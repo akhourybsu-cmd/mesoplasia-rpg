@@ -1,0 +1,202 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
+[ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
+size = Vector2(896, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_vertical"]
+size = Vector2(32, 640)
+
+[sub_resource type="RectangleShape2D" id="Shape_stall"]
+size = Vector2(96, 48)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_horizontal"]
+size = Vector2(96, 128)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_vertical"]
+size = Vector2(128, 96)
+
+[node name="Marketplace" type="Node2D"]
+script = ExtResource("1_zone")
+camera_bounds = Rect2i(0, 0, 896, 640)
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 896, 0, 896, 640, 0, 640)
+color = Color(0.3, 0.44, 0.28, 1)
+
+[node name="MarketGround" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(96, 64, 800, 64, 800, 576, 96, 576)
+color = Color(0.67, 0.57, 0.4, 1)
+
+[node name="WestLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 256, 288, 256, 288, 384, 0, 384)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="CentralLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(384, 64, 512, 64, 512, 640, 384, 640)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="CrossLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(96, 288, 800, 288, 800, 352, 96, 352)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="Stalls" type="Node2D" parent="."]
+
+[node name="Stall01" type="StaticBody2D" parent="Stalls"]
+position = Vector2(208, 160)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall01"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.8, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall01"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall02" type="StaticBody2D" parent="Stalls"]
+position = Vector2(336, 160)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall02"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.72, 0.32, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall02"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall03" type="StaticBody2D" parent="Stalls"]
+position = Vector2(560, 160)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall03"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.8, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall03"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall04" type="StaticBody2D" parent="Stalls"]
+position = Vector2(688, 160)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall04"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.72, 0.32, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall04"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall05" type="StaticBody2D" parent="Stalls"]
+position = Vector2(208, 464)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall05"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.8, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall05"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall06" type="StaticBody2D" parent="Stalls"]
+position = Vector2(336, 464)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall06"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.72, 0.32, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall06"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall07" type="StaticBody2D" parent="Stalls"]
+position = Vector2(560, 464)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall07"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.8, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall07"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall08" type="StaticBody2D" parent="Stalls"]
+position = Vector2(688, 464)
+
+[node name="Visual" type="Polygon2D" parent="Stalls/Stall08"]
+polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
+color = Color(0.72, 0.32, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall08"]
+shape = SubResource("Shape_stall")
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="North" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(448, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/North"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="South" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(448, 624)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/South"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="West" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(16, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/West"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="East" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(880, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/East"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="NorthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 896, 0, 896, 32, 0, 32)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="SouthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 608, 896, 608, 896, 640, 0, 640)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="WestVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 640, 0, 640)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="EastVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(864, 0, 896, 0, 896, 640, 864, 640)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="EntryPoints" type="Node2D" parent="."]
+
+[node name="from_wayfarers_approach" type="Marker2D" parent="EntryPoints"]
+position = Vector2(128, 320)
+
+[node name="from_town_square" type="Marker2D" parent="EntryPoints"]
+position = Vector2(448, 512)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="ToWayfarersApproach" type="Area2D" parent="Exits"]
+position = Vector2(64, 320)
+script = ExtResource("2_exit")
+destination_zone = &"wayfarers_approach"
+destination_entry = &"from_marketplace"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToWayfarersApproach"]
+shape = SubResource("Shape_exit_horizontal")
+
+[node name="ToTownSquare" type="Area2D" parent="Exits"]
+position = Vector2(448, 576)
+script = ExtResource("2_exit")
+destination_zone = &"town_square"
+destination_entry = &"from_marketplace"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToTownSquare"]
+shape = SubResource("Shape_exit_vertical")
+
+[node name="ZoneLabel" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 220.0
+offset_bottom = 58.0
+text = "DEV ZONE: MARKETPLACE"

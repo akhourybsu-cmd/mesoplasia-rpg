@@ -1,0 +1,265 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
+[ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_vertical"]
+size = Vector2(32, 768)
+
+[sub_resource type="RectangleShape2D" id="Shape_cabin"]
+size = Vector2(128, 96)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence"]
+size = Vector2(192, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_horizontal"]
+size = Vector2(96, 128)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_vertical"]
+size = Vector2(128, 96)
+
+[node name="Residential" type="Node2D"]
+script = ExtResource("1_zone")
+camera_bounds = Rect2i(0, 0, 1152, 768)
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 768, 0, 768)
+color = Color(0.27, 0.47, 0.28, 1)
+
+[node name="WestPath" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 320, 1152, 320, 1152, 448, 0, 448)
+color = Color(0.53, 0.44, 0.31, 1)
+
+[node name="CommonsPath" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(512, 448, 640, 448, 640, 768, 512, 768)
+color = Color(0.53, 0.44, 0.31, 1)
+
+[node name="NorthLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(224, 96, 288, 96, 288, 320, 224, 320)
+color = Color(0.53, 0.44, 0.31, 1)
+
+[node name="NortheastLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(864, 96, 928, 96, 928, 320, 864, 320)
+color = Color(0.53, 0.44, 0.31, 1)
+
+[node name="SouthwestLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(256, 448, 320, 448, 320, 672, 256, 672)
+color = Color(0.53, 0.44, 0.31, 1)
+
+[node name="SoutheastLane" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(896, 448, 960, 448, 960, 672, 896, 672)
+color = Color(0.53, 0.44, 0.31, 1)
+
+[node name="Homes" type="Node2D" parent="."]
+
+[node name="Cabin01" type="StaticBody2D" parent="Homes"]
+position = Vector2(160, 128)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin01"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin01"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin02" type="StaticBody2D" parent="Homes"]
+position = Vector2(384, 160)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin02"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.43, 0.26, 0.17, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin02"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin03" type="StaticBody2D" parent="Homes"]
+position = Vector2(608, 128)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin03"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin03"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin04" type="StaticBody2D" parent="Homes"]
+position = Vector2(800, 176)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin04"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.43, 0.26, 0.17, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin04"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin05" type="StaticBody2D" parent="Homes"]
+position = Vector2(1024, 128)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin05"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin05"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin06" type="StaticBody2D" parent="Homes"]
+position = Vector2(160, 592)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin06"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.43, 0.26, 0.17, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin06"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin07" type="StaticBody2D" parent="Homes"]
+position = Vector2(400, 624)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin07"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin07"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin08" type="StaticBody2D" parent="Homes"]
+position = Vector2(752, 608)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin08"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.43, 0.26, 0.17, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin08"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin09" type="StaticBody2D" parent="Homes"]
+position = Vector2(992, 576)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin09"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin09"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin10" type="StaticBody2D" parent="Homes"]
+position = Vector2(1024, 256)
+
+[node name="Visual" type="Polygon2D" parent="Homes/Cabin10"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.43, 0.26, 0.17, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin10"]
+shape = SubResource("Shape_cabin")
+
+[node name="YardFences" type="Node2D" parent="."]
+
+[node name="Fence01" type="StaticBody2D" parent="YardFences"]
+position = Vector2(160, 240)
+
+[node name="Visual" type="Polygon2D" parent="YardFences/Fence01"]
+polygon = PackedVector2Array(-96, -12, 96, -12, 96, 12, -96, 12)
+color = Color(0.62, 0.46, 0.25, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardFences/Fence01"]
+shape = SubResource("Shape_fence")
+
+[node name="Fence02" type="StaticBody2D" parent="YardFences"]
+position = Vector2(784, 272)
+
+[node name="Visual" type="Polygon2D" parent="YardFences/Fence02"]
+polygon = PackedVector2Array(-96, -12, 96, -12, 96, 12, -96, 12)
+color = Color(0.62, 0.46, 0.25, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardFences/Fence02"]
+shape = SubResource("Shape_fence")
+
+[node name="Fence03" type="StaticBody2D" parent="YardFences"]
+position = Vector2(240, 512)
+
+[node name="Visual" type="Polygon2D" parent="YardFences/Fence03"]
+polygon = PackedVector2Array(-96, -12, 96, -12, 96, 12, -96, 12)
+color = Color(0.62, 0.46, 0.25, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardFences/Fence03"]
+shape = SubResource("Shape_fence")
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="North" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(576, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/North"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="South" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(576, 752)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/South"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="West" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(16, 384)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/West"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="East" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1136, 384)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/East"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="NorthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 32, 0, 32)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="SouthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 736, 1152, 736, 1152, 768, 0, 768)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="WestVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 768, 0, 768)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="EastVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(1120, 0, 1152, 0, 1152, 768, 1120, 768)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="EntryPoints" type="Node2D" parent="."]
+
+[node name="from_town_square" type="Marker2D" parent="EntryPoints"]
+position = Vector2(128, 384)
+
+[node name="from_commons" type="Marker2D" parent="EntryPoints"]
+position = Vector2(576, 640)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="ToTownSquare" type="Area2D" parent="Exits"]
+position = Vector2(64, 384)
+script = ExtResource("2_exit")
+destination_zone = &"town_square"
+destination_entry = &"from_residential"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToTownSquare"]
+shape = SubResource("Shape_exit_horizontal")
+
+[node name="ToCommons" type="Area2D" parent="Exits"]
+position = Vector2(576, 704)
+script = ExtResource("2_exit")
+destination_zone = &"commons"
+destination_entry = &"from_residential"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToCommons"]
+shape = SubResource("Shape_exit_vertical")
+
+[node name="ZoneLabel" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 260.0
+offset_bottom = 58.0
+text = "DEV ZONE: RESIDENTIAL"

@@ -1,0 +1,187 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
+[ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
+size = Vector2(960, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_vertical"]
+size = Vector2(32, 704)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_horizontal"]
+size = Vector2(96, 128)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_vertical"]
+size = Vector2(128, 96)
+
+[sub_resource type="RectangleShape2D" id="Shape_blocker"]
+size = Vector2(192, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_reserved"]
+size = Vector2(160, 96)
+
+[node name="TownSquare" type="Node2D"]
+script = ExtResource("1_zone")
+camera_bounds = Rect2i(0, 0, 960, 704)
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 960, 0, 960, 704, 0, 704)
+color = Color(0.29, 0.46, 0.29, 1)
+
+[node name="MainRoad" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 288, 960, 288, 960, 416, 0, 416)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="NorthRoad" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(416, 0, 544, 0, 544, 288, 416, 288)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="SouthRoad" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(416, 416, 544, 416, 544, 704, 416, 704)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="TerrebonneBranch" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(544, 160, 672, 160, 864, 0, 736, 0)
+color = Color(0.56, 0.45, 0.32, 1)
+
+[node name="SquareGround" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(224, 128, 736, 128, 736, 576, 224, 576)
+color = Color(0.68, 0.62, 0.48, 1)
+
+[node name="ReservedCommunitySpace" type="StaticBody2D" parent="."]
+position = Vector2(480, 224)
+
+[node name="Visual" type="Polygon2D" parent="ReservedCommunitySpace"]
+polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
+color = Color(0.48, 0.52, 0.42, 1)
+
+[node name="DevelopmentLabel" type="Label" parent="ReservedCommunitySpace"]
+offset_left = -76.0
+offset_top = -10.0
+offset_right = 76.0
+offset_bottom = 16.0
+text = "FUTURE COMMUNITY SPACE"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReservedCommunitySpace"]
+shape = SubResource("Shape_reserved")
+
+[node name="TerrebonneRoadBlocker" type="StaticBody2D" parent="."]
+position = Vector2(768, 80)
+
+[node name="Visual" type="Polygon2D" parent="TerrebonneRoadBlocker"]
+polygon = PackedVector2Array(-96, -16, 96, -16, 96, 16, -96, 16)
+color = Color(0.72, 0.52, 0.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrebonneRoadBlocker"]
+shape = SubResource("Shape_blocker")
+
+[node name="DevelopmentLabel" type="Label" parent="TerrebonneRoadBlocker"]
+offset_left = -176.0
+offset_top = -52.0
+offset_right = 176.0
+offset_bottom = -26.0
+text = "Road to Terrebonne — unavailable in current build"
+horizontal_alignment = 1
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="North" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(480, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/North"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="South" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(480, 688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/South"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="West" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(16, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/West"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="East" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(944, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/East"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="NorthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 960, 0, 960, 32, 0, 32)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="SouthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 672, 960, 672, 960, 704, 0, 704)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="WestVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 704, 0, 704)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="EastVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(928, 0, 960, 0, 960, 704, 928, 704)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="EntryPoints" type="Node2D" parent="."]
+
+[node name="from_wayfarers_approach" type="Marker2D" parent="EntryPoints"]
+position = Vector2(128, 352)
+
+[node name="from_residential" type="Marker2D" parent="EntryPoints"]
+position = Vector2(832, 352)
+
+[node name="from_marketplace" type="Marker2D" parent="EntryPoints"]
+position = Vector2(480, 128)
+
+[node name="from_commons" type="Marker2D" parent="EntryPoints"]
+position = Vector2(480, 576)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="ToWayfarersApproach" type="Area2D" parent="Exits"]
+position = Vector2(64, 352)
+script = ExtResource("2_exit")
+destination_zone = &"wayfarers_approach"
+destination_entry = &"from_town_square"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToWayfarersApproach"]
+shape = SubResource("Shape_exit_horizontal")
+
+[node name="ToResidential" type="Area2D" parent="Exits"]
+position = Vector2(896, 352)
+script = ExtResource("2_exit")
+destination_zone = &"residential"
+destination_entry = &"from_town_square"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToResidential"]
+shape = SubResource("Shape_exit_horizontal")
+
+[node name="ToMarketplace" type="Area2D" parent="Exits"]
+position = Vector2(480, 64)
+script = ExtResource("2_exit")
+destination_zone = &"marketplace"
+destination_entry = &"from_town_square"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToMarketplace"]
+shape = SubResource("Shape_exit_vertical")
+
+[node name="ToCommons" type="Area2D" parent="Exits"]
+position = Vector2(480, 640)
+script = ExtResource("2_exit")
+destination_zone = &"commons"
+destination_entry = &"from_town_square"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToCommons"]
+shape = SubResource("Shape_exit_vertical")
+
+[node name="ZoneLabel" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 220.0
+offset_bottom = 58.0
+text = "DEV ZONE: TOWN SQUARE"

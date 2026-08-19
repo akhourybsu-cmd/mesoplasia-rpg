@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
+[ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
+size = Vector2(1024, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_vertical"]
+size = Vector2(32, 704)
+
+[sub_resource type="RectangleShape2D" id="Shape_greenery"]
+size = Vector2(96, 96)
+
+[sub_resource type="RectangleShape2D" id="Shape_rock"]
+size = Vector2(64, 48)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_horizontal"]
+size = Vector2(96, 128)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit_vertical"]
+size = Vector2(128, 96)
+
+[node name="Commons" type="Node2D"]
+script = ExtResource("1_zone")
+camera_bounds = Rect2i(0, 0, 1024, 704)
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 704, 0, 704)
+color = Color(0.24, 0.48, 0.27, 1)
+
+[node name="WestPath" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 288, 512, 288, 512, 416, 0, 416)
+color = Color(0.5, 0.43, 0.3, 1)
+
+[node name="NorthPath" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(448, 0, 576, 0, 576, 416, 448, 416)
+color = Color(0.5, 0.43, 0.3, 1)
+
+[node name="QuietGreen" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(608, 128, 928, 128, 928, 576, 608, 576)
+color = Color(0.3, 0.55, 0.31, 1)
+
+[node name="Greenery" type="Node2D" parent="."]
+
+[node name="TreeCluster01" type="StaticBody2D" parent="Greenery"]
+position = Vector2(192, 160)
+
+[node name="Visual" type="Polygon2D" parent="Greenery/TreeCluster01"]
+polygon = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Greenery/TreeCluster01"]
+shape = SubResource("Shape_greenery")
+
+[node name="TreeCluster02" type="StaticBody2D" parent="Greenery"]
+position = Vector2(800, 224)
+
+[node name="Visual" type="Polygon2D" parent="Greenery/TreeCluster02"]
+polygon = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Greenery/TreeCluster02"]
+shape = SubResource("Shape_greenery")
+
+[node name="TreeCluster03" type="StaticBody2D" parent="Greenery"]
+position = Vector2(768, 512)
+
+[node name="Visual" type="Polygon2D" parent="Greenery/TreeCluster03"]
+polygon = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Greenery/TreeCluster03"]
+shape = SubResource("Shape_greenery")
+
+[node name="RockCluster" type="StaticBody2D" parent="Greenery"]
+position = Vector2(288, 544)
+
+[node name="Visual" type="Polygon2D" parent="Greenery/RockCluster"]
+polygon = PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)
+color = Color(0.38, 0.42, 0.38, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Greenery/RockCluster"]
+shape = SubResource("Shape_rock")
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="North" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(512, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/North"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="South" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(512, 688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/South"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="West" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(16, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/West"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="East" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1008, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/East"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="NorthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 32, 0, 32)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="SouthVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 672, 1024, 672, 1024, 704, 0, 704)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="WestVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 704, 0, 704)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="EastVisual" type="Polygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(992, 0, 1024, 0, 1024, 704, 992, 704)
+color = Color(0.1, 0.3, 0.12, 1)
+
+[node name="EntryPoints" type="Node2D" parent="."]
+
+[node name="from_town_square" type="Marker2D" parent="EntryPoints"]
+position = Vector2(128, 352)
+
+[node name="from_residential" type="Marker2D" parent="EntryPoints"]
+position = Vector2(512, 128)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="ToTownSquare" type="Area2D" parent="Exits"]
+position = Vector2(64, 352)
+script = ExtResource("2_exit")
+destination_zone = &"town_square"
+destination_entry = &"from_commons"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToTownSquare"]
+shape = SubResource("Shape_exit_horizontal")
+
+[node name="ToResidential" type="Area2D" parent="Exits"]
+position = Vector2(512, 64)
+script = ExtResource("2_exit")
+destination_zone = &"residential"
+destination_entry = &"from_commons"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ToResidential"]
+shape = SubResource("Shape_exit_vertical")
+
+[node name="ZoneLabel" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 220.0
+offset_bottom = 58.0
+text = "DEV ZONE: TOWN COMMONS"

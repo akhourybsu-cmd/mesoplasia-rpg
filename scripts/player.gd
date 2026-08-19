@@ -18,7 +18,16 @@ var _active_movement_axis: MovementAxis = MovementAxis.VERTICAL
 
 
 func _ready() -> void:
-	if not camera_limits.has_area():
+	_apply_camera_limits()
+
+
+func set_camera_limits(bounds: Rect2i) -> void:
+	camera_limits = bounds
+	_apply_camera_limits()
+
+
+func _apply_camera_limits() -> void:
+	if not camera_limits.has_area() or not is_node_ready():
 		return
 
 	_camera.limit_left = camera_limits.position.x
