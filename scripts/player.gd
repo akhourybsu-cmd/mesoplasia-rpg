@@ -9,7 +9,22 @@ enum MovementAxis {
 @export_category("Movement")
 @export var movement_speed: float = 96.0
 
+@export_category("Camera")
+@export var camera_limits := Rect2i()
+
 var _active_movement_axis: MovementAxis = MovementAxis.VERTICAL
+
+@onready var _camera: Camera2D = $Camera2D
+
+
+func _ready() -> void:
+	if not camera_limits.has_area():
+		return
+
+	_camera.limit_left = camera_limits.position.x
+	_camera.limit_top = camera_limits.position.y
+	_camera.limit_right = camera_limits.end.x
+	_camera.limit_bottom = camera_limits.end.y
 
 
 func _physics_process(_delta: float) -> void:

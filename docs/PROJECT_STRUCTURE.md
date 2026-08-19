@@ -22,7 +22,10 @@ mesoplasia-rpg/
 ├── data/
 ├── docs/
 ├── scenes/
-│   └── Main.tscn
+│   ├── world/
+│   │   └── Caden.tscn
+│   ├── Main.tscn
+│   └── Player.tscn
 ├── scripts/
 ├── systems/
 ├── tests/
@@ -40,10 +43,10 @@ Godot's local `.godot/` cache is intentionally excluded from this repository str
 - `assets/` contains art, audio, tiles, sprites, portraits, and UI assets. Its subdirectories group assets by purpose.
 - `data/` contains structured game-content data, including future item, dialogue, quest, character, enemy, and world definitions.
 - `docs/` contains project architecture, design decisions, standards, and technical documentation.
-- `scenes/` contains Godot `.tscn` scenes.
+- `scenes/` contains Godot `.tscn` scenes. Reusable location scenes live under `scenes/world/` and are composed by the project entry scene rather than becoming entry points themselves.
 - `scripts/` contains reusable scene and gameplay scripts.
 - `systems/` contains larger game-wide systems and managers.
 - `tests/` contains automated or repeatable verification where practical.
 - `ui/` contains reusable Godot UI scenes and related game-interface resources.
 
-Gameplay architecture has intentionally not yet been implemented. This document should evolve as actual systems are introduced and their responsibilities become established.
+Gameplay architecture remains intentionally limited to approved milestones. This document should evolve as actual systems are introduced and their responsibilities become established.

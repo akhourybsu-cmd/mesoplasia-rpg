@@ -1,0 +1,312 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
+size = Vector2(2048, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_boundary_vertical"]
+size = Vector2(32, 1280)
+
+[sub_resource type="RectangleShape2D" id="Shape_cabin"]
+size = Vector2(128, 96)
+
+[sub_resource type="RectangleShape2D" id="Shape_inn"]
+size = Vector2(192, 128)
+
+[sub_resource type="RectangleShape2D" id="Shape_stall"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="Shape_road_blocker"]
+size = Vector2(32, 160)
+
+[node name="Caden" type="Node2D"]
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 2048, 0, 2048, 1280, 0, 1280)
+color = Color(0.25, 0.42, 0.26, 1)
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="MainRoad" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(0, 576, 2048, 576, 2048, 704, 0, 704)
+color = Color(0.54, 0.43, 0.31, 1)
+
+[node name="MarketplaceGround" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(800, 448, 1248, 448, 1248, 832, 800, 832)
+color = Color(0.68, 0.58, 0.42, 1)
+
+[node name="NorthwestPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(288, 368, 352, 368, 352, 576, 288, 576)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="NorthInnPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(480, 544, 544, 544, 544, 576, 480, 576)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="NorthMarketPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(992, 336, 1056, 336, 1056, 448, 992, 448)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="NortheastPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(1472, 368, 1536, 368, 1536, 576, 1472, 576)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="SouthwestPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(320, 704, 384, 704, 384, 912, 320, 912)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="SouthMarketPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(992, 832, 1056, 832, 1056, 1056, 992, 1056)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="SoutheastPath" type="Polygon2D" parent="Paths"]
+polygon = PackedVector2Array(1632, 704, 1696, 704, 1696, 848, 1632, 848)
+color = Color(0.58, 0.48, 0.34, 1)
+
+[node name="Structures" type="Node2D" parent="."]
+
+[node name="Inn" type="StaticBody2D" parent="Structures"]
+position = Vector2(512, 480)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Inn"]
+polygon = PackedVector2Array(-96, -64, 96, -64, 96, 64, -96, 64)
+color = Color(0.36, 0.22, 0.15, 1)
+
+[node name="DevelopmentLabel" type="Label" parent="Structures/Inn"]
+offset_left = -48.0
+offset_top = -10.0
+offset_right = 48.0
+offset_bottom = 16.0
+text = "INN"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Inn"]
+shape = SubResource("Shape_inn")
+
+[node name="Cabin01" type="StaticBody2D" parent="Structures"]
+position = Vector2(320, 320)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin01"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin01"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin02" type="StaticBody2D" parent="Structures"]
+position = Vector2(672, 288)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin02"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin02"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin03" type="StaticBody2D" parent="Structures"]
+position = Vector2(1024, 288)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin03"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin03"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin04" type="StaticBody2D" parent="Structures"]
+position = Vector2(1344, 288)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin04"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin04"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin05" type="StaticBody2D" parent="Structures"]
+position = Vector2(1696, 352)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin05"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin05"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin06" type="StaticBody2D" parent="Structures"]
+position = Vector2(352, 960)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin06"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin06"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin07" type="StaticBody2D" parent="Structures"]
+position = Vector2(704, 1024)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin07"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin07"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin08" type="StaticBody2D" parent="Structures"]
+position = Vector2(1376, 992)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin08"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin08"]
+shape = SubResource("Shape_cabin")
+
+[node name="Cabin09" type="StaticBody2D" parent="Structures"]
+position = Vector2(1664, 896)
+
+[node name="Visual" type="Polygon2D" parent="Structures/Cabin09"]
+polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
+color = Color(0.45, 0.28, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Structures/Cabin09"]
+shape = SubResource("Shape_cabin")
+
+[node name="Marketplace" type="Node2D" parent="."]
+
+[node name="DevelopmentLabel" type="Label" parent="Marketplace"]
+offset_left = 944.0
+offset_top = 616.0
+offset_right = 1104.0
+offset_bottom = 642.0
+text = "MARKETPLACE"
+horizontal_alignment = 1
+
+[node name="Stall01" type="StaticBody2D" parent="Marketplace"]
+position = Vector2(864, 496)
+
+[node name="Visual" type="Polygon2D" parent="Marketplace/Stall01"]
+polygon = PackedVector2Array(-32, -16, 32, -16, 32, 16, -32, 16)
+color = Color(0.78, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marketplace/Stall01"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall02" type="StaticBody2D" parent="Marketplace"]
+position = Vector2(1024, 496)
+
+[node name="Visual" type="Polygon2D" parent="Marketplace/Stall02"]
+polygon = PackedVector2Array(-32, -16, 32, -16, 32, 16, -32, 16)
+color = Color(0.78, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marketplace/Stall02"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall03" type="StaticBody2D" parent="Marketplace"]
+position = Vector2(1184, 496)
+
+[node name="Visual" type="Polygon2D" parent="Marketplace/Stall03"]
+polygon = PackedVector2Array(-32, -16, 32, -16, 32, 16, -32, 16)
+color = Color(0.78, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marketplace/Stall03"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall04" type="StaticBody2D" parent="Marketplace"]
+position = Vector2(864, 784)
+
+[node name="Visual" type="Polygon2D" parent="Marketplace/Stall04"]
+polygon = PackedVector2Array(-32, -16, 32, -16, 32, 16, -32, 16)
+color = Color(0.78, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marketplace/Stall04"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall05" type="StaticBody2D" parent="Marketplace"]
+position = Vector2(1024, 784)
+
+[node name="Visual" type="Polygon2D" parent="Marketplace/Stall05"]
+polygon = PackedVector2Array(-32, -16, 32, -16, 32, 16, -32, 16)
+color = Color(0.78, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marketplace/Stall05"]
+shape = SubResource("Shape_stall")
+
+[node name="Stall06" type="StaticBody2D" parent="Marketplace"]
+position = Vector2(1184, 784)
+
+[node name="Visual" type="Polygon2D" parent="Marketplace/Stall06"]
+polygon = PackedVector2Array(-32, -16, 32, -16, 32, 16, -32, 16)
+color = Color(0.78, 0.45, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marketplace/Stall06"]
+shape = SubResource("Shape_stall")
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="NorthEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1024, 16)
+
+[node name="Visual" type="Polygon2D" parent="Boundaries/NorthEdge"]
+polygon = PackedVector2Array(-1024, -16, 1024, -16, 1024, 16, -1024, 16)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/NorthEdge"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="SouthEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1024, 1264)
+
+[node name="Visual" type="Polygon2D" parent="Boundaries/SouthEdge"]
+polygon = PackedVector2Array(-1024, -16, 1024, -16, 1024, 16, -1024, 16)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/SouthEdge"]
+shape = SubResource("Shape_boundary_horizontal")
+
+[node name="WestEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(16, 640)
+
+[node name="Visual" type="Polygon2D" parent="Boundaries/WestEdge"]
+polygon = PackedVector2Array(-16, -640, 16, -640, 16, 640, -16, 640)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/WestEdge"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="EastEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(2032, 640)
+
+[node name="Visual" type="Polygon2D" parent="Boundaries/EastEdge"]
+polygon = PackedVector2Array(-16, -640, 16, -640, 16, 640, -16, 640)
+color = Color(0.12, 0.28, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/EastEdge"]
+shape = SubResource("Shape_boundary_vertical")
+
+[node name="TerrebonneRoadBlocker" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1888, 640)
+
+[node name="Visual" type="Polygon2D" parent="Boundaries/TerrebonneRoadBlocker"]
+polygon = PackedVector2Array(-16, -80, 16, -80, 16, 80, -16, 80)
+color = Color(0.72, 0.52, 0.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/TerrebonneRoadBlocker"]
+shape = SubResource("Shape_road_blocker")
+
+[node name="DevelopmentMarkers" type="Node2D" parent="."]
+
+[node name="TerrebonneRoadLabel" type="Label" parent="DevelopmentMarkers"]
+offset_left = 1576.0
+offset_top = 528.0
+offset_right = 1872.0
+offset_bottom = 554.0
+text = "Road to Terrebonne — unavailable in current build"
+horizontal_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(128, 640)
+z_index = 10
+camera_limits = Rect2i(0, 0, 2048, 1280)
