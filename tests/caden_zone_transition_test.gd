@@ -25,15 +25,15 @@ func _run_test() -> void:
 		return
 	if not await _travel("Exits/ToWayfarersApproach", &"WayfarersApproach", Vector2(512, 128), Rect2i(0, 0, 1024, 640)):
 		return
-	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(128, 352), Rect2i(0, 0, 960, 704)):
+	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(160, 352), Rect2i(0, 0, 960, 704)):
 		return
 	if not await _travel("Exits/ToMarketplace", &"Marketplace", Vector2(448, 512), Rect2i(0, 0, 896, 640)):
 		return
-	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(480, 128), Rect2i(0, 0, 960, 704)):
+	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(480, 160), Rect2i(0, 0, 960, 704)):
 		return
 	if not await _travel("Exits/ToResidential", &"Residential", Vector2(128, 384), Rect2i(0, 0, 1152, 768)):
 		return
-	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(832, 352), Rect2i(0, 0, 960, 704)):
+	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(800, 352), Rect2i(0, 0, 960, 704)):
 		return
 	if not await _travel("Exits/ToCommons", &"Commons", Vector2(128, 352), Rect2i(0, 0, 1024, 704)):
 		return
@@ -41,7 +41,7 @@ func _run_test() -> void:
 		return
 	if not await _travel("Exits/ToCommons", &"Commons", Vector2(512, 128), Rect2i(0, 0, 1024, 704)):
 		return
-	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(480, 576), Rect2i(0, 0, 960, 704)):
+	if not await _travel("Exits/ToTownSquare", &"TownSquare", Vector2(480, 544), Rect2i(0, 0, 960, 704)):
 		return
 	if not await _travel("Exits/ToWayfarersApproach", &"WayfarersApproach", Vector2(864, 320), Rect2i(0, 0, 1024, 640)):
 		return

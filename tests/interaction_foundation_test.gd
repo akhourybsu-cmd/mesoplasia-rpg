@@ -86,7 +86,7 @@ func _test_zone_unload_clears_active_target() -> bool:
 	await physics_frame
 
 	var town_square := caden.get("_current_zone") as Node2D
-	var square_local := town_square.get_node("SquareLocal") as StaticBody2D
+	var square_local := town_square.get_node("Actors/NPCs/SquareLocal") as StaticBody2D
 	var old_interactable := square_local.get_node("Interactable") as Area2D
 	var old_interactable_reference: WeakRef = weakref(old_interactable)
 	player.position = square_local.position + Vector2(0, 56)
