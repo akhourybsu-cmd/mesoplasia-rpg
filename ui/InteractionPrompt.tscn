@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/interaction_prompt.gd" id="1_prompt"]
+
+[node name="InteractionPrompt" type="CanvasLayer"]
+visible = false
+layer = 10
+script = ExtResource("1_prompt")
+
+[node name="PromptPanel" type="PanelContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -48.0
+offset_right = 80.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PromptLabel" type="Label" parent="PromptPanel"]
+layout_mode = 2
+text = "[E] Interact"
+horizontal_alignment = 1
+vertical_alignment = 1

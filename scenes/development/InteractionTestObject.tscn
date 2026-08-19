@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/interaction_test_object.gd" id="1_test"]
+[ext_resource type="Script" path="res://scripts/interaction/interactable.gd" id="2_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Shape_object"]
+size = Vector2(48, 48)
+
+[sub_resource type="CircleShape2D" id="Shape_interaction"]
+radius = 32.0
+
+[node name="DevelopmentInteractionTest" type="StaticBody2D"]
+script = ExtResource("1_test")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+color = Color(0.65, 0.25, 0.7, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_object")
+
+[node name="DevelopmentLabel" type="Label" parent="."]
+offset_left = -104.0
+offset_top = -56.0
+offset_right = 104.0
+offset_bottom = -30.0
+text = "DEV INTERACTION TEST"
+horizontal_alignment = 1
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_interactable")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("Shape_interaction")
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interacted"]

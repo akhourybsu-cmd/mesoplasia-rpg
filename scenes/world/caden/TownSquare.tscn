@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+[ext_resource type="PackedScene" path="res://scenes/development/InteractionTestObject.tscn" id="3_test"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -84,6 +85,9 @@ offset_right = 176.0
 offset_bottom = -26.0
 text = "Road to Terrebonne — unavailable in current build"
 horizontal_alignment = 1
+
+[node name="DevelopmentInteractionTest" parent="." instance=ExtResource("3_test")]
+position = Vector2(672, 480)
 
 [node name="Boundaries" type="Node2D" parent="."]
 

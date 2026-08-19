@@ -13,12 +13,15 @@ enum MovementAxis {
 @export var camera_limits := Rect2i()
 
 var _active_movement_axis: MovementAxis = MovementAxis.VERTICAL
+var facing_direction := Vector2.DOWN
 
 @onready var _camera: Camera2D = $Camera2D
+@onready var _interaction_detector: Area2D = $InteractionDetector
 
 
 func _ready() -> void:
 	_apply_camera_limits()
+	_interaction_detector.call("set_facing_direction", facing_direction)
 
 
 func set_camera_limits(bounds: Rect2i) -> void:
@@ -37,7 +40,12 @@ func _apply_camera_limits() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	velocity = _get_four_direction_input() * movement_speed
+	var movement_direction := _get_four_direction_input()
+	if movement_direction != Vector2.ZERO:
+		facing_direction = movement_direction
+		_interaction_detector.call("set_facing_direction", facing_direction)
+
+	velocity = movement_direction * movement_speed
 	move_and_slide()
 
 

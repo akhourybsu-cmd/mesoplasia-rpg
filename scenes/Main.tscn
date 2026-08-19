@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhjv2s6hu8uvu"]
+[gd_scene format=3 uid="uid://bhjv2s6hu8uvu"]
 
 [ext_resource type="PackedScene" path="res://scenes/world/caden/Caden.tscn" id="1_caden"]
 
 [node name="Main" type="Node2D" unique_id=869966369]
 
-[node name="Caden" parent="." instance=ExtResource("1_caden")]
+[node name="Caden" parent="." unique_id=362761094 instance=ExtResource("1_caden")]
