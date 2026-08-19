@@ -3,9 +3,8 @@ extends SceneTree
 const CADEN_SCENE := preload("res://scenes/world/caden/Caden.tscn")
 
 const EXPECTED_LINES := [
-	"Caden's been busy with travelers lately.",
-	"Seems like half the road is headed toward Terrebonne.",
-	"The Festival of the Six is drawing quite a crowd.",
+	"I was lucky to find a place to rest.",
+	"Rooms are filling quickly with travelers bound for the festival.",
 ]
 
 
@@ -20,7 +19,7 @@ func _run_test() -> void:
 
 	var player := caden.get_node("Player") as CharacterBody2D
 	var approach := caden.get("_current_zone") as Node2D
-	var traveler := approach.get_node("FestivalTravelerTest") as StaticBody2D
+	var traveler := approach.get_node("RestingTraveler") as StaticBody2D
 	var old_traveler_reference: WeakRef = weakref(traveler)
 	var detector := player.get_node("InteractionDetector") as Area2D
 	var interaction_prompt := player.get_node("InteractionPrompt") as CanvasLayer
@@ -77,11 +76,6 @@ func _run_test() -> void:
 
 	dialogue_ui.call("_unhandled_input", _make_interact_event(false))
 	dialogue_ui.call("_unhandled_input", _make_interact_event(true))
-	if dialogue_ui.call("get_current_line_text") != EXPECTED_LINES[2]:
-		return _fail("Dialogue did not advance to line three.")
-
-	dialogue_ui.call("_unhandled_input", _make_interact_event(false))
-	dialogue_ui.call("_unhandled_input", _make_interact_event(true))
 	await physics_frame
 	if dialogue_ui.call("is_dialogue_active"):
 		return _fail("Dialogue did not close after the final line.")
@@ -106,7 +100,7 @@ func _run_test() -> void:
 	await physics_frame
 	await physics_frame
 	var reloaded_approach := caden.get("_current_zone") as Node2D
-	var reloaded_traveler := reloaded_approach.get_node("FestivalTravelerTest") as StaticBody2D
+	var reloaded_traveler := reloaded_approach.get_node("RestingTraveler") as StaticBody2D
 	player.position = reloaded_traveler.position + Vector2(0, -56)
 	await physics_frame
 	await physics_frame

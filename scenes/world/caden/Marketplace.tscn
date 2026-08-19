@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/market_stall_attendant.tres" id="4_attendant"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/market_shopper.tres" id="5_shopper"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/market_supply_traveler.tres" id="6_traveler"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(896, 32)
@@ -123,6 +127,24 @@ color = Color(0.72, 0.32, 0.2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall08"]
 shape = SubResource("Shape_stall")
+
+[node name="StallAttendant" parent="." instance=ExtResource("3_npc")]
+position = Vector2(208, 208)
+conversation = ExtResource("4_attendant")
+placeholder_color = Color(0.82, 0.4, 0.32, 1)
+facing_direction = Vector2(0, 1)
+
+[node name="MarketShopper" parent="." instance=ExtResource("3_npc")]
+position = Vector2(448, 320)
+conversation = ExtResource("5_shopper")
+placeholder_color = Color(0.36, 0.7, 0.72, 1)
+facing_direction = Vector2(-1, 0)
+
+[node name="SupplyTraveler" parent="." instance=ExtResource("3_npc")]
+position = Vector2(688, 400)
+conversation = ExtResource("6_traveler")
+placeholder_color = Color(0.7, 0.5, 0.82, 1)
+facing_direction = Vector2(0, -1)
 
 [node name="Boundaries" type="Node2D" parent="."]
 

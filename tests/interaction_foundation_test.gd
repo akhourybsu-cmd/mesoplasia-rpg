@@ -86,16 +86,16 @@ func _test_zone_unload_clears_active_target() -> bool:
 	await physics_frame
 
 	var town_square := caden.get("_current_zone") as Node2D
-	var test_object := town_square.get_node("DevelopmentInteractionTest") as StaticBody2D
-	var old_interactable := test_object.get_node("Interactable") as Area2D
+	var square_local := town_square.get_node("SquareLocal") as StaticBody2D
+	var old_interactable := square_local.get_node("Interactable") as Area2D
 	var old_interactable_reference: WeakRef = weakref(old_interactable)
-	player.position = test_object.position + Vector2(0, 56)
+	player.position = square_local.position + Vector2(0, 56)
 	await physics_frame
 	await physics_frame
 
 	var detector := player.get_node("InteractionDetector") as Area2D
 	if detector.call("get_active_interactable") != old_interactable:
-		return _fail("Town Square development object was not detected before zone unload.")
+		return _fail("Town Square NPC was not detected before zone unload.")
 
 	var to_residential := town_square.get_node("Exits/ToResidential") as Area2D
 	to_residential.emit_signal("transition_requested", &"residential", &"from_town_square")

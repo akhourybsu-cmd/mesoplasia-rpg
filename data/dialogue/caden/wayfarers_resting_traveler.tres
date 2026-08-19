@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueConversation" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_conversation.gd" id="1_conversation"]
+
+[resource]
+script = ExtResource("1_conversation")
+speaker_id = &"wayfarers_resting_traveler"
+speaker_name = "Traveler"
+lines = Array[String](["I was lucky to find a place to rest.", "Rooms are filling quickly with travelers bound for the festival."])

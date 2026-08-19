@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/commons_local.tres" id="4_local"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(1024, 32)
@@ -82,6 +84,12 @@ color = Color(0.38, 0.42, 0.38, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Greenery/RockCluster"]
 shape = SubResource("Shape_rock")
+
+[node name="CommonsLocal" parent="." instance=ExtResource("3_npc")]
+position = Vector2(704, 400)
+conversation = ExtResource("4_local")
+placeholder_color = Color(0.76, 0.58, 0.34, 1)
+facing_direction = Vector2(-1, 0)
 
 [node name="Boundaries" type="Node2D" parent="."]
 

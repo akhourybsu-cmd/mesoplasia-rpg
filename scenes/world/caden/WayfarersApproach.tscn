@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
-[ext_resource type="PackedScene" path="res://scenes/development/FestivalTravelerTest.tscn" id="3_traveler"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/wayfarers_resting_traveler.tres" id="4_resting"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/wayfarers_continuing_traveler.tres" id="5_continuing"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/wayfarers_roadside_local.tres" id="6_local"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(1024, 32)
@@ -80,8 +83,23 @@ color = Color(0.62, 0.38, 0.18, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cart02"]
 shape = SubResource("Shape_cart")
 
-[node name="FestivalTravelerTest" parent="." instance=ExtResource("3_traveler")]
-position = Vector2(704, 448)
+[node name="RestingTraveler" parent="." instance=ExtResource("3_npc")]
+position = Vector2(128, 448)
+conversation = ExtResource("4_resting")
+placeholder_color = Color(0.82, 0.54, 0.3, 1)
+facing_direction = Vector2(1, 0)
+
+[node name="ContinuingTraveler" parent="." instance=ExtResource("3_npc")]
+position = Vector2(768, 448)
+conversation = ExtResource("5_continuing")
+placeholder_color = Color(0.68, 0.42, 0.78, 1)
+facing_direction = Vector2(-1, 0)
+
+[node name="RoadsideLocal" parent="." instance=ExtResource("3_npc")]
+position = Vector2(416, 352)
+conversation = ExtResource("6_local")
+placeholder_color = Color(0.88, 0.58, 0.36, 1)
+facing_direction = Vector2(0, -1)
 
 [node name="Boundaries" type="Node2D" parent="."]
 

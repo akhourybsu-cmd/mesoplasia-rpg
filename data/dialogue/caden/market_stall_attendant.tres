@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueConversation" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_conversation.gd" id="1_conversation"]
+
+[resource]
+script = ExtResource("1_conversation")
+speaker_id = &"market_stall_attendant"
+speaker_name = "Merchant"
+lines = Array[String](["It's been a busy market today.", "Supplies don't stay on the tables for long."])

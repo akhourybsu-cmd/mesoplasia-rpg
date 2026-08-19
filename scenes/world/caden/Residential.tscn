@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/residential_home_resident.tres" id="4_home"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/residential_path_resident.tres" id="5_path"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(1152, 32)
@@ -186,6 +189,18 @@ color = Color(0.62, 0.46, 0.25, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardFences/Fence03"]
 shape = SubResource("Shape_fence")
+
+[node name="HomeResident" parent="." instance=ExtResource("3_npc")]
+position = Vector2(160, 304)
+conversation = ExtResource("4_home")
+placeholder_color = Color(0.82, 0.48, 0.38, 1)
+facing_direction = Vector2(0, 1)
+
+[node name="PathResident" parent="." instance=ExtResource("3_npc")]
+position = Vector2(704, 384)
+conversation = ExtResource("5_path")
+placeholder_color = Color(0.48, 0.68, 0.48, 1)
+facing_direction = Vector2(-1, 0)
 
 [node name="Boundaries" type="Node2D" parent="."]
 

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/npcs/stationary_npc.gd" id="1_npc"]
+[ext_resource type="Script" path="res://scripts/interaction/interactable.gd" id="2_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Shape_npc"]
+size = Vector2(20, 20)
+
+[sub_resource type="CircleShape2D" id="Shape_interaction"]
+radius = 32.0
+
+[node name="StationaryNpc" type="StaticBody2D" groups=["npcs"]]
+script = ExtResource("1_npc")
+
+[node name="PlaceholderVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-10, -12, 10, -12, 10, 12, -10, 12)
+color = Color(0.78, 0.52, 0.3, 1)
+
+[node name="FacingMarker" type="Polygon2D" parent="."]
+position = Vector2(0, 9)
+polygon = PackedVector2Array(-3, -3, 3, -3, 0, 3)
+color = Color(1, 0.94, 0.72, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_npc")
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_interactable")
+prompt_text = "Talk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("Shape_interaction")
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interacted"]

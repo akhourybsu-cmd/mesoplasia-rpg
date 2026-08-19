@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
-[ext_resource type="PackedScene" path="res://scenes/development/InteractionTestObject.tscn" id="3_test"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/square_local_resident.tres" id="4_local"]
+[ext_resource type="Resource" path="res://data/dialogue/caden/square_passing_visitor.tres" id="5_visitor"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -86,8 +88,17 @@ offset_bottom = -26.0
 text = "Road to Terrebonne — unavailable in current build"
 horizontal_alignment = 1
 
-[node name="DevelopmentInteractionTest" parent="." instance=ExtResource("3_test")]
-position = Vector2(672, 480)
+[node name="SquareLocal" parent="." instance=ExtResource("3_npc")]
+position = Vector2(320, 352)
+conversation = ExtResource("4_local")
+placeholder_color = Color(0.88, 0.62, 0.3, 1)
+facing_direction = Vector2(1, 0)
+
+[node name="PassingVisitor" parent="." instance=ExtResource("3_npc")]
+position = Vector2(640, 352)
+conversation = ExtResource("5_visitor")
+placeholder_color = Color(0.42, 0.68, 0.84, 1)
+facing_direction = Vector2(-1, 0)
 
 [node name="Boundaries" type="Node2D" parent="."]
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueConversation" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_conversation.gd" id="1_conversation"]
+
+[resource]
+script = ExtResource("1_conversation")
+speaker_id = &"residential_path_resident"
+speaker_name = "Resident"
+lines = Array[String](["These paths are usually easygoing.", "Even with more visitors around, this part of Caden stays quiet."])
