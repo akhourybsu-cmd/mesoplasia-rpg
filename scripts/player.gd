@@ -6,6 +6,8 @@ enum MovementAxis {
 	VERTICAL,
 }
 
+const DIALOGUE_CONTROL_LOCK: StringName = &"dialogue"
+
 @export_category("Movement")
 @export var movement_speed: float = 96.0
 
@@ -14,9 +16,11 @@ enum MovementAxis {
 
 var _active_movement_axis: MovementAxis = MovementAxis.VERTICAL
 var facing_direction := Vector2.DOWN
+var _control_locks: Dictionary[StringName, bool] = {}
 
 @onready var _camera: Camera2D = $Camera2D
 @onready var _interaction_detector: Area2D = $InteractionDetector
+@onready var _dialogue_ui: CanvasLayer = $DialogueUI
 
 
 func _ready() -> void:
@@ -39,7 +43,38 @@ func _apply_camera_limits() -> void:
 	_camera.limit_bottom = camera_limits.end.y
 
 
+func start_dialogue(conversation: Resource) -> bool:
+	var dialogue_started: bool = _dialogue_ui.call("start_dialogue", conversation)
+	if dialogue_started:
+		lock_controls(DIALOGUE_CONTROL_LOCK)
+	return dialogue_started
+
+
+func lock_controls(reason: StringName) -> void:
+	_control_locks[reason] = true
+	_interaction_detector.call("set_interaction_enabled", false)
+
+
+func unlock_controls(reason: StringName) -> void:
+	_control_locks.erase(reason)
+	if not is_control_locked():
+		_interaction_detector.call("set_interaction_enabled", true)
+
+
+func is_control_locked() -> bool:
+	return not _control_locks.is_empty()
+
+
+func _on_dialogue_closed() -> void:
+	unlock_controls(DIALOGUE_CONTROL_LOCK)
+
+
 func _physics_process(_delta: float) -> void:
+	if is_control_locked():
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	var movement_direction := _get_four_direction_input()
 	if movement_direction != Vector2.ZERO:
 		facing_direction = movement_direction

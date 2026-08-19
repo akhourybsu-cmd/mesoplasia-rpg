@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_ui.gd" id="1_dialogue"]
+
+[node name="DialogueUI" type="CanvasLayer"]
+visible = false
+layer = 20
+script = ExtResource("1_dialogue")
+
+[node name="DialoguePanel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -128.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Content" type="VBoxContainer" parent="DialoguePanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpeakerName" type="Label" parent="DialoguePanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.78, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "Speaker"
+
+[node name="Separator" type="HSeparator" parent="DialoguePanel/Content"]
+layout_mode = 2
+
+[node name="DialogueText" type="Label" parent="DialoguePanel/Content"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Dialogue text"
+autowrap_mode = 2
+
+[node name="AdvanceHint" type="Label" parent="DialoguePanel/Content"]
+layout_mode = 2
+text = "[E] Continue"
+horizontal_alignment = 2

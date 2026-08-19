@@ -9,6 +9,7 @@ var _candidates: Array[Area2D] = []
 var _active_interactable: Area2D
 var _facing_direction := Vector2.DOWN
 var _interactor: Node2D
+var _interaction_enabled := true
 var _last_prompt_text := ""
 
 
@@ -23,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"):
+	if _interaction_enabled and event.is_action_pressed("interact"):
 		try_interact()
 		get_viewport().set_input_as_handled()
 
@@ -34,6 +35,9 @@ func set_facing_direction(direction: Vector2) -> void:
 
 
 func try_interact() -> void:
+	if not _interaction_enabled:
+		return
+
 	_refresh_active_interactable()
 	if _is_valid_candidate(_active_interactable):
 		_active_interactable.call("interact", _interactor)
@@ -42,6 +46,12 @@ func try_interact() -> void:
 func get_active_interactable() -> Area2D:
 	_refresh_active_interactable()
 	return _active_interactable
+
+
+func set_interaction_enabled(is_enabled: bool) -> void:
+	_interaction_enabled = is_enabled
+	set_process_unhandled_input(is_enabled)
+	_refresh_active_interactable()
 
 
 func clear_candidates() -> void:
@@ -62,6 +72,9 @@ func _on_area_exited(area: Area2D) -> void:
 
 func _refresh_active_interactable() -> void:
 	_prune_candidates()
+	if not _interaction_enabled:
+		_set_active_interactable(null)
+		return
 
 	var best_candidate: Area2D
 	var best_score := INF

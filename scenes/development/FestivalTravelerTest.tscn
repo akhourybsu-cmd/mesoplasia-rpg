@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/dialogue_test_npc.gd" id="1_npc"]
+[ext_resource type="Script" path="res://scripts/interaction/interactable.gd" id="2_interactable"]
+[ext_resource type="Resource" path="res://data/dialogue/development_festival_traveler.tres" id="3_dialogue"]
+
+[sub_resource type="RectangleShape2D" id="Shape_npc"]
+size = Vector2(24, 28)
+
+[sub_resource type="CircleShape2D" id="Shape_interaction"]
+radius = 32.0
+
+[node name="FestivalTravelerTest" type="StaticBody2D"]
+script = ExtResource("1_npc")
+conversation = ExtResource("3_dialogue")
+
+[node name="PlaceholderVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
+color = Color(0.25, 0.75, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_npc")
+
+[node name="DevelopmentLabel" type="Label" parent="."]
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -22.0
+text = "DEV FESTIVAL TRAVELER"
+horizontal_alignment = 1
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_interactable")
+prompt_text = "Talk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("Shape_interaction")
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interacted"]

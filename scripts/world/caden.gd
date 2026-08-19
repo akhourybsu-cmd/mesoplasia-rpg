@@ -49,7 +49,7 @@ func _connect_zone_exits(zone: Node2D) -> void:
 
 
 func _on_transition_requested(destination_zone: StringName, destination_entry: StringName) -> void:
-	if _transition_locked:
+	if _transition_locked or _player.call("is_control_locked"):
 		return
 
 	_transition_locked = true

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
+[ext_resource type="PackedScene" path="res://scenes/development/FestivalTravelerTest.tscn" id="3_traveler"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(1024, 32)
@@ -78,6 +79,9 @@ color = Color(0.62, 0.38, 0.18, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cart02"]
 shape = SubResource("Shape_cart")
+
+[node name="FestivalTravelerTest" parent="." instance=ExtResource("3_traveler")]
+position = Vector2(704, 448)
 
 [node name="Boundaries" type="Node2D" parent="."]
 
