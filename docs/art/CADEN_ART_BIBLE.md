@@ -161,9 +161,23 @@ Core visual qualities:
 
 - Festival-related visual touches must remain background subtext in the Caden vertical slice.
 - Any approved touches should be sparse, optional to notice, and subordinate to navigation and everyday town life.
-- Do not invent Festival iconography, banners, colors, symbols, ceremonies, decorations, artifacts, or traditions.
+- Generic blue-and-cream ribbons or fabric decorations may be used sparingly as approved background subtext. Do not invent Festival symbols, crests, religious imagery, relic imagery, historical iconography, ceremonies, artifacts, or traditions.
 - Use only approved narrative references when Festival-specific visual content is requested.
 - In the absence of approved specifics, prefer neutral signs of increased travel or preparation that do not establish new lore.
+
+## Edenite Accent Direction
+
+- Blue Edenite illumination is an important visual identifier of Mesoplasia.
+- Caden may use restrained Edenite-blue fixtures and accents.
+- Edenite remains an accent rather than the town's dominant palette.
+- Only a small number of visibly glowing elements should normally appear within one `640 x 360` camera view.
+- Edenite should not be attached indiscriminately to every building, lamp, fence, roof, or prop.
+- The approved effect uses sapphire/cyan blue with restrained pale-blue glow.
+- Warm timber, stone, greenery, and cream remain the dominant Caden palette.
+- Generic blue-and-cream Festival-period ribbons or fabric decorations are visually approved when used sparingly.
+- No Festival symbols, crests, religious imagery, relic imagery, or historical iconography may be invented.
+- The reserved Town Square community space remains undefined.
+- Edenite pedestal and crystal assets from the source sheet are optional reference components and are not authorization to create a permanent centerpiece, monument, shrine, or fountain.
 
 ## Town Square Visual-Slice Rules
 
