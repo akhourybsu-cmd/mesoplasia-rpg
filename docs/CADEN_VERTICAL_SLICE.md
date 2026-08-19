@@ -357,4 +357,6 @@ After Milestone A:
 
 **Combat:** Not yet authorized.
 
+**Development objective:** `Get Your Bearings` is temporary gameplay-test content only and is not established Mesoplasia narrative canon.
+
 **Full canon package:** Not required for this milestone.

@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/objective_ui.gd" id="1_objective_ui"]
+
+[node name="ObjectiveUI" type="CanvasLayer"]
+visible = false
+layer = 5
+script = ExtResource("1_objective_ui")
+
+[node name="ObjectivePanel" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -252.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 100.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="ObjectivePanel"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="DevelopmentLabel" type="Label" parent="ObjectivePanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
+theme_override_font_sizes/font_size = 10
+text = "DEV OBJECTIVE"
+
+[node name="Title" type="Label" parent="ObjectivePanel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Get Your Bearings"
+
+[node name="Separator" type="HSeparator" parent="ObjectivePanel/Content"]
+layout_mode = 2
+
+[node name="CurrentStep" type="Label" parent="ObjectivePanel/Content"]
+layout_mode = 2
+text = "Visit the Marketplace"
+autowrap_mode = 2
+
+[node name="CompletionTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="CompletionTimer" to="." method="_on_completion_timer_timeout"]

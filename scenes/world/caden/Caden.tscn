@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/caden.gd" id="1_caden"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/objectives/objective_tracker.gd" id="3_tracker"]
+[ext_resource type="Resource" path="res://data/objectives/development_get_your_bearings.tres" id="4_objective"]
+[ext_resource type="PackedScene" path="res://ui/ObjectiveUI.tscn" id="5_objective_ui"]
 
 [node name="Caden" type="Node2D"]
 script = ExtResource("1_caden")
@@ -10,3 +13,12 @@ script = ExtResource("1_caden")
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 z_index = 10
+
+[node name="ObjectiveTracker" type="Node" parent="."]
+script = ExtResource("3_tracker")
+objective_definition = ExtResource("4_objective")
+
+[node name="ObjectiveUI" parent="." instance=ExtResource("5_objective_ui")]
+
+[connection signal="zone_changed" from="." to="ObjectiveTracker" method="record_zone_visit"]
+[connection signal="progress_changed" from="ObjectiveTracker" to="ObjectiveUI" method="update_objective"]

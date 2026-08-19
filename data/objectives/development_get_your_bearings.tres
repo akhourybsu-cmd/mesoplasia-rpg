@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ObjectiveDefinition" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/objectives/objective_definition.gd" id="1_objective"]
+[ext_resource type="Script" path="res://scripts/objectives/objective_step_definition.gd" id="2_step"]
+
+[sub_resource type="Resource" id="Step_marketplace"]
+script = ExtResource("2_step")
+step_id = &"visit_marketplace"
+display_text = "Visit the Marketplace"
+completion_zone_ids = Array[StringName]([&"marketplace"])
+
+[sub_resource type="Resource" id="Step_town_square"]
+script = ExtResource("2_step")
+step_id = &"visit_town_square"
+display_text = "Visit the Town Square"
+completion_zone_ids = Array[StringName]([&"town_square"])
+
+[sub_resource type="Resource" id="Step_commons"]
+script = ExtResource("2_step")
+step_id = &"visit_commons"
+display_text = "Visit the Commons"
+completion_zone_ids = Array[StringName]([&"commons"])
+
+[sub_resource type="Resource" id="Step_return"]
+script = ExtResource("2_step")
+step_id = &"return_to_wayfarers_approach"
+display_text = "Return to Wayfarer's Approach"
+completion_zone_ids = Array[StringName]([&"wayfarers_approach"])
+
+[resource]
+script = ExtResource("1_objective")
+objective_id = &"development_get_your_bearings"
+title = "Get Your Bearings"
+development_only = true
+steps = Array[Resource]([SubResource("Step_marketplace"), SubResource("Step_town_square"), SubResource("Step_commons"), SubResource("Step_return")])

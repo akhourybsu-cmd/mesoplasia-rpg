@@ -1,6 +1,8 @@
 class_name Caden
 extends Node2D
 
+signal zone_changed(zone_id: StringName)
+
 const ZONE_SCENES := {
 	&"wayfarers_approach": preload("res://scenes/world/caden/WayfarersApproach.tscn"),
 	&"marketplace": preload("res://scenes/world/caden/Marketplace.tscn"),
@@ -40,6 +42,7 @@ func _load_zone(zone_id: StringName, entry_id: StringName) -> void:
 
 	_player.position = _current_zone.call("get_entry_position", entry_id) as Vector2
 	_player.call("set_camera_limits", _current_zone.get("camera_bounds") as Rect2i)
+	zone_changed.emit(zone_id)
 
 
 func _connect_zone_exits(zone: Node2D) -> void:
