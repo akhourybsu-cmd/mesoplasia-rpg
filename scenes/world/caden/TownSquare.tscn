@@ -6,11 +6,11 @@
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_local_resident.tres" id="4_local"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_passing_visitor.tres" id="5_visitor"]
 [ext_resource type="TileSet" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres" id="6_terrain"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1.png" id="7_building_nw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1.png" id="8_building_sw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1.png" id="9_building_ne"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1.png" id="10_building_se"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v1.png" id="11_building_s"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png" id="7_building_nw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1_1.png" id="8_building_sw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1_1.png" id="9_building_ne"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1_1.png" id="10_building_se"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v1_1.png" id="11_building_s"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -135,9 +135,8 @@ polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.4, 0.25, 0.17, 1)
 
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
-position = Vector2(4, 36)
-polygon = PackedVector2Array(-72, -8, 72, -8, 78, 8, -66, 8)
-color = Color(0.145, 0.122, 0.098, 0.33)
+polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
+color = Color(0.145, 0.122, 0.098, 0.376)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
 position = Vector2(0, -16)
@@ -157,9 +156,8 @@ polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.44, 0.28, 0.18, 1)
 
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
-position = Vector2(4, 36)
-polygon = PackedVector2Array(-72, -8, 72, -8, 78, 8, -66, 8)
-color = Color(0.145, 0.122, 0.098, 0.33)
+polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
+color = Color(0.145, 0.122, 0.098, 0.376)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
 position = Vector2(0, -16)
@@ -179,9 +177,8 @@ polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
 color = Color(0.38, 0.24, 0.16, 1)
 
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
-position = Vector2(4, 36)
-polygon = PackedVector2Array(-56, -8, 56, -8, 62, 8, -50, 8)
-color = Color(0.145, 0.122, 0.098, 0.33)
+polygon = PackedVector2Array(-51, 38, 54, 38, 59, 53, -45, 53)
+color = Color(0.145, 0.122, 0.098, 0.376)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
 position = Vector2(0, -16)
@@ -201,9 +198,8 @@ polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.43, 0.27, 0.17, 1)
 
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
-position = Vector2(4, 36)
-polygon = PackedVector2Array(-72, -8, 72, -8, 78, 8, -66, 8)
-color = Color(0.145, 0.122, 0.098, 0.33)
+polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
+color = Color(0.145, 0.122, 0.098, 0.376)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
 position = Vector2(0, -16)
@@ -223,9 +219,8 @@ polygon = PackedVector2Array(-64, -32, 64, -32, 64, 32, -64, 32)
 color = Color(0.36, 0.23, 0.16, 1)
 
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
-position = Vector2(4, 20)
-polygon = PackedVector2Array(-56, -8, 56, -8, 62, 8, -50, 8)
-color = Color(0.145, 0.122, 0.098, 0.33)
+polygon = PackedVector2Array(-51, 22, 54, 22, 59, 37, -45, 37)
+color = Color(0.145, 0.122, 0.098, 0.376)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
 position = Vector2(0, -16)
