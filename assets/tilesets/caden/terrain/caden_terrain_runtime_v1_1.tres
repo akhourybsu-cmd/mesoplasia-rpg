@@ -1,11 +1,11 @@
-[gd_resource type="TileSet" load_steps=3 format=3]
+[gd_resource type="TileSet" format=3 uid="uid://ffmi8arynxey"]
 
-[ext_resource type="Texture2D" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png" id="1_atlas"]
+[ext_resource type="Texture2D" uid="uid://dg6ee27f7rsju" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png" id="1_atlas"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_caden_terrain_v1_1"]
 texture = ExtResource("1_atlas")
 texture_region_size = Vector2i(32, 32)
-+0:0/0 = 0
+0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0

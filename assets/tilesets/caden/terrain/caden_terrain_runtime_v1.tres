@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=3 format=3]
+[gd_resource type="TileSet" format=3 uid="uid://d2p0vpv0mwari"]
 
-[ext_resource type="Texture2D" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1.png" id="1_atlas"]
+[ext_resource type="Texture2D" uid="uid://dl7ydtpgtv3j" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1.png" id="1_atlas"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_caden_terrain"]
 texture = ExtResource("1_atlas")

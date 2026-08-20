@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -6,6 +6,11 @@
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_local_resident.tres" id="4_local"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_passing_visitor.tres" id="5_visitor"]
 [ext_resource type="TileSet" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres" id="6_terrain"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1.png" id="7_building_nw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1.png" id="8_building_sw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1.png" id="9_building_ne"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1.png" id="10_building_se"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v1.png" id="11_building_s"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -122,9 +127,21 @@ color = Color(0.12, 0.28, 0.14, 1)
 [node name="GenericBuildingNorthwest" type="StaticBody2D" parent="SolidScenery/Buildings"]
 position = Vector2(144, 112)
 
-[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
+[node name="DevelopmentFallback" type="Node2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
+visible = false
+
+[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest/DevelopmentFallback"]
 polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.4, 0.25, 0.17, 1)
+
+[node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
+position = Vector2(4, 36)
+polygon = PackedVector2Array(-72, -8, 72, -8, 78, 8, -66, 8)
+color = Color(0.145, 0.122, 0.098, 0.33)
+
+[node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
+position = Vector2(0, -16)
+texture = ExtResource("7_building_nw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
 shape = SubResource("Shape_building_5x3")
@@ -132,9 +149,21 @@ shape = SubResource("Shape_building_5x3")
 [node name="GenericBuildingSouthwest" type="StaticBody2D" parent="SolidScenery/Buildings"]
 position = Vector2(144, 560)
 
-[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
+[node name="DevelopmentFallback" type="Node2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
+visible = false
+
+[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest/DevelopmentFallback"]
 polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.44, 0.28, 0.18, 1)
+
+[node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
+position = Vector2(4, 36)
+polygon = PackedVector2Array(-72, -8, 72, -8, 78, 8, -66, 8)
+color = Color(0.145, 0.122, 0.098, 0.33)
+
+[node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
+position = Vector2(0, -16)
+texture = ExtResource("8_building_sw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
 shape = SubResource("Shape_building_5x3")
@@ -142,9 +171,21 @@ shape = SubResource("Shape_building_5x3")
 [node name="GenericBuildingNortheast" type="StaticBody2D" parent="SolidScenery/Buildings"]
 position = Vector2(832, 208)
 
-[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
+[node name="DevelopmentFallback" type="Node2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
+visible = false
+
+[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNortheast/DevelopmentFallback"]
 polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
 color = Color(0.38, 0.24, 0.16, 1)
+
+[node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
+position = Vector2(4, 36)
+polygon = PackedVector2Array(-56, -8, 56, -8, 62, 8, -50, 8)
+color = Color(0.145, 0.122, 0.098, 0.33)
+
+[node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
+position = Vector2(0, -16)
+texture = ExtResource("9_building_ne")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
 shape = SubResource("Shape_building_4x3")
@@ -152,9 +193,21 @@ shape = SubResource("Shape_building_4x3")
 [node name="GenericBuildingSoutheast" type="StaticBody2D" parent="SolidScenery/Buildings"]
 position = Vector2(816, 560)
 
-[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
+[node name="DevelopmentFallback" type="Node2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
+visible = false
+
+[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast/DevelopmentFallback"]
 polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.43, 0.27, 0.17, 1)
+
+[node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
+position = Vector2(4, 36)
+polygon = PackedVector2Array(-72, -8, 72, -8, 78, 8, -66, 8)
+color = Color(0.145, 0.122, 0.098, 0.33)
+
+[node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
+position = Vector2(0, -16)
+texture = ExtResource("10_building_se")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
 shape = SubResource("Shape_building_5x3")
@@ -162,9 +215,21 @@ shape = SubResource("Shape_building_5x3")
 [node name="GenericBuildingSouth" type="StaticBody2D" parent="SolidScenery/Buildings"]
 position = Vector2(352, 624)
 
-[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
+[node name="DevelopmentFallback" type="Node2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
+visible = false
+
+[node name="Visual" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouth/DevelopmentFallback"]
 polygon = PackedVector2Array(-64, -32, 64, -32, 64, 32, -64, 32)
 color = Color(0.36, 0.23, 0.16, 1)
+
+[node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
+position = Vector2(4, 20)
+polygon = PackedVector2Array(-56, -8, 56, -8, 62, 8, -50, 8)
+color = Color(0.145, 0.122, 0.098, 0.33)
+
+[node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
+position = Vector2(0, -16)
+texture = ExtResource("11_building_s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
 shape = SubResource("Shape_building_4x2")
@@ -336,6 +401,7 @@ text = "Road to Terrebonne — unavailable in current build"
 horizontal_alignment = 1
 
 [node name="BuildingNorthwestLabel" type="Label" parent="DevelopmentLabels"]
+visible = false
 position = Vector2(144, 112)
 offset_left = -72.0
 offset_top = -10.0
@@ -345,6 +411,7 @@ text = "DEV BUILDING FOOTPRINT"
 horizontal_alignment = 1
 
 [node name="BuildingSouthwestLabel" type="Label" parent="DevelopmentLabels"]
+visible = false
 position = Vector2(144, 560)
 offset_left = -72.0
 offset_top = -10.0
@@ -354,6 +421,7 @@ text = "DEV BUILDING FOOTPRINT"
 horizontal_alignment = 1
 
 [node name="BuildingNortheastLabel" type="Label" parent="DevelopmentLabels"]
+visible = false
 position = Vector2(832, 208)
 offset_left = -72.0
 offset_top = -10.0
@@ -363,6 +431,7 @@ text = "DEV BUILDING FOOTPRINT"
 horizontal_alignment = 1
 
 [node name="BuildingSoutheastLabel" type="Label" parent="DevelopmentLabels"]
+visible = false
 position = Vector2(816, 560)
 offset_left = -72.0
 offset_top = -10.0
@@ -372,6 +441,7 @@ text = "DEV BUILDING FOOTPRINT"
 horizontal_alignment = 1
 
 [node name="BuildingSouthLabel" type="Label" parent="DevelopmentLabels"]
+visible = false
 position = Vector2(352, 624)
 offset_left = -72.0
 offset_top = -10.0
