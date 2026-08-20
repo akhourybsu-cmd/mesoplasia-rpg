@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3]
+[gd_scene load_steps=66 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -25,6 +25,32 @@
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/rocks/caden_rock_small_01_v1.png" id="23_rock_s1"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/rocks/caden_rock_small_02_v1.png" id="24_rock_s2"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/rocks/caden_rock_cluster_01_v1.png" id="25_rock_c1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/seating/caden_bench_01_v1.png" id="26_bench_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/seating/caden_bench_02_v1.png" id="27_bench_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/lighting/caden_lantern_post_01_v1.png" id="28_lantern_post"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/lighting/caden_ground_lantern_01_v1.png" id="29_lantern_ground"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/fences/caden_fence_straight_01_v1.png" id="30_fence_straight"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/fences/caden_fence_corner_01_v1.png" id="31_fence_corner"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/fences/caden_fence_end_01_v1.png" id="32_fence_end"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_01_v1.png" id="33_planter_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_02_v1.png" id="34_planter_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/storage/caden_barrel_01_v1.png" id="35_barrel_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/storage/caden_storage_cluster_01_v1.png" id="36_storage_cluster"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/storage/caden_sack_cluster_01_v1.png" id="37_sack_cluster"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/travel/caden_luggage_bundle_01_v1.png" id="38_luggage_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/travel/caden_travel_pack_01_v1.png" id="39_travel_pack"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/fences/caden_fence_gate_01_v1.png" id="40_fence_gate"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/edenite/caden_edenite_lantern_01_v1.png" id="41_edenite_lantern"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/edenite/caden_edenite_stone_fixture_01_v1.png" id="42_edenite_stone"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/edenite/caden_edenite_small_fixture_01_v1.png" id="43_edenite_small"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/festival/caden_festival_drape_01_v1.png" id="44_festival_drape_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/festival/caden_festival_drape_02_v1.png" id="45_festival_drape_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/festival/caden_festival_bunting_01_v1.png" id="46_festival_bunting_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/festival/caden_festival_bunting_02_v1.png" id="47_festival_bunting_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/festival/caden_festival_ribbon_drop_01_v1.png" id="48_festival_ribbon"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_gate_01_v1.png" id="49_closure_gate"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_rope_01_v1.png" id="50_closure_rope"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_timbers_01_v1.png" id="51_closure_timbers"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -55,6 +81,18 @@ size = Vector2(128, 96)
 
 [sub_resource type="RectangleShape2D" id="Shape_building_4x2"]
 size = Vector2(128, 64)
+
+[sub_resource type="RectangleShape2D" id="Shape_prop_bench_plain"]
+size = Vector2(52, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_prop_bench_flower"]
+size = Vector2(64, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_prop_lantern_post"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_edenite_lantern"]
+size = Vector2(14, 10)
 
 [node name="TownSquare" type="Node2D"]
 script = ExtResource("1_zone")
@@ -455,6 +493,7 @@ shape = SubResource("Shape_reserved")
 position = Vector2(768, 112)
 
 [node name="Visual" type="Polygon2D" parent="SolidScenery/TerrebonneClosure/HorizontalBarrier"]
+visible = false
 polygon = PackedVector2Array(-160, -16, 160, -16, 160, 16, -160, 16)
 color = Color(0.72, 0.52, 0.24, 1)
 
@@ -465,6 +504,7 @@ shape = SubResource("Shape_closure_horizontal")
 position = Vector2(624, 80)
 
 [node name="Visual" type="Polygon2D" parent="SolidScenery/TerrebonneClosure/VerticalBarrier"]
+visible = false
 polygon = PackedVector2Array(-16, -48, 16, -48, 16, 48, -16, 48)
 color = Color(0.72, 0.52, 0.24, 1)
 
@@ -472,6 +512,247 @@ color = Color(0.72, 0.52, 0.24, 1)
 shape = SubResource("Shape_closure_vertical")
 
 [node name="EnvironmentalProps" type="Node2D" parent="."]
+
+[node name="Props" type="Node2D" parent="EnvironmentalProps"]
+
+[node name="Seating" type="Node2D" parent="EnvironmentalProps/Props"]
+
+[node name="BenchWest" type="StaticBody2D" parent="EnvironmentalProps/Props/Seating"]
+position = Vector2(160, 240)
+
+[node name="ContactShadow" type="Polygon2D" parent="EnvironmentalProps/Props/Seating/BenchWest"]
+polygon = PackedVector2Array(-26, -8, 26, -8, 30, 2, -22, 2)
+color = Color(0.145, 0.122, 0.098, 0.32)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalProps/Props/Seating/BenchWest"]
+offset = Vector2(0, -32)
+texture = ExtResource("27_bench_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalProps/Props/Seating/BenchWest"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_prop_bench_plain")
+
+[node name="BenchEast" type="StaticBody2D" parent="EnvironmentalProps/Props/Seating"]
+position = Vector2(784, 440)
+
+[node name="ContactShadow" type="Polygon2D" parent="EnvironmentalProps/Props/Seating/BenchEast"]
+polygon = PackedVector2Array(-32, -8, 32, -8, 36, 2, -28, 2)
+color = Color(0.145, 0.122, 0.098, 0.32)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalProps/Props/Seating/BenchEast"]
+offset = Vector2(0, -32)
+texture = ExtResource("26_bench_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalProps/Props/Seating/BenchEast"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_prop_bench_flower")
+
+[node name="Lighting" type="Node2D" parent="EnvironmentalProps/Props"]
+
+[node name="LanternNorth" type="StaticBody2D" parent="EnvironmentalProps/Props/Lighting"]
+position = Vector2(368, 144)
+
+[node name="ContactShadow" type="Polygon2D" parent="EnvironmentalProps/Props/Lighting/LanternNorth"]
+polygon = PackedVector2Array(-5, -5, 7, -5, 11, 2, -1, 2)
+color = Color(0.145, 0.122, 0.098, 0.3)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalProps/Props/Lighting/LanternNorth"]
+offset = Vector2(0, -48)
+texture = ExtResource("28_lantern_post")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalProps/Props/Lighting/LanternNorth"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_prop_lantern_post")
+
+[node name="LanternSouth" type="StaticBody2D" parent="EnvironmentalProps/Props/Lighting"]
+position = Vector2(576, 496)
+
+[node name="ContactShadow" type="Polygon2D" parent="EnvironmentalProps/Props/Lighting/LanternSouth"]
+polygon = PackedVector2Array(-5, -5, 7, -5, 11, 2, -1, 2)
+color = Color(0.145, 0.122, 0.098, 0.3)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalProps/Props/Lighting/LanternSouth"]
+offset = Vector2(0, -48)
+texture = ExtResource("28_lantern_post")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalProps/Props/Lighting/LanternSouth"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_prop_lantern_post")
+
+[node name="GroundLanternSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Lighting"]
+position = Vector2(248, 576)
+offset = Vector2(0, -32)
+texture = ExtResource("29_lantern_ground")
+
+[node name="Fences" type="Node2D" parent="EnvironmentalProps/Props"]
+
+[node name="FenceSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Fences"]
+position = Vector2(128, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("30_fence_straight")
+
+[node name="FenceSouthwestEnd" type="Sprite2D" parent="EnvironmentalProps/Props/Fences"]
+position = Vector2(224, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_end")
+
+[node name="FenceSoutheastCorner" type="Sprite2D" parent="EnvironmentalProps/Props/Fences"]
+position = Vector2(736, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("31_fence_corner")
+
+[node name="FenceSoutheast" type="Sprite2D" parent="EnvironmentalProps/Props/Fences"]
+position = Vector2(832, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("30_fence_straight")
+
+[node name="Planters" type="Node2D" parent="EnvironmentalProps/Props"]
+
+[node name="PlanterWest" type="Sprite2D" parent="EnvironmentalProps/Props/Planters"]
+position = Vector2(208, 224)
+offset = Vector2(0, -32)
+texture = ExtResource("33_planter_1")
+
+[node name="PlanterEast" type="Sprite2D" parent="EnvironmentalProps/Props/Planters"]
+position = Vector2(720, 440)
+offset = Vector2(0, -32)
+texture = ExtResource("34_planter_2")
+
+[node name="Storage" type="Node2D" parent="EnvironmentalProps/Props"]
+
+[node name="BarrelNorthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
+position = Vector2(64, 144)
+offset = Vector2(0, -32)
+texture = ExtResource("35_barrel_1")
+
+[node name="StorageSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
+position = Vector2(224, 576)
+offset = Vector2(0, -32)
+texture = ExtResource("36_storage_cluster")
+
+[node name="SacksSoutheast" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
+position = Vector2(736, 576)
+offset = Vector2(0, -32)
+texture = ExtResource("37_sack_cluster")
+
+[node name="Travel" type="Node2D" parent="EnvironmentalProps/Props"]
+
+[node name="LuggageSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Travel"]
+position = Vector2(256, 624)
+offset = Vector2(0, -32)
+texture = ExtResource("38_luggage_1")
+
+[node name="TravelPackSoutheast" type="Sprite2D" parent="EnvironmentalProps/Props/Travel"]
+position = Vector2(704, 624)
+offset = Vector2(0, -32)
+texture = ExtResource("39_travel_pack")
+
+[node name="FestivalAndEdenite" type="Node2D" parent="."]
+
+[node name="PerimeterFencing" type="Node2D" parent="FestivalAndEdenite"]
+
+[node name="PlainFences" type="Node2D" parent="FestivalAndEdenite/PerimeterFencing"]
+
+[node name="FenceSouthwestCorner" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(64, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("31_fence_corner")
+
+[node name="FenceSouthwestGate" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(256, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("40_fence_gate")
+
+[node name="FenceNorthwestEndWest" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(256, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_end")
+
+[node name="FenceNorthwestStraight" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(320, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("30_fence_straight")
+
+[node name="FenceNorthwestEndEast" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(368, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_end")
+
+[node name="FenceSoutheastEnd" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(896, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_end")
+
+[node name="FestivalFabric" type="Node2D" parent="FestivalAndEdenite"]
+
+[node name="FenceOverlays" type="Node2D" parent="FestivalAndEdenite/FestivalFabric"]
+
+[node name="DrapeSouthwest" type="Sprite2D" parent="FestivalAndEdenite/FestivalFabric/FenceOverlays"]
+position = Vector2(128, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("45_festival_drape_2")
+
+[node name="BuntingNorthwest" type="Sprite2D" parent="FestivalAndEdenite/FestivalFabric/FenceOverlays"]
+position = Vector2(320, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("46_festival_bunting_1")
+
+[node name="DrapeSoutheast" type="Sprite2D" parent="FestivalAndEdenite/FestivalFabric/FenceOverlays"]
+position = Vector2(832, 672)
+offset = Vector2(0, -32)
+texture = ExtResource("44_festival_drape_1")
+
+[node name="LanternDecor" type="Node2D" parent="FestivalAndEdenite/FestivalFabric"]
+
+[node name="RibbonNorthLantern" type="Sprite2D" parent="FestivalAndEdenite/FestivalFabric/LanternDecor"]
+position = Vector2(368, 144)
+offset = Vector2(0, -32)
+texture = ExtResource("48_festival_ribbon")
+
+[node name="EdeniteFixtures" type="Node2D" parent="FestivalAndEdenite"]
+
+[node name="SmallFixtureWestBoundary" type="Sprite2D" parent="FestivalAndEdenite/EdeniteFixtures"]
+position = Vector2(24, 176)
+offset = Vector2(0, -32)
+texture = ExtResource("43_edenite_small")
+
+[node name="LanternEastPlazaEdge" type="StaticBody2D" parent="FestivalAndEdenite/EdeniteFixtures"]
+position = Vector2(704, 368)
+
+[node name="Sprite" type="Sprite2D" parent="FestivalAndEdenite/EdeniteFixtures/LanternEastPlazaEdge"]
+offset = Vector2(0, -48)
+texture = ExtResource("41_edenite_lantern")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FestivalAndEdenite/EdeniteFixtures/LanternEastPlazaEdge"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_edenite_lantern")
+
+[node name="StoneFixtureSouthBoundary" type="Sprite2D" parent="FestivalAndEdenite/EdeniteFixtures"]
+position = Vector2(672, 672)
+offset = Vector2(0, -48)
+texture = ExtResource("42_edenite_stone")
+
+[node name="TerrebonneClosure" type="Node2D" parent="FestivalAndEdenite"]
+
+[node name="ClosureCorner" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
+position = Vector2(624, 112)
+offset = Vector2(0, -32)
+texture = ExtResource("31_fence_corner")
+
+[node name="ClosureGate" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
+position = Vector2(688, 112)
+offset = Vector2(0, -32)
+texture = ExtResource("49_closure_gate")
+
+[node name="ClosureRope" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
+position = Vector2(752, 112)
+offset = Vector2(0, -32)
+texture = ExtResource("50_closure_rope")
+
+[node name="ClosureTimbers" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
+position = Vector2(816, 112)
+offset = Vector2(0, -32)
+texture = ExtResource("51_closure_timbers")
 
 [node name="Actors" type="Node2D" parent="."]
 
