@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=36 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -11,6 +11,20 @@
 [ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1_1.png" id="9_building_ne"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1_1.png" id="10_building_se"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v1_1.png" id="11_building_s"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/ground/caden_nature_ground_runtime_v1.png" id="12_nature_ground"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="13_tree_m1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_02_v1.png" id="14_tree_m2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_small_01_v1.png" id="15_tree_s1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_small_02_v1.png" id="16_tree_s2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_bush_medium_01_v1.png" id="17_bush_m1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_bush_medium_02_v1.png" id="18_bush_m2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_bush_medium_03_v1.png" id="19_bush_m3"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_shrub_small_01_v1.png" id="20_shrub_s1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_shrub_small_02_v1.png" id="21_shrub_s2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_shrub_small_03_v1.png" id="22_shrub_s3"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/rocks/caden_rock_small_01_v1.png" id="23_rock_s1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/rocks/caden_rock_small_02_v1.png" id="24_rock_s2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/rocks/caden_rock_cluster_01_v1.png" id="25_rock_c1"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -101,6 +115,202 @@ tile_set = ExtResource("6_terrain")
 z_index = 3
 tile_map_data = PackedByteArray("AAANAAUAAAAAAAQAAAAOAAUAAAAAAAQAAAAPAAUAAAAAAAQAAAAQAAUAAAAAAAQAAAAHAAkAAAACAAQAAAAWAAkAAAADAAQAAAAHAAoAAAACAAQAAAAWAAoAAAADAAQAAAAHAAsAAAACAAQAAAAWAAsAAAADAAQAAAAHAAwAAAACAAQAAAAWAAwAAAADAAQAAAANABAAAAABAAQAAAAOABAAAAABAAQAAAAPABAAAAABAAQAAAAQABAAAAABAAQAAAA=")
 tile_set = ExtResource("6_terrain")
+
+[node name="Nature" type="Node2D" parent="."]
+
+[node name="GroundOverlays" type="Node2D" parent="Nature"]
+
+[node name="FlowerNorthwestA" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(272, 176)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+
+[node name="FlowerNorthwestB" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(336, 176)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 1
+
+[node name="FlowerWestUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(240, 192)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="FlowerEastUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(736, 224)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 3
+
+[node name="FlowerWestA" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(112, 240)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 4
+
+[node name="TuftWestUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(192, 224)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 5
+
+[node name="TuftWestLowerA" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(80, 464)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 6
+
+[node name="TuftWestLowerB" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(208, 464)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 7
+
+[node name="TuftEastLowerA" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(752, 464)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 8
+
+[node name="FlowerEastLower" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(880, 464)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+
+[node name="FlowerSouthwest" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(272, 640)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="FlowerSoutheast" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(624, 640)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 4
+
+[node name="TuftNorthEast" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(576, 80)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 6
+
+[node name="TuftNorthWest" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(336, 80)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 8
+
+[node name="LowVegetation" type="Node2D" parent="Nature"]
+
+[node name="BushNorthwestWest" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(80, 160)
+offset = Vector2(0, -16)
+texture = ExtResource("17_bush_m1")
+
+[node name="BushNortheastWest" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(768, 256)
+offset = Vector2(0, -16)
+texture = ExtResource("17_bush_m1")
+
+[node name="BushNorthwestEast" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(208, 160)
+offset = Vector2(0, -16)
+texture = ExtResource("18_bush_m2")
+
+[node name="BushSoutheastEast" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(880, 608)
+offset = Vector2(0, -16)
+texture = ExtResource("18_bush_m2")
+
+[node name="BushSouthwestWest" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(80, 608)
+offset = Vector2(0, -16)
+texture = ExtResource("19_bush_m3")
+
+[node name="BushNortheastEast" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(896, 255)
+offset = Vector2(0, -16)
+texture = ExtResource("19_bush_m3")
+
+[node name="ShrubSouthwestEast" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(208, 608)
+offset = Vector2(0, -16)
+texture = ExtResource("20_shrub_s1")
+
+[node name="ShrubSoutheastWest" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(752, 608)
+offset = Vector2(0, -16)
+texture = ExtResource("21_shrub_s2")
+
+[node name="ShrubNorthwestOuter" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(240, 128)
+offset = Vector2(0, -16)
+texture = ExtResource("22_shrub_s3")
+
+[node name="Trees" type="Node2D" parent="Nature"]
+
+[node name="TreeWestUpper" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(32, 240)
+offset = Vector2(0, -48)
+texture = ExtResource("13_tree_m1")
+
+[node name="TreeEastLower" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(928, 528)
+offset = Vector2(0, -48)
+texture = ExtResource("13_tree_m1")
+
+[node name="TreeWestLower" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(32, 512)
+offset = Vector2(0, -48)
+texture = ExtResource("14_tree_m2")
+
+[node name="TreeEastUpper" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(928, 208)
+offset = Vector2(0, -48)
+texture = ExtResource("14_tree_m2")
+
+[node name="SaplingSouthwest" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(32, 656)
+offset = Vector2(0, -32)
+texture = ExtResource("15_tree_s1")
+
+[node name="SaplingNortheast" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(928, 96)
+offset = Vector2(0, -32)
+texture = ExtResource("16_tree_s2")
+
+[node name="Rocks" type="Node2D" parent="Nature"]
+
+[node name="RockNorthwest" type="Sprite2D" parent="Nature/Rocks"]
+position = Vector2(272, 80)
+offset = Vector2(0, -16)
+texture = ExtResource("23_rock_s1")
+
+[node name="RockSouth" type="Sprite2D" parent="Nature/Rocks"]
+position = Vector2(688, 640)
+offset = Vector2(0, -16)
+texture = ExtResource("24_rock_s2")
+
+[node name="RockClusterSoutheastBoundary" type="Sprite2D" parent="Nature/Rocks"]
+position = Vector2(928, 640)
+offset = Vector2(0, -16)
+texture = ExtResource("25_rock_c1")
 
 [node name="SolidScenery" type="Node2D" parent="."]
 
