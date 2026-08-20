@@ -1,10 +1,10 @@
 extends SceneTree
 
 const TOWN_SQUARE_SCENE := preload("res://scenes/world/caden/TownSquare.tscn")
+const PROJECT_CONFIGURATION := preload("res://tests/project_configuration_test_helper.gd")
 
 const EXPECTED_SOURCE_SHA256 := "82b60c3b0935e284b602f2a04713d7e4cf84ec4770bc7229ea80aeedc9195bf8"
 const EXPECTED_TERRAIN_SHA256 := "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a"
-const EXPECTED_PROJECT_SHA256 := "b560718fd3141c70c318a2843b409b95490b876c139bd77104c125ce181c91f0"
 const BUILDING_ROOT := "SolidScenery/Buildings/"
 const BUILDINGS := {
 	&"GenericBuildingNorthwest": {
@@ -88,8 +88,9 @@ func _verify_protected_files() -> bool:
 		return _fail("The immutable architecture source-master hash changed.")
 	if FileAccess.get_sha256("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png") != EXPECTED_TERRAIN_SHA256:
 		return _fail("The protected Terrain Runtime v1.1 hash changed.")
-	if FileAccess.get_sha256("res://project.godot") != EXPECTED_PROJECT_SHA256:
-		return _fail("project.godot changed from the architecture-polish baseline.")
+	var project_configuration_error: String = PROJECT_CONFIGURATION.verify()
+	if not project_configuration_error.is_empty():
+		return _fail(project_configuration_error)
 	for building_name: StringName in BUILDINGS:
 		var expected: Dictionary = BUILDINGS[building_name]
 		if FileAccess.get_sha256(expected["v1_path"] as String) != expected["v1_hash"]:

@@ -1,10 +1,10 @@
 extends SceneTree
 
 const TOWN_SQUARE_SCENE := preload("res://scenes/world/caden/TownSquare.tscn")
+const PROJECT_CONFIGURATION := preload("res://tests/project_configuration_test_helper.gd")
 
 const EXPECTED_SOURCE_SHA256 := "611eb43cc137a63b477d982371e88d6d6d07997878a12bde8202ef26cfe93650"
 const EXPECTED_TERRAIN_SHA256 := "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a"
-const EXPECTED_PROJECT_SHA256 := "b560718fd3141c70c318a2843b409b95490b876c139bd77104c125ce181c91f0"
 const EXPECTED_ARCHITECTURE_HASHES := {
 	"res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png": "55ee5c5c35e2f646e5b8b2295680111eba56e71168d5efed5b246ae9f2c0f770",
 	"res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1_1.png": "790f375a5549e91af59950e91c648fc6c547fc2d1b092591dc33a56ba59b6780",
@@ -70,8 +70,9 @@ func _verify_protected_files() -> bool:
 		return _fail("The immutable Nature source-master hash changed.")
 	if FileAccess.get_sha256("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png") != EXPECTED_TERRAIN_SHA256:
 		return _fail("The protected Terrain Runtime v1.1 hash changed.")
-	if FileAccess.get_sha256("res://project.godot") != EXPECTED_PROJECT_SHA256:
-		return _fail("project.godot changed during the Nature pass.")
+	var project_configuration_error: String = PROJECT_CONFIGURATION.verify()
+	if not project_configuration_error.is_empty():
+		return _fail(project_configuration_error)
 	for path: String in EXPECTED_ARCHITECTURE_HASHES:
 		if FileAccess.get_sha256(path) != EXPECTED_ARCHITECTURE_HASHES[path]:
 			return _fail("Protected Architecture Runtime v1.1 changed: %s" % path)

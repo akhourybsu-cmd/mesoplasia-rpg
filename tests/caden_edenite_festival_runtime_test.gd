@@ -1,8 +1,8 @@
 extends SceneTree
 
 const TOWN_SQUARE_SCENE := preload("res://scenes/world/caden/TownSquare.tscn")
+const PROJECT_CONFIGURATION := preload("res://tests/project_configuration_test_helper.gd")
 
-const EXPECTED_PROJECT_SHA256 := "b560718fd3141c70c318a2843b409b95490b876c139bd77104c125ce181c91f0"
 const EXPECTED_PROTECTED_HASHES := {
 	"res://assets/source_art/caden/accents/caden_edenite_festival_master_v1.png": "95a1860a8cc172ae7fbb65a8256450c018f7cef277595c33af80211feff5fc16",
 	"res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
@@ -123,8 +123,9 @@ func _run_test() -> void:
 
 
 func _verify_protected_files() -> bool:
-	if FileAccess.get_sha256("res://project.godot") != EXPECTED_PROJECT_SHA256:
-		return _fail("project.godot changed during the Edenite/Festival pass.")
+	var project_configuration_error: String = PROJECT_CONFIGURATION.verify()
+	if not project_configuration_error.is_empty():
+		return _fail(project_configuration_error)
 	for path: String in EXPECTED_PROTECTED_HASHES:
 		if not FileAccess.file_exists(path):
 			return _fail("Missing protected input: %s" % path)

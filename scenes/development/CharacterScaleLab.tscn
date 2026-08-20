@@ -1,0 +1,714 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png" id="1_terrain"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png" id="2_building"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/seating/caden_bench_01_v1.png" id="3_bench"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/lighting/caden_lantern_post_01_v1.png" id="4_lantern"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/accents/edenite/caden_edenite_lantern_01_v1.png" id="5_edenite"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_02_v1.png" id="6_planter"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="7_tree"]
+
+[node name="CharacterScaleLab" type="Node2D"]
+
+[node name="Backdrop" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 640, 0, 640, 360, 0, 360)
+color = Color(0.188, 0.18, 0.157, 1)
+z_index = -20
+
+[node name="TerrainPatches" type="Node2D" parent="."]
+z_index = -10
+
+[node name="Grass" type="Node2D" parent="TerrainPatches"]
+
+[node name="Grass_0_0" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(144, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_1_0" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(176, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_2_0" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(208, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_3_0" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(240, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_0_1" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(144, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_1_1" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(176, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_2_1" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(208, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_3_1" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(240, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_0_2" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(144, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_1_2" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(176, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_2_2" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(208, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_3_2" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(240, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_0_3" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(144, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_1_3" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(176, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_2_3" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(208, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Grass_3_3" type="Sprite2D" parent="TerrainPatches/Grass"]
+position = Vector2(240, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+
+[node name="Road" type="Node2D" parent="TerrainPatches"]
+
+[node name="Road_0_0" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(272, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_1_0" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(304, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_2_0" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(336, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_3_0" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(368, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_0_1" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(272, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_1_1" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(304, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_2_1" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(336, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_3_1" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(368, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_0_2" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(272, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_1_2" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(304, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_2_2" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(336, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_3_2" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(368, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_0_3" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(272, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_1_3" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(304, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_2_3" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(336, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="Road_3_3" type="Sprite2D" parent="TerrainPatches/Road"]
+position = Vector2(368, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 8
+
+[node name="RoadToPlazaTransition" type="Node2D" parent="TerrainPatches"]
+
+[node name="Transition_0" type="Sprite2D" parent="TerrainPatches/RoadToPlazaTransition"]
+position = Vector2(400, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 35
+
+[node name="Transition_1" type="Sprite2D" parent="TerrainPatches/RoadToPlazaTransition"]
+position = Vector2(400, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 35
+
+[node name="Transition_2" type="Sprite2D" parent="TerrainPatches/RoadToPlazaTransition"]
+position = Vector2(400, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 35
+
+[node name="Transition_3" type="Sprite2D" parent="TerrainPatches/RoadToPlazaTransition"]
+position = Vector2(400, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 35
+
+[node name="Plaza" type="Node2D" parent="TerrainPatches"]
+
+[node name="Plaza_0_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(432, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_1_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(464, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_2_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(496, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_3_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(528, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_4_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(560, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_5_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(592, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_6_0" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(624, 248)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_0_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(432, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_1_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(464, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_2_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(496, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_3_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(528, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_4_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(560, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_5_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(592, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_6_1" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(624, 280)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_0_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(432, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_1_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(464, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_2_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(496, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_3_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(528, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_4_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(560, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_5_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(592, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_6_2" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(624, 312)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_0_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(432, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_1_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(464, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_2_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(496, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_3_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(528, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_4_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(560, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_5_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(592, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="Plaza_6_3" type="Sprite2D" parent="TerrainPatches/Plaza"]
+position = Vector2(624, 344)
+texture = ExtResource("1_terrain")
+hframes = 8
+vframes = 8
+frame = 36
+
+[node name="EnvironmentReferences" type="Node2D" parent="."]
+
+[node name="RepresentativeBuilding" type="Sprite2D" parent="EnvironmentReferences"]
+position = Vector2(112, 120)
+texture = ExtResource("2_building")
+
+[node name="RepresentativeBench" type="Sprite2D" parent="EnvironmentReferences"]
+position = Vector2(300, 155)
+texture = ExtResource("3_bench")
+
+[node name="OrdinaryLantern" type="Sprite2D" parent="EnvironmentReferences"]
+position = Vector2(368, 139)
+texture = ExtResource("4_lantern")
+
+[node name="EdeniteFixture" type="Sprite2D" parent="EnvironmentReferences"]
+position = Vector2(440, 139)
+texture = ExtResource("5_edenite")
+
+[node name="RepresentativePlanter" type="Sprite2D" parent="EnvironmentReferences"]
+position = Vector2(504, 155)
+texture = ExtResource("6_planter")
+
+[node name="MediumTree" type="Sprite2D" parent="EnvironmentReferences"]
+position = Vector2(576, 139)
+texture = ExtResource("7_tree")
+
+[node name="Candidates" type="Node2D" parent="."]
+
+[node name="CandidateA_32x48" type="Node2D" parent="Candidates"]
+position = Vector2(208, 340)
+
+[node name="CollisionFootprint" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0)
+color = Color(0.969, 0.718, 0.286, 0.18)
+
+[node name="CollisionOutline" type="Line2D" parent="Candidates/CandidateA_32x48"]
+points = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0, -12, -24)
+width = 1.0
+default_color = Color(0.969, 0.718, 0.286, 1)
+
+[node name="LeftLeg" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(-7, -12, -1, -12, -1, -3, -8, -3)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="RightLeg" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(1, -12, 7, -12, 8, -3, 1, -3)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="LeftFoot" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(-9, -4, -1, -4, -1, 0, -10, 0)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="RightFoot" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(1, -4, 9, -4, 10, 0, 1, 0)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="LeftArm" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(-9, -30, -6, -31, -7, -9, -11, -10)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="RightArm" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(6, -31, 9, -30, 11, -10, 7, -9)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="Body" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(-9, -33, 9, -33, 10, -16, 6, -11, -6, -11, -10, -16)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="Head" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+polygon = PackedVector2Array(-4, -45, 4, -45, 6, -42, 6, -35, 3, -32, -3, -32, -6, -35, -6, -42)
+color = Color(0.651, 0.616, 0.537, 1)
+
+[node name="CanvasBounds" type="Line2D" parent="Candidates/CandidateA_32x48"]
+points = PackedVector2Array(-16, -48, 16, -48, 16, 0, -16, 0, -16, -48)
+width = 1.0
+default_color = Color(0.302, 0.722, 0.8, 0.9)
+
+[node name="FeetContactLine" type="Line2D" parent="Candidates/CandidateA_32x48"]
+points = PackedVector2Array(-16, 0, 16, 0)
+width = 1.0
+default_color = Color(0.369, 0.839, 0.561, 1)
+
+[node name="PlayerOrigin" type="Polygon2D" parent="Candidates/CandidateA_32x48"]
+position = Vector2(0, -12)
+polygon = PackedVector2Array(-2, 0, 0, -2, 2, 0, 0, 2)
+color = Color(0.91, 0.361, 0.361, 1)
+
+[node name="CandidateB_40x56" type="Node2D" parent="Candidates"]
+position = Vector2(336, 340)
+
+[node name="CollisionFootprint" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0)
+color = Color(0.969, 0.718, 0.286, 0.18)
+
+[node name="CollisionOutline" type="Line2D" parent="Candidates/CandidateB_40x56"]
+points = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0, -12, -24)
+width = 1.0
+default_color = Color(0.969, 0.718, 0.286, 1)
+
+[node name="LeftLeg" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(-8, -14, -1, -14, -1, -3, -9, -3)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="RightLeg" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(1, -14, 8, -14, 9, -3, 1, -3)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="LeftFoot" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(-10, -4, -1, -4, -1, 0, -11, 0)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="RightFoot" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(1, -4, 10, -4, 11, 0, 1, 0)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="LeftArm" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(-11, -36, -8, -37, -9, -11, -13, -12)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="RightArm" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(8, -37, 11, -36, 13, -12, 9, -11)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="Body" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(-11, -39, 11, -39, 12, -18, 8, -13, -8, -13, -12, -18)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="Head" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+polygon = PackedVector2Array(-6, -53, 6, -53, 8, -50, 8, -41, 5, -38, -5, -38, -8, -41, -8, -50)
+color = Color(0.651, 0.616, 0.537, 1)
+
+[node name="CanvasBounds" type="Line2D" parent="Candidates/CandidateB_40x56"]
+points = PackedVector2Array(-20, -56, 20, -56, 20, 0, -20, 0, -20, -56)
+width = 1.0
+default_color = Color(0.302, 0.722, 0.8, 0.9)
+
+[node name="FeetContactLine" type="Line2D" parent="Candidates/CandidateB_40x56"]
+points = PackedVector2Array(-20, 0, 20, 0)
+width = 1.0
+default_color = Color(0.369, 0.839, 0.561, 1)
+
+[node name="PlayerOrigin" type="Polygon2D" parent="Candidates/CandidateB_40x56"]
+position = Vector2(0, -12)
+polygon = PackedVector2Array(-2, 0, 0, -2, 2, 0, 0, 2)
+color = Color(0.91, 0.361, 0.361, 1)
+
+[node name="CandidateC_48x64" type="Node2D" parent="Candidates"]
+position = Vector2(496, 340)
+
+[node name="CollisionFootprint" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0)
+color = Color(0.969, 0.718, 0.286, 0.18)
+
+[node name="CollisionOutline" type="Line2D" parent="Candidates/CandidateC_48x64"]
+points = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0, -12, -24)
+width = 1.0
+default_color = Color(0.969, 0.718, 0.286, 1)
+
+[node name="LeftLeg" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(-10, -16, -1, -16, -1, -3, -11, -3)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="RightLeg" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(1, -16, 10, -16, 11, -3, 1, -3)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="LeftFoot" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(-12, -4, -1, -4, -1, 0, -13, 0)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="RightFoot" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(1, -4, 12, -4, 13, 0, 1, 0)
+color = Color(0.149, 0.184, 0.196, 1)
+
+[node name="LeftArm" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(-13, -41, -10, -42, -11, -13, -16, -14)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="RightArm" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(10, -42, 13, -41, 16, -14, 11, -13)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="Body" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(-13, -44, 13, -44, 14, -20, 10, -15, -10, -15, -14, -20)
+color = Color(0.302, 0.408, 0.416, 1)
+
+[node name="Head" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+polygon = PackedVector2Array(-7, -60, 7, -60, 9, -57, 9, -46, 6, -43, -6, -43, -9, -46, -9, -57)
+color = Color(0.651, 0.616, 0.537, 1)
+
+[node name="CanvasBounds" type="Line2D" parent="Candidates/CandidateC_48x64"]
+points = PackedVector2Array(-24, -64, 24, -64, 24, 0, -24, 0, -24, -64)
+width = 1.0
+default_color = Color(0.302, 0.722, 0.8, 0.9)
+
+[node name="FeetContactLine" type="Line2D" parent="Candidates/CandidateC_48x64"]
+points = PackedVector2Array(-24, 0, 24, 0)
+width = 1.0
+default_color = Color(0.369, 0.839, 0.561, 1)
+
+[node name="PlayerOrigin" type="Polygon2D" parent="Candidates/CandidateC_48x64"]
+position = Vector2(0, -12)
+polygon = PackedVector2Array(-2, 0, 0, -2, 2, 0, 0, 2)
+color = Color(0.91, 0.361, 0.361, 1)
+
+[node name="DevelopmentLabels" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="Header" type="Label" parent="DevelopmentLabels"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 632.0
+offset_bottom = 28.0
+text = "CHARACTER SCALE LAB — NONCANONICAL DEVELOPMENT SILHOUETTES"
+horizontal_alignment = 1
+
+[node name="EnvironmentNote" type="Label" parent="DevelopmentLabels"]
+offset_left = 198.0
+offset_top = 194.0
+offset_right = 632.0
+offset_bottom = 216.0
+text = "Door | bench | ordinary lantern | Edenite fixture | planter | medium tree"
+horizontal_alignment = 1
+
+[node name="CandidateALabel" type="Label" parent="DevelopmentLabels"]
+offset_left = 144.0
+offset_top = 258.0
+offset_right = 272.0
+offset_bottom = 278.0
+text = "A  32×48"
+horizontal_alignment = 1
+
+[node name="CandidateBLabel" type="Label" parent="DevelopmentLabels"]
+offset_left = 272.0
+offset_top = 250.0
+offset_right = 400.0
+offset_bottom = 278.0
+text = "B  40×56\nRECOMMENDED"
+horizontal_alignment = 1
+
+[node name="CandidateCLabel" type="Label" parent="DevelopmentLabels"]
+offset_left = 432.0
+offset_top = 242.0
+offset_right = 560.0
+offset_bottom = 278.0
+text = "C  48×64"
+horizontal_alignment = 1
+
+[node name="Legend" type="Label" parent="DevelopmentLabels"]
+offset_left = 8.0
+offset_top = 330.0
+offset_right = 136.0
+offset_bottom = 356.0
+text = "CYAN canvas\nAMBER 24×24 collision"
