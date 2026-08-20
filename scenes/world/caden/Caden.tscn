@@ -1,24 +1,24 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://d1tgi7qh81a2a"]
 
-[ext_resource type="Script" path="res://scripts/world/caden.gd" id="1_caden"]
+[ext_resource type="Script" uid="uid://dkyqruoef08o4" path="res://scripts/world/caden.gd" id="1_caden"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2_player"]
-[ext_resource type="Script" path="res://scripts/objectives/objective_tracker.gd" id="3_tracker"]
-[ext_resource type="Resource" path="res://data/objectives/development_get_your_bearings.tres" id="4_objective"]
+[ext_resource type="Script" uid="uid://die7b31owierk" path="res://scripts/objectives/objective_tracker.gd" id="3_tracker"]
+[ext_resource type="Resource" uid="uid://cy1nmiymjpie1" path="res://data/objectives/development_get_your_bearings.tres" id="4_objective"]
 [ext_resource type="PackedScene" path="res://ui/ObjectiveUI.tscn" id="5_objective_ui"]
 
-[node name="Caden" type="Node2D"]
+[node name="Caden" type="Node2D" unique_id=1205033867]
 script = ExtResource("1_caden")
 
-[node name="CurrentZone" type="Node2D" parent="."]
+[node name="CurrentZone" type="Node2D" parent="." unique_id=979378482]
 
-[node name="Player" parent="." instance=ExtResource("2_player")]
+[node name="Player" parent="." unique_id=474583093 instance=ExtResource("2_player")]
 z_index = 10
 
-[node name="ObjectiveTracker" type="Node" parent="."]
+[node name="ObjectiveTracker" type="Node" parent="." unique_id=238192612]
 script = ExtResource("3_tracker")
 objective_definition = ExtResource("4_objective")
 
-[node name="ObjectiveUI" parent="." instance=ExtResource("5_objective_ui")]
+[node name="ObjectiveUI" parent="." unique_id=591995755 instance=ExtResource("5_objective_ui")]
 
 [connection signal="zone_changed" from="." to="ObjectiveTracker" method="record_zone_visit"]
 [connection signal="progress_changed" from="ObjectiveTracker" to="ObjectiveUI" method="update_objective"]

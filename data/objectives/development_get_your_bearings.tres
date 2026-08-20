@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ObjectiveDefinition" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="ObjectiveDefinition" format=3 uid="uid://cy1nmiymjpie1"]
 
-[ext_resource type="Script" path="res://scripts/objectives/objective_definition.gd" id="1_objective"]
-[ext_resource type="Script" path="res://scripts/objectives/objective_step_definition.gd" id="2_step"]
+[ext_resource type="Script" uid="uid://dbyb865fwsev0" path="res://scripts/objectives/objective_definition.gd" id="1_objective"]
+[ext_resource type="Script" uid="uid://ct7qv0heup3ne" path="res://scripts/objectives/objective_step_definition.gd" id="2_step"]
 
 [sub_resource type="Resource" id="Step_marketplace"]
 script = ExtResource("2_step")

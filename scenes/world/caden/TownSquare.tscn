@@ -159,96 +159,96 @@ tile_set = ExtResource("6_terrain")
 [node name="GroundOverlays" type="Node2D" parent="Nature"]
 
 [node name="FlowerNorthwestA" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(272, 176)
+position = Vector2(80, 224)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 
 [node name="FlowerNorthwestB" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(336, 176)
+position = Vector2(112, 224)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 1
 
 [node name="FlowerWestUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(240, 192)
+position = Vector2(208, 208)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 2
 
 [node name="FlowerEastUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(736, 224)
+position = Vector2(736, 240)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 3
 
-[node name="FlowerWestA" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(112, 240)
+[node name="FlowerNorthFence" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(304, 128)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 4
 
-[node name="TuftWestUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(192, 224)
+[node name="TuftNorthFenceEast" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(336, 112)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 5
 
 [node name="TuftWestLowerA" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(80, 464)
+position = Vector2(48, 624)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 6
 
 [node name="TuftWestLowerB" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(208, 464)
+position = Vector2(80, 640)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 7
 
 [node name="TuftEastLowerA" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(752, 464)
+position = Vector2(880, 640)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 8
 
 [node name="FlowerEastLower" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(880, 464)
+position = Vector2(912, 624)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 
 [node name="FlowerSouthwest" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(272, 640)
+position = Vector2(256, 624)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 2
 
 [node name="FlowerSoutheast" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(624, 640)
+position = Vector2(624, 480)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 4
 
 [node name="TuftNorthEast" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(576, 80)
+position = Vector2(912, 240)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
 frame = 6
 
-[node name="TuftNorthWest" type="Sprite2D" parent="Nature/GroundOverlays"]
-position = Vector2(336, 80)
+[node name="TuftNorthFenceWest" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(240, 128)
 texture = ExtResource("12_nature_ground")
 hframes = 3
 vframes = 3
@@ -262,7 +262,7 @@ offset = Vector2(0, -16)
 texture = ExtResource("17_bush_m1")
 
 [node name="BushNortheastWest" type="Sprite2D" parent="Nature/LowVegetation"]
-position = Vector2(768, 256)
+position = Vector2(768, 255)
 offset = Vector2(0, -16)
 texture = ExtResource("17_bush_m1")
 
@@ -287,17 +287,17 @@ offset = Vector2(0, -16)
 texture = ExtResource("19_bush_m3")
 
 [node name="ShrubSouthwestEast" type="Sprite2D" parent="Nature/LowVegetation"]
-position = Vector2(208, 608)
+position = Vector2(240, 544)
 offset = Vector2(0, -16)
 texture = ExtResource("20_shrub_s1")
 
 [node name="ShrubSoutheastWest" type="Sprite2D" parent="Nature/LowVegetation"]
-position = Vector2(752, 608)
+position = Vector2(720, 480)
 offset = Vector2(0, -16)
 texture = ExtResource("21_shrub_s2")
 
 [node name="ShrubNorthwestOuter" type="Sprite2D" parent="Nature/LowVegetation"]
-position = Vector2(240, 128)
+position = Vector2(240, 144)
 offset = Vector2(0, -16)
 texture = ExtResource("22_shrub_s3")
 
@@ -309,27 +309,27 @@ offset = Vector2(0, -48)
 texture = ExtResource("13_tree_m1")
 
 [node name="TreeEastLower" type="Sprite2D" parent="Nature/Trees"]
-position = Vector2(928, 528)
+position = Vector2(928, 640)
 offset = Vector2(0, -48)
 texture = ExtResource("13_tree_m1")
 
 [node name="TreeWestLower" type="Sprite2D" parent="Nature/Trees"]
-position = Vector2(32, 512)
+position = Vector2(32, 640)
 offset = Vector2(0, -48)
 texture = ExtResource("14_tree_m2")
 
 [node name="TreeEastUpper" type="Sprite2D" parent="Nature/Trees"]
-position = Vector2(928, 208)
+position = Vector2(928, 240)
 offset = Vector2(0, -48)
 texture = ExtResource("14_tree_m2")
 
-[node name="SaplingSouthwest" type="Sprite2D" parent="Nature/Trees"]
-position = Vector2(32, 656)
+[node name="SaplingNorthwestFence" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(224, 96)
 offset = Vector2(0, -32)
 texture = ExtResource("15_tree_s1")
 
 [node name="SaplingNortheast" type="Sprite2D" parent="Nature/Trees"]
-position = Vector2(928, 96)
+position = Vector2(896, 160)
 offset = Vector2(0, -32)
 texture = ExtResource("16_tree_s2")
 
@@ -340,13 +340,13 @@ position = Vector2(272, 80)
 offset = Vector2(0, -16)
 texture = ExtResource("23_rock_s1")
 
-[node name="RockSouth" type="Sprite2D" parent="Nature/Rocks"]
-position = Vector2(688, 640)
+[node name="RockSouthwestBoundary" type="Sprite2D" parent="Nature/Rocks"]
+position = Vector2(48, 656)
 offset = Vector2(0, -16)
 texture = ExtResource("24_rock_s2")
 
 [node name="RockClusterSoutheastBoundary" type="Sprite2D" parent="Nature/Rocks"]
-position = Vector2(928, 640)
+position = Vector2(912, 672)
 offset = Vector2(0, -16)
 texture = ExtResource("25_rock_c1")
 
@@ -580,7 +580,7 @@ position = Vector2(0, -5)
 shape = SubResource("Shape_prop_lantern_post")
 
 [node name="GroundLanternSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Lighting"]
-position = Vector2(248, 576)
+position = Vector2(256, 592)
 offset = Vector2(0, -32)
 texture = ExtResource("29_lantern_ground")
 
@@ -592,7 +592,7 @@ offset = Vector2(0, -32)
 texture = ExtResource("30_fence_straight")
 
 [node name="FenceSouthwestEnd" type="Sprite2D" parent="EnvironmentalProps/Props/Fences"]
-position = Vector2(224, 672)
+position = Vector2(256, 672)
 offset = Vector2(0, -32)
 texture = ExtResource("32_fence_end")
 
@@ -620,13 +620,13 @@ texture = ExtResource("34_planter_2")
 
 [node name="Storage" type="Node2D" parent="EnvironmentalProps/Props"]
 
-[node name="BarrelNorthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
-position = Vector2(64, 144)
+[node name="BarrelSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
+position = Vector2(208, 576)
 offset = Vector2(0, -32)
 texture = ExtResource("35_barrel_1")
 
 [node name="StorageSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
-position = Vector2(224, 576)
+position = Vector2(224, 592)
 offset = Vector2(0, -32)
 texture = ExtResource("36_storage_cluster")
 
@@ -637,13 +637,13 @@ texture = ExtResource("37_sack_cluster")
 
 [node name="Travel" type="Node2D" parent="EnvironmentalProps/Props"]
 
-[node name="LuggageSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Travel"]
-position = Vector2(256, 624)
+[node name="LuggageEastRest" type="Sprite2D" parent="EnvironmentalProps/Props/Travel"]
+position = Vector2(688, 464)
 offset = Vector2(0, -32)
 texture = ExtResource("38_luggage_1")
 
 [node name="TravelPackSoutheast" type="Sprite2D" parent="EnvironmentalProps/Props/Travel"]
-position = Vector2(704, 624)
+position = Vector2(704, 560)
 offset = Vector2(0, -32)
 texture = ExtResource("39_travel_pack")
 
@@ -659,7 +659,7 @@ offset = Vector2(0, -32)
 texture = ExtResource("31_fence_corner")
 
 [node name="FenceSouthwestGate" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
-position = Vector2(256, 672)
+position = Vector2(224, 672)
 offset = Vector2(0, -32)
 texture = ExtResource("40_fence_gate")
 
@@ -704,15 +704,15 @@ texture = ExtResource("44_festival_drape_1")
 
 [node name="LanternDecor" type="Node2D" parent="FestivalAndEdenite/FestivalFabric"]
 
-[node name="RibbonNorthLantern" type="Sprite2D" parent="FestivalAndEdenite/FestivalFabric/LanternDecor"]
-position = Vector2(368, 144)
+[node name="RibbonSouthLantern" type="Sprite2D" parent="FestivalAndEdenite/FestivalFabric/LanternDecor"]
+position = Vector2(576, 496)
 offset = Vector2(0, -32)
 texture = ExtResource("48_festival_ribbon")
 
 [node name="EdeniteFixtures" type="Node2D" parent="FestivalAndEdenite"]
 
 [node name="SmallFixtureWestBoundary" type="Sprite2D" parent="FestivalAndEdenite/EdeniteFixtures"]
-position = Vector2(24, 176)
+position = Vector2(24, 112)
 offset = Vector2(0, -32)
 texture = ExtResource("43_edenite_small")
 
@@ -740,17 +740,17 @@ offset = Vector2(0, -32)
 texture = ExtResource("31_fence_corner")
 
 [node name="ClosureGate" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
-position = Vector2(688, 112)
+position = Vector2(680, 112)
 offset = Vector2(0, -32)
 texture = ExtResource("49_closure_gate")
 
 [node name="ClosureRope" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
-position = Vector2(752, 112)
+position = Vector2(736, 112)
 offset = Vector2(0, -32)
 texture = ExtResource("50_closure_rope")
 
 [node name="ClosureTimbers" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
-position = Vector2(816, 112)
+position = Vector2(792, 112)
 offset = Vector2(0, -32)
 texture = ExtResource("51_closure_timbers")
 
