@@ -24,17 +24,15 @@ const EXPECTED_ENVIRONMENT_HASHES := {
 	"res://assets/environments/caden/props/lighting/caden_lantern_post_01_v1.png": "705640a25a52bfddaf1dd624b2e301d6e01c6eaf88cfee717a7f6b6e0e341c59",
 	"res://assets/environments/caden/accents/edenite/caden_edenite_lantern_01_v1.png": "18ce8e4b5066cb228e589e7f9f0cee4dd07fab18e8e9c45f4e12f430a12c36ad",
 }
-const EXPECTED_PRODUCTION_HASHES := {
-	"res://scenes/Player.tscn": "90c659026d41bc79c301212e8157d42a7bc5ac7bafc10aa8a0cbc810c63455d7",
-	"res://scripts/player.gd": "c9f50b41f3ff3f90e7323d7c5057d55a351f7755c3f44c1b31f28167fbffe650",
+const EXPECTED_PROTECTED_PRODUCTION_HASHES := {
 	"res://scenes/npcs/StationaryNpc.tscn": "c2ba9b8358c3e0ed27227d3bb93052afc463164fb5aafc64a0b5dfb62fcbe854",
 	"res://scripts/npcs/stationary_npc.gd": "8b2a0032376495184e4638b5bc86849d13b712716eabf416487b4b3f78c84e4b",
 	"res://scenes/world/caden/TownSquare.tscn": "af98a1d13ac14c0675968621400f21bbc9b1568be815a99b8844959b70af9781",
 }
-const APPROVED_SOURCE_PATHS := [
-	"res://assets/source_art/caden/characters/player/caden_player_character_master_v1.png",
-	"res://assets/source_art/caden/characters/npc/caden_npc_base_master_v1.png",
-]
+const APPROVED_PLAYER_SOURCE_PATH := "res://assets/source_art/caden/characters/player/caden_player_character_master_v3.png"
+const APPROVED_PLAYER_RUNTIME_PATH := "res://assets/characters/caden/player/caden_player_runtime_v1.png"
+const NPC_SOURCE_PATH := "res://assets/source_art/caden/characters/npc/caden_npc_base_master_v1.png"
+const NPC_RUNTIME_PATH := "res://assets/characters/caden/npc/caden_npc_base_runtime_v1.png"
 
 
 func _initialize() -> void:
@@ -55,20 +53,17 @@ func _run_test() -> void:
 	if not _verify_no_environment_source_master_coupling():
 		return
 
-	print("PASS: Character scale lab, candidate canvases, 24x24 overlays, transparent 4x4 templates, protected hashes, source-art gate, and semantic project configuration.")
+	print("PASS: Character scale lab, approved Player runtime, candidate canvases, 24x24 overlays, transparent 4x4 templates, protected NPC/world hashes, and semantic project configuration.")
 	quit(0)
 
 
 func _verify_source_art_gate() -> bool:
-	for path: String in APPROVED_SOURCE_PATHS:
+	for path: String in [APPROVED_PLAYER_SOURCE_PATH, APPROVED_PLAYER_RUNTIME_PATH]:
+		if not FileAccess.file_exists(path):
+			return _fail("Approved Player visual artifact is missing: %s" % path)
+	for path: String in [NPC_SOURCE_PATH, NPC_RUNTIME_PATH]:
 		if FileAccess.file_exists(path):
-			return _fail("Planning-stage source-art gate changed; update the character visual pass before integration: %s" % path)
-	for path: String in [
-		"res://assets/characters/caden/player/caden_player_runtime_v1.png",
-		"res://assets/characters/caden/npc/caden_npc_base_runtime_v1.png",
-	]:
-		if FileAccess.file_exists(path):
-			return _fail("Character runtime output exists even though the approved source-art gate is closed: %s" % path)
+			return _fail("NPC visual integration remains out of scope for this Player-only pass: %s" % path)
 	return true
 
 
@@ -78,9 +73,9 @@ func _verify_protected_files() -> bool:
 			return _fail("Missing representative protected environment asset: %s" % path)
 		if FileAccess.get_sha256(path) != EXPECTED_ENVIRONMENT_HASHES[path]:
 			return _fail("Representative protected environment asset changed: %s" % path)
-	for path: String in EXPECTED_PRODUCTION_HASHES:
-		if FileAccess.get_sha256(path) != EXPECTED_PRODUCTION_HASHES[path]:
-			return _fail("Production character/gameplay scene or script changed while the source-art gate is closed: %s" % path)
+	for path: String in EXPECTED_PROTECTED_PRODUCTION_HASHES:
+		if FileAccess.get_sha256(path) != EXPECTED_PROTECTED_PRODUCTION_HASHES[path]:
+			return _fail("Protected NPC or world production file changed during the Player-only pass: %s" % path)
 	return true
 
 
@@ -113,8 +108,22 @@ func _verify_lab_scene() -> bool:
 		if lab.get_node_or_null(required_path) == null:
 			return _fail("CharacterScaleLab is missing required context: %s" % required_path)
 
-	if lab.get_node("Candidates").get_child_count() != 3:
-		return _fail("CharacterScaleLab must contain exactly three candidate silhouettes.")
+	if lab.get_node("Candidates").get_child_count() != 4:
+		return _fail("CharacterScaleLab must contain the approved runtime plus three scale silhouettes.")
+	var runtime_candidate := lab.get_node_or_null("Candidates/RuntimeCandidateV1") as Node2D
+	if runtime_candidate == null:
+		return _fail("CharacterScaleLab is missing the approved runtime candidate.")
+	if runtime_candidate.position != Vector2(80, 340):
+		return _fail("CharacterScaleLab runtime candidate no longer uses the approved comparison position.")
+	var runtime_canvas := runtime_candidate.get_node("CanvasBounds") as Line2D
+	if _points_size(runtime_canvas.points) != Vector2(CELL_SIZE):
+		return _fail("CharacterScaleLab runtime candidate no longer displays the 40x56 canvas.")
+	var runtime_collision := runtime_candidate.get_node("CollisionFootprint") as Polygon2D
+	if _points_size(runtime_collision.polygon) != Vector2(24, 24):
+		return _fail("CharacterScaleLab runtime candidate no longer displays the existing 24x24 Player collision footprint.")
+	var runtime_sprite := runtime_candidate.get_node("AnimatedSprite2D") as AnimatedSprite2D
+	if runtime_sprite.position != Vector2(0, -28) or runtime_sprite.sprite_frames == null:
+		return _fail("CharacterScaleLab runtime sprite lost its approved foot alignment or SpriteFrames resource.")
 	for candidate_path: String in CANDIDATES:
 		var candidate := lab.get_node_or_null(candidate_path) as Node2D
 		if candidate == null:

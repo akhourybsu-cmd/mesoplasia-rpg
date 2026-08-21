@@ -21,11 +21,13 @@ var _control_locks: Dictionary[StringName, bool] = {}
 @onready var _camera: Camera2D = $Camera2D
 @onready var _interaction_detector: Area2D = $InteractionDetector
 @onready var _dialogue_ui: CanvasLayer = $DialogueUI
+@onready var _character_visual: AnimatedSprite2D = $VisualRoot/AnimatedSprite2D
 
 
 func _ready() -> void:
 	_apply_camera_limits()
 	_interaction_detector.call("set_facing_direction", facing_direction)
+	_update_character_visual(Vector2.ZERO)
 
 
 func set_camera_limits(bounds: Rect2i) -> void:
@@ -72,6 +74,7 @@ func _on_dialogue_closed() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_control_locked():
 		velocity = Vector2.ZERO
+		_update_character_visual(Vector2.ZERO)
 		move_and_slide()
 		return
 
@@ -81,7 +84,12 @@ func _physics_process(_delta: float) -> void:
 		_interaction_detector.call("set_facing_direction", facing_direction)
 
 	velocity = movement_direction * movement_speed
+	_update_character_visual(movement_direction)
 	move_and_slide()
+
+
+func _update_character_visual(movement_direction: Vector2) -> void:
+	_character_visual.call("update_visual_state", movement_direction, facing_direction)
 
 
 func _get_four_direction_input() -> Vector2:

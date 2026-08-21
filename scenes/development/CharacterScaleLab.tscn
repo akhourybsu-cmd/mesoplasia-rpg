@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png" id="1_terrain"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png" id="2_building"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" path="res://assets/environments/caden/accents/edenite/caden_edenite_lantern_01_v1.png" id="5_edenite"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_02_v1.png" id="6_planter"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="7_tree"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/player/caden_player_sprite_frames_v1.tres" id="8_player_frames"]
 
 [node name="CharacterScaleLab" type="Node2D"]
 
@@ -486,6 +487,34 @@ texture = ExtResource("7_tree")
 
 [node name="Candidates" type="Node2D" parent="."]
 
+[node name="RuntimeCandidateV1" type="Node2D" parent="Candidates"]
+position = Vector2(80, 340)
+
+[node name="CollisionFootprint" type="Polygon2D" parent="Candidates/RuntimeCandidateV1"]
+polygon = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0)
+color = Color(0.969, 0.718, 0.286, 0.18)
+
+[node name="CollisionOutline" type="Line2D" parent="Candidates/RuntimeCandidateV1"]
+points = PackedVector2Array(-12, -24, 12, -24, 12, 0, -12, 0, -12, -24)
+width = 1.0
+default_color = Color(0.969, 0.718, 0.286, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Candidates/RuntimeCandidateV1"]
+position = Vector2(0, -28)
+sprite_frames = ExtResource("8_player_frames")
+animation = &"walk_down"
+autoplay = "walk_down"
+
+[node name="CanvasBounds" type="Line2D" parent="Candidates/RuntimeCandidateV1"]
+points = PackedVector2Array(-20, -56, 20, -56, 20, 0, -20, 0, -20, -56)
+width = 1.0
+default_color = Color(0.302, 0.722, 0.8, 0.9)
+
+[node name="FeetContactLine" type="Line2D" parent="Candidates/RuntimeCandidateV1"]
+points = PackedVector2Array(-20, 0, 20, 0)
+width = 1.0
+default_color = Color(0.369, 0.839, 0.561, 1)
+
 [node name="CandidateA_32x48" type="Node2D" parent="Candidates"]
 position = Vector2(208, 340)
 
@@ -680,6 +709,14 @@ offset_top = 194.0
 offset_right = 632.0
 offset_bottom = 216.0
 text = "Door | bench | ordinary lantern | Edenite fixture | planter | medium tree"
+horizontal_alignment = 1
+
+[node name="RuntimeCandidateLabel" type="Label" parent="DevelopmentLabels"]
+offset_left = 24.0
+offset_top = 250.0
+offset_right = 136.0
+offset_bottom = 292.0
+text = "RUNTIME v1\n40×56"
 horizontal_alignment = 1
 
 [node name="CandidateALabel" type="Label" parent="DevelopmentLabels"]
