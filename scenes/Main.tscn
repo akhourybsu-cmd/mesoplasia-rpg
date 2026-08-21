@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhjv2s6hu8uvu"]
 
-[ext_resource type="PackedScene" path="res://scenes/world/caden/Caden.tscn" id="1_caden"]
+[ext_resource type="PackedScene" uid="uid://d1tgi7qh81a2a" path="res://scenes/world/caden/Caden.tscn" id="1_caden"]
 
 [node name="Main" type="Node2D" unique_id=869966369]
 
