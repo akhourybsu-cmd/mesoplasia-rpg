@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/interaction_prompt.gd" id="1_prompt"]
+[ext_resource type="StyleBox" path="res://ui/themes/caden/caden_interaction_panel_v1.tres" id="2_panel"]
+[ext_resource type="Texture2D" path="res://ui/themes/caden/keycaps/caden_keycap_neutral_v1.tres" id="3_keycap"]
 
 [node name="InteractionPrompt" type="CanvasLayer"]
 visible = false
@@ -13,15 +15,42 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -48.0
-offset_right = 80.0
+offset_left = -88.0
+offset_top = -56.0
+offset_right = 88.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/panel = ExtResource("2_panel")
 
-[node name="PromptLabel" type="Label" parent="PromptPanel"]
+[node name="PromptContent" type="HBoxContainer" parent="PromptPanel"]
 layout_mode = 2
-text = "[E] Interact"
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="KeycapFrame" type="TextureRect" parent="PromptPanel/PromptContent"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_keycap")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KeycapLabel" type="Label" parent="PromptPanel/PromptContent/KeycapFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.176471, 0.109804, 0.0705882, 1)
+theme_override_font_sizes/font_size = 12
+text = "E"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="PromptPanel/PromptContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.109804, 0.0705882, 1)
+theme_override_font_sizes/font_size = 13
+text = "Interact"
 vertical_alignment = 1

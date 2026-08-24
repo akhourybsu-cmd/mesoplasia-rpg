@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/objective_ui.gd" id="1_objective_ui"]
+[ext_resource type="StyleBox" path="res://ui/themes/caden/caden_objective_panel_v1.tres" id="2_panel"]
+[ext_resource type="Texture2D" path="res://ui/themes/caden/icons/caden_objective_active_v1.tres" id="3_active"]
+[ext_resource type="Texture2D" path="res://ui/themes/caden/icons/caden_objective_complete_v1.tres" id="4_complete"]
 
 [node name="ObjectiveUI" type="CanvasLayer"]
 visible = false
 layer = 5
 script = ExtResource("1_objective_ui")
+active_marker_texture = ExtResource("3_active")
+complete_marker_texture = ExtResource("4_complete")
 
 [node name="ObjectivePanel" type="PanelContainer" parent="."]
 anchor_left = 1.0
@@ -13,22 +18,36 @@ anchor_right = 1.0
 offset_left = -252.0
 offset_top = 16.0
 offset_right = -16.0
-offset_bottom = 100.0
+offset_bottom = 144.0
 grow_horizontal = 0
 mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_panel")
 
 [node name="Content" type="VBoxContainer" parent="ObjectivePanel"]
 layout_mode = 2
-theme_override_constants/separation = 3
+theme_override_constants/separation = 2
 
-[node name="DevelopmentLabel" type="Label" parent="ObjectivePanel/Content"]
+[node name="ObjectiveHeader" type="HBoxContainer" parent="ObjectivePanel/Content"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
+theme_override_constants/separation = 4
+
+[node name="ObjectiveMarker" type="TextureRect" parent="ObjectivePanel/Content/ObjectiveHeader"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_active")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DevelopmentLabel" type="Label" parent="ObjectivePanel/Content/ObjectiveHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.321569, 0.192157, 0.105882, 1)
 theme_override_font_sizes/font_size = 10
 text = "DEV OBJECTIVE"
+vertical_alignment = 1
 
 [node name="Title" type="Label" parent="ObjectivePanel/Content"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.109804, 0.0705882, 1)
 theme_override_font_sizes/font_size = 16
 text = "Get Your Bearings"
 
@@ -37,6 +56,8 @@ layout_mode = 2
 
 [node name="CurrentStep" type="Label" parent="ObjectivePanel/Content"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.109804, 0.0705882, 1)
+theme_override_font_sizes/font_size = 13
 text = "Visit the Marketplace"
 autowrap_mode = 2
 

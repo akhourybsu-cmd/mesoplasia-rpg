@@ -1,0 +1,137 @@
+{
+  "atlases": {
+    "blank_keycaps": {
+      "cell_size": [
+        24,
+        24
+      ],
+      "dynamic_text_required": true,
+      "ids": {
+        "disabled": 2,
+        "focused": 1,
+        "neutral": 0
+      },
+      "path": "res://assets/ui/caden/keycaps/caden_ui_blank_keycaps_v1.png"
+    },
+    "navigation": {
+      "cell_size": [
+        24,
+        24
+      ],
+      "ids": {
+        "continue": 0,
+        "next": 2,
+        "previous": 1,
+        "selection": 0
+      },
+      "path": "res://assets/ui/caden/icons/caden_ui_navigation_icons_v1.png"
+    },
+    "objective_states": {
+      "cell_size": [
+        24,
+        24
+      ],
+      "ids": {
+        "active": 0,
+        "complete": 2,
+        "failed": 3,
+        "updated": 1
+      },
+      "path": "res://assets/ui/caden/icons/caden_ui_objective_icons_v1.png"
+    }
+  },
+  "excluded_from_runtime_v1": [
+    "soft or complex presentation examples not proven readable at 24x24",
+    "decorative assemblies not required by DialogueUI, InteractionPrompt, or ObjectiveUI",
+    "permanently lettered keycaps and platform-specific controller branding"
+  ],
+  "panel_candidates": {
+    "dialogue_panel": {
+      "crop": [
+        15,
+        303,
+        312,
+        492
+      ],
+      "divisor": 3,
+      "margins": [
+        14,
+        14,
+        14,
+        12
+      ]
+    },
+    "divider": {
+      "crop": [
+        15,
+        616,
+        261,
+        643
+      ],
+      "divisor": 3,
+      "margins": [
+        8,
+        3,
+        8,
+        3
+      ]
+    },
+    "interaction_panel": {
+      "crop": [
+        289,
+        525,
+        475,
+        588
+      ],
+      "divisor": 3,
+      "margins": [
+        10,
+        6,
+        10,
+        6
+      ]
+    },
+    "nameplate": {
+      "crop": [
+        17,
+        519,
+        260,
+        594
+      ],
+      "divisor": 3,
+      "margins": [
+        18,
+        7,
+        10,
+        7
+      ]
+    },
+    "objective_panel": {
+      "crop": [
+        710,
+        307,
+        977,
+        490
+      ],
+      "divisor": 3,
+      "margins": [
+        13,
+        14,
+        13,
+        12
+      ]
+    }
+  },
+  "review_sha256": "879ef65e76a59c5f30290229a772b2a4a6c5ea83e14693f3bf0b7e150dfdc32f",
+  "schema": "caden-ui-runtime-manifest-v1",
+  "source_files": {
+    "icons": {
+      "path": "assets/source_art/caden/ui/icons/caden_ui_icons_cursors_input_prompts_batch_b_master_v2.png",
+      "sha256": "92c4b1253bc1ea3a11239278dd44d362ba8de1b587b2cba61ee7c48f8c154694"
+    },
+    "panels": {
+      "path": "assets/source_art/caden/ui/panels/caden_ui_panels_frames_master_v1.png",
+      "sha256": "28ba4e9631c32fc9f4145d598751b0abb818dca34338da72a8b9e214b5ee3aaa"
+    }
+  }
+}

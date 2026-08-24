@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/ui/caden/icons/caden_ui_navigation_icons_v1.png" id="1_atlas"]
+
+[resource]
+atlas = ExtResource("1_atlas")
+region = Rect2(24, 0, 24, 24)
+filter_clip = true

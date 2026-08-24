@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3]
+[gd_scene load_steps=67 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -51,6 +51,7 @@
 [ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_gate_01_v1.png" id="49_closure_gate"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_rope_01_v1.png" id="50_closure_rope"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_timbers_01_v1.png" id="51_closure_timbers"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/caden_npc_base_sprite_frames_v1.tres" id="52_npc_frames"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -759,9 +760,12 @@ texture = ExtResource("51_closure_timbers")
 [node name="NPCs" type="Node2D" parent="Actors"]
 
 [node name="SquareLocal" parent="Actors/NPCs" instance=ExtResource("3_npc")]
+z_index = 10
 position = Vector2(288, 448)
 conversation = ExtResource("4_local")
 placeholder_color = Color(0.88, 0.62, 0.3, 1)
+character_sprite_frames = ExtResource("52_npc_frames")
+character_visual_enabled = true
 facing_direction = Vector2(1, 0)
 
 [node name="PassingVisitor" parent="Actors/NPCs" instance=ExtResource("3_npc")]

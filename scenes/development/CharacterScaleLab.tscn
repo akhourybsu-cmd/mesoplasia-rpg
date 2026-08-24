@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png" id="1_terrain"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png" id="2_building"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_02_v1.png" id="6_planter"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="7_tree"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/player/caden_player_sprite_frames_v1.tres" id="8_player_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/caden_npc_base_sprite_frames_v1.tres" id="9_npc_frames"]
 
 [node name="CharacterScaleLab" type="Node2D"]
 
@@ -515,6 +516,34 @@ points = PackedVector2Array(-20, 0, 20, 0)
 width = 1.0
 default_color = Color(0.369, 0.839, 0.561, 1)
 
+[node name="NpcRuntimeCandidateV1" type="Node2D" parent="Candidates"]
+position = Vector2(144, 340)
+
+[node name="CollisionFootprint" type="Polygon2D" parent="Candidates/NpcRuntimeCandidateV1"]
+polygon = PackedVector2Array(-10, -20, 10, -20, 10, 0, -10, 0)
+color = Color(0.969, 0.718, 0.286, 0.18)
+
+[node name="CollisionOutline" type="Line2D" parent="Candidates/NpcRuntimeCandidateV1"]
+points = PackedVector2Array(-10, -20, 10, -20, 10, 0, -10, 0, -10, -20)
+width = 1.0
+default_color = Color(0.969, 0.718, 0.286, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Candidates/NpcRuntimeCandidateV1"]
+position = Vector2(0, -28)
+sprite_frames = ExtResource("9_npc_frames")
+animation = &"walk_down"
+autoplay = "walk_down"
+
+[node name="CanvasBounds" type="Line2D" parent="Candidates/NpcRuntimeCandidateV1"]
+points = PackedVector2Array(-20, -56, 20, -56, 20, 0, -20, 0, -20, -56)
+width = 1.0
+default_color = Color(0.302, 0.722, 0.8, 0.9)
+
+[node name="FeetContactLine" type="Line2D" parent="Candidates/NpcRuntimeCandidateV1"]
+points = PackedVector2Array(-20, 0, 20, 0)
+width = 1.0
+default_color = Color(0.369, 0.839, 0.561, 1)
+
 [node name="CandidateA_32x48" type="Node2D" parent="Candidates"]
 position = Vector2(208, 340)
 
@@ -712,17 +741,25 @@ text = "Door | bench | ordinary lantern | Edenite fixture | planter | medium tre
 horizontal_alignment = 1
 
 [node name="RuntimeCandidateLabel" type="Label" parent="DevelopmentLabels"]
-offset_left = 24.0
+offset_left = 16.0
 offset_top = 250.0
-offset_right = 136.0
+offset_right = 112.0
 offset_bottom = 292.0
-text = "RUNTIME v1\n40×56"
+text = "PLAYER v1\n40×56"
+horizontal_alignment = 1
+
+[node name="NpcRuntimeCandidateLabel" type="Label" parent="DevelopmentLabels"]
+offset_left = 96.0
+offset_top = 250.0
+offset_right = 192.0
+offset_bottom = 292.0
+text = "NPC v1\n40×56"
 horizontal_alignment = 1
 
 [node name="CandidateALabel" type="Label" parent="DevelopmentLabels"]
-offset_left = 144.0
+offset_left = 168.0
 offset_top = 258.0
-offset_right = 272.0
+offset_right = 248.0
 offset_bottom = 278.0
 text = "A  32×48"
 horizontal_alignment = 1
@@ -746,6 +783,6 @@ horizontal_alignment = 1
 [node name="Legend" type="Label" parent="DevelopmentLabels"]
 offset_left = 8.0
 offset_top = 330.0
-offset_right = 136.0
+offset_right = 240.0
 offset_bottom = 356.0
-text = "CYAN canvas\nAMBER 24×24 collision"
+text = "CYAN canvas\nAMBER collision: Player 24 / NPC 20"

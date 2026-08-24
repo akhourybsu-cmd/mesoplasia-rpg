@@ -24,15 +24,19 @@ const EXPECTED_ENVIRONMENT_HASHES := {
 	"res://assets/environments/caden/props/lighting/caden_lantern_post_01_v1.png": "705640a25a52bfddaf1dd624b2e301d6e01c6eaf88cfee717a7f6b6e0e341c59",
 	"res://assets/environments/caden/accents/edenite/caden_edenite_lantern_01_v1.png": "18ce8e4b5066cb228e589e7f9f0cee4dd07fab18e8e9c45f4e12f430a12c36ad",
 }
-const EXPECTED_PROTECTED_PRODUCTION_HASHES := {
-	"res://scenes/npcs/StationaryNpc.tscn": "c2ba9b8358c3e0ed27227d3bb93052afc463164fb5aafc64a0b5dfb62fcbe854",
-	"res://scripts/npcs/stationary_npc.gd": "8b2a0032376495184e4638b5bc86849d13b712716eabf416487b4b3f78c84e4b",
-	"res://scenes/world/caden/TownSquare.tscn": "af98a1d13ac14c0675968621400f21bbc9b1568be815a99b8844959b70af9781",
-}
 const APPROVED_PLAYER_SOURCE_PATH := "res://assets/source_art/caden/characters/player/caden_player_character_master_v3.png"
 const APPROVED_PLAYER_RUNTIME_PATH := "res://assets/characters/caden/player/caden_player_runtime_v1.png"
-const NPC_SOURCE_PATH := "res://assets/source_art/caden/characters/npc/caden_npc_base_master_v1.png"
+const APPROVED_PLAYER_RUNTIME_SHA256 := "9f692386e678528708de983463473db1fae63f72160244d52295b1af3e1be282"
+const APPROVED_PLAYER_FRAMES_PATH := "res://assets/characters/caden/player/caden_player_sprite_frames_v1.tres"
+const APPROVED_PLAYER_FRAMES_SHA256 := "60a9e29a77271b1c9c5285700e8ca3cf9d796b443d6465e3b95ee598309c1dd3"
+const NPC_ORIGINAL_SOURCE_PATH := "res://assets/source_art/caden/characters/npc/caden_npc_base_master_v1.png"
+const NPC_ORIGINAL_SOURCE_SHA256 := "8b284d0864199b1329ac7e448bd2712e2e414aec97e446de35da8cc70c7387cd"
+const NPC_REPAIRED_SOURCE_PATH := "res://assets/source_art/caden/characters/npc/caden_npc_base_master_v2.png"
+const NPC_REPAIRED_SOURCE_SHA256 := "ab7e2f000f4f26ccb1a127e588da8e633259cf14f02416f396312d07cb5b9938"
+const NPC_SOURCE_SIZE := Vector2i(1060, 1484)
+const NPC_AUDIT_PATH := "res://docs/art/previews/caden_npc_base_runtime_v1/caden_npc_source_audit_v1.json"
 const NPC_RUNTIME_PATH := "res://assets/characters/caden/npc/caden_npc_base_runtime_v1.png"
+const NPC_RUNTIME_SHA256 := "3cba56af2257f09f6c6e7f8ba0789e93a90d0e69f18ac271421ccb1f8354840c"
 
 
 func _initialize() -> void:
@@ -53,7 +57,7 @@ func _run_test() -> void:
 	if not _verify_no_environment_source_master_coupling():
 		return
 
-	print("PASS: Character scale lab, approved Player runtime, candidate canvases, 24x24 overlays, transparent 4x4 templates, protected NPC/world hashes, and semantic project configuration.")
+	print("PASS: Character scale lab, protected Player runtime, audited repaired NPC source, NPC runtime candidate, character canvases, environment hashes, and semantic project configuration.")
 	quit(0)
 
 
@@ -61,9 +65,35 @@ func _verify_source_art_gate() -> bool:
 	for path: String in [APPROVED_PLAYER_SOURCE_PATH, APPROVED_PLAYER_RUNTIME_PATH]:
 		if not FileAccess.file_exists(path):
 			return _fail("Approved Player visual artifact is missing: %s" % path)
-	for path: String in [NPC_SOURCE_PATH, NPC_RUNTIME_PATH]:
-		if FileAccess.file_exists(path):
-			return _fail("NPC visual integration remains out of scope for this Player-only pass: %s" % path)
+	if not FileAccess.file_exists(NPC_ORIGINAL_SOURCE_PATH):
+		return _fail("The immutable NPC v1 source master is missing.")
+	if FileAccess.get_sha256(NPC_ORIGINAL_SOURCE_PATH) != NPC_ORIGINAL_SOURCE_SHA256:
+		return _fail("The immutable NPC v1 source-master hash changed.")
+	var original_source := Image.new()
+	if original_source.load(ProjectSettings.globalize_path(NPC_ORIGINAL_SOURCE_PATH)) != OK:
+		return _fail("The immutable NPC v1 source master did not decode.")
+	if original_source.get_size() != NPC_SOURCE_SIZE or original_source.get_format() != Image.FORMAT_RGB8:
+		return _fail("The immutable NPC v1 source must remain RGB 1060x1484.")
+	if FileAccess.get_sha256(NPC_REPAIRED_SOURCE_PATH) != NPC_REPAIRED_SOURCE_SHA256:
+		return _fail("The audited transparent NPC v2 repair is missing or changed.")
+	var repaired_source := Image.new()
+	if repaired_source.load(ProjectSettings.globalize_path(NPC_REPAIRED_SOURCE_PATH)) != OK:
+		return _fail("The audited NPC v2 repair did not decode.")
+	if repaired_source.get_size() != NPC_SOURCE_SIZE or repaired_source.get_format() != Image.FORMAT_RGBA8:
+		return _fail("The audited NPC v2 repair must remain RGBA 1060x1484.")
+	if not FileAccess.file_exists(NPC_AUDIT_PATH):
+		return _fail("The passing NPC source audit is missing.")
+	var audit_file := FileAccess.open(NPC_AUDIT_PATH, FileAccess.READ)
+	var audit: Variant = JSON.parse_string(audit_file.get_as_text()) if audit_file != null else null
+	if not audit is Dictionary:
+		return _fail("The NPC source audit is not valid JSON data.")
+	var quality_gate: Dictionary = audit.get("quality_gate", {})
+	if not quality_gate.get("passed", false):
+		return _fail("The repaired NPC source no longer passes its mechanical quality gate.")
+	if audit.get("source_sha256", "") != NPC_REPAIRED_SOURCE_SHA256:
+		return _fail("The NPC source audit does not match the repaired source master.")
+	if FileAccess.get_sha256(NPC_RUNTIME_PATH) != NPC_RUNTIME_SHA256:
+		return _fail("The selected NPC runtime is missing or changed.")
 	return true
 
 
@@ -73,9 +103,10 @@ func _verify_protected_files() -> bool:
 			return _fail("Missing representative protected environment asset: %s" % path)
 		if FileAccess.get_sha256(path) != EXPECTED_ENVIRONMENT_HASHES[path]:
 			return _fail("Representative protected environment asset changed: %s" % path)
-	for path: String in EXPECTED_PROTECTED_PRODUCTION_HASHES:
-		if FileAccess.get_sha256(path) != EXPECTED_PROTECTED_PRODUCTION_HASHES[path]:
-			return _fail("Protected NPC or world production file changed during the Player-only pass: %s" % path)
+	if FileAccess.get_sha256(APPROVED_PLAYER_RUNTIME_PATH) != APPROVED_PLAYER_RUNTIME_SHA256:
+		return _fail("The approved Player runtime changed during NPC preparation.")
+	if FileAccess.get_sha256(APPROVED_PLAYER_FRAMES_PATH) != APPROVED_PLAYER_FRAMES_SHA256:
+		return _fail("The approved Player SpriteFrames resource changed during NPC preparation.")
 	return true
 
 
@@ -108,8 +139,8 @@ func _verify_lab_scene() -> bool:
 		if lab.get_node_or_null(required_path) == null:
 			return _fail("CharacterScaleLab is missing required context: %s" % required_path)
 
-	if lab.get_node("Candidates").get_child_count() != 4:
-		return _fail("CharacterScaleLab must contain the approved runtime plus three scale silhouettes.")
+	if lab.get_node("Candidates").get_child_count() != 5:
+		return _fail("CharacterScaleLab must contain Player and NPC runtimes plus three scale silhouettes.")
 	var runtime_candidate := lab.get_node_or_null("Candidates/RuntimeCandidateV1") as Node2D
 	if runtime_candidate == null:
 		return _fail("CharacterScaleLab is missing the approved runtime candidate.")
@@ -124,6 +155,18 @@ func _verify_lab_scene() -> bool:
 	var runtime_sprite := runtime_candidate.get_node("AnimatedSprite2D") as AnimatedSprite2D
 	if runtime_sprite.position != Vector2(0, -28) or runtime_sprite.sprite_frames == null:
 		return _fail("CharacterScaleLab runtime sprite lost its approved foot alignment or SpriteFrames resource.")
+	var npc_candidate := lab.get_node_or_null("Candidates/NpcRuntimeCandidateV1") as Node2D
+	if npc_candidate == null or npc_candidate.position != Vector2(144, 340):
+		return _fail("CharacterScaleLab is missing the approved NPC runtime comparison position.")
+	var npc_canvas := npc_candidate.get_node("CanvasBounds") as Line2D
+	if _points_size(npc_canvas.points) != Vector2(CELL_SIZE):
+		return _fail("CharacterScaleLab NPC candidate no longer displays the 40x56 canvas.")
+	var npc_collision := npc_candidate.get_node("CollisionFootprint") as Polygon2D
+	if _points_size(npc_collision.polygon) != Vector2(20, 20):
+		return _fail("CharacterScaleLab NPC candidate no longer displays the 20x20 collision footprint.")
+	var npc_sprite := npc_candidate.get_node("AnimatedSprite2D") as AnimatedSprite2D
+	if npc_sprite.position != Vector2(0, -28) or npc_sprite.sprite_frames == null:
+		return _fail("CharacterScaleLab NPC candidate lost its approved foot alignment or SpriteFrames resource.")
 	for candidate_path: String in CANDIDATES:
 		var candidate := lab.get_node_or_null(candidate_path) as Node2D
 		if candidate == null:
