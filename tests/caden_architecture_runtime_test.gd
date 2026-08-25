@@ -187,9 +187,13 @@ func _verify_entry_clearance(town_square: Node2D, footprints: Array[Rect2]) -> b
 
 func _verify_npc_approaches(town_square: Node2D, footprints: Array[Rect2]) -> bool:
 	var npc_root := town_square.get_node("Actors/NPCs") as Node2D
-	if npc_root.get_child_count() != 2:
+	if npc_root.get_child_count() != 5:
 		return _fail("Town Square NPC count changed during architecture integration.")
+	var interactive_count := 0
 	for npc in npc_root.get_children():
+		if not npc.is_in_group(&"npcs"):
+			continue
+		interactive_count += 1
 		var interactable := npc.get_node_or_null("Interactable") as Area2D
 		if interactable == null:
 			return _fail("NPC %s lost its interaction area." % npc.name)
@@ -205,6 +209,8 @@ func _verify_npc_approaches(town_square: Node2D, footprints: Array[Rect2]) -> bo
 				clear_approaches += 1
 		if clear_approaches < 2:
 			return _fail("NPC %s no longer has sufficient clear interaction approaches." % npc.name)
+	if interactive_count != 2:
+		return _fail("Town Square interactive NPC count changed during architecture integration.")
 	return true
 
 

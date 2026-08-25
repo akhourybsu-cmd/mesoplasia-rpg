@@ -12,7 +12,8 @@ const BUILDINGS := {
 		"footprint": Vector2(160, 96),
 		"v1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1.png",
 		"v1_hash": "f493d5ac99bb9c81e04f940244c6e79fdabad1f2303abea8f3557ae58048418f",
-		"v1_1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png",
+		"runtime_path": "res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v2.png",
+		"runtime_hash": "24b29773c878b774b4f370ce812bb13ff5fb71fd1fe0a6f53c629f1c4174d479",
 		"texture_size": Vector2i(192, 160),
 		"join_bounds": Rect2i(20, 65, 152, 6),
 	},
@@ -21,7 +22,8 @@ const BUILDINGS := {
 		"footprint": Vector2(160, 96),
 		"v1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1.png",
 		"v1_hash": "e8d418c26653085d63f8bb434068908f3368508a33ae467346ce44a13adfb335",
-		"v1_1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1_1.png",
+		"runtime_path": "res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png",
+		"runtime_hash": "a9b63a7d6ad67bdbe3d99c97bdd9b3c3e6f4ac9014bdd5f0fc2e8734187d1d93",
 		"texture_size": Vector2i(192, 160),
 		"join_bounds": Rect2i(20, 65, 152, 4),
 	},
@@ -30,7 +32,8 @@ const BUILDINGS := {
 		"footprint": Vector2(128, 96),
 		"v1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1.png",
 		"v1_hash": "023082b67d5924c542c250c5080f35410a3c5c9b69a5ca5cc9e6534b100b1460",
-		"v1_1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1_1.png",
+		"runtime_path": "res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png",
+		"runtime_hash": "8505d8435638e305544d6794d464d1c7249b595b2bf0cb279f42a68139c0f0b1",
 		"texture_size": Vector2i(160, 160),
 		"join_bounds": Rect2i(20, 65, 120, 6),
 	},
@@ -39,7 +42,8 @@ const BUILDINGS := {
 		"footprint": Vector2(160, 96),
 		"v1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1.png",
 		"v1_hash": "cd0e3baaf0ad75ca29b94d2651c0ad7af746bf9db5cbdb3e8c07d71bed63d1dd",
-		"v1_1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1_1.png",
+		"runtime_path": "res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png",
+		"runtime_hash": "00ae942961bfe3cf6abef30804e848f2b8565d2c38c3670c193f2993f8a3e2af",
 		"texture_size": Vector2i(192, 160),
 		"join_bounds": Rect2i(20, 65, 152, 6),
 	},
@@ -48,7 +52,8 @@ const BUILDINGS := {
 		"footprint": Vector2(128, 64),
 		"v1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_south_v1.png",
 		"v1_hash": "bcd2289ef3685ac2205664fd90ce617657624be48641a9026b69baef64ec7456",
-		"v1_1_path": "res://assets/environments/caden/architecture/town_square/town_square_building_south_v1_1.png",
+		"runtime_path": "res://assets/environments/caden/architecture/town_square/town_square_building_south_v2.png",
+		"runtime_hash": "b33ca98d80e099c817fe8cc47894a93184e4aab7fb2a690f37818d41d2f22457",
 		"texture_size": Vector2i(160, 128),
 		"join_bounds": Rect2i(20, 55, 120, 4),
 	},
@@ -79,7 +84,7 @@ func _run_test() -> void:
 	if not await _verify_town_square():
 		return
 
-	print("PASS: Caden Architecture Runtime v1.1 connected joins, protected v1 assets, locked layout, and visual-only integration.")
+	print("PASS: Caden Architecture Runtime v2 continuous roofs, protected prior assets, locked layout, and visual-only integration.")
 	quit(0)
 
 
@@ -101,21 +106,23 @@ func _verify_protected_files() -> bool:
 func _verify_runtime_textures() -> bool:
 	for building_name: StringName in BUILDINGS:
 		var expected: Dictionary = BUILDINGS[building_name]
-		var path := expected["v1_1_path"] as String
+		var path := expected["runtime_path"] as String
 		if not FileAccess.file_exists(path):
-			return _fail("Missing Runtime v1.1 texture for %s." % building_name)
+			return _fail("Missing Runtime v2 texture for %s." % building_name)
+		if FileAccess.get_sha256(path) != expected["runtime_hash"]:
+			return _fail("Runtime v2 texture hash changed for %s." % building_name)
 		var texture := load(path) as Texture2D
 		if texture == null:
-			return _fail("Runtime v1.1 texture did not load for %s." % building_name)
+			return _fail("Runtime v2 texture did not load for %s." % building_name)
 		if Vector2i(texture.get_size()) != expected["texture_size"]:
-			return _fail("Runtime v1.1 dimensions changed for %s." % building_name)
+			return _fail("Runtime v2 dimensions changed for %s." % building_name)
 		var image := texture.get_image()
 		if image == null or image.is_empty():
-			return _fail("Runtime v1.1 image data is unavailable for %s." % building_name)
+			return _fail("Runtime v2 image data is unavailable for %s." % building_name)
 		if not _has_binary_transparency(image):
-			return _fail("Runtime v1.1 texture lacks clean binary transparency for %s." % building_name)
+			return _fail("Runtime v2 texture lacks clean binary transparency for %s." % building_name)
 		if not _join_is_opaque(image, expected["join_bounds"] as Rect2i):
-			return _fail("Runtime v1.1 has a transparent roof/façade gap for %s." % building_name)
+			return _fail("Runtime v2 has a transparent roof/façade gap for %s." % building_name)
 	return true
 
 
@@ -162,10 +169,10 @@ func _verify_town_square() -> bool:
 		footprints.append(Rect2(building.position - rectangle.size * 0.5, rectangle.size))
 
 		var sprite := building.get_node("ExteriorSprite") as Sprite2D
-		if sprite == null or sprite.texture == null or sprite.texture.resource_path != expected["v1_1_path"]:
-			return _fail("Town Square does not reference Runtime v1.1 for %s." % building_name)
+		if sprite == null or sprite.texture == null or sprite.texture.resource_path != expected["runtime_path"]:
+			return _fail("Town Square does not reference Runtime v2 for %s." % building_name)
 		if sprite.position != Vector2(0, -16) or sprite.get_script() != null:
-			return _fail("Runtime v1.1 sprite anchor or visual-only status changed for %s." % building_name)
+			return _fail("Runtime v2 sprite anchor or visual-only status changed for %s." % building_name)
 		var shadow := building.get_node("ContactShadow") as Polygon2D
 		if shadow == null or shadow.get_script() != null:
 			return _fail("Contact shadow is missing or gained gameplay logic for %s." % building_name)
@@ -180,8 +187,8 @@ func _verify_town_square() -> bool:
 
 	if not _verify_corridors(town_square, footprints):
 		return false
-	if town_square.get_node("Actors/NPCs").get_child_count() != 2:
-		return _fail("Town Square NPC population changed during architecture polish.")
+	if town_square.get_node("Actors/NPCs").get_child_count() != 5:
+		return _fail("Town Square NPC population does not include the three bounded ambient patrols.")
 	town_square.queue_free()
 	await process_frame
 	return true

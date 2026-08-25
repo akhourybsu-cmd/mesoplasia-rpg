@@ -1,0 +1,2128 @@
+{
+	"version": 1,
+	"generator": "res://tools/art/prepare_caden_wayfarers_approach_runtime_v1.gd",
+	"source_quality_limitation": "The requested transparent PNG sources/ZIP were not attached; runtime alpha was reconstructed deterministically from black-matte JPEG renditions.",
+	"normalization": {
+		"family_scales": {
+			"props": 0.333333333333333,
+			"terrain": 0.8,
+			"structures": 0.5
+		},
+		"resampling": "nearest-neighbor only",
+		"transparent_padding_pixels": 2,
+		"matte_threshold": 0.0470588235294118,
+		"lighting": "preserved from upper-left-lit supplied artwork"
+	},
+	"sources": {
+		"props": {
+			"path": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"dimensions": [
+				1280,
+				801
+			],
+			"sha256": "9b6bacf81437aaf4f9df8e8a266a1233c536b40d23a7c5c7df65dcd6360855a3",
+			"format_note": "Supplied JPEG rendition; lossless transparent PNG master was not present in the attachment payload."
+		},
+		"terrain": {
+			"path": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"dimensions": [
+				1280,
+				809
+			],
+			"sha256": "76f445e3f0218467662dce0696db8c963e097ac80cc67b2fca9a02f94d876a9c",
+			"format_note": "Supplied JPEG rendition; lossless transparent PNG master was not present in the attachment payload."
+		},
+		"structures": {
+			"path": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"dimensions": [
+				1280,
+				799
+			],
+			"sha256": "f3fc13484bb8f2c7b477860107ae18e1f244179b1d73d1e95bb74dc6b86a35ab",
+			"format_note": "Supplied JPEG rendition; lossless transparent PNG master was not present in the attachment payload."
+		}
+	},
+	"concept_reference": {
+		"path": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_full_zone_concept_v2_greybox_aligned.jpg",
+		"sha256": "f0edecc86e2f1494fc417bdf91ff1c713ea830db9ee8f750aa0ddfb85cfe66ba",
+		"runtime_usage": "Visual composition reference only; not loaded by the runtime zone."
+	},
+	"attachment_provenance": {
+		"traveler_props": "1-Photo-1.jpg",
+		"road_terrain": "2-Photo-2.jpg",
+		"inn_structures": "3-Photo-3.jpg",
+		"full_zone_concept": "4-Photo-4.jpg"
+	},
+	"assets": {
+		"covered_wagon_side": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				12,
+				35,
+				410,
+				245
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/vehicles/covered_wagon_side_v1.png",
+			"runtime_dimensions": [
+				139,
+				77
+			],
+			"visible_bounds_xywh": [
+				4,
+				3,
+				131,
+				71
+			],
+			"anchor": [
+				69,
+				75
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "32327eb82a0a6aa91c36d03f6fef4133f39081fb6f00eb2eadb7fa17d5ce46c0"
+		},
+		"covered_wagon_rear": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				448,
+				2,
+				168,
+				274
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/vehicles/covered_wagon_rear_v1.png",
+			"runtime_dimensions": [
+				58,
+				93
+			],
+			"visible_bounds_xywh": [
+				2,
+				3,
+				53,
+				86
+			],
+			"anchor": [
+				29,
+				91
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "5726cc8df44b7ecf9fc6ead19952510a36710d81047feeb1a088537092c78748"
+		},
+		"supply_cart_open": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				660,
+				108,
+				268,
+				160
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/vehicles/supply_cart_open_v1.png",
+			"runtime_dimensions": [
+				87,
+				53
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				80,
+				46
+			],
+			"anchor": [
+				43,
+				51
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "2a232f11a54e9d669ab6040af4784eb4bfc6475b43be4d23708155503dcdd150"
+		},
+		"handcart": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				970,
+				140,
+				208,
+				128
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/vehicles/handcart_v1.png",
+			"runtime_dimensions": [
+				66,
+				32
+			],
+			"visible_bounds_xywh": [
+				4,
+				3,
+				59,
+				24
+			],
+			"anchor": [
+				33,
+				30
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "04c824ef4fddd10833fb800e4bfd891c46b0eeee56905f3d076b86cb1b9f67bb"
+		},
+		"hitching_rail_long": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				32,
+				280,
+				290,
+				86
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/fences/hitching_rail_long_v1.png",
+			"runtime_dimensions": [
+				90,
+				29
+			],
+			"visible_bounds_xywh": [
+				2,
+				4,
+				84,
+				20
+			],
+			"anchor": [
+				45,
+				27
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "dbac5e53336f1d8edcccad01ec8870336e5c860d570ec38c08459535f231ad96"
+		},
+		"hitching_rail_short": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				455,
+				278,
+				170,
+				88
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/fences/hitching_rail_short_v1.png",
+			"runtime_dimensions": [
+				53,
+				32
+			],
+			"visible_bounds_xywh": [
+				3,
+				5,
+				47,
+				24
+			],
+			"anchor": [
+				26,
+				30
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "403f3ab1d086c879091325d784ac710a9bde7e02b5e30b3603dc579bb90187a6"
+		},
+		"hitching_rail_rope": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				858,
+				278,
+				178,
+				92
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/fences/hitching_rail_rope_v1.png",
+			"runtime_dimensions": [
+				56,
+				29
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				49,
+				23
+			],
+			"anchor": [
+				28,
+				27
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "a34adc4d0aadd71087a92a6ec8e61e546185c4537f7f3e2831d26e223757b390"
+		},
+		"fence_opening": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				170,
+				724,
+				155,
+				76
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/fences/fence_opening_v1.png",
+			"runtime_dimensions": [
+				48,
+				27
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				42,
+				21
+			],
+			"anchor": [
+				24,
+				25
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "4237180a50eaeeb870209056a45ae2a8abe80a76142d461d41e009f0a56d2b98"
+		},
+		"wagon_gate": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				350,
+				716,
+				386,
+				84
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/fences/wagon_gate_v1.png",
+			"runtime_dimensions": [
+				123,
+				29
+			],
+			"visible_bounds_xywh": [
+				3,
+				5,
+				117,
+				21
+			],
+			"anchor": [
+				61,
+				27
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "e087c56b6593b2e4fe3963907912ad4eabcc118ae132b99da5e874a87e3f8c8d"
+		},
+		"fire_ring_unlit": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				510,
+				370,
+				164,
+				102
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/camp/fire_ring_unlit_v1.png",
+			"runtime_dimensions": [
+				51,
+				34
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				45,
+				28
+			],
+			"anchor": [
+				25,
+				32
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "8aa7fef1d9a8e75fc323c92c7a0edf31ef7609ff4efe92c0ee7bf0933755f09c"
+		},
+		"fire_ring_lit": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				684,
+				382,
+				132,
+				88
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/camp/fire_ring_lit_v1.png",
+			"runtime_dimensions": [
+				35,
+				27
+			],
+			"visible_bounds_xywh": [
+				3,
+				5,
+				29,
+				19
+			],
+			"anchor": [
+				17,
+				25
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "c25c415b0681419119293c20aafcd2c305930e85909c5af4643ed1b73249722e"
+		},
+		"supply_cluster_green": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				852,
+				364,
+				178,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/supplies/supply_cluster_green_v1.png",
+			"runtime_dimensions": [
+				53,
+				37
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				46,
+				31
+			],
+			"anchor": [
+				26,
+				35
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "d31c99f0198ad2045e1522ca247258deef950cd9c7d86e68100519e8fd16bc64"
+		},
+		"supply_cluster_travel": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				632,
+				470,
+				190,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/supplies/supply_cluster_travel_v1.png",
+			"runtime_dimensions": [
+				56,
+				32
+			],
+			"visible_bounds_xywh": [
+				4,
+				3,
+				49,
+				26
+			],
+			"anchor": [
+				28,
+				30
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "e885e120cacbcadcbfb3ada2c8b55b86e1df25144241d08fa7fe139b686507b0"
+		},
+		"crates_barrels_cluster": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				32,
+				586,
+				170,
+				126
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/supplies/crates_barrels_cluster_v1.png",
+			"runtime_dimensions": [
+				56,
+				37
+			],
+			"visible_bounds_xywh": [
+				3,
+				5,
+				50,
+				29
+			],
+			"anchor": [
+				28,
+				35
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "1cf6f1a3f6d723916dc02daa4956a1761aa080e04c65ff83d1199e753d937a12"
+		},
+		"spare_wagon_wheel": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				650,
+				584,
+				126,
+				128
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/supplies/spare_wagon_wheel_v1.png",
+			"runtime_dimensions": [
+				35,
+				37
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				29,
+				31
+			],
+			"anchor": [
+				17,
+				35
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "7d409bdbaa053e799d7c78066ce4d1c2af0a9437b307a704d9f34cacc84fe28b"
+		},
+		"spare_wagon_wheels": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				786,
+				584,
+				154,
+				126
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/supplies/spare_wagon_wheels_v1.png",
+			"runtime_dimensions": [
+				48,
+				34
+			],
+			"visible_bounds_xywh": [
+				5,
+				3,
+				40,
+				28
+			],
+			"anchor": [
+				24,
+				32
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "142ae7e3050f099d19ca951d2495d28d6e022546a56ae2455c18f55bbe9bb684"
+		},
+		"water_supply_station": {
+			"family": "props",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_traveler_props_source_v1.jpg",
+			"source_bounds_xywh": [
+				1100,
+				578,
+				148,
+				150
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/props/supplies/water_supply_station_v1.png",
+			"runtime_dimensions": [
+				41,
+				52
+			],
+			"visible_bounds_xywh": [
+				2,
+				8,
+				36,
+				41
+			],
+			"anchor": [
+				20,
+				50
+			],
+			"scale": 0.333333333333333,
+			"resampling": "nearest-neighbor",
+			"sha256": "f3bcb0150dc9aaa3f50f79bb556a814edacb9a61738b386be4be9edf2ba7f0a6"
+		},
+		"roadside_inn_exterior": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				38,
+				10,
+				666,
+				408
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roadside_inn_exterior_v1.png",
+			"runtime_dimensions": [
+				326,
+				202
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				320,
+				196
+			],
+			"anchor": [
+				163,
+				200
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "cf8bc4a6ff2c9bd163fa7add8f5ee979895be2d56614c107199e30057b4b325f"
+		},
+		"roadside_inn_rear": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				724,
+				52,
+				522,
+				338
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roadside_inn_rear_v1.png",
+			"runtime_dimensions": [
+				259,
+				166
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				253,
+				157
+			],
+			"anchor": [
+				129,
+				164
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "74d7064eabb7337b8dee66b99b9a98efe60b0215a6d3b95ed706d712bc351b18"
+		},
+		"porch_awning": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				28,
+				412,
+				254,
+				138
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/porch_awning_v1.png",
+			"runtime_dimensions": [
+				122,
+				66
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				116,
+				60
+			],
+			"anchor": [
+				61,
+				64
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "0a5f94e46decddeba290b9f62b76a837806c966832ae4b9a96895c64a0c2c075"
+		},
+		"porch_post": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				286,
+				408,
+				78,
+				136
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/porch_post_v1.png",
+			"runtime_dimensions": [
+				22,
+				62
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				16,
+				56
+			],
+			"anchor": [
+				11,
+				60
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "5d3e6e85fc17104dc84660f91ec8f9f55445294f1c18284bf7026649515bbce0"
+		},
+		"porch_stairs": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				372,
+				398,
+				146,
+				150
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/porch_stairs_v1.png",
+			"runtime_dimensions": [
+				77,
+				74
+			],
+			"visible_bounds_xywh": [
+				2,
+				2,
+				73,
+				69
+			],
+			"anchor": [
+				38,
+				72
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "980ba1b98d366abd8936d6bc3d53fd0f5699431af206a1a31bc23ac1be8dfc32"
+		},
+		"roof_awning": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				556,
+				414,
+				202,
+				128
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roof_awning_v1.png",
+			"runtime_dimensions": [
+				94,
+				50
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				88,
+				44
+			],
+			"anchor": [
+				47,
+				48
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "131cd2e6643f6f2621de8a48a8023fc56292b847ad0575328a21b370dbc7f3e3"
+		},
+		"stone_chimney": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				778,
+				394,
+				88,
+				148
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/stone_chimney_v1.png",
+			"runtime_dimensions": [
+				38,
+				62
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				32,
+				56
+			],
+			"anchor": [
+				19,
+				60
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "95779c68f128d3144d0a66ba0e0ff652a5aec1f665a2f71a8fc0d8af6efec720"
+		},
+		"roof_dormer": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				866,
+				398,
+				104,
+				146
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roof_dormer_v1.png",
+			"runtime_dimensions": [
+				42,
+				70
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				35,
+				64
+			],
+			"anchor": [
+				21,
+				68
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "d7c04be5fb8aec869baf138eb25dc820071ea83663d2b53dae680617c9c4790b"
+		},
+		"window_box": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				966,
+				416,
+				142,
+				122
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/window_box_v1.png",
+			"runtime_dimensions": [
+				50,
+				53
+			],
+			"visible_bounds_xywh": [
+				3,
+				5,
+				42,
+				45
+			],
+			"anchor": [
+				25,
+				51
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "5da7ea6a77d3b530235a2ef041f7d302efc9ed9447858772257aa7e4d056ee20"
+		},
+		"timber_wall": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				1102,
+				410,
+				164,
+				136
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/timber_wall_v1.png",
+			"runtime_dimensions": [
+				78,
+				62
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				72,
+				54
+			],
+			"anchor": [
+				39,
+				60
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "ac714df3313e6646f368bb0fee191ab3833d89a04d1649ef900c0db18a490136"
+		},
+		"stone_foundation": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				28,
+				570,
+				186,
+				80
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/stone_foundation_v1.png",
+			"runtime_dimensions": [
+				86,
+				34
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				80,
+				28
+			],
+			"anchor": [
+				43,
+				32
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "b9e195a92d59bd9411bf2e10a612ccb68fcfebf08b2d2d1173cdcae2eed3e021"
+		},
+		"roof_strip": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				220,
+				568,
+				260,
+				78
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roof_strip_v1.png",
+			"runtime_dimensions": [
+				126,
+				30
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				120,
+				24
+			],
+			"anchor": [
+				63,
+				28
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "e226bdc1a4800c2150d8ac9840aac98045eff87ef495331b33ba63de02d077c6"
+		},
+		"roof_gable": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				464,
+				552,
+				132,
+				112
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roof_gable_v1.png",
+			"runtime_dimensions": [
+				70,
+				53
+			],
+			"visible_bounds_xywh": [
+				2,
+				3,
+				66,
+				47
+			],
+			"anchor": [
+				35,
+				51
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "bf6e37ba7479151ff7dc263ab5ee07dd83259cacc29f4d8c2e931fdf4b94fab7"
+		},
+		"wooden_door": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				638,
+				548,
+				94,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/wooden_door_v1.png",
+			"runtime_dimensions": [
+				38,
+				53
+			],
+			"visible_bounds_xywh": [
+				3,
+				5,
+				32,
+				43
+			],
+			"anchor": [
+				19,
+				51
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "8547ef10aab9f3205fbd566946b8093276082ae5fcaf1a8ccbf1e69997747d96"
+		},
+		"blank_hanging_inn_sign": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				734,
+				558,
+				222,
+				124
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/blank_hanging_inn_sign_v1.png",
+			"runtime_dimensions": [
+				90,
+				66
+			],
+			"visible_bounds_xywh": [
+				3,
+				2,
+				84,
+				62
+			],
+			"anchor": [
+				45,
+				64
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "24b7d92f176a33f3ebea7f8378fca9b1a6d927bbfac6c5257e102f47c7b24126"
+		},
+		"edenite_wall_lantern": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				958,
+				548,
+				78,
+				138
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/edenite_wall_lantern_v1.png",
+			"runtime_dimensions": [
+				38,
+				50
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				32,
+				44
+			],
+			"anchor": [
+				19,
+				48
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "7c1521a1f0da143c251ae48395e295df03d2c8bfa88793dc3c3a1f229cbcb004"
+		},
+		"edenite_post_lantern": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				1034,
+				546,
+				82,
+				156
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/edenite_post_lantern_v1.png",
+			"runtime_dimensions": [
+				28,
+				74
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				22,
+				67
+			],
+			"anchor": [
+				14,
+				72
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "7d0c7a4847853282993699fbdf18426ed614b0338aa60627c404d84e0678fd0c"
+		},
+		"open_wagon_shelter": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				184,
+				648,
+				218,
+				146
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/open_wagon_shelter_v1.png",
+			"runtime_dimensions": [
+				110,
+				70
+			],
+			"visible_bounds_xywh": [
+				3,
+				3,
+				105,
+				64
+			],
+			"anchor": [
+				55,
+				68
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "13a1d792fe2a417f1c6a4434503e2ca5c2e1752c5296dffa4e53be4ad7a27219"
+		},
+		"roofed_supply_shelter": {
+			"family": "structures",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_inn_structures_source_v1.jpg",
+			"source_bounds_xywh": [
+				446,
+				642,
+				266,
+				152
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/structures/roofed_supply_shelter_v1.png",
+			"runtime_dimensions": [
+				127,
+				73
+			],
+			"visible_bounds_xywh": [
+				3,
+				2,
+				121,
+				68
+			],
+			"anchor": [
+				63,
+				71
+			],
+			"scale": 0.5,
+			"resampling": "nearest-neighbor",
+			"sha256": "78a658af6e5ed58acb5cd9aaae2c3c7c3f10bff77a8f84cde0de2544b8cc0540"
+		},
+		"road_horizontal_wide": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				20,
+				42,
+				420,
+				180
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_horizontal_wide_v1.png",
+			"runtime_dimensions": [
+				338,
+				142
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				332,
+				134
+			],
+			"anchor": [
+				169,
+				140
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "d9afa784489cab5cf2a44505ea976561bf7a7ee50cb8619388824e039688e086"
+		},
+		"road_vertical_wide": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				470,
+				12,
+				176,
+				248
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_vertical_wide_v1.png",
+			"runtime_dimensions": [
+				141,
+				199
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				133,
+				191
+			],
+			"anchor": [
+				70,
+				197
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "bddb1bb9bb469dcec8da68dbbbe6fa3bcb4855c0d90cf36455916d23c1049d14"
+		},
+		"road_t_junction": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				670,
+				14,
+				412,
+				250
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_t_junction_v1.png",
+			"runtime_dimensions": [
+				332,
+				199
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				322,
+				191
+			],
+			"anchor": [
+				166,
+				197
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "90940f0a1118737010851c7dbe843ebf4357aeca8c7308a34dfa5ef743150222"
+		},
+		"road_endcap_horizontal": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				1098,
+				62,
+				170,
+				138
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_endcap_horizontal_v1.png",
+			"runtime_dimensions": [
+				134,
+				103
+			],
+			"visible_bounds_xywh": [
+				5,
+				4,
+				123,
+				95
+			],
+			"anchor": [
+				67,
+				101
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "e845d2451d1d5511a766a359e45677b066aeb04012910a5a0199dbdb17012318"
+		},
+		"road_endcap_vertical": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				1102,
+				198,
+				154,
+				180
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_endcap_vertical_v1.png",
+			"runtime_dimensions": [
+				97,
+				135
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				89,
+				127
+			],
+			"anchor": [
+				48,
+				133
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "852059fc4d41cb8ab226bff0a0f93343a392e380e2f0788f92e15d20a5eb9d28"
+		},
+		"road_corner_outer_nw": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				24,
+				258,
+				132,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_nw_v1.png",
+			"runtime_dimensions": [
+				103,
+				84
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				95,
+				76
+			],
+			"anchor": [
+				51,
+				82
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "ffd25d79865bab0dab9ba27745e6d04e3a1df0f9a826815a7d70da9f98fa46d6"
+		},
+		"road_corner_inner_ne": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				154,
+				258,
+				132,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_ne_v1.png",
+			"runtime_dimensions": [
+				90,
+				86
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				82,
+				78
+			],
+			"anchor": [
+				45,
+				84
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "b693100131de595b34fe7d6d4398bc6ac143d47b2225bbc4ae23f52b5ef97b17"
+		},
+		"road_corner_inner_nw": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				286,
+				258,
+				126,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_nw_v1.png",
+			"runtime_dimensions": [
+				90,
+				84
+			],
+			"visible_bounds_xywh": [
+				6,
+				4,
+				80,
+				76
+			],
+			"anchor": [
+				45,
+				82
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "5424f77fb1b4b18d0aa3c8ea264d12f1fb81616f8f115199682eab40bd43141d"
+		},
+		"road_corner_outer_ne": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				412,
+				258,
+				112,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_ne_v1.png",
+			"runtime_dimensions": [
+				86,
+				84
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				80,
+				76
+			],
+			"anchor": [
+				43,
+				82
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "e3bad17a9d096dc537668343601c3fa5cd0a94b37b2c73fa4658f81eee34d1b9"
+		},
+		"road_corner_split": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				518,
+				258,
+				120,
+				120
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_split_v1.png",
+			"runtime_dimensions": [
+				90,
+				84
+			],
+			"visible_bounds_xywh": [
+				2,
+				4,
+				84,
+				76
+			],
+			"anchor": [
+				45,
+				82
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "e63a6c5dfbbc573d0c5acd8371a1cb6075e3c6d4c5761c5c602822b39a3acc15"
+		},
+		"road_corner_outer_sw": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				24,
+				382,
+				132,
+				90
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_sw_v1.png",
+			"runtime_dimensions": [
+				103,
+				74
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				95,
+				68
+			],
+			"anchor": [
+				51,
+				72
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "686c7b482b67e69b581d43712078f2c501f612fb340ae9eb32447d0fcb3c7cca"
+		},
+		"road_corner_inner_se": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				154,
+				382,
+				132,
+				90
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_se_v1.png",
+			"runtime_dimensions": [
+				90,
+				74
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				82,
+				68
+			],
+			"anchor": [
+				45,
+				72
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "89df3acd43d83252d68f0d295e5e2555929b26b11b0fbd0d0be48963d2a5b009"
+		},
+		"road_corner_inner_sw": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				286,
+				382,
+				126,
+				90
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_sw_v1.png",
+			"runtime_dimensions": [
+				90,
+				74
+			],
+			"visible_bounds_xywh": [
+				4,
+				8,
+				82,
+				64
+			],
+			"anchor": [
+				45,
+				72
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "708e9c540e3ad1b65e8ac3083f5795fa619db67bce91231a62827dabaaf99d2e"
+		},
+		"road_corner_outer_se": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				412,
+				382,
+				112,
+				90
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_se_v1.png",
+			"runtime_dimensions": [
+				86,
+				74
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				80,
+				68
+			],
+			"anchor": [
+				43,
+				72
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "91a57986579f59f2cdce1c64ce5d179c15e19688c6544ec4fdb7f9c27757f9e3"
+		},
+		"road_corner_split_south": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				518,
+				382,
+				120,
+				90
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_corner_split_south_v1.png",
+			"runtime_dimensions": [
+				90,
+				74
+			],
+			"visible_bounds_xywh": [
+				2,
+				4,
+				84,
+				68
+			],
+			"anchor": [
+				45,
+				72
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "5780003bd2c26f011f58c02a757f280ed5ea343f1daf843e254d6c99e571cf56"
+		},
+		"grass_edge_horizontal_a": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				42,
+				478,
+				124,
+				68
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_horizontal_a_v1.png",
+			"runtime_dimensions": [
+				95,
+				46
+			],
+			"visible_bounds_xywh": [
+				5,
+				4,
+				86,
+				38
+			],
+			"anchor": [
+				47,
+				44
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "ae4b7a4c99d03baae7d2383369843b90c58f0ee38b163f98ec1fd619a84061fe"
+		},
+		"grass_edge_horizontal_b": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				164,
+				478,
+				124,
+				68
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_horizontal_b_v1.png",
+			"runtime_dimensions": [
+				102,
+				46
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				96,
+				38
+			],
+			"anchor": [
+				51,
+				44
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "1a614b96375764311a1fface14c2f9a564429a41dcc1eb8c20e4c555b162de76"
+		},
+		"grass_edge_horizontal_c": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				286,
+				478,
+				118,
+				68
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_horizontal_c_v1.png",
+			"runtime_dimensions": [
+				98,
+				58
+			],
+			"visible_bounds_xywh": [
+				2,
+				2,
+				94,
+				52
+			],
+			"anchor": [
+				49,
+				56
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "3b7ea77fc03b37a1c8da29564d422a4963924356b77f95e539333bf30fbd7530"
+		},
+		"grass_edge_vertical_a": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				378,
+				466,
+				54,
+				92
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_vertical_a_v1.png",
+			"runtime_dimensions": [
+				44,
+				78
+			],
+			"visible_bounds_xywh": [
+				4,
+				2,
+				38,
+				73
+			],
+			"anchor": [
+				22,
+				76
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "4f95b82469f30537a4048bebbd2009422729d4b04c949d1d187b31fc96d22f18"
+		},
+		"grass_edge_vertical_b": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				430,
+				466,
+				54,
+				92
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_vertical_b_v1.png",
+			"runtime_dimensions": [
+				47,
+				78
+			],
+			"visible_bounds_xywh": [
+				2,
+				2,
+				43,
+				74
+			],
+			"anchor": [
+				23,
+				76
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "83ef422b847e3be39a76333a58870a2413da1bab10eb66250dbe0160cdf5ca38"
+		},
+		"wheel_ruts_straight_a": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				36,
+				542,
+				158,
+				122
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_straight_a_v1.png",
+			"runtime_dimensions": [
+				121,
+				90
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				113,
+				82
+			],
+			"anchor": [
+				60,
+				88
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "d8c40eda8200b63a8bda6f9848ec649b464e44e2796a1e78831b23cd7bd189ed"
+		},
+		"wheel_ruts_curve": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				196,
+				542,
+				172,
+				122
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_curve_v1.png",
+			"runtime_dimensions": [
+				134,
+				90
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				128,
+				82
+			],
+			"anchor": [
+				67,
+				88
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "ac121bc42f63c9b3c871d0690f69d17942671ea7d14d55b726d0ea9265535cd0"
+		},
+		"wheel_ruts_straight_b": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				378,
+				542,
+				174,
+				122
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_straight_b_v1.png",
+			"runtime_dimensions": [
+				128,
+				97
+			],
+			"visible_bounds_xywh": [
+				7,
+				2,
+				117,
+				91
+			],
+			"anchor": [
+				64,
+				95
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "ccde78c05d3d03cc49178c1a3ca1c2fcb1f3587a2a861727332de7446215731c"
+		},
+		"wheel_ruts_straight_c": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				554,
+				542,
+				174,
+				122
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_straight_c_v1.png",
+			"runtime_dimensions": [
+				138,
+				97
+			],
+			"visible_bounds_xywh": [
+				2,
+				2,
+				132,
+				91
+			],
+			"anchor": [
+				69,
+				95
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "f2f576f31f641afb2f1f7c8073b1767dab4ffeab990ea2ce7b10e930b1f5d891"
+		},
+		"footprints_scatter": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				748,
+				542,
+				174,
+				112
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/footprints_scatter_v1.png",
+			"runtime_dimensions": [
+				122,
+				71
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				114,
+				63
+			],
+			"anchor": [
+				61,
+				69
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "79afcc39a60dbb12f41989c02d11bf03e8687c8d2f92ea6d8b0fbb0664bb3fc7"
+		},
+		"road_wear_scatter": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				910,
+				542,
+				172,
+				112
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_wear_scatter_v1.png",
+			"runtime_dimensions": [
+				110,
+				74
+			],
+			"visible_bounds_xywh": [
+				4,
+				6,
+				102,
+				64
+			],
+			"anchor": [
+				55,
+				72
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "3161ff3792c2f92dc8bb10d5d29a1752524b373904624042c49b387751c8b691"
+		},
+		"road_wear_patch": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				1074,
+				542,
+				158,
+				112
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_wear_patch_v1.png",
+			"runtime_dimensions": [
+				97,
+				66
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				89,
+				58
+			],
+			"anchor": [
+				48,
+				64
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "51496c1db2f79231ebd5599abde31821a2edd37518bfcdc35ae38bdb3559c6d9"
+		},
+		"rest_field_trampled_a": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				24,
+				654,
+				192,
+				130
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_a_v1.png",
+			"runtime_dimensions": [
+				135,
+				108
+			],
+			"visible_bounds_xywh": [
+				4,
+				2,
+				127,
+				104
+			],
+			"anchor": [
+				67,
+				106
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "c07d6de0212bab57a57f87fd717d2f050302ac44ee59c4c98166c55e3a6750d2"
+		},
+		"rest_field_dirt_a": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				202,
+				654,
+				204,
+				130
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/rest_field_dirt_a_v1.png",
+			"runtime_dimensions": [
+				158,
+				103
+			],
+			"visible_bounds_xywh": [
+				4,
+				2,
+				152,
+				97
+			],
+			"anchor": [
+				79,
+				101
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "d508fa606c2635e042a213ee0e6db5a20fbab3e1d0f73a8eb3c24918a98c9553"
+		},
+		"rest_field_trampled_b": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				394,
+				654,
+				196,
+				130
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_b_v1.png",
+			"runtime_dimensions": [
+				142,
+				108
+			],
+			"visible_bounds_xywh": [
+				4,
+				2,
+				134,
+				104
+			],
+			"anchor": [
+				71,
+				106
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "cd03dc56ebcac9aaddbc7d2ae9e1165d88959bb16270f69fd835fe1768ecc628"
+		},
+		"rest_field_trampled_c": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				578,
+				654,
+				196,
+				130
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_c_v1.png",
+			"runtime_dimensions": [
+				135,
+				108
+			],
+			"visible_bounds_xywh": [
+				4,
+				2,
+				127,
+				104
+			],
+			"anchor": [
+				67,
+				106
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "1a8d2441ee0e1a3bd00a554d04f62eafdf35dba6ff79b494a7b3c477b114c44d"
+		},
+		"rest_field_straw": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				772,
+				666,
+				142,
+				112
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/rest_field_straw_v1.png",
+			"runtime_dimensions": [
+				116,
+				84
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				108,
+				76
+			],
+			"anchor": [
+				58,
+				82
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "cfdfe361580056b6aa784111ab95a263366d0817b8f4ef5f76812aac8504de3e"
+		},
+		"rest_field_mud": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				910,
+				666,
+				140,
+				112
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/rest_field_mud_v1.png",
+			"runtime_dimensions": [
+				103,
+				82
+			],
+			"visible_bounds_xywh": [
+				2,
+				5,
+				97,
+				73
+			],
+			"anchor": [
+				51,
+				80
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "86bfbcbfb70e96d8b22f1f28f3d4c6f179126c67d7618aff3d78172de143a6f7"
+		},
+		"edge_detail_grass": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				1050,
+				670,
+				68,
+				100
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/edge_detail_grass_v1.png",
+			"runtime_dimensions": [
+				39,
+				57
+			],
+			"visible_bounds_xywh": [
+				4,
+				5,
+				31,
+				48
+			],
+			"anchor": [
+				19,
+				55
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "6680ac9ee0e2c2037ea74235e396e1043378c843e00215c9473375a66be680ca"
+		},
+		"edge_detail_flowers": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				1114,
+				670,
+				76,
+				100
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/edge_detail_flowers_v1.png",
+			"runtime_dimensions": [
+				52,
+				58
+			],
+			"visible_bounds_xywh": [
+				4,
+				4,
+				44,
+				50
+			],
+			"anchor": [
+				26,
+				56
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "fa8fe992e31256d657b4ad3b560347de0690dc2e71a0748a4aacb580ef17e5bb"
+		},
+		"edge_detail_stones": {
+			"family": "terrain",
+			"source": "res://assets/source_art/caden/environment/wayfarers_approach/wayfarers_approach_road_terrain_source_v1.jpg",
+			"source_bounds_xywh": [
+				1182,
+				670,
+				82,
+				100
+			],
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/edge_detail_stones_v1.png",
+			"runtime_dimensions": [
+				52,
+				52
+			],
+			"visible_bounds_xywh": [
+				2,
+				4,
+				46,
+				44
+			],
+			"anchor": [
+				26,
+				50
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor",
+			"sha256": "4d6e3fcd1892529388587f5b637e1e6155d39a1f4deddacd8444af6d235f7e5b"
+		},
+		"road_horizontal_continuous_1024": {
+			"family": "terrain",
+			"derived_from": "res://assets/environments/caden/wayfarers_approach/terrain/road_horizontal_wide_v1.png",
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_horizontal_continuous_1024_v1.png",
+			"runtime_dimensions": [
+				1024,
+				142
+			],
+			"visible_bounds_xywh": [
+				0,
+				0,
+				1024,
+				142
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor; repeated internal source strip",
+			"sha256": "da25268c4d0294cea3dce62facd20b77d42557956e936926cb46e766b12d1d59"
+		},
+		"road_vertical_continuous_256": {
+			"family": "terrain",
+			"derived_from": "res://assets/environments/caden/wayfarers_approach/terrain/road_vertical_wide_v1.png",
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_vertical_continuous_256_v1.png",
+			"runtime_dimensions": [
+				141,
+				256
+			],
+			"visible_bounds_xywh": [
+				0,
+				0,
+				141,
+				256
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor; repeated internal source strip",
+			"sha256": "bf01afb9df551028dac0955fd8eef6caa83c7e0530af6eb12aca0d6f4c5fba9f"
+		},
+		"road_t_junction_overlay": {
+			"family": "terrain",
+			"derived_from": "res://assets/environments/caden/wayfarers_approach/terrain/road_t_junction_v1.png",
+			"runtime_path": "res://assets/environments/caden/wayfarers_approach/terrain/road_t_junction_overlay_v1.png",
+			"runtime_dimensions": [
+				332,
+				199
+			],
+			"visible_bounds_xywh": [
+				0,
+				0,
+				332,
+				199
+			],
+			"scale": 0.8,
+			"resampling": "nearest-neighbor; repeated internal source strip",
+			"sha256": "1a2abacd7e4c9aff7dda3a0aebc45510c0e090e9422f41297e15672bb25bece6"
+		}
+	}
+}

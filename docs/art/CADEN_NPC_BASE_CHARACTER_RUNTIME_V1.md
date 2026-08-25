@@ -1,5 +1,7 @@
 # Caden NPC Base Character Runtime v1
 
+> Current integration note: the base runtime contract is unchanged, but Town Square now also uses prepared variant art for `PassingVisitor` and three ambient patrols. See `CADEN_TOWN_SQUARE_PREMIUM_OVERHAUL_V2.md`. The remainder of this document records the original base-runtime preparation and SquareLocal integration pass.
+
 ## Outcome
 
 All mechanical gates pass, and the runtime is integrated into exactly one production NPC: `Actors/NPCs/SquareLocal` in Town Square. The character remains a noncanonical reusable development base.
@@ -140,7 +142,7 @@ StationaryNpc
 
 The root exports optional `character_sprite_frames` and `character_visual_enabled` fields. Both default to unconfigured/false, so existing NPC instances retain their rectangles and markers. When enabled with a valid eight-animation resource, the script hides the fallback, selects the one-frame directional idle from the existing facing value, and stops playback. The facing setter normalizes runtime/editor assignments to a cardinal direction and updates the idle without a `_process()` loop. No movement, pathfinding, schedule, manager, registry, autoload, or AnimationTree was added.
 
-## SquareLocal-only integration
+## Historical v1 SquareLocal-only integration
 
 SquareLocal remains at `Actors/NPCs/SquareLocal`, position `(288,448)`, facing right `(1,0)`, with the same `square_local_resident.tres` dialogue, speaker name `Local`, prompt text `Talk`, `20 x 20` collision, and radius-32 interaction area.
 

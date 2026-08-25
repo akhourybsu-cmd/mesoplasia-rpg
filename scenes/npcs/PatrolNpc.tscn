@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/npcs/patrol_npc.gd" id="1_patrol"]
+
+[sub_resource type="RectangleShape2D" id="Shape_npc"]
+size = Vector2(20, 20)
+
+[node name="PatrolNpc" type="CharacterBody2D" groups=["ambient_npcs"]]
+script = ExtResource("1_patrol")
+
+[node name="PlaceholderVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-10, -12, 10, -12, 10, 12, -10, 12)
+color = Color(0.55, 0.66, 0.78, 1)
+
+[node name="FacingMarker" type="Polygon2D" parent="."]
+position = Vector2(0, 9)
+polygon = PackedVector2Array(-3, -3, 3, -3, 0, 3)
+color = Color(1, 0.94, 0.72, 1)
+
+[node name="VisualRoot" type="Node2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VisualRoot"]
+visible = false
+position = Vector2(0, -28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_npc")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/props/vehicles/supply_cart_open_v1.png" id="1_cart"]
+
+[sub_resource type="RectangleShape2D" id="Shape_cart"]
+size = Vector2(70, 20)
+
+[node name="SupplyCart" type="StaticBody2D"]
+
+[node name="ContactShadow" type="Polygon2D" parent="."]
+position = Vector2(5, -6)
+polygon = PackedVector2Array(-36, -8, 36, -8, 32, 4, -32, 4)
+color = Color(0.08, 0.07, 0.06, 0.28)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -26.5)
+texture = ExtResource("1_cart")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -11)
+shape = SubResource("Shape_cart")
+

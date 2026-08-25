@@ -1,0 +1,1669 @@
+{
+  "contract": {
+    "alpha": "binary",
+    "column_order": [
+      "neutral",
+      "step_a",
+      "passing",
+      "step_b"
+    ],
+    "frame_dimensions": [
+      40,
+      56
+    ],
+    "grid": [
+      4,
+      4
+    ],
+    "normalization": "shared scale per character; nearest-neighbor; horizontally centered; feet aligned",
+    "row_order": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "runtime_dimensions": [
+      160,
+      224
+    ]
+  },
+  "preview": {
+    "path": "docs/art/previews/caden_npc_variants_runtime_v1_lineup.png",
+    "sha256": "7af31ab33c26485adb0e1972206ed4f0157d31f9221e8d4c780b605975021442"
+  },
+  "schema": "caden-npc-variants-runtime-v1",
+  "variants": [
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              4,
+              3,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              4,
+              3,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              4,
+              3,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              4,
+              3,
+              35,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              9,
+              3,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              3,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              4,
+              32,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              3,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              3,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              3,
+              32,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              5,
+              3,
+              35,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              5,
+              3,
+              35,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              5,
+              3,
+              35,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              5,
+              3,
+              35,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/dwarf_elder_man_01/caden_npc_dwarf_elder_man_01_runtime_v1.png",
+        "sha256": "e631af323f69c15841836d6632f08e6cfb7b8f2058a3e1858af973a1cea72e8c",
+        "shared_scale": 0.234513274
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/dwarf_elder_man_01/caden_npc_dwarf_elder_man_01_master_v2.png",
+        "sha256": "5f8f901246bcb94aef453b9828c673a3e922a95ba89652fd00ca022da7ef3f60",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/dwarf_elder_man_01/caden_npc_dwarf_elder_man_01_sprite_frames_v1.tres",
+        "sha256": "b17bf8bd6eaeab74c08f8402c2f44e3a136fbd7726f4e34cbf23609b1da61d84"
+      },
+      "variant_id": "dwarf_elder_man_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              4,
+              3,
+              37,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              4,
+              3,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              4,
+              4,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              4,
+              3,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              4,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              4,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              4,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              4,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              9,
+              4,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              4,
+              5,
+              36,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              5,
+              5,
+              35,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              4,
+              4,
+              35,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              5,
+              5,
+              35,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/dwarf_middle_woman_01/caden_npc_dwarf_middle_woman_01_runtime_v1.png",
+        "sha256": "8c7c1edf1d1e3aa5057d3f13e136cdd0b0dc9989bbcbdcc066bde4b83dd11b03",
+        "shared_scale": 0.230434783
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/dwarf_middle_woman_01/caden_npc_dwarf_middle_woman_01_master_v2.png",
+        "sha256": "00bcc5707b6fd5828efbb175897f87d1f81a7cc6146c51aa2a55366fb3b01aa8",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/dwarf_middle_woman_01/caden_npc_dwarf_middle_woman_01_sprite_frames_v1.tres",
+        "sha256": "c0c6afb5edabf8bcb1a2fff3be53a84377826798145c9bfcc96d6713b5c5f58d"
+      },
+      "variant_id": "dwarf_middle_woman_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              5,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              9,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              5,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              10,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              5,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              11,
+              5,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              10,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              8,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              4,
+              33,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/elf_older_woman_01/caden_npc_elf_older_woman_01_runtime_v1.png",
+        "sha256": "35eb3c11f1a00e21e1fee0108acfb18570022991053f1cc1e773dde5d3bd353a",
+        "shared_scale": 0.196296296
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/elf_older_woman_01/caden_npc_elf_older_woman_01_master_v2.png",
+        "sha256": "1f625357e13f179511d99c6690197d325e719043612aaa1cdb0e198eaecc9703",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/elf_older_woman_01/caden_npc_elf_older_woman_01_sprite_frames_v1.tres",
+        "sha256": "3997292af523877b2e427609f3224a65b19e427709bde82ffb47f37acfcb5fe0"
+      },
+      "variant_id": "elf_older_woman_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              7,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              11,
+              4,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              4,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              10,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              5,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              10,
+              5,
+              30,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              9,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              8,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              3,
+              33,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/elf_younger_man_01/caden_npc_elf_younger_man_01_runtime_v1.png",
+        "sha256": "28e1a2e745d647ff36d6a09157edfb76818e10443760dd902eb563cdbcb0240a",
+        "shared_scale": 0.197761194
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/elf_younger_man_01/caden_npc_elf_younger_man_01_master_v2.png",
+        "sha256": "915d1233dbfb040ce8d505d2225f164e986be063e66557793e9865ee15115915",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/elf_younger_man_01/caden_npc_elf_younger_man_01_sprite_frames_v1.tres",
+        "sha256": "58ec0f8e28c2581d197f3baa9f4cc90f483cccf451a3dd170719fdb4645b52ea"
+      },
+      "variant_id": "elf_younger_man_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              6,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              5,
+              30,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              9,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              5,
+              30,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              10,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              6,
+              30,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              9,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              6,
+              30,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              10,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              6,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_runtime_v1.png",
+        "sha256": "a73c0931758b0686e57dbd4705a092bf672ec8efbabf733204faa8ecba071076",
+        "shared_scale": 0.192028986
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_master_v2.png",
+        "sha256": "535ddbf6b5c96018e63ea5a9bc39507686062f5733f846cce5ba7281433314ae",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_sprite_frames_v1.tres",
+        "sha256": "b0aef6c091406d1bd9d79f62ceb38c23d34c0856790465299f133d935687d427"
+      },
+      "variant_id": "half_elf_young_nonbinary_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              6,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              6,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              6,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              7,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              9,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              10,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              10,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              9,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              7,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/human_elder_woman_01/caden_npc_human_elder_woman_01_runtime_v1.png",
+        "sha256": "7f75b75472b4744c1cfc63c41964c73c612afa5b74536831016c328b64e1ceb5",
+        "shared_scale": 0.189285714
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/human_elder_woman_01/caden_npc_human_elder_woman_01_master_v2.png",
+        "sha256": "c249d20ee0796eb972dc59d5e7f90e6ad25baead6be2901c68992f6c8791cf41",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/human_elder_woman_01/caden_npc_human_elder_woman_01_sprite_frames_v1.tres",
+        "sha256": "b474345820d55f04761c71598a710edfd8fa756c775a7379145664c2c0a9967d"
+      },
+      "variant_id": "human_elder_woman_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              6,
+              4,
+              34,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              6,
+              4,
+              34,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              6,
+              4,
+              34,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              6,
+              4,
+              34,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              12,
+              4,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              12,
+              4,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              11,
+              4,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              12,
+              4,
+              29,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              9,
+              4,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              6,
+              4,
+              34,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              6,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              6,
+              4,
+              34,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              6,
+              3,
+              34,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/human_middle_man_01/caden_npc_human_middle_man_01_runtime_v1.png",
+        "sha256": "a443157de566b64e3293fdbe20e0cb7644867bbde0eb4fa2b7ff9df00160c38f",
+        "shared_scale": 0.197026022
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/human_middle_man_01/caden_npc_human_middle_man_01_master_v2.png",
+        "sha256": "194e4bd6f40c08629364176a58266dd6e4db68fd046cf0f0145bf0c5e9459985",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/human_middle_man_01/caden_npc_human_middle_man_01_sprite_frames_v1.tres",
+        "sha256": "702203db1d1e441261d5f1afae31c39733c9d8af06d5aabb8ffdf07509c88473"
+      },
+      "variant_id": "human_middle_man_01"
+    },
+    {
+      "runtime": {
+        "binary_alpha": true,
+        "dimensions": [
+          160,
+          224
+        ],
+        "frames": [
+          {
+            "direction": "down",
+            "frame": 0,
+            "visible_bbox": [
+              6,
+              4,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 1,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 2,
+            "visible_bbox": [
+              6,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "down",
+            "frame": 3,
+            "visible_bbox": [
+              7,
+              3,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              6,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 2,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "left",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              6,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              5,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              7,
+              32,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 2,
+            "visible_bbox": [
+              9,
+              6,
+              31,
+              56
+            ]
+          },
+          {
+            "direction": "right",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              6,
+              32,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 0,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 1,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 2,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          },
+          {
+            "direction": "up",
+            "frame": 3,
+            "visible_bbox": [
+              8,
+              5,
+              33,
+              56
+            ]
+          }
+        ],
+        "nonempty_frames": 16,
+        "path": "assets/characters/caden/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_runtime_v1.png",
+        "sha256": "d18531ca7474ad46118c3d88420f085a7a045a3a032623356306770584cecb62",
+        "shared_scale": 0.195571956
+      },
+      "source": {
+        "cell_dimensions": [
+          265,
+          371
+        ],
+        "dimensions": [
+          1060,
+          1484
+        ],
+        "path": "assets/source_art/caden/characters/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_master_v2.png",
+        "sha256": "5dba9c4541bfcdc2275c30fdb3d7a59fc4fd97b9025e575b75863caf390da6be",
+        "unchanged": true
+      },
+      "source_frame_count": 16,
+      "sprite_frames": {
+        "animations": [
+          "idle_down",
+          "idle_left",
+          "idle_right",
+          "idle_up",
+          "walk_down",
+          "walk_left",
+          "walk_right",
+          "walk_up"
+        ],
+        "path": "assets/characters/caden/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_sprite_frames_v1.tres",
+        "sha256": "2de3c2949ffc5523a71309a5fe510a5e75af85c5c3434054f91e7b0e792dc0f7"
+      },
+      "variant_id": "human_young_woman_01"
+    }
+  ]
+}

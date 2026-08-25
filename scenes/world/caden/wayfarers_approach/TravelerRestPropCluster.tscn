@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/props/supplies/supply_cluster_green_v1.png" id="1_supplies"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/props/supplies/spare_wagon_wheels_v1.png" id="2_wheels"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/storage/caden_crate_01_v1.png" id="3_crate"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/storage/caden_barrel_01_v1.png" id="4_barrel"]
+
+[node name="TravelerRestPropCluster" type="Node2D"]
+
+[node name="Supplies" type="Sprite2D" parent="."]
+position = Vector2(-18, -18.5)
+texture = ExtResource("1_supplies")
+
+[node name="Wheels" type="Sprite2D" parent="."]
+position = Vector2(25, -17)
+texture = ExtResource("2_wheels")
+
+[node name="SharedCrate" type="Sprite2D" parent="."]
+position = Vector2(-36, -22)
+texture = ExtResource("3_crate")
+
+[node name="SharedBarrel" type="Sprite2D" parent="."]
+position = Vector2(40, -25)
+texture = ExtResource("4_barrel")

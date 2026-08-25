@@ -8,9 +8,11 @@ from the clean views and represented separately in the clearance overlay.
 
 from __future__ import annotations
 
+import base64
 from dataclasses import dataclass, field
 from pathlib import Path
 import re
+import struct
 
 from PIL import Image, ImageDraw
 
@@ -30,6 +32,7 @@ COLOR_RE = re.compile(
     r"Color\((-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*"
     r"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)\)"
 )
+PACKED_BYTES_RE = re.compile(r'PackedByteArray\("([^"]*)"\)')
 
 
 @dataclass
@@ -55,7 +58,24 @@ def parse_color(value: str) -> tuple[int, int, int, int]:
     match = COLOR_RE.search(value)
     if match is None:
         raise ValueError(f"Unsupported Color value: {value}")
-    return tuple(round(float(component) * 255) for component in match.groups())
+    return tuple(max(0, min(255, round(float(component) * 255))) for component in match.groups())
+
+
+def modulate_image(image: Image.Image, value: str | None) -> Image.Image:
+    if value is None:
+        return image
+    match = COLOR_RE.search(value)
+    if match is None:
+        raise ValueError(f"Unsupported modulate value: {value}")
+    factors = [float(component) for component in match.groups()]
+    channels = image.split()
+    return Image.merge(
+        "RGBA",
+        tuple(
+            channel.point(lambda pixel, factor=factor: min(255, round(pixel * factor)))
+            for channel, factor in zip(channels, factors)
+        ),
+    )
 
 
 def parse_scene() -> tuple[dict[str, Path], list[SceneNode], dict[str, SceneNode]]:
@@ -147,6 +167,33 @@ def polygon_points(value: str) -> list[tuple[float, float]]:
     return list(zip(numbers[0::2], numbers[1::2]))
 
 
+def render_tile_map_overlay(
+    preview: Image.Image,
+    node: SceneNode,
+    resources: dict[str, Path],
+) -> None:
+    tile_set_id = extract_resource_id(node.properties["tile_set"])
+    tile_set_text = resources[tile_set_id].read_text(encoding="utf-8")
+    atlas_match = re.search(r'path="res://([^"]+\.png)"', tile_set_text)
+    packed_match = PACKED_BYTES_RE.fullmatch(node.properties["tile_map_data"])
+    if atlas_match is None or packed_match is None:
+        raise ValueError(f"Unable to decode tile-map overlay: {node.full_path}")
+
+    atlas = Image.open(ROOT / atlas_match.group(1)).convert("RGBA")
+    packed = base64.b64decode(packed_match.group(1))
+    if len(packed) < 2 or (len(packed) - 2) % 12 != 0:
+        raise ValueError(f"Unexpected tile-map payload size: {node.full_path}")
+    for offset in range(2, len(packed), 12):
+        cell_x, cell_y, source_id, atlas_x, atlas_y, alternative = struct.unpack_from(
+            "<hhhhhh", packed, offset
+        )
+        if source_id != 0 or alternative != 0:
+            raise ValueError(f"Unsupported tile-map cell encoding: {node.full_path}")
+        tile = atlas.crop((atlas_x * 32, atlas_y * 32, (atlas_x + 1) * 32, (atlas_y + 1) * 32))
+        tile = modulate_image(tile, node.properties.get("modulate"))
+        preview.alpha_composite(tile, (cell_x * 32, cell_y * 32))
+
+
 def render_scene() -> Image.Image:
     resources, nodes, by_path = parse_scene()
     preview = Image.open(TERRAIN_PREVIEW).convert("RGBA")
@@ -155,7 +202,16 @@ def render_scene() -> Image.Image:
     for node in nodes:
         if node.properties.get("visible") == "false":
             continue
-        if node.node_type == "Polygon2D" and node.name == "ContactShadow":
+        if node.full_path.startswith("TerrainLayers/PlazaComposition/") and node.node_type == "TileMapLayer":
+            render_tile_map_overlay(preview, node, resources)
+            continue
+        render_polygon = (
+            node.name in {"ContactShadow", "GroundDarkening"}
+            or node.full_path.startswith("TerrainLayers/BuildingApproaches/")
+            or node.full_path.startswith("TerrainLayers/PlazaComposition/InnerBorder/")
+            or node.full_path.startswith("SolidScenery/PerimeterVisuals/")
+        )
+        if node.node_type == "Polygon2D" and render_polygon:
             node_x, node_y = global_position(node, by_path, positions)
             points = [
                 (round(node_x + point_x), round(node_y + point_y))

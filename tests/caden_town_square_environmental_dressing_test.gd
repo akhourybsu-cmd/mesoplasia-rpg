@@ -123,6 +123,8 @@ func _run_test() -> void:
 	await process_frame
 	if not _verify_locked_scene_state(town_square):
 		return
+	if not _verify_composition_structure(town_square):
+		return
 	var roots := _environment_roots(town_square)
 	if roots.is_empty():
 		return
@@ -131,6 +133,8 @@ func _run_test() -> void:
 	if not _verify_counts_and_clearances(town_square, roots):
 		return
 	if not _verify_supported_blocking_visuals(town_square):
+		return
+	if not _verify_premium_cluster_spacing(town_square):
 		return
 	if not _verify_collision_relationships(town_square, roots):
 		return
@@ -142,7 +146,7 @@ func _run_test() -> void:
 		return
 	town_square.queue_free()
 	await process_frame
-	print("PASS: Caden Town Square environmental dressing v1 hashes, clusters, clearances, collision, fencing, Festival restraint, Edenite density, and closure alignment.")
+	print("PASS: Caden Town Square composition preserves gameplay geometry while adding plaza hierarchy, grounded buildings, balanced clusters, social NPC anchors, perimeter layering, and a complete Terrebonne closure.")
 	quit(0)
 
 
@@ -175,7 +179,7 @@ func _verify_locked_scene_state(town_square: Node2D) -> bool:
 			return _fail("Town Square is missing a required broad category: %s" % path)
 	if town_square.get_node("Exits").get_child_count() != 4:
 		return _fail("Town Square exit count changed.")
-	if town_square.get_node("Actors/NPCs").get_child_count() != 2:
+	if town_square.get_node("Actors/NPCs").get_child_count() != 5:
 		return _fail("Town Square NPC population changed.")
 	for path: String in EXPECTED_BUILDINGS:
 		var expected: Array = EXPECTED_BUILDINGS[path]
@@ -186,11 +190,53 @@ func _verify_locked_scene_state(town_square: Node2D) -> bool:
 		"TerrainLayers/RoadTiles": 116,
 		"TerrainLayers/PlazaTiles": 192,
 		"TerrainLayers/TerrainTransitions": 16,
+		"TerrainLayers/PlazaComposition/TravelCorridors": 24,
+		"TerrainLayers/PlazaComposition/ReservedInlay": 9,
 	}
 	for path: String in expected_tile_counts:
 		var layer := town_square.get_node_or_null(path) as TileMapLayer
 		if layer == null or layer.get_used_cells().size() != expected_tile_counts[path]:
 			return _fail("Locked terrain placement count changed: %s" % path)
+	return true
+
+
+func _verify_composition_structure(town_square: Node2D) -> bool:
+	var approaches := town_square.get_node_or_null("TerrainLayers/BuildingApproaches") as Node2D
+	if approaches == null or approaches.get_child_count() != 5:
+		return _fail("Town Square must retain five visual doorstep approaches.")
+	for approach: Node in approaches.get_children():
+		if not approach is Polygon2D or approach.get_script() != null:
+			return _fail("Building approaches must remain visual-only polygons.")
+	for path: String in EXPECTED_BUILDINGS:
+		if town_square.get_node_or_null("%s/GroundDarkening" % path) == null:
+			return _fail("A building lost its ground-darkening transition: %s" % path)
+	var inner_border := town_square.get_node_or_null("TerrainLayers/PlazaComposition/InnerBorder") as Node2D
+	if inner_border == null or inner_border.get_child_count() != 8:
+		return _fail("The plaza inner border lost one of its eight quiet seam segments.")
+	for segment: Node in inner_border.get_children():
+		if not segment is Polygon2D or segment.get_script() != null:
+			return _fail("The plaza inner border must remain a visual-only stone seam.")
+
+	var inlay := town_square.get_node("TerrainLayers/PlazaComposition/ReservedInlay") as TileMapLayer
+	for x: int in range(8, 11):
+		for y: int in range(7, 10):
+			if inlay.get_cell_source_id(Vector2i(x, y)) != 0:
+				return _fail("The reserved 3x3 inlay is incomplete at %s." % Vector2i(x, y))
+
+	var npc_expectations := {
+		"SquareLocal": [Vector2(288, 448), null],
+		"PassingVisitor": [Vector2(352, 448), null],
+		"NorthPlazaWalker": [Vector2(160, 272), 64.0],
+		"WestPlazaWalker": [Vector2(752, 352), 96.0],
+		"SouthPlazaWalker": [Vector2(656, 496), 64.0],
+	}
+	for npc_name: String in npc_expectations:
+		var npc := town_square.get_node_or_null("Actors/NPCs/%s" % npc_name) as Node2D
+		var expected: Array = npc_expectations[npc_name]
+		if npc == null or npc.position != expected[0]:
+			return _fail("An NPC left its approved activity anchor: %s" % npc_name)
+		if expected[1] != null and not is_equal_approx(float(npc.get("patrol_distance")), float(expected[1])):
+			return _fail("An ambient NPC patrol left its approved activity cluster: %s" % npc_name)
 	return true
 
 
@@ -227,9 +273,9 @@ func _verify_environment_is_visual_only(roots: Array[Node]) -> bool:
 
 func _verify_counts_and_clearances(town_square: Node2D, roots: Array[Node]) -> bool:
 	var nature := town_square.get_node("Nature")
-	if nature.get_node("GroundOverlays").get_child_count() != 14:
+	if nature.get_node("GroundOverlays").get_child_count() != 18:
 		return _fail("Nature ground-detail count changed from the retained clustered set.")
-	if nature.get_node("LowVegetation").get_child_count() != 9 or nature.get_node("Trees").get_child_count() != 6 or nature.get_node("Rocks").get_child_count() != 3:
+	if nature.get_node("LowVegetation").get_child_count() != 18 or nature.get_node("Trees").get_child_count() != 10 or nature.get_node("Rocks").get_child_count() != 3:
 		return _fail("Nature category counts changed from the retained clustered set.")
 	var props := town_square.get_node("EnvironmentalProps/Props")
 	var expected_prop_counts := {"Seating": 2, "Lighting": 3, "Fences": 4, "Planters": 2, "Storage": 3, "Travel": 2}
@@ -286,6 +332,35 @@ func _verify_supported_blocking_visuals(town_square: Node2D) -> bool:
 	return true
 
 
+func _verify_premium_cluster_spacing(town_square: Node2D) -> bool:
+	var groups := [
+		[
+			"EnvironmentalProps/Props/Storage/BarrelSouthwest",
+			"EnvironmentalProps/Props/Storage/StorageSouthwest",
+			"EnvironmentalProps/Props/Lighting/GroundLanternSouthwest",
+		],
+		[
+			"EnvironmentalProps/Props/Storage/SacksSoutheast",
+			"EnvironmentalProps/Props/Travel/TravelPackSoutheast",
+		],
+	]
+	for group: Array in groups:
+		var bounds: Array[Rect2] = []
+		for path: String in group:
+			var sprite := town_square.get_node_or_null(path) as Sprite2D
+			if sprite == null:
+				return _fail("Premium frontage cluster is missing %s." % path)
+			bounds.append(_sprite_canvas_bounds(sprite))
+		for index in range(bounds.size()):
+			for other_index in range(index + 1, bounds.size()):
+				if bounds[index].intersects(bounds[other_index]):
+					return _fail("Premium frontage props overlap inside one cluster.")
+	var development_labels := town_square.get_node("DevelopmentLabels") as Node2D
+	if development_labels.visible:
+		return _fail("Development labels still cover the premium Town Square presentation.")
+	return true
+
+
 func _verify_collision_relationships(town_square: Node2D, roots: Array[Node]) -> bool:
 	var collision_bodies: Array[StaticBody2D] = []
 	for environment_root: Node in roots:
@@ -331,11 +406,11 @@ func _verify_fences_and_festival(town_square: Node2D) -> bool:
 	for path: String in ["EnvironmentalProps/Props/Fences", "FestivalAndEdenite/PerimeterFencing/PlainFences"]:
 		for node: Node in town_square.get_node(path).get_children():
 			fences.append(node as Node2D)
-	if fences.size() != 10:
-		return _fail("The perimeter must retain ten fence segments.")
+	if fences.size() != 13:
+		return _fail("The perimeter must retain thirteen fence segments.")
 	var runs := _group_fence_runs(fences)
-	if runs.size() != 3:
-		return _fail("The ten fences must form three coherent perimeter runs.")
+	if runs.size() != 4:
+		return _fail("The thirteen fences must form four coherent perimeter runs.")
 	for run: Array in runs:
 		if run.size() < 3:
 			return _fail("A perimeter fence run is too short to read coherently.")
@@ -352,8 +427,8 @@ func _verify_fences_and_festival(town_square: Node2D) -> bool:
 	var overlays := town_square.get_node("FestivalAndEdenite/FestivalFabric/FenceOverlays")
 	var decorated_count := overlays.get_child_count()
 	var ratio := float(decorated_count) / float(fences.size())
-	if ratio < 0.25 or ratio > 0.40 or fences.size() <= decorated_count:
-		return _fail("Festival fence coverage left the approved 25-40 percent range or stopped being a minority.")
+	if ratio < 0.20 or ratio > 0.35 or fences.size() <= decorated_count:
+		return _fail("Festival fence coverage left the restrained 20-35 percent range or stopped being a minority.")
 	var fence_positions: Array[Vector2] = []
 	for fence: Node2D in fences:
 		fence_positions.append(fence.global_position)
@@ -396,8 +471,8 @@ func _verify_terrebonne_closure(town_square: Node2D) -> bool:
 	if not _verify_static_rectangle(collision_root.get_node("VerticalBarrier") as StaticBody2D, Vector2(624, 80), Vector2(32, 96)):
 		return _fail("The vertical Terrebonne closure collision changed.")
 	var art := town_square.get_node("FestivalAndEdenite/TerrebonneClosure")
-	if art.get_child_count() != 4:
-		return _fail("The closure must retain corner, gate, rope, and timber art.")
+	if art.get_child_count() != 6:
+		return _fail("The closure must retain its corner, gate, rope, timbers, end treatment, and hedge.")
 	var horizontal := Rect2(608, 96, 320, 32)
 	var vertical := Rect2(608, 32, 32, 96)
 	for closure_asset: Node in art.get_children():

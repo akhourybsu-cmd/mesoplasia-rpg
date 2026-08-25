@@ -124,11 +124,11 @@ func _verify_town_square() -> bool:
 	for child_name: String in ["GroundOverlays", "LowVegetation", "Trees", "Rocks"]:
 		if nature.get_node_or_null(child_name) == null:
 			return _fail("Nature hierarchy is missing %s." % child_name)
-	if nature.get_node("GroundOverlays").get_child_count() != 14:
+	if nature.get_node("GroundOverlays").get_child_count() != 18:
 		return _fail("Ground-overlay placement count changed.")
-	if nature.get_node("LowVegetation").get_child_count() != 9:
+	if nature.get_node("LowVegetation").get_child_count() != 18:
 		return _fail("Low-vegetation placement count changed.")
-	if nature.get_node("Trees").get_child_count() != 6 or nature.get_node("Rocks").get_child_count() != 3:
+	if nature.get_node("Trees").get_child_count() != 10 or nature.get_node("Rocks").get_child_count() != 3:
 		return _fail("Tree or rock placement count changed.")
 	if not nature.find_children("*", "CollisionObject2D", true, false).is_empty():
 		return _fail("Nature introduced a physics body or area.")
@@ -148,7 +148,7 @@ func _verify_town_square() -> bool:
 			return _fail("Blocking-looking Nature base is outside existing blocked geometry: %s" % point)
 	if town_square.get("camera_bounds") != Rect2i(0, 0, 960, 704):
 		return _fail("Town Square bounds changed during Nature integration.")
-	if town_square.get_node("Exits").get_child_count() != 4 or town_square.get_node("Actors/NPCs").get_child_count() != 2:
+	if town_square.get_node("Exits").get_child_count() != 4 or town_square.get_node("Actors/NPCs").get_child_count() != 5:
 		return _fail("Town Square exits or NPC population changed.")
 	town_square.queue_free()
 	await process_frame

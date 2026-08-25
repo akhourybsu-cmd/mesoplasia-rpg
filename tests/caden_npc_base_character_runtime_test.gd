@@ -13,6 +13,8 @@ const RUNTIME_PATH := "res://assets/characters/caden/npc/caden_npc_base_runtime_
 const RUNTIME_SHA256 := "3cba56af2257f09f6c6e7f8ba0789e93a90d0e69f18ac271421ccb1f8354840c"
 const SPRITE_FRAMES_PATH := "res://assets/characters/caden/npc/caden_npc_base_sprite_frames_v1.tres"
 const SQUARE_LOCAL_DIALOGUE_PATH := "res://data/dialogue/caden/square_local_resident.tres"
+const VISITOR_SPRITE_FRAMES_PATH := "res://assets/characters/caden/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_sprite_frames_v1.tres"
+const VISITOR_DIALOGUE_PATH := "res://data/dialogue/caden/square_passing_visitor.tres"
 const SOURCE_SIZE := Vector2i(1060, 1484)
 const SOURCE_CELL_SIZE := Vector2i(265, 371)
 const RUNTIME_SIZE := Vector2i(160, 224)
@@ -49,7 +51,7 @@ func _run_test() -> void:
 		return
 	if not await _verify_stationary_npc_defaults():
 		return
-	if not await _verify_square_local_only_integration():
+	if not await _verify_town_square_interactive_visuals():
 		return
 	if not await _verify_zone_unload_and_restore():
 		return
@@ -57,7 +59,7 @@ func _run_test() -> void:
 	if not project_configuration_error.is_empty():
 		return _fail(project_configuration_error)
 
-	print("PASS: NPC source/runtime contract, SpriteFrames, optional StationaryNpc visuals, SquareLocal-only integration, collision, interaction, dialogue, and zone reload behavior.")
+	print("PASS: NPC base contract, optional StationaryNpc visuals, Town Square interactive variants, collision, interaction, dialogue, and zone reload behavior.")
 	quit(0)
 
 
@@ -164,7 +166,7 @@ func _verify_stationary_npc_defaults() -> bool:
 	return true
 
 
-func _verify_square_local_only_integration() -> bool:
+func _verify_town_square_interactive_visuals() -> bool:
 	var configured_count := 0
 	for zone_scene: PackedScene in ZONE_SCENES:
 		var zone := zone_scene.instantiate() as Node2D
@@ -181,30 +183,40 @@ func _verify_square_local_only_integration() -> bool:
 			var sprite := npc.get_node("VisualRoot/AnimatedSprite2D") as AnimatedSprite2D
 			if enabled or frames != null:
 				configured_count += 1
-				if zone.name != "TownSquare" or npc.name != "SquareLocal":
-					return _fail("NPC runtime art was assigned outside TownSquare/SquareLocal.")
-				if frames == null or frames.resource_path != SPRITE_FRAMES_PATH:
-					return _fail("SquareLocal does not use the approved NPC SpriteFrames resource.")
-				if npc.position != Vector2(288, 448) or npc.z_index != 10 or npc.get("facing_direction") != Vector2.RIGHT:
-					return _fail("SquareLocal position or facing direction changed.")
-				var conversation := npc.get("conversation") as Resource
-				if conversation == null or conversation.resource_path != SQUARE_LOCAL_DIALOGUE_PATH:
-					return _fail("SquareLocal dialogue assignment changed.")
-				if sprite.animation != &"idle_right" or sprite.is_playing() or not sprite.visible or placeholder.visible or marker.visible:
-					return _fail("SquareLocal does not show idle_right with its placeholder hidden.")
+				if zone.name != "TownSquare":
+					return _fail("NPC runtime art was assigned outside Town Square.")
 				if (npc.get_node("VisualRoot") as Node2D).position != Vector2(0, 10) or sprite.position != Vector2(0, -28):
-					return _fail("SquareLocal visual no longer uses the documented integer feet offset.")
-				npc.set("facing_direction", Vector2.UP)
-				if sprite.animation != &"idle_up" or sprite.is_playing():
-					return _fail("SquareLocal did not update to a static idle_up after a runtime facing change.")
-				npc.set("facing_direction", Vector2.RIGHT)
+					return _fail("A configured Town Square NPC no longer uses the documented integer feet offset.")
+				if not sprite.visible or placeholder.visible or marker.visible or sprite.is_playing():
+					return _fail("A configured Town Square NPC does not hide its placeholder and remain idle.")
+				var conversation := npc.get("conversation") as Resource
+				if npc.name == "SquareLocal":
+					if frames == null or frames.resource_path != SPRITE_FRAMES_PATH:
+						return _fail("SquareLocal does not use the approved base SpriteFrames resource.")
+					if npc.position != Vector2(288, 448) or npc.z_index != 10 or npc.get("facing_direction") != Vector2.RIGHT:
+						return _fail("SquareLocal position or facing direction changed.")
+					if conversation == null or conversation.resource_path != SQUARE_LOCAL_DIALOGUE_PATH or sprite.animation != &"idle_right":
+						return _fail("SquareLocal dialogue or idle-right visual changed.")
+					npc.set("facing_direction", Vector2.UP)
+					if sprite.animation != &"idle_up" or sprite.is_playing():
+						return _fail("SquareLocal did not update to a static idle_up after a runtime facing change.")
+					npc.set("facing_direction", Vector2.RIGHT)
+				elif npc.name == "PassingVisitor":
+					if frames == null or frames.resource_path != VISITOR_SPRITE_FRAMES_PATH:
+						return _fail("PassingVisitor does not use its prepared variant SpriteFrames resource.")
+					if npc.position != Vector2(352, 448) or npc.z_index != 10 or npc.get("facing_direction") != Vector2.LEFT:
+						return _fail("PassingVisitor position or facing direction changed.")
+					if conversation == null or conversation.resource_path != VISITOR_DIALOGUE_PATH or sprite.animation != &"idle_left":
+						return _fail("PassingVisitor dialogue or idle-left visual changed.")
+				else:
+					return _fail("Unexpected configured interactive NPC: %s." % npc.name)
 			else:
 				if not placeholder.visible or not marker.visible or sprite.visible:
 					return _fail("An unassigned Caden NPC placeholder changed visibility.")
 		zone.queue_free()
 		await process_frame
-	if configured_count != 1:
-		return _fail("Expected exactly one configured Caden NPC, found %d." % configured_count)
+	if configured_count != 2:
+		return _fail("Expected exactly two configured interactive Caden NPCs, found %d." % configured_count)
 	return true
 
 

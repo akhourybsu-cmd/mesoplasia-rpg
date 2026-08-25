@@ -250,7 +250,7 @@ func _verify_locked_scene_state(town_square: Node2D, props: Node2D) -> bool:
 		return _fail("Town Square camera bounds changed during prop integration.")
 	if town_square.get_node("Exits").get_child_count() != 4:
 		return _fail("Town Square exit count changed during prop integration.")
-	if town_square.get_node("Actors/NPCs").get_child_count() != 2:
+	if town_square.get_node("Actors/NPCs").get_child_count() != 5:
 		return _fail("Town Square NPC population changed during prop integration.")
 	var closure := town_square.get_node("SolidScenery/TerrebonneClosure") as Node2D
 	if not _verify_static_rectangle(closure.get_node("HorizontalBarrier") as StaticBody2D, Vector2(768, 112), Vector2(320, 32)):

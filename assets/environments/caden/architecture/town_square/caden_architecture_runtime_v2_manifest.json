@@ -1,0 +1,174 @@
+{
+  "generated_buildings": {
+    "northeast": {
+      "binary_alpha": true,
+      "canvas": [
+        160,
+        160
+      ],
+      "collision_footprint": [
+        128,
+        96
+      ],
+      "continuous_roof_field": true,
+      "ground_line": 144,
+      "join_bounds": [
+        20,
+        65,
+        140,
+        71
+      ],
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png",
+      "scene_center": [
+        832,
+        208
+      ],
+      "sha256": "8505d8435638e305544d6794d464d1c7249b595b2bf0cb279f42a68139c0f0b1",
+      "visible_bounds": [
+        7,
+        12,
+        154,
+        148
+      ]
+    },
+    "northwest": {
+      "binary_alpha": true,
+      "canvas": [
+        192,
+        160
+      ],
+      "collision_footprint": [
+        160,
+        96
+      ],
+      "continuous_roof_field": true,
+      "ground_line": 144,
+      "join_bounds": [
+        20,
+        65,
+        172,
+        71
+      ],
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_northwest_v2.png",
+      "scene_center": [
+        144,
+        112
+      ],
+      "sha256": "24b29773c878b774b4f370ce812bb13ff5fb71fd1fe0a6f53c629f1c4174d479",
+      "visible_bounds": [
+        9,
+        12,
+        184,
+        148
+      ]
+    },
+    "south": {
+      "binary_alpha": true,
+      "canvas": [
+        160,
+        128
+      ],
+      "collision_footprint": [
+        128,
+        64
+      ],
+      "continuous_roof_field": true,
+      "ground_line": 112,
+      "join_bounds": [
+        20,
+        55,
+        140,
+        59
+      ],
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_south_v2.png",
+      "scene_center": [
+        352,
+        624
+      ],
+      "sha256": "b33ca98d80e099c817fe8cc47894a93184e4aab7fb2a690f37818d41d2f22457",
+      "visible_bounds": [
+        12,
+        10,
+        148,
+        116
+      ]
+    },
+    "southeast": {
+      "binary_alpha": true,
+      "canvas": [
+        192,
+        160
+      ],
+      "collision_footprint": [
+        160,
+        96
+      ],
+      "continuous_roof_field": true,
+      "ground_line": 144,
+      "join_bounds": [
+        20,
+        65,
+        172,
+        71
+      ],
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png",
+      "scene_center": [
+        816,
+        560
+      ],
+      "sha256": "00ae942961bfe3cf6abef30804e848f2b8565d2c38c3670c193f2993f8a3e2af",
+      "visible_bounds": [
+        9,
+        10,
+        184,
+        148
+      ]
+    },
+    "southwest": {
+      "binary_alpha": true,
+      "canvas": [
+        192,
+        160
+      ],
+      "collision_footprint": [
+        160,
+        96
+      ],
+      "continuous_roof_field": true,
+      "ground_line": 144,
+      "join_bounds": [
+        20,
+        65,
+        172,
+        69
+      ],
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png",
+      "scene_center": [
+        144,
+        560
+      ],
+      "sha256": "a9b63a7d6ad67bdbe3d99c97bdd9b3c3e6f4ac9014bdd5f0fc2e8734187d1d93",
+      "visible_bounds": [
+        11,
+        14,
+        182,
+        148
+      ]
+    }
+  },
+  "method": "source-palette continuous staggered shingle field over protected Runtime v1.1 fa\u00e7ades",
+  "previews": {
+    "comparison": "docs/art/previews/caden_architecture_v1_1_vs_v2_comparison.png",
+    "lineup": "docs/art/previews/caden_architecture_runtime_v2_lineup.png",
+    "town_square": "docs/art/previews/caden_architecture_runtime_v2_town_square_preview.png"
+  },
+  "protected_inputs": {
+    "source": "82b60c3b0935e284b602f2a04713d7e4cf84ec4770bc7229ea80aeedc9195bf8",
+    "v1_1_northeast": "22c8515c03591d869174392fe83ee2a90c909f6c58b70820fb9a6ea60792d1a6",
+    "v1_1_northwest": "55ee5c5c35e2f646e5b8b2295680111eba56e71168d5efed5b246ae9f2c0f770",
+    "v1_1_south": "0693a95af32429919b54c72b0d4e5817298d6bd37d06897d7009579bc5394caa",
+    "v1_1_southeast": "68c8686dca3dae8f3173415a094c824f8601021ab51b6904968deef5e84ab487",
+    "v1_1_southwest": "790f375a5549e91af59950e91c648fc6c547fc2d1b092591dc33a56ba59b6780"
+  },
+  "schema": "caden-architecture-runtime-v2"
+}

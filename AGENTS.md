@@ -62,3 +62,9 @@ For every implementation task:
 - Clearly report anything that could not be tested.
 - Summarize files changed and why.
 - Do not claim something was tested if it was not.
+
+## Running Change Log
+
+- For every implementation task, append a dated entry to `docs/CHANGELOG.md`.
+- Record the task scope, files or systems changed, validation performed, and any remaining limitations or approval items.
+- Keep existing entries intact; corrections should be added as follow-up notes rather than rewriting prior history.

@@ -1,5 +1,7 @@
 # Caden Architecture Runtime v1.1
 
+> Current integration note: Town Square now uses Architecture Runtime v2. Runtime v1.1 remains protected as the façade/source-of-truth and rollback stage. See `CADEN_TOWN_SQUARE_PREMIUM_OVERHAUL_V2.md` and `caden_architecture_runtime_v2_manifest.json`.
+
 ## Purpose and manual-review findings
 
 Runtime v1.1 is a non-destructive architecture polish derivative. Manual review of Runtime v1 at the `640 x 360` internal resolution found visible roof-to-façade separation, background showing through the join, floating roofs, broad unstructured plaster bands, shallow eaves, similar silhouettes, mechanical dark roof divisions, and weak ground contact.

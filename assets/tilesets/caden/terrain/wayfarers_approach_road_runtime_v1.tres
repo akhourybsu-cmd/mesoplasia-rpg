@@ -1,0 +1,282 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_horizontal_continuous_1024_v1.png" id="1_xmgkf"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_vertical_continuous_256_v1.png" id="2_cpfqm"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_sw_v1.png" id="3_upai1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_se_v1.png" id="4_kcokf"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_sw_v1.png" id="5_2f7tv"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_se_v1.png" id="6_awflq"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_split_south_v1.png" id="7_fdn6w"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_horizontal_a_v1.png" id="8_gr467"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_horizontal_b_v1.png" id="9_ysy0h"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_horizontal_c_v1.png" id="10_edtr1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_vertical_a_v1.png" id="11_70xhg"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/grass_edge_vertical_b_v1.png" id="12_mhps3"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_t_junction_overlay_v1.png" id="13_fdkef"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_straight_a_v1.png" id="14_7ywyc"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_curve_v1.png" id="15_n2p5r"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_straight_b_v1.png" id="16_040rq"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/wheel_ruts_straight_c_v1.png" id="17_ysdlu"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/footprints_scatter_v1.png" id="18_ibq0n"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_wear_scatter_v1.png" id="19_kv0ji"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_wear_patch_v1.png" id="20_q4rb4"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_a_v1.png" id="21_ptesr"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/rest_field_dirt_a_v1.png" id="22_a22bk"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_b_v1.png" id="23_gi7xl"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_endcap_horizontal_v1.png" id="24_dkqrc"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_c_v1.png" id="25_krlp5"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/rest_field_straw_v1.png" id="26_ignwf"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/rest_field_mud_v1.png" id="27_7b1e3"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/edge_detail_grass_v1.png" id="28_c5lt2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/edge_detail_flowers_v1.png" id="29_15uu5"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/edge_detail_stones_v1.png" id="30_216oa"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_horizontal_wide_v1.png" id="31_klo4u"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_vertical_wide_v1.png" id="32_xf3iq"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_t_junction_v1.png" id="33_fjohd"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_endcap_vertical_v1.png" id="34_04f5s"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_nw_v1.png" id="35_golua"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_ne_v1.png" id="36_4gbqt"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_inner_nw_v1.png" id="37_w4fpq"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_outer_ne_v1.png" id="38_2men5"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/road_corner_split_v1.png" id="39_rr334"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h4m04"]
+texture = ExtResource("1_xmgkf")
+texture_region_size = Vector2i(1024, 142)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a62ua"]
+texture = ExtResource("2_cpfqm")
+texture_region_size = Vector2i(141, 256)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2bnhd"]
+texture = ExtResource("3_upai1")
+texture_region_size = Vector2i(103, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snf3w"]
+texture = ExtResource("4_kcokf")
+texture_region_size = Vector2i(90, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wq4pv"]
+texture = ExtResource("5_2f7tv")
+texture_region_size = Vector2i(90, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu8py"]
+texture = ExtResource("6_awflq")
+texture_region_size = Vector2i(86, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2o0bc"]
+texture = ExtResource("7_fdn6w")
+texture_region_size = Vector2i(90, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wadpc"]
+texture = ExtResource("8_gr467")
+texture_region_size = Vector2i(95, 46)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6yiys"]
+texture = ExtResource("9_ysy0h")
+texture_region_size = Vector2i(102, 46)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymhyk"]
+texture = ExtResource("10_edtr1")
+texture_region_size = Vector2i(98, 58)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h365o"]
+texture = ExtResource("11_70xhg")
+texture_region_size = Vector2i(44, 78)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5mda"]
+texture = ExtResource("12_mhps3")
+texture_region_size = Vector2i(47, 78)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pm67f"]
+texture = ExtResource("13_fdkef")
+texture_region_size = Vector2i(332, 199)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(16, -14)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yssiv"]
+texture = ExtResource("14_7ywyc")
+texture_region_size = Vector2i(121, 90)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_shj7v"]
+texture = ExtResource("15_n2p5r")
+texture_region_size = Vector2i(134, 90)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dny3p"]
+texture = ExtResource("16_040rq")
+texture_region_size = Vector2i(128, 97)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n80cn"]
+texture = ExtResource("17_ysdlu")
+texture_region_size = Vector2i(138, 97)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5v0b"]
+texture = ExtResource("18_ibq0n")
+texture_region_size = Vector2i(122, 71)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymdvh"]
+texture = ExtResource("19_kv0ji")
+texture_region_size = Vector2i(110, 74)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1lxns"]
+texture = ExtResource("20_q4rb4")
+texture_region_size = Vector2i(97, 66)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipc2l"]
+texture = ExtResource("21_ptesr")
+texture_region_size = Vector2i(135, 108)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grh8a"]
+texture = ExtResource("22_a22bk")
+texture_region_size = Vector2i(158, 103)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khdfs"]
+texture = ExtResource("23_gi7xl")
+texture_region_size = Vector2i(142, 108)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6tlnk"]
+texture = ExtResource("24_dkqrc")
+texture_region_size = Vector2i(134, 103)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsjgi"]
+texture = ExtResource("25_krlp5")
+texture_region_size = Vector2i(135, 108)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yfaes"]
+texture = ExtResource("26_ignwf")
+texture_region_size = Vector2i(116, 84)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipk4y"]
+texture = ExtResource("27_7b1e3")
+texture_region_size = Vector2i(103, 82)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mxxhs"]
+texture = ExtResource("28_c5lt2")
+texture_region_size = Vector2i(39, 57)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnexh"]
+texture = ExtResource("29_15uu5")
+texture_region_size = Vector2i(52, 58)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7gvs"]
+texture = ExtResource("30_216oa")
+texture_region_size = Vector2i(52, 52)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xa73f"]
+texture = ExtResource("31_klo4u")
+texture_region_size = Vector2i(338, 142)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iy171"]
+texture = ExtResource("32_xf3iq")
+texture_region_size = Vector2i(141, 199)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofmx8"]
+texture = ExtResource("33_fjohd")
+texture_region_size = Vector2i(332, 199)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o3kay"]
+texture = ExtResource("34_04f5s")
+texture_region_size = Vector2i(97, 135)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(16, 28)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ndmm"]
+texture = ExtResource("35_golua")
+texture_region_size = Vector2i(103, 84)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o7gs8"]
+texture = ExtResource("36_4gbqt")
+texture_region_size = Vector2i(90, 86)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0medk"]
+texture = ExtResource("37_w4fpq")
+texture_region_size = Vector2i(90, 84)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5syjd"]
+texture = ExtResource("38_2men5")
+texture_region_size = Vector2i(86, 84)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6wqgd"]
+texture = ExtResource("39_rr334")
+texture_region_size = Vector2i(90, 84)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_h4m04")
+sources/1 = SubResource("TileSetAtlasSource_a62ua")
+sources/2 = SubResource("TileSetAtlasSource_pm67f")
+sources/3 = SubResource("TileSetAtlasSource_6tlnk")
+sources/4 = SubResource("TileSetAtlasSource_o3kay")
+sources/5 = SubResource("TileSetAtlasSource_3ndmm")
+sources/6 = SubResource("TileSetAtlasSource_o7gs8")
+sources/7 = SubResource("TileSetAtlasSource_0medk")
+sources/8 = SubResource("TileSetAtlasSource_5syjd")
+sources/9 = SubResource("TileSetAtlasSource_6wqgd")
+sources/10 = SubResource("TileSetAtlasSource_2bnhd")
+sources/11 = SubResource("TileSetAtlasSource_snf3w")
+sources/12 = SubResource("TileSetAtlasSource_wq4pv")
+sources/13 = SubResource("TileSetAtlasSource_vu8py")
+sources/14 = SubResource("TileSetAtlasSource_2o0bc")
+sources/15 = SubResource("TileSetAtlasSource_wadpc")
+sources/16 = SubResource("TileSetAtlasSource_6yiys")
+sources/17 = SubResource("TileSetAtlasSource_ymhyk")
+sources/18 = SubResource("TileSetAtlasSource_h365o")
+sources/19 = SubResource("TileSetAtlasSource_j5mda")
+sources/20 = SubResource("TileSetAtlasSource_yssiv")
+sources/21 = SubResource("TileSetAtlasSource_shj7v")
+sources/22 = SubResource("TileSetAtlasSource_dny3p")
+sources/23 = SubResource("TileSetAtlasSource_n80cn")
+sources/24 = SubResource("TileSetAtlasSource_n5v0b")
+sources/25 = SubResource("TileSetAtlasSource_ymdvh")
+sources/26 = SubResource("TileSetAtlasSource_1lxns")
+sources/27 = SubResource("TileSetAtlasSource_ipc2l")
+sources/28 = SubResource("TileSetAtlasSource_grh8a")
+sources/29 = SubResource("TileSetAtlasSource_khdfs")
+sources/30 = SubResource("TileSetAtlasSource_vsjgi")
+sources/31 = SubResource("TileSetAtlasSource_yfaes")
+sources/32 = SubResource("TileSetAtlasSource_ipk4y")
+sources/33 = SubResource("TileSetAtlasSource_mxxhs")
+sources/34 = SubResource("TileSetAtlasSource_jnexh")
+sources/35 = SubResource("TileSetAtlasSource_i7gvs")
+sources/36 = SubResource("TileSetAtlasSource_xa73f")
+sources/37 = SubResource("TileSetAtlasSource_iy171")
+sources/38 = SubResource("TileSetAtlasSource_ofmx8")

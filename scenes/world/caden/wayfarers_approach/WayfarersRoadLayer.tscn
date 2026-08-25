@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="TileSet" path="res://assets/tilesets/caden/terrain/wayfarers_approach_road_runtime_v1.tres" id="1_2r2o3"]
+
+[node name="WayfarersRoadLayer" type="Node2D" unique_id=284504843]
+
+[node name="MainCarriageRoad" type="TileMapLayer" parent="." unique_id=1127199179]
+position = Vector2(0, 32)
+tile_map_data = PackedByteArray(0, 0, 15, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("1_2r2o3")
+
+[node name="NorthConnector" type="TileMapLayer" parent="." unique_id=1025860084]
+position = Vector2(32, 0)
+tile_map_data = PackedByteArray(0, 0, 15, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("1_2r2o3")
+
+[node name="TJunction" type="TileMapLayer" parent="." unique_id=2035465392]
+position = Vector2(32, -20)
+tile_map_data = PackedByteArray(0, 0, 15, 0, 9, 0, 2, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("1_2r2o3")
+
+[node name="LowerYardTransition" type="TileMapLayer" parent="." unique_id=362155695]
+position = Vector2(32, 96)
+tile_map_data = PackedByteArray(0, 0, 15, 0, 17, 0, 4, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("1_2r2o3")

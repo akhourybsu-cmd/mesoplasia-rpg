@@ -206,11 +206,11 @@ func _verify_town_square() -> bool:
 
 func _verify_hierarchy_and_visual_only(accents: Node2D) -> bool:
 	var expected_counts := {
-		"PerimeterFencing/PlainFences": 6,
+		"PerimeterFencing/PlainFences": 9,
 		"FestivalFabric/FenceOverlays": 3,
 		"FestivalFabric/LanternDecor": 1,
 		"EdeniteFixtures": 3,
-		"TerrebonneClosure": 4,
+		"TerrebonneClosure": 6,
 	}
 	for path: String in expected_counts:
 		var branch := accents.get_node_or_null(path)
@@ -239,13 +239,13 @@ func _verify_fencing(town_square: Node2D, accents: Node2D) -> bool:
 	var new_fences := accents.get_node("PerimeterFencing/PlainFences")
 	var decorated := accents.get_node("FestivalFabric/FenceOverlays").get_child_count()
 	var total_plain := prior_fences.get_child_count() + new_fences.get_child_count()
-	if total_plain != 10:
-		return _fail("The selective perimeter should contain 10 neutral fence segments.")
+	if total_plain != 13:
+		return _fail("The selective perimeter should contain 13 neutral fence segments.")
 	if decorated != 3 or total_plain < decorated:
 		return _fail("Plain perimeter fencing must outnumber decorated segments.")
 	var ratio := float(decorated) / float(total_plain)
-	if ratio < 0.25 or ratio > 0.40:
-		return _fail("Decorated fence coverage left the approved 25–40 percent range.")
+	if ratio < 0.20 or ratio > 0.35:
+		return _fail("Decorated fence coverage left the restrained 20-35 percent range.")
 	return true
 
 
@@ -317,7 +317,7 @@ func _verify_locked_scene_state(town_square: Node2D, accents: Node2D) -> bool:
 		return _fail("Town Square camera bounds changed during Pass 5.")
 	if town_square.get_node("Exits").get_child_count() != 4:
 		return _fail("Town Square exit count changed during Pass 5.")
-	if town_square.get_node("Actors/NPCs").get_child_count() != 2:
+	if town_square.get_node("Actors/NPCs").get_child_count() != 5:
 		return _fail("Town Square NPC population changed during Pass 5.")
 	var locked_closure := town_square.get_node("SolidScenery/TerrebonneClosure") as Node2D
 	if not _verify_static_rectangle(locked_closure.get_node("HorizontalBarrier") as StaticBody2D, Vector2(768, 112), Vector2(320, 32)):

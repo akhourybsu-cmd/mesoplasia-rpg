@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3]
+[gd_scene load_steps=72 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -6,11 +6,11 @@
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_local_resident.tres" id="4_local"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_passing_visitor.tres" id="5_visitor"]
 [ext_resource type="TileSet" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres" id="6_terrain"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png" id="7_building_nw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1_1.png" id="8_building_sw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1_1.png" id="9_building_ne"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1_1.png" id="10_building_se"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v1_1.png" id="11_building_s"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v2.png" id="7_building_nw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png" id="8_building_sw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png" id="9_building_ne"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png" id="10_building_se"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v2.png" id="11_building_s"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/ground/caden_nature_ground_runtime_v1.png" id="12_nature_ground"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="13_tree_m1"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_02_v1.png" id="14_tree_m2"]
@@ -52,6 +52,11 @@
 [ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_rope_01_v1.png" id="50_closure_rope"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/accents/closure/caden_closure_timbers_01_v1.png" id="51_closure_timbers"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/caden_npc_base_sprite_frames_v1.tres" id="52_npc_frames"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/PatrolNpc.tscn" id="53_patrol_npc"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_sprite_frames_v1.tres" id="54_visitor_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_sprite_frames_v1.tres" id="55_north_walker_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/dwarf_middle_woman_01/caden_npc_dwarf_middle_woman_01_sprite_frames_v1.tres" id="56_west_walker_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/elf_younger_man_01/caden_npc_elf_younger_man_01_sprite_frames_v1.tres" id="57_south_walker_frames"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -155,6 +160,78 @@ z_index = 3
 tile_map_data = PackedByteArray("AAANAAUAAAAAAAQAAAAOAAUAAAAAAAQAAAAPAAUAAAAAAAQAAAAQAAUAAAAAAAQAAAAHAAkAAAACAAQAAAAWAAkAAAADAAQAAAAHAAoAAAACAAQAAAAWAAoAAAADAAQAAAAHAAsAAAACAAQAAAAWAAsAAAADAAQAAAAHAAwAAAACAAQAAAAWAAwAAAADAAQAAAANABAAAAABAAQAAAAOABAAAAABAAQAAAAPABAAAAABAAQAAAAQABAAAAABAAQAAAA=")
 tile_set = ExtResource("6_terrain")
 
+[node name="PlazaComposition" type="Node2D" parent="TerrainLayers"]
+
+[node name="InnerBorder" type="Node2D" parent="TerrainLayers/PlazaComposition"]
+z_index = 5
+
+[node name="Northwest" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(384, 254, 448, 254, 448, 258, 384, 258)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="Northeast" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(512, 254, 576, 254, 576, 258, 512, 258)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="Southwest" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(384, 446, 448, 446, 448, 450, 384, 450)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="Southeast" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(512, 446, 576, 446, 576, 450, 512, 450)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="WestUpper" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(382, 256, 386, 256, 386, 320, 382, 320)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="WestLower" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(382, 384, 386, 384, 386, 448, 382, 448)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="EastUpper" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(574, 256, 578, 256, 578, 320, 574, 320)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="EastLower" type="Polygon2D" parent="TerrainLayers/PlazaComposition/InnerBorder"]
+polygon = PackedVector2Array(574, 384, 578, 384, 578, 448, 574, 448)
+color = Color(0.36, 0.34, 0.31, 0.5)
+
+[node name="TravelCorridors" type="TileMapLayer" parent="TerrainLayers/PlazaComposition"]
+modulate = Color(1.06, 1.045, 1, 1)
+z_index = 4
+tile_map_data = PackedByteArray("AAAOAAYAAAABAAUAAAAPAAYAAAABAAUAAAAOAAcAAAABAAUAAAAPAAcAAAABAAUAAAAIAAoAAAABAAUAAAAJAAoAAAABAAUAAAAKAAoAAAABAAUAAAALAAoAAAABAAUAAAASAAoAAAABAAUAAAATAAoAAAABAAUAAAAUAAoAAAABAAUAAAAVAAoAAAABAAUAAAAIAAsAAAABAAUAAAAJAAsAAAABAAUAAAAKAAsAAAABAAUAAAALAAsAAAABAAUAAAASAAsAAAABAAUAAAATAAsAAAABAAUAAAAUAAsAAAABAAUAAAAVAAsAAAABAAUAAAAOAA4AAAABAAUAAAAPAA4AAAABAAUAAAAOAA8AAAABAAUAAAAPAA8AAAABAAUAAAA=")
+tile_set = ExtResource("6_terrain")
+
+[node name="ReservedInlay" type="TileMapLayer" parent="TerrainLayers/PlazaComposition"]
+modulate = Color(0.94, 0.95, 0.92, 1)
+z_index = 4
+tile_map_data = PackedByteArray("AAAIAAcAAAAAAAUAAAAJAAcAAAAAAAUAAAAKAAcAAAAAAAUAAAAIAAgAAAAAAAUAAAAJAAgAAAABAAUAAAAKAAgAAAAAAAUAAAAIAAkAAAAAAAUAAAAJAAkAAAAAAAUAAAAKAAkAAAAAAAUAAAA=")
+tile_set = ExtResource("6_terrain")
+
+[node name="BuildingApproaches" type="Node2D" parent="TerrainLayers"]
+z_index = 1
+
+[node name="NorthwestDoorstep" type="Polygon2D" parent="TerrainLayers/BuildingApproaches"]
+polygon = PackedVector2Array(132, 154, 156, 154, 160, 181, 190, 197, 224, 197, 224, 217, 184, 217, 140, 191)
+color = Color(0.39, 0.335, 0.235, 0.42)
+
+[node name="NortheastDoorstep" type="Polygon2D" parent="TerrainLayers/BuildingApproaches"]
+polygon = PackedVector2Array(820, 248, 844, 248, 848, 288, 816, 288)
+color = Color(0.39, 0.335, 0.235, 0.42)
+
+[node name="SouthwestDoorstep" type="Polygon2D" parent="TerrainLayers/BuildingApproaches"]
+polygon = PackedVector2Array(100, 600, 124, 600, 132, 626, 160, 641, 192, 641, 192, 659, 152, 659, 112, 637)
+color = Color(0.39, 0.335, 0.235, 0.42)
+
+[node name="SoutheastDoorstep" type="Polygon2D" parent="TerrainLayers/BuildingApproaches"]
+polygon = PackedVector2Array(820, 600, 844, 600, 838, 629, 808, 645, 768, 645, 768, 663, 816, 663, 840, 637)
+color = Color(0.39, 0.335, 0.235, 0.42)
+
+[node name="SouthCommunityDoorstep" type="Polygon2D" parent="TerrainLayers/BuildingApproaches"]
+polygon = PackedVector2Array(356, 648, 380, 648, 388, 666, 416, 666, 416, 688, 376, 688)
+color = Color(0.39, 0.335, 0.235, 0.42)
+
 [node name="Nature" type="Node2D" parent="."]
 
 [node name="GroundOverlays" type="Node2D" parent="Nature"]
@@ -255,6 +332,34 @@ hframes = 3
 vframes = 3
 frame = 8
 
+[node name="TuftTerrebonneWestLower" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(576, 176)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 5
+
+[node name="TuftTerrebonneWestUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(608, 144)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 7
+
+[node name="TuftTerrebonneEastLower" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(752, 176)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 6
+
+[node name="TuftTerrebonneEastUpper" type="Sprite2D" parent="Nature/GroundOverlays"]
+position = Vector2(816, 112)
+texture = ExtResource("12_nature_ground")
+hframes = 3
+vframes = 3
+frame = 8
+
 [node name="LowVegetation" type="Node2D" parent="Nature"]
 
 [node name="BushNorthwestWest" type="Sprite2D" parent="Nature/LowVegetation"]
@@ -302,6 +407,51 @@ position = Vector2(240, 144)
 offset = Vector2(0, -16)
 texture = ExtResource("22_shrub_s3")
 
+[node name="UndergrowthNorthwestBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(240, 32)
+offset = Vector2(0, -16)
+texture = ExtResource("18_bush_m2")
+
+[node name="UndergrowthNortheastBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(592, 32)
+offset = Vector2(0, -16)
+texture = ExtResource("17_bush_m1")
+
+[node name="UndergrowthWestUpperBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(32, 176)
+offset = Vector2(0, -16)
+texture = ExtResource("19_bush_m3")
+
+[node name="UndergrowthEastUpperBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(928, 128)
+offset = Vector2(0, -16)
+texture = ExtResource("17_bush_m1")
+
+[node name="UndergrowthWestLowerBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(32, 496)
+offset = Vector2(0, -16)
+texture = ExtResource("18_bush_m2")
+
+[node name="UndergrowthEastLowerBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(928, 496)
+offset = Vector2(0, -16)
+texture = ExtResource("19_bush_m3")
+
+[node name="UndergrowthSouthwestBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(272, 672)
+offset = Vector2(0, -16)
+texture = ExtResource("19_bush_m3")
+
+[node name="UndergrowthSoutheastBoundary" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(640, 672)
+offset = Vector2(0, -16)
+texture = ExtResource("17_bush_m1")
+
+[node name="FoundationShrubSouth" type="Sprite2D" parent="Nature/LowVegetation"]
+position = Vector2(272, 656)
+offset = Vector2(0, -16)
+texture = ExtResource("20_shrub_s1")
+
 [node name="Trees" type="Node2D" parent="Nature"]
 
 [node name="TreeWestUpper" type="Sprite2D" parent="Nature/Trees"]
@@ -310,11 +460,13 @@ offset = Vector2(0, -48)
 texture = ExtResource("13_tree_m1")
 
 [node name="TreeEastLower" type="Sprite2D" parent="Nature/Trees"]
+z_index = 11
 position = Vector2(928, 640)
 offset = Vector2(0, -48)
 texture = ExtResource("13_tree_m1")
 
 [node name="TreeWestLower" type="Sprite2D" parent="Nature/Trees"]
+z_index = 11
 position = Vector2(32, 640)
 offset = Vector2(0, -48)
 texture = ExtResource("14_tree_m2")
@@ -333,6 +485,28 @@ texture = ExtResource("15_tree_s1")
 position = Vector2(896, 160)
 offset = Vector2(0, -32)
 texture = ExtResource("16_tree_s2")
+
+[node name="TreeWestNorthBoundary" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(32, 96)
+offset = Vector2(0, -48)
+texture = ExtResource("14_tree_m2")
+
+[node name="TreeEastNorthBoundary" type="Sprite2D" parent="Nature/Trees"]
+position = Vector2(928, 96)
+offset = Vector2(0, -48)
+texture = ExtResource("13_tree_m1")
+
+[node name="TreeWestMiddleBoundary" type="Sprite2D" parent="Nature/Trees"]
+z_index = 11
+position = Vector2(32, 496)
+offset = Vector2(0, -48)
+texture = ExtResource("13_tree_m1")
+
+[node name="TreeEastMiddleBoundary" type="Sprite2D" parent="Nature/Trees"]
+z_index = 11
+position = Vector2(928, 496)
+offset = Vector2(0, -48)
+texture = ExtResource("14_tree_m2")
 
 [node name="Rocks" type="Node2D" parent="Nature"]
 
@@ -355,21 +529,45 @@ texture = ExtResource("25_rock_c1")
 
 [node name="PerimeterVisuals" type="Node2D" parent="SolidScenery"]
 
-[node name="North" type="Polygon2D" parent="SolidScenery/PerimeterVisuals"]
-polygon = PackedVector2Array(0, 0, 960, 0, 960, 32, 0, 32)
-color = Color(0.12, 0.28, 0.14, 1)
+[node name="North" type="Node2D" parent="SolidScenery/PerimeterVisuals"]
 
-[node name="South" type="Polygon2D" parent="SolidScenery/PerimeterVisuals"]
-polygon = PackedVector2Array(0, 672, 960, 672, 960, 704, 0, 704)
-color = Color(0.12, 0.28, 0.14, 1)
+[node name="NorthwestUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/North"]
+polygon = PackedVector2Array(0, 0, 416, 0, 416, 28, 288, 28, 288, 18, 160, 18, 160, 30, 0, 30)
+color = Color(0.105, 0.25, 0.13, 0.78)
 
-[node name="West" type="Polygon2D" parent="SolidScenery/PerimeterVisuals"]
-polygon = PackedVector2Array(0, 0, 32, 0, 32, 704, 0, 704)
-color = Color(0.12, 0.28, 0.14, 1)
+[node name="NortheastUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/North"]
+polygon = PackedVector2Array(544, 0, 960, 0, 960, 20, 896, 20, 896, 28, 768, 28, 768, 18, 608, 18, 608, 30, 544, 30)
+color = Color(0.105, 0.25, 0.13, 0.78)
 
-[node name="East" type="Polygon2D" parent="SolidScenery/PerimeterVisuals"]
-polygon = PackedVector2Array(928, 0, 960, 0, 960, 704, 928, 704)
-color = Color(0.12, 0.28, 0.14, 1)
+[node name="South" type="Node2D" parent="SolidScenery/PerimeterVisuals"]
+
+[node name="SouthwestUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/South"]
+polygon = PackedVector2Array(0, 676, 128, 676, 128, 684, 288, 684, 288, 674, 416, 674, 416, 704, 0, 704)
+color = Color(0.105, 0.25, 0.13, 0.78)
+
+[node name="SoutheastUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/South"]
+polygon = PackedVector2Array(544, 676, 672, 676, 672, 686, 832, 686, 832, 678, 960, 678, 960, 704, 544, 704)
+color = Color(0.105, 0.25, 0.13, 0.78)
+
+[node name="West" type="Node2D" parent="SolidScenery/PerimeterVisuals"]
+
+[node name="UpperUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/West"]
+polygon = PackedVector2Array(0, 0, 24, 0, 24, 96, 32, 96, 32, 224, 20, 224, 20, 288, 0, 288)
+color = Color(0.105, 0.25, 0.13, 0.78)
+
+[node name="LowerUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/West"]
+polygon = PackedVector2Array(0, 416, 22, 416, 22, 512, 32, 512, 32, 640, 24, 640, 24, 704, 0, 704)
+color = Color(0.105, 0.25, 0.13, 0.78)
+
+[node name="East" type="Node2D" parent="SolidScenery/PerimeterVisuals"]
+
+[node name="UpperUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/East"]
+polygon = PackedVector2Array(936, 0, 960, 0, 960, 288, 936, 288, 936, 208, 928, 208, 928, 96, 936, 96)
+color = Color(0.105, 0.25, 0.13, 0.78)
+
+[node name="LowerUndergrowth" type="Polygon2D" parent="SolidScenery/PerimeterVisuals/East"]
+polygon = PackedVector2Array(938, 416, 960, 416, 960, 704, 936, 704, 936, 624, 928, 624, 928, 512, 938, 512)
+color = Color(0.105, 0.25, 0.13, 0.78)
 
 [node name="Buildings" type="Node2D" parent="SolidScenery"]
 
@@ -383,9 +581,13 @@ visible = false
 polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.4, 0.25, 0.17, 1)
 
+[node name="GroundDarkening" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
+polygon = PackedVector2Array(-78, 30, 76, 30, 84, 47, 72, 59, -70, 59, -84, 48)
+color = Color(0.16, 0.2, 0.12, 0.28)
+
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
 polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
-color = Color(0.145, 0.122, 0.098, 0.376)
+color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
 position = Vector2(0, -16)
@@ -404,9 +606,13 @@ visible = false
 polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.44, 0.28, 0.18, 1)
 
+[node name="GroundDarkening" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
+polygon = PackedVector2Array(-78, 30, 76, 30, 84, 47, 72, 59, -70, 59, -84, 48)
+color = Color(0.16, 0.2, 0.12, 0.28)
+
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
 polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
-color = Color(0.145, 0.122, 0.098, 0.376)
+color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
 position = Vector2(0, -16)
@@ -425,9 +631,13 @@ visible = false
 polygon = PackedVector2Array(-64, -48, 64, -48, 64, 48, -64, 48)
 color = Color(0.38, 0.24, 0.16, 1)
 
+[node name="GroundDarkening" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
+polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
+color = Color(0.16, 0.2, 0.12, 0.28)
+
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
 polygon = PackedVector2Array(-51, 38, 54, 38, 59, 53, -45, 53)
-color = Color(0.145, 0.122, 0.098, 0.376)
+color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
 position = Vector2(0, -16)
@@ -446,9 +656,13 @@ visible = false
 polygon = PackedVector2Array(-80, -48, 80, -48, 80, 48, -80, 48)
 color = Color(0.43, 0.27, 0.17, 1)
 
+[node name="GroundDarkening" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
+polygon = PackedVector2Array(-78, 30, 76, 30, 84, 47, 72, 59, -70, 59, -84, 48)
+color = Color(0.16, 0.2, 0.12, 0.28)
+
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
 polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
-color = Color(0.145, 0.122, 0.098, 0.376)
+color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
 position = Vector2(0, -16)
@@ -467,9 +681,13 @@ visible = false
 polygon = PackedVector2Array(-64, -32, 64, -32, 64, 32, -64, 32)
 color = Color(0.36, 0.23, 0.16, 1)
 
+[node name="GroundDarkening" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
+polygon = PackedVector2Array(-62, 16, 60, 16, 68, 32, 56, 42, -54, 42, -68, 32)
+color = Color(0.16, 0.2, 0.12, 0.28)
+
 [node name="ContactShadow" type="Polygon2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
 polygon = PackedVector2Array(-51, 22, 54, 22, 59, 37, -45, 37)
-color = Color(0.145, 0.122, 0.098, 0.376)
+color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
 position = Vector2(0, -16)
@@ -622,17 +840,17 @@ texture = ExtResource("34_planter_2")
 [node name="Storage" type="Node2D" parent="EnvironmentalProps/Props"]
 
 [node name="BarrelSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
-position = Vector2(208, 576)
+position = Vector2(80, 592)
 offset = Vector2(0, -32)
 texture = ExtResource("35_barrel_1")
 
 [node name="StorageSouthwest" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
-position = Vector2(224, 592)
+position = Vector2(192, 592)
 offset = Vector2(0, -32)
 texture = ExtResource("36_storage_cluster")
 
 [node name="SacksSoutheast" type="Sprite2D" parent="EnvironmentalProps/Props/Storage"]
-position = Vector2(736, 576)
+position = Vector2(752, 592)
 offset = Vector2(0, -32)
 texture = ExtResource("37_sack_cluster")
 
@@ -644,7 +862,7 @@ offset = Vector2(0, -32)
 texture = ExtResource("38_luggage_1")
 
 [node name="TravelPackSoutheast" type="Sprite2D" parent="EnvironmentalProps/Props/Travel"]
-position = Vector2(704, 560)
+position = Vector2(704, 528)
 offset = Vector2(0, -32)
 texture = ExtResource("39_travel_pack")
 
@@ -683,6 +901,21 @@ texture = ExtResource("32_fence_end")
 position = Vector2(896, 672)
 offset = Vector2(0, -32)
 texture = ExtResource("32_fence_end")
+
+[node name="FenceNortheastApproachEnd" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(576, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_end")
+
+[node name="FenceNortheastApproachStraight" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(608, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("30_fence_straight")
+
+[node name="FenceNortheastApproachCorner" type="Sprite2D" parent="FestivalAndEdenite/PerimeterFencing/PlainFences"]
+position = Vector2(640, 32)
+offset = Vector2(0, -32)
+texture = ExtResource("31_fence_corner")
 
 [node name="FestivalFabric" type="Node2D" parent="FestivalAndEdenite"]
 
@@ -755,9 +988,20 @@ position = Vector2(792, 112)
 offset = Vector2(0, -32)
 texture = ExtResource("51_closure_timbers")
 
+[node name="ClosureEnd" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
+position = Vector2(864, 112)
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_end")
+
+[node name="ClosureHedge" type="Sprite2D" parent="FestivalAndEdenite/TerrebonneClosure"]
+position = Vector2(912, 112)
+offset = Vector2(0, -16)
+texture = ExtResource("19_bush_m3")
+
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="NPCs" type="Node2D" parent="Actors"]
+y_sort_enabled = true
 
 [node name="SquareLocal" parent="Actors/NPCs" instance=ExtResource("3_npc")]
 z_index = 10
@@ -769,10 +1013,40 @@ character_visual_enabled = true
 facing_direction = Vector2(1, 0)
 
 [node name="PassingVisitor" parent="Actors/NPCs" instance=ExtResource("3_npc")]
-position = Vector2(672, 256)
+z_index = 10
+position = Vector2(352, 448)
 conversation = ExtResource("5_visitor")
 placeholder_color = Color(0.42, 0.68, 0.84, 1)
+character_sprite_frames = ExtResource("54_visitor_frames")
+character_visual_enabled = true
 facing_direction = Vector2(-1, 0)
+
+[node name="NorthPlazaWalker" parent="Actors/NPCs" instance=ExtResource("53_patrol_npc")]
+z_index = 10
+position = Vector2(160, 272)
+character_sprite_frames = ExtResource("55_north_walker_frames")
+patrol_distance = 64.0
+move_speed = 20.0
+pause_duration = 1.2
+
+[node name="WestPlazaWalker" parent="Actors/NPCs" instance=ExtResource("53_patrol_npc")]
+z_index = 10
+position = Vector2(752, 352)
+character_sprite_frames = ExtResource("56_west_walker_frames")
+patrol_axis = 1
+patrol_distance = 96.0
+move_speed = 22.0
+pause_duration = 1.4
+start_toward_positive = false
+
+[node name="SouthPlazaWalker" parent="Actors/NPCs" instance=ExtResource("53_patrol_npc")]
+z_index = 10
+position = Vector2(656, 496)
+character_sprite_frames = ExtResource("57_south_walker_frames")
+patrol_distance = 64.0
+move_speed = 24.0
+pause_duration = 1.0
+start_toward_positive = false
 
 [node name="ForegroundOverlays" type="Node2D" parent="."]
 
@@ -855,6 +1129,7 @@ destination_entry = &"from_town_square"
 shape = SubResource("Shape_exit_vertical")
 
 [node name="DevelopmentLabels" type="Node2D" parent="."]
+visible = false
 
 [node name="ZoneLabel" type="Label" parent="DevelopmentLabels"]
 offset_left = 32.0
