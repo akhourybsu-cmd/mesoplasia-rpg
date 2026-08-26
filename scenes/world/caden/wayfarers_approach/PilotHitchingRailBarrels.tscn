@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/depth_sorted_static_prop.gd" id="1_depth"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/props/pilot_v1/hitching_rail_barrels_pilot_v1.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="Shape_barrels"]
+size = Vector2(42, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_hitching_rail"]
+size = Vector2(70, 10)
+
+[node name="PilotHitchingRailBarrels" type="StaticBody2D"]
+script = ExtResource("1_depth")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-57, -55)
+texture = ExtResource("2_texture")
+centered = false
+
+[node name="BarrelsCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-29, -7)
+shape = SubResource("Shape_barrels")
+
+[node name="HitchingRailCollision" type="CollisionShape2D" parent="."]
+position = Vector2(13, -5)
+shape = SubResource("Shape_hitching_rail")

@@ -140,12 +140,27 @@ Every source crop, destination, output size, family scale, visible bounds, ancho
 - The three existing travelers now use distinct shared Caden character variants. Their positions, dialogue resources, and behavior are unchanged.
 - The resource builder and runtime test cover the generated ground layer so this refinement remains reproducible.
 
+## Limited transparent-source pilot v1
+
+The Caden Mega Asset Library v1.1 supplied lossless transparent candidates after the original runtime was completed. Visual approval authorized a two-asset Wayfarer pilot only:
+
+- `sp_way_05_bench_luggage_lantern` at `(860, 556)` in the open right-side rest lawn;
+- `sp_way_07_hitching_rail_barrels` at `(680, 500)` beside the traveler yard and below the preserved east-west road corridor.
+
+Both source PNGs are retained under `assets/source_art/caden/environment/wayfarers_approach/pilot_v1/`. `prepare_caden_wayfarer_pilot_runtime_v1.py` verifies their approved source hashes, crops the catalog alpha bounds, normalizes offline at `0.1875` with nearest-neighbor sampling, performs explicit halo/shadow/fragment cleanup, and adds two pixels of transparent safety padding. Godot imports the 112 x 70 and 115 x 63 runtime PNGs at scale `1.0`.
+
+The pilot manifest records source and runtime hashes, dimensions, structural pivots, cleanup counts, import scale, and collision definitions. Bottom-center pivots use the bench, luggage, barrels, and rail ground contacts rather than flowers, stones, or shadow pixels.
+
+`PilotBenchLuggageLantern.tscn` uses separate collision shapes for the lantern post, bench, and luggage. `PilotHitchingRailBarrels.tscn` uses separate barrel and rail shapes. Neither blocks the full image rectangle. `DepthSortedStaticProp` moves each pilot prop between z-index 9 and 11 as the Player crosses its ground-contact Y coordinate; the existing Player remains at z-index 10.
+
+No existing inn, vehicle, fence, road, exit, camera, NPC, or route geometry changed. Assets `06` and `08` remain scale-approved alternates but are not selected. Assets `11` through `15` remain deferred, and all seven buildings plus set pieces `01` through `04`, `09`, `10`, and `16` remain rejected as supplied.
+
 ## Validation
 
 Commands are run with Godot 4.7.2 Compatibility rendering.
 
 - `--script res://tests/caden_wayfarers_approach_runtime_test.gd`
-  - PASS: 75 manifest entries, TileSet population, unchanged zone contracts, active solid collisions, import settings, blocked map bounds, and clear 24 x 24 footprint sweeps on the main east-west road, north road, and lower-right lawn.
+  - PASS: 75 baseline manifest entries, exactly two pilot entries, source/runtime hashes, 0.1875 normalization, scale-1.0 placement, object-specific collision, front/behind depth sorting, unchanged zone contracts, blocked map bounds, and clear 24 x 24 footprint sweeps on preserved routes.
 - `--script res://tests/caden_zone_transition_test.gd`
   - PASS: every Caden connection, persistent Player, entry placement, and camera limit.
 - `--script res://tools/art/render_caden_wayfarers_approach_preview.gd` with the Compatibility renderer
@@ -159,7 +174,16 @@ Commands are run with Godot 4.7.2 Compatibility rendering.
 - `docs/art/previews/wayfarers_approach/caden_wayfarers_approach_runtime_v1_full_zone.png`
 - `docs/art/previews/wayfarers_approach/caden_wayfarers_approach_runtime_v1_gameplay_640x360.png`
 - `docs/art/previews/wayfarers_approach/caden_wayfarers_approach_runtime_v1_display_1280x720.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/grass_before_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/grass_after_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/road_before_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/road_after_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/bench_player_behind_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/bench_player_front_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/rail_player_behind_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/rail_player_front_640x360.png`
+- `docs/art/previews/wayfarers_approach/pilot_v1/wayfarer_pilot_comparison_board_v1.png`
 
 ## Remaining approval item
 
-Provide the original transparent PNG sheets or the named ZIP if lossless source fidelity is required. The deterministic crop manifest and tools can then regenerate the same library without changing scene layout, collisions, or gameplay contracts.
+The two-asset in-engine comparison is the active gate. No additional Caden Mega Asset Library item may be normalized or integrated until the pilot placement, cleanup, overlap, and depth-sorting captures receive visual approval.

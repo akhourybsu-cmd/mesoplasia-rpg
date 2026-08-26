@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "generator": "tools/art/prepare_caden_wayfarer_pilot_runtime_v1.py",
+  "generator_sha256": "256ecdb09db8bc49873d375c9f65d0342df84a0a9a91972abfd8f9568aeb35d6",
+  "source_package": "Caden Mega Asset Library v1.1",
+  "source_package_sha256": "7859e29f917e1a3bca18334d831bac361d543a9be40f8b8e8cc03649ee3a98a1",
+  "scope": "Limited two-asset Wayfarer pilot; no additional library assets authorized.",
+  "assets": {
+    "sp_way_05_bench_luggage_lantern": {
+      "selection_status": "pilot_selected",
+      "source_path": "assets/source_art/caden/environment/wayfarers_approach/pilot_v1/caden_sp_way_05_bench_luggage_lantern_source_v1.png",
+      "source_sha256": "da43948a523945de20f696a862f2db62bd66c5f219d785a468d241d122197894",
+      "source_dimensions": [
+        640,
+        416
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        608,
+        384
+      ],
+      "scale": 0.1875,
+      "resampling": "nearest-neighbor",
+      "manual_cleanup": {
+        "bright_halo_pixels_recolored_or_removed": 41,
+        "baked_shadow_pixels_removed": 76,
+        "detached_fragments_removed": 3,
+        "detached_fragment_pixels_removed": 3,
+        "transparent_rgb_pixels_zeroed": 0,
+        "remaining_edge_pixels": 0
+      },
+      "runtime_path": "assets/environments/caden/wayfarers_approach/props/pilot_v1/bench_luggage_lantern_pilot_v1.png",
+      "runtime_dimensions": [
+        112,
+        70
+      ],
+      "pivot_xy": [
+        56,
+        63
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes flowers, stones, and shadow pixels",
+      "import_scale": 1.0,
+      "collision_shapes": [
+        {
+          "name": "lantern_post",
+          "shape": "rectangle",
+          "offset": [
+            -33,
+            -8
+          ],
+          "size": [
+            10,
+            10
+          ]
+        },
+        {
+          "name": "bench",
+          "shape": "rectangle",
+          "offset": [
+            -7,
+            -6
+          ],
+          "size": [
+            48,
+            10
+          ]
+        },
+        {
+          "name": "luggage",
+          "shape": "rectangle",
+          "offset": [
+            31,
+            -6
+          ],
+          "size": [
+            38,
+            14
+          ]
+        }
+      ],
+      "runtime_sha256": "38d5fd03fe0f4affd92c00b81766c8326b90edece2bebadbc833cb023a7fe55c"
+    },
+    "sp_way_07_hitching_rail_barrels": {
+      "selection_status": "pilot_selected",
+      "source_path": "assets/source_art/caden/environment/wayfarers_approach/pilot_v1/caden_sp_way_07_hitching_rail_barrels_source_v1.png",
+      "source_sha256": "9e2a243a381c735c730af3a899d9d82b503f94b0340478b530357d7734804d87",
+      "source_dimensions": [
+        656,
+        378
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        624,
+        346
+      ],
+      "scale": 0.1875,
+      "resampling": "nearest-neighbor",
+      "manual_cleanup": {
+        "bright_halo_pixels_recolored_or_removed": 48,
+        "baked_shadow_pixels_removed": 55,
+        "detached_fragments_removed": 1,
+        "detached_fragment_pixels_removed": 1,
+        "transparent_rgb_pixels_zeroed": 0,
+        "remaining_edge_pixels": 0
+      },
+      "runtime_path": "assets/environments/caden/wayfarers_approach/props/pilot_v1/hitching_rail_barrels_pilot_v1.png",
+      "runtime_dimensions": [
+        115,
+        63
+      ],
+      "pivot_xy": [
+        57,
+        55
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes flowers, stones, and shadow pixels",
+      "import_scale": 1.0,
+      "collision_shapes": [
+        {
+          "name": "barrels",
+          "shape": "rectangle",
+          "offset": [
+            -29,
+            -7
+          ],
+          "size": [
+            42,
+            16
+          ]
+        },
+        {
+          "name": "hitching_rail",
+          "shape": "rectangle",
+          "offset": [
+            13,
+            -5
+          ],
+          "size": [
+            70,
+            10
+          ]
+        }
+      ],
+      "runtime_sha256": "60734babb1bee7934f0043001832fc3bee268cc18a5f83da9f96991b11a7e782"
+    }
+  }
+}

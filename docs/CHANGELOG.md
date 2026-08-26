@@ -57,3 +57,35 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 ### Remaining limitation
 
 - The originally requested transparent PNG masters and ZIP remain unavailable. The supplied JPEG-derived runtime library is unchanged; replacing it with the lossless masters remains the only known source-art fidelity gap.
+
+## 2026-08-26 - Wayfarer limited transparent-source pilot v1
+
+### Scope
+
+- Imported only the approved `sp_way_05_bench_luggage_lantern` and `sp_way_07_hitching_rail_barrels` transparent sources from Caden Mega Asset Library v1.1.
+- Normalized both offline at `0.1875` with nearest-neighbor sampling, applied manual halo/shadow/fringe/fragment cleanup, and retained two pixels of transparent safety padding.
+- Added the cleaned runtime PNGs at Godot scale `1.0`, structural bottom-center pivots, object-specific collision shapes, and player-relative ground-contact depth sorting.
+- Placed `05` in the open right-side rest lawn and `07` beside the traveler yard without altering the inn, roads, exits, collision corridors, NPCs, or camera bounds.
+- Kept `06` and `08` unselected, `11` through `15` deferred, and all user-rejected buildings/set pieces out of the runtime pilot.
+
+### Files and systems changed
+
+- Added two selected source PNGs under `assets/source_art/caden/environment/wayfarers_approach/pilot_v1/`.
+- Added two cleaned runtime PNGs under `assets/environments/caden/wayfarers_approach/props/pilot_v1/`.
+- Added `wayfarers_approach_pilot_runtime_v1.json` with source/runtime hashes, cleanup counts, pivots, scale, and collision metadata.
+- Added two reusable pilot prop scenes and `scripts/world/depth_sorted_static_prop.gd`.
+- Updated `scenes/world/caden/WayfarersApproach.tscn` and its runtime contract test.
+- Added reproducible normalization, render, and comparison-board tools plus eight 640 x 360 review captures and one comparison board.
+- Updated `docs/art/CADEN_WAYFARERS_APPROACH_RUNTIME_V1.md`.
+
+### Validation
+
+- Pilot normalization tool: PASS; exactly two outputs, approved source hashes, 0.1875 nearest-neighbor scaling, runtime scale 1.0 metadata, zero edge-touching pixels, and recorded cleanup counts.
+- Godot 4.7.2 headless import: PASS; lossless, non-mipmapped runtime imports generated with no missing-resource or scene parser errors.
+- `res://tests/caden_wayfarers_approach_runtime_test.gd`: PASS; preserved routes and contracts, exact pilot count, hashes, pivots, object collisions, and both depth-sort states.
+- Compatibility renderer: PASS; grass and road-adjacent before/after images plus player-behind/player-in-front captures generated at 640 x 360.
+- Visual review: PASS for technical presentation; both pilot assets remain pending the user's two-asset in-engine approval gate.
+
+### Remaining approval item
+
+- Approve, revise, or reject the two pilot placements and their cleanup/depth-sorting results before any additional library asset is integrated.

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/depth_sorted_static_prop.gd" id="1_depth"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/props/pilot_v1/bench_luggage_lantern_pilot_v1.png" id="2_texture"]
+
+[sub_resource type="RectangleShape2D" id="Shape_lantern_post"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_bench"]
+size = Vector2(48, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_luggage"]
+size = Vector2(38, 14)
+
+[node name="PilotBenchLuggageLantern" type="StaticBody2D"]
+script = ExtResource("1_depth")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-56, -63)
+texture = ExtResource("2_texture")
+centered = false
+
+[node name="LanternPostCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-33, -8)
+shape = SubResource("Shape_lantern_post")
+
+[node name="BenchCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-7, -6)
+shape = SubResource("Shape_bench")
+
+[node name="LuggageCollision" type="CollisionShape2D" parent="."]
+position = Vector2(31, -6)
+shape = SubResource("Shape_luggage")

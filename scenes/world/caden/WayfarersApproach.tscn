@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3]
+[gd_scene load_steps=58 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -43,6 +43,8 @@
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_sprite_frames_v1.tres" id="42_resting_frames"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_sprite_frames_v1.tres" id="43_continuing_frames"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_middle_man_01/caden_npc_human_middle_man_01_sprite_frames_v1.tres" id="44_local_frames"]
+[ext_resource type="PackedScene" path="res://scenes/world/caden/wayfarers_approach/PilotBenchLuggageLantern.tscn" id="45_pilot_bench"]
+[ext_resource type="PackedScene" path="res://scenes/world/caden/wayfarers_approach/PilotHitchingRailBarrels.tscn" id="46_pilot_hitch"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(1024, 32)
@@ -296,6 +298,14 @@ texture = ExtResource("26_water")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/TravelerRestArea/WaterStation"]
 position = Vector2(0, -7)
 shape = SubResource("Shape_water")
+
+[node name="PilotProps" type="Node2D" parent="SolidScenery"]
+
+[node name="HitchingRailBarrels" parent="SolidScenery/PilotProps" instance=ExtResource("46_pilot_hitch")]
+position = Vector2(680, 500)
+
+[node name="BenchLuggageLantern" parent="SolidScenery/PilotProps" instance=ExtResource("45_pilot_bench")]
+position = Vector2(860, 556)
 
 [node name="YardFences" type="Node2D" parent="SolidScenery/TravelerRestArea"]
 z_index = 5
