@@ -1,13 +1,75 @@
 {
-  "version": 1,
+  "version": 2,
   "generator": "tools/art/prepare_caden_wayfarer_pilot_runtime_v1.py",
-  "generator_sha256": "256ecdb09db8bc49873d375c9f65d0342df84a0a9a91972abfd8f9568aeb35d6",
+  "generator_sha256": "221d3a06b80df61ec33742e68d18afc3831c1a5486cb6e0b13975cd152e78330",
   "source_package": "Caden Mega Asset Library v1.1",
   "source_package_sha256": "7859e29f917e1a3bca18334d831bac361d543a9be40f8b8e8cc03649ee3a98a1",
   "scope": "Limited two-asset Wayfarer pilot; no additional library assets authorized.",
+  "provenance_and_licensing": {
+    "source": "Caden Mega Asset Library v1.1",
+    "notes": "See docs/PROVENANCE_AND_LICENSE.md in the verified source package.",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_until_rights_are_verified"
+  },
+  "concept_authority": {
+    "allowed": [
+      "palette",
+      "materials",
+      "lighting",
+      "architectural language",
+      "greenery",
+      "relative density"
+    ],
+    "excluded": [
+      "signs",
+      "emblems",
+      "central monument",
+      "exact geometry",
+      "lore-bearing details"
+    ]
+  },
+  "approval_decisions": {
+    "pilot_selected": [
+      "sp_way_05_bench_luggage_lantern",
+      "sp_way_07_hitching_rail_barrels"
+    ],
+    "scale_approved_alternates_not_selected": [
+      "sp_way_06_bench_packs_planter",
+      "sp_way_08_hitching_posts_supplies"
+    ],
+    "deferred": {
+      "sp_way_11": "corrected but absent from the approved scale-calibration board",
+      "sp_way_12": "corrected but absent from the approved scale-calibration board; may read as a Marketplace stall",
+      "sp_way_13": "corrected but absent from the approved scale-calibration board",
+      "sp_way_14": "reserved for an optional Festival-state pass",
+      "sp_way_15": "tree reads as a sapling; combined sprite creates collision and depth-sorting problems"
+    },
+    "rejected_as_is": [
+      "all seven Wayfarer buildings",
+      "sp_way_01-04",
+      "sp_way_09-10",
+      "sp_way_16"
+    ]
+  },
+  "gate": "Wayfarer's Approach structural recomposition v5 visually approved; Marketplace composition and candidate shortlist review is the next gate.",
   "assets": {
     "sp_way_05_bench_luggage_lantern": {
+      "catalog_asset_id": "caden_sp_way_05_bench_luggage_lantern_master_v1",
+      "catalog_source": "metadata/ASSET_CATALOG.json in Caden Mega Asset Library v1.1",
+      "catalog_status": "candidate",
+      "catalog_metadata_status": "proposed_pending_visual_approval",
       "selection_status": "pilot_selected",
+      "approval_state": "pilot_selected_wayfarer_structural_recomposition_v5_approved",
+      "rights_status": "project_internal_rights_unverified",
+      "zone": "wayfarers_approach",
+      "intended_placement": "open right-side rest lawn, clear of the road and eastern transition corridor",
+      "scene_path": "scenes/world/caden/WayfarersApproach.tscn",
+      "scene_node_path": "SolidScenery/PilotProps/BenchLuggageLantern",
+      "world_position_xy": [
+        860,
+        556
+      ],
+      "scale_family": "medium_setpiece",
       "source_path": "assets/source_art/caden/environment/wayfarers_approach/pilot_v1/caden_sp_way_05_bench_luggage_lantern_source_v1.png",
       "source_sha256": "da43948a523945de20f696a862f2db62bd66c5f219d785a468d241d122197894",
       "source_dimensions": [
@@ -22,6 +84,10 @@
       ],
       "scale": 0.1875,
       "resampling": "nearest-neighbor",
+      "target_runtime_dimensions": [
+        112,
+        70
+      ],
       "manual_cleanup": {
         "bright_halo_pixels_recolored_or_removed": 41,
         "baked_shadow_pixels_removed": 76,
@@ -41,6 +107,24 @@
       ],
       "pivot_basis": "bottom-center structural ground contact; excludes flowers, stones, and shadow pixels",
       "import_scale": 1.0,
+      "intended_footprint": {
+        "solid_bounds_relative_to_pivot_xyxy": [
+          -38,
+          -13,
+          50,
+          1
+        ],
+        "solid_bounds_size": [
+          88,
+          14
+        ],
+        "passable_details": [
+          "flowers",
+          "stones",
+          "ground decoration",
+          "removed shadow pixels"
+        ]
+      },
       "collision_shapes": [
         {
           "name": "lantern_post",
@@ -79,10 +163,43 @@
           ]
         }
       ],
+      "sorting_strategy": "player-relative z-index from structural ground-contact Y; behind=9, neutral=10, front=11",
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          106,
+          68
+        ],
+        "visible_pixels": 3931,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 2,
+        "detached_components_at_or_below_2_pixels": 0,
+        "smallest_component_pixels": 4,
+        "largest_component_pixels": 3927
+      },
       "runtime_sha256": "38d5fd03fe0f4affd92c00b81766c8326b90edece2bebadbc833cb023a7fe55c"
     },
     "sp_way_07_hitching_rail_barrels": {
+      "catalog_asset_id": "caden_sp_way_07_hitching_rail_barrels_master_v1",
+      "catalog_source": "metadata/ASSET_CATALOG.json in Caden Mega Asset Library v1.1",
+      "catalog_status": "candidate",
+      "catalog_metadata_status": "proposed_pending_visual_approval",
       "selection_status": "pilot_selected",
+      "approval_state": "pilot_selected_wayfarer_structural_recomposition_v5_approved",
+      "rights_status": "project_internal_rights_unverified",
+      "zone": "wayfarers_approach",
+      "intended_placement": "traveler wagon and hitching area, south of the preserved east-west road corridor",
+      "scene_path": "scenes/world/caden/WayfarersApproach.tscn",
+      "scene_node_path": "SolidScenery/PilotProps/HitchingRailBarrels",
+      "world_position_xy": [
+        650,
+        500
+      ],
+      "scale_family": "medium_setpiece",
       "source_path": "assets/source_art/caden/environment/wayfarers_approach/pilot_v1/caden_sp_way_07_hitching_rail_barrels_source_v1.png",
       "source_sha256": "9e2a243a381c735c730af3a899d9d82b503f94b0340478b530357d7734804d87",
       "source_dimensions": [
@@ -97,6 +214,10 @@
       ],
       "scale": 0.1875,
       "resampling": "nearest-neighbor",
+      "target_runtime_dimensions": [
+        115,
+        63
+      ],
       "manual_cleanup": {
         "bright_halo_pixels_recolored_or_removed": 48,
         "baked_shadow_pixels_removed": 55,
@@ -116,6 +237,24 @@
       ],
       "pivot_basis": "bottom-center structural ground contact; excludes flowers, stones, and shadow pixels",
       "import_scale": 1.0,
+      "intended_footprint": {
+        "solid_bounds_relative_to_pivot_xyxy": [
+          -50,
+          -15,
+          48,
+          1
+        ],
+        "solid_bounds_size": [
+          98,
+          16
+        ],
+        "passable_details": [
+          "flowers",
+          "rope gaps",
+          "ground decoration",
+          "removed shadow pixels"
+        ]
+      },
       "collision_shapes": [
         {
           "name": "barrels",
@@ -142,6 +281,24 @@
           ]
         }
       ],
+      "sorting_strategy": "player-relative z-index from structural ground-contact Y; behind=9, neutral=10, front=11",
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          113,
+          61
+        ],
+        "visible_pixels": 3073,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 3,
+        "detached_components_at_or_below_2_pixels": 0,
+        "smallest_component_pixels": 3,
+        "largest_component_pixels": 3066
+      },
       "runtime_sha256": "60734babb1bee7934f0043001832fc3bee268cc18a5f83da9f96991b11a7e782"
     }
   }

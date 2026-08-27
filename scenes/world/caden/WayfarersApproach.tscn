@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3]
+[gd_scene load_steps=71 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -45,6 +45,19 @@
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_middle_man_01/caden_npc_human_middle_man_01_sprite_frames_v1.tres" id="44_local_frames"]
 [ext_resource type="PackedScene" path="res://scenes/world/caden/wayfarers_approach/PilotBenchLuggageLantern.tscn" id="45_pilot_bench"]
 [ext_resource type="PackedScene" path="res://scenes/world/caden/wayfarers_approach/PilotHitchingRailBarrels.tscn" id="46_pilot_hitch"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/inn_forecourt_surface_v1.png" id="47_forecourt"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/traveler_yard_surface_v1.png" id="48_yard_surface"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/rest_grove_surface_v1.png" id="49_grove_surface"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_northwest_shoulder_surface_v1.png" id="50_road_nw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_northeast_shoulder_surface_v1.png" id="51_road_ne"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_southwest_shoulder_surface_v1.png" id="52_road_sw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_southeast_shoulder_surface_v1.png" id="53_road_se"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_vertical_west_shoulder_surface_v1.png" id="54_road_vw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_vertical_east_shoulder_surface_v1.png" id="55_road_ve"]
+[ext_resource type="Script" path="res://scripts/world/depth_sorted_static_prop.gd" id="56_depth"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/storage/caden_storage_cluster_01_v1.png" id="57_storage"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/travel/caden_luggage_bundle_01_v1.png" id="58_luggage"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/lighting/caden_ground_lantern_01_v1.png" id="59_ground_lantern"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(1024, 32)
@@ -131,39 +144,11 @@ position = Vector2(242, 328)
 modulate = Color(0.8, 0.72, 0.56, 0.3)
 texture = ExtResource("20_wear")
 
-[node name="RestField" type="Node2D" parent="TerrainLayers"]
-z_index = 2
-
-[node name="TrampledWest" type="Sprite2D" parent="TerrainLayers/RestField"]
-position = Vector2(200, 466)
-modulate = Color(0.96, 0.98, 0.92, 0.5)
-texture = ExtResource("21_rest_a")
-
-[node name="DirtCenter" type="Sprite2D" parent="TerrainLayers/RestField"]
-position = Vector2(354, 478)
-modulate = Color(0.96, 0.98, 0.92, 0.48)
-texture = ExtResource("22_rest_dirt")
-
-[node name="TrampledEast" type="Sprite2D" parent="TerrainLayers/RestField"]
-position = Vector2(512, 466)
-modulate = Color(0.96, 0.98, 0.92, 0.46)
-texture = ExtResource("23_rest_b")
-
-[node name="SouthwestWear" type="Sprite2D" parent="TerrainLayers/RestField"]
-position = Vector2(250, 550)
-modulate = Color(0.96, 0.98, 0.92, 0.38)
-texture = ExtResource("24_rest_c")
-
-[node name="LowerRightWornPath" type="Sprite2D" parent="TerrainLayers/RestField"]
-position = Vector2(804, 570)
-modulate = Color(0.96, 0.98, 0.92, 0.34)
-texture = ExtResource("22_rest_dirt")
-
 [node name="GroundDetails" type="Node2D" parent="TerrainLayers"]
 z_index = 3
 
 [node name="FlowerNorthwest" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(92, 210)
+position = Vector2(164, 230)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
@@ -176,46 +161,45 @@ vframes = 3
 frame = 1
 
 [node name="FlowersNorthLawnA" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(664, 170)
+position = Vector2(748, 216)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 2
 
 [node name="FlowersNorthLawnB" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(870, 210)
+position = Vector2(838, 214)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 3
 
 [node name="TuftNorthLawn" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(760, 120)
+position = Vector2(810, 236)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 5
 
 [node name="FlowersSouthLawnA" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(700, 470)
+position = Vector2(924, 584)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 1
 
 [node name="TuftSouthLawn" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(910, 520)
+position = Vector2(938, 580)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 5
 
 [node name="FlowersSouthBoundary" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(680, 590)
+position = Vector2(802, 596)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
-frame = 2
 
 [node name="YardEdgeTuftWest" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
 position = Vector2(168, 532)
@@ -225,24 +209,118 @@ vframes = 3
 frame = 5
 
 [node name="YardEdgeFlowers" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(540, 438)
+position = Vector2(440, 228)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 1
 
 [node name="SouthLawnTuft" type="Sprite2D" parent="TerrainLayers/GroundDetails"]
-position = Vector2(780, 548)
+position = Vector2(812, 592)
 texture = ExtResource("31_ground_detail")
 hframes = 3
 vframes = 3
 frame = 5
+
+[node name="LandscapeEnhancement" type="Node2D" parent="TerrainLayers"]
+
+[node name="AuthoredSurfaces" type="Node2D" parent="TerrainLayers/LandscapeEnhancement"]
+z_index = 2
+
+[node name="InnForecourt" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(112, 188)
+texture = ExtResource("47_forecourt")
+centered = false
+
+[node name="TravelerWorkingYard" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(124, 376)
+texture = ExtResource("48_yard_surface")
+centered = false
+
+[node name="RestGrove" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(774, 380)
+texture = ExtResource("49_grove_surface")
+centered = false
+
+[node name="RoadNorthwestShoulder" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(-2, 242)
+texture = ExtResource("50_road_nw")
+centered = false
+
+[node name="RoadNortheastShoulder" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(574, 242)
+texture = ExtResource("51_road_ne")
+centered = false
+
+[node name="RoadSouthwestShoulder" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(-2, 358)
+texture = ExtResource("52_road_sw")
+centered = false
+
+[node name="RoadSoutheastShoulder" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(574, 358)
+texture = ExtResource("53_road_se")
+centered = false
+
+[node name="RoadVerticalWestShoulder" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(438, -2)
+texture = ExtResource("54_road_vw")
+centered = false
+
+[node name="RoadVerticalEastShoulder" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/AuthoredSurfaces"]
+position = Vector2(554, -2)
+texture = ExtResource("55_road_ve")
+centered = false
+
+[node name="Planting" type="Node2D" parent="TerrainLayers/LandscapeEnhancement"]
+z_index = 3
+
+[node name="NorthTreeWhiteFlowers" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/Planting"]
+position = Vector2(764, 224)
+texture = ExtResource("31_ground_detail")
+hframes = 3
+vframes = 3
+
+[node name="NorthTreeYellowFlowers" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/Planting"]
+position = Vector2(822, 226)
+texture = ExtResource("31_ground_detail")
+hframes = 3
+vframes = 3
+frame = 4
+
+[node name="RestGroveWhiteFlowers" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/Planting"]
+position = Vector2(820, 596)
+texture = ExtResource("31_ground_detail")
+hframes = 3
+vframes = 3
+
+[node name="RestGroveYellowFlowers" type="Sprite2D" parent="TerrainLayers/LandscapeEnhancement/Planting"]
+position = Vector2(930, 592)
+texture = ExtResource("31_ground_detail")
+hframes = 3
+vframes = 3
+frame = 4
 
 [node name="SolidScenery" type="Node2D" parent="."]
 
 [node name="InnExterior" parent="SolidScenery" instance=ExtResource("9_inn")]
 position = Vector2(304, 240)
 z_index = 5
+
+[node name="InnServiceComposition" type="Node2D" parent="SolidScenery"]
+z_index = 6
+
+[node name="Luggage" type="Sprite2D" parent="SolidScenery/InnServiceComposition"]
+position = Vector2(174, 234)
+texture = ExtResource("58_luggage")
+
+[node name="Storage" type="Sprite2D" parent="SolidScenery/InnServiceComposition"]
+position = Vector2(422, 232)
+texture = ExtResource("57_storage")
+
+[node name="GroundLantern" type="Sprite2D" parent="SolidScenery/InnServiceComposition"]
+position = Vector2(396, 234)
+texture = ExtResource("59_ground_lantern")
 
 [node name="TravelerRestArea" type="Node2D" parent="SolidScenery"]
 
@@ -302,7 +380,7 @@ shape = SubResource("Shape_water")
 [node name="PilotProps" type="Node2D" parent="SolidScenery"]
 
 [node name="HitchingRailBarrels" parent="SolidScenery/PilotProps" instance=ExtResource("46_pilot_hitch")]
-position = Vector2(680, 500)
+position = Vector2(650, 500)
 
 [node name="BenchLuggageLantern" parent="SolidScenery/PilotProps" instance=ExtResource("45_pilot_bench")]
 position = Vector2(860, 556)
@@ -407,8 +485,8 @@ position = Vector2(792, 208)
 z_index = 5
 
 [node name="Sprite" type="Sprite2D" parent="SolidScenery/InteriorTrees/NorthLawnTree"]
-position = Vector2(0, -30)
-texture = ExtResource("34_tree_s1")
+position = Vector2(0, -46)
+texture = ExtResource("33_tree_m2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/InteriorTrees/NorthLawnTree"]
 position = Vector2(0, -9)
@@ -419,12 +497,53 @@ position = Vector2(842, 508)
 z_index = 5
 
 [node name="Sprite" type="Sprite2D" parent="SolidScenery/InteriorTrees/SouthLawnTree"]
-position = Vector2(0, -32)
-texture = ExtResource("35_tree_s2")
+position = Vector2(0, -46)
+texture = ExtResource("32_tree_m1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/InteriorTrees/SouthLawnTree"]
 position = Vector2(0, -9)
 shape = SubResource("Shape_tree")
+
+[node name="RestGroveTreeWest" type="StaticBody2D" parent="SolidScenery/InteriorTrees"]
+position = Vector2(790, 580)
+script = ExtResource("56_depth")
+neutral_z_index = 6
+
+[node name="Sprite" type="Sprite2D" parent="SolidScenery/InteriorTrees/RestGroveTreeWest"]
+position = Vector2(0, -46)
+texture = ExtResource("33_tree_m2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/InteriorTrees/RestGroveTreeWest"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="RestGroveTreeEast" type="StaticBody2D" parent="SolidScenery/InteriorTrees"]
+position = Vector2(948, 558)
+script = ExtResource("56_depth")
+neutral_z_index = 6
+
+[node name="Sprite" type="Sprite2D" parent="SolidScenery/InteriorTrees/RestGroveTreeEast"]
+position = Vector2(0, -46)
+texture = ExtResource("32_tree_m1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/InteriorTrees/RestGroveTreeEast"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="RestGrovePlantingMasses" type="Node2D" parent="SolidScenery"]
+z_index = 6
+
+[node name="WestShrub" type="Sprite2D" parent="SolidScenery/RestGrovePlantingMasses"]
+position = Vector2(800, 588)
+texture = ExtResource("36_bush_m1")
+
+[node name="EastShrub" type="Sprite2D" parent="SolidScenery/RestGrovePlantingMasses"]
+position = Vector2(926, 594)
+texture = ExtResource("37_bush_m2")
+
+[node name="OuterShrub" type="Sprite2D" parent="SolidScenery/RestGrovePlantingMasses"]
+position = Vector2(966, 582)
+texture = ExtResource("38_bush_m3")
 
 [node name="BoundaryNature" type="Node2D" parent="."]
 
@@ -471,23 +590,23 @@ position = Vector2(54, 75)
 texture = ExtResource("32_tree_m1")
 
 [node name="TreeNorthwestB" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(112, 52)
+position = Vector2(90, 62)
 texture = ExtResource("33_tree_m2")
 
 [node name="TreeNorthRoadWest" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(410, 44)
+position = Vector2(310, 48)
 texture = ExtResource("34_tree_s1")
 
 [node name="TreeNorthRoadEast" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(614, 50)
+position = Vector2(650, 58)
 texture = ExtResource("35_tree_s2")
 
 [node name="TreeNortheastA" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(724, 58)
+position = Vector2(710, 66)
 texture = ExtResource("32_tree_m1")
 
 [node name="TreeNortheastB" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(856, 54)
+position = Vector2(932, 52)
 texture = ExtResource("33_tree_m2")
 
 [node name="TreeNortheastC" type="Sprite2D" parent="BoundaryNature/Trees"]
@@ -495,35 +614,35 @@ position = Vector2(968, 78)
 texture = ExtResource("32_tree_m1")
 
 [node name="TreeNorthwestC" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(250, 38)
+position = Vector2(126, 78)
 texture = ExtResource("35_tree_s2")
 
 [node name="TreeNortheastD" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(660, 34)
+position = Vector2(680, 38)
 texture = ExtResource("34_tree_s1")
 
 [node name="TreeNorthwestEdge" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(330, 14)
+position = Vector2(280, 28)
 texture = ExtResource("34_tree_s1")
 
 [node name="TreeNortheastEdge" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(786, 16)
+position = Vector2(900, 28)
 texture = ExtResource("35_tree_s2")
 
 [node name="TreeWestUpper" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(38, 188)
+position = Vector2(28, 176)
 texture = ExtResource("34_tree_s1")
 
 [node name="TreeWestLower" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(42, 500)
+position = Vector2(30, 478)
 texture = ExtResource("33_tree_m2")
 
 [node name="TreeEastUpper" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(990, 190)
+position = Vector2(996, 176)
 texture = ExtResource("35_tree_s2")
 
 [node name="TreeEastLower" type="Sprite2D" parent="BoundaryNature/Trees"]
-position = Vector2(990, 494)
+position = Vector2(996, 478)
 texture = ExtResource("32_tree_m1")
 
 [node name="ForegroundSouthwest" type="Sprite2D" parent="BoundaryNature/Trees"]
@@ -550,43 +669,43 @@ texture = ExtResource("34_tree_s1")
 z_index = 6
 
 [node name="BushNorthwest" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(172, 72)
+position = Vector2(142, 78)
 texture = ExtResource("36_bush_m1")
 
 [node name="BushNorthRoadWest" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(380, 34)
+position = Vector2(338, 44)
 texture = ExtResource("37_bush_m2")
 
 [node name="BushNorthRoadEast" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(644, 34)
+position = Vector2(668, 62)
 texture = ExtResource("38_bush_m3")
 
 [node name="BushNortheast" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(918, 52)
+position = Vector2(958, 68)
 texture = ExtResource("36_bush_m1")
 
 [node name="BushNorthwestInner" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(322, 34)
+position = Vector2(270, 54)
 texture = ExtResource("38_bush_m3")
 
 [node name="BushNortheastInner" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(688, 30)
+position = Vector2(704, 82)
 texture = ExtResource("37_bush_m2")
 
 [node name="BushNorthwestEdge" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(146, 16)
+position = Vector2(78, 32)
 texture = ExtResource("37_bush_m2")
 
 [node name="BushNorthwestRoadEdge" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(356, 14)
+position = Vector2(300, 34)
 texture = ExtResource("36_bush_m1")
 
 [node name="BushNortheastRoadEdge" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(680, 14)
+position = Vector2(726, 42)
 texture = ExtResource("38_bush_m3")
 
 [node name="BushNortheastEdge" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(938, 18)
+position = Vector2(918, 34)
 texture = ExtResource("36_bush_m1")
 
 [node name="BushWestRoadNorth" type="Sprite2D" parent="BoundaryNature/Shrubs"]
@@ -622,11 +741,11 @@ position = Vector2(812, 618)
 texture = ExtResource("38_bush_m3")
 
 [node name="ShrubNorthLawn" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(930, 150)
+position = Vector2(826, 186)
 texture = ExtResource("39_shrub")
 
 [node name="RockSouthLawn" type="Sprite2D" parent="BoundaryNature/Shrubs"]
-position = Vector2(744, 554)
+position = Vector2(760, 596)
 texture = ExtResource("40_rocks")
 
 [node name="Actors" type="Node2D" parent="."]

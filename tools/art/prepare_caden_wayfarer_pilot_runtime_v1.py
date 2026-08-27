@@ -22,11 +22,18 @@ PADDING = 2
 @dataclass(frozen=True)
 class PilotSpec:
     key: str
+    catalog_asset_id: str
     source_name: str
     source_sha256: str
     source_bounds: tuple[int, int, int, int]
     runtime_name: str
+    target_dimensions: tuple[int, int]
     pivot: tuple[int, int]
+    intended_placement: str
+    scene_node_path: str
+    world_position: tuple[int, int]
+    solid_bounds: tuple[int, int, int, int]
+    passable_details: tuple[str, ...]
     shadow_regions: tuple[tuple[int, int, int, int], ...]
     collisions: tuple[dict[str, object], ...]
 
@@ -34,11 +41,18 @@ class PilotSpec:
 SPECS = (
     PilotSpec(
         key="sp_way_05_bench_luggage_lantern",
+        catalog_asset_id="caden_sp_way_05_bench_luggage_lantern_master_v1",
         source_name="caden_sp_way_05_bench_luggage_lantern_source_v1.png",
         source_sha256="da43948a523945de20f696a862f2db62bd66c5f219d785a468d241d122197894",
         source_bounds=(32, 32, 608, 384),
         runtime_name="bench_luggage_lantern_pilot_v1.png",
+        target_dimensions=(112, 70),
         pivot=(56, 63),
+        intended_placement="open right-side rest lawn, clear of the road and eastern transition corridor",
+        scene_node_path="SolidScenery/PilotProps/BenchLuggageLantern",
+        world_position=(860, 556),
+        solid_bounds=(-38, -13, 50, 1),
+        passable_details=("flowers", "stones", "ground decoration", "removed shadow pixels"),
         shadow_regions=((96, 48, 112, 64),),
         collisions=(
             {"name": "lantern_post", "shape": "rectangle", "offset": [-33, -8], "size": [10, 10]},
@@ -48,11 +62,18 @@ SPECS = (
     ),
     PilotSpec(
         key="sp_way_07_hitching_rail_barrels",
+        catalog_asset_id="caden_sp_way_07_hitching_rail_barrels_master_v1",
         source_name="caden_sp_way_07_hitching_rail_barrels_source_v1.png",
         source_sha256="9e2a243a381c735c730af3a899d9d82b503f94b0340478b530357d7734804d87",
         source_bounds=(32, 32, 624, 346),
         runtime_name="hitching_rail_barrels_pilot_v1.png",
+        target_dimensions=(115, 63),
         pivot=(57, 55),
+        intended_placement="traveler wagon and hitching area, south of the preserved east-west road corridor",
+        scene_node_path="SolidScenery/PilotProps/HitchingRailBarrels",
+        world_position=(650, 500),
+        solid_bounds=(-50, -15, 48, 1),
+        passable_details=("flowers", "rope gaps", "ground decoration", "removed shadow pixels"),
         shadow_regions=((50, 45, 91, 58),),
         collisions=(
             {"name": "barrels", "shape": "rectangle", "offset": [-29, -7], "size": [42, 16]},
@@ -85,13 +106,21 @@ def _visible_boundary(image: Image.Image) -> set[tuple[int, int]]:
     return boundary
 
 
+def _bright_halo_positions(image: Image.Image) -> set[tuple[int, int]]:
+    rgba = image.load()
+    positions: set[tuple[int, int]] = set()
+    for x, y in _visible_boundary(image):
+        red, green, blue, _alpha = rgba[x, y]
+        if max(red, green, blue) - min(red, green, blue) <= 28 and (red + green + blue) / 3 >= 218:
+            positions.add((x, y))
+    return positions
+
+
 def _clean_bright_halo(image: Image.Image) -> int:
     rgba = image.load()
     replacements: dict[tuple[int, int], tuple[int, int, int, int]] = {}
-    for x, y in _visible_boundary(image):
-        red, green, blue, alpha = rgba[x, y]
-        if max(red, green, blue) - min(red, green, blue) > 28 or (red + green + blue) / 3 < 218:
-            continue
+    for x, y in _bright_halo_positions(image):
+        _red, _green, _blue, alpha = rgba[x, y]
         candidates: list[tuple[int, int, int]] = []
         for ny in range(max(0, y - 2), min(image.height, y + 3)):
             for nx in range(max(0, x - 2), min(image.width, x + 3)):
@@ -180,6 +209,56 @@ def _edge_pixel_count(image: Image.Image) -> int:
     return sum(pixels[position] > 0 for position in positions)
 
 
+def _component_sizes(image: Image.Image) -> list[int]:
+    alpha = image.getchannel("A")
+    pixels = alpha.load()
+    visited: set[tuple[int, int]] = set()
+    sizes: list[int] = []
+    for y in range(image.height):
+        for x in range(image.width):
+            if pixels[x, y] == 0 or (x, y) in visited:
+                continue
+            stack = [(x, y)]
+            visited.add((x, y))
+            size = 0
+            while stack:
+                px, py = stack.pop()
+                size += 1
+                for nx, ny in ((px - 1, py), (px + 1, py), (px, py - 1), (px, py + 1)):
+                    if nx < 0 or ny < 0 or nx >= image.width or ny >= image.height:
+                        continue
+                    if pixels[nx, ny] == 0 or (nx, ny) in visited:
+                        continue
+                    visited.add((nx, ny))
+                    stack.append((nx, ny))
+            sizes.append(size)
+    return sorted(sizes, reverse=True)
+
+
+def _post_cleanup_audit(image: Image.Image) -> dict[str, object]:
+    alpha = image.getchannel("A")
+    alpha_values = list(alpha.get_flattened_data())
+    component_sizes = _component_sizes(image)
+    visible_bounds = alpha.getbbox()
+    transparent_rgb_pixels = sum(
+        1
+        for red, green, blue, value in image.get_flattened_data()
+        if value == 0 and (red != 0 or green != 0 or blue != 0)
+    )
+    return {
+        "visible_bounds_xyxy": list(visible_bounds) if visible_bounds is not None else None,
+        "visible_pixels": sum(value > 0 for value in alpha_values),
+        "partial_alpha_pixels": sum(0 < value < 255 for value in alpha_values),
+        "transparent_rgb_pixels": transparent_rgb_pixels,
+        "canvas_edge_pixels": _edge_pixel_count(image),
+        "bright_boundary_halo_candidates": len(_bright_halo_positions(image)),
+        "connected_components": len(component_sizes),
+        "detached_components_at_or_below_2_pixels": sum(size <= 2 for size in component_sizes),
+        "smallest_component_pixels": component_sizes[-1] if component_sizes else 0,
+        "largest_component_pixels": component_sizes[0] if component_sizes else 0,
+    }
+
+
 def main() -> int:
     RUNTIME_ROOT.mkdir(parents=True, exist_ok=True)
     records: dict[str, object] = {}
@@ -196,6 +275,8 @@ def main() -> int:
         normalized = cropped.resize(normalized_size, Image.Resampling.NEAREST)
         runtime = Image.new("RGBA", (normalized.width + PADDING * 2, normalized.height + PADDING * 2), (0, 0, 0, 0))
         runtime.alpha_composite(normalized, (PADDING, PADDING))
+        if runtime.size != spec.target_dimensions:
+            raise RuntimeError(f"Unexpected target dimensions for {spec.key}: {runtime.size}")
         shadow_pixels = _remove_baked_shadow(runtime, spec.shadow_regions)
         halo_pixels = _clean_bright_halo(runtime)
         fragment_count, fragment_pixels = _remove_tiny_fragments(runtime)
@@ -203,16 +284,39 @@ def main() -> int:
         edge_pixels = _edge_pixel_count(runtime)
         if edge_pixels:
             raise RuntimeError(f"Runtime edge pixels remain for {spec.key}: {edge_pixels}")
+        post_cleanup_audit = _post_cleanup_audit(runtime)
+        for audit_key in (
+            "partial_alpha_pixels",
+            "transparent_rgb_pixels",
+            "canvas_edge_pixels",
+            "bright_boundary_halo_candidates",
+            "detached_components_at_or_below_2_pixels",
+        ):
+            if post_cleanup_audit[audit_key] != 0:
+                raise RuntimeError(f"Post-cleanup audit failed for {spec.key}: {audit_key}")
         output_path = RUNTIME_ROOT / spec.runtime_name
         runtime.save(output_path, format="PNG", compress_level=9)
         records[spec.key] = {
+            "catalog_asset_id": spec.catalog_asset_id,
+            "catalog_source": "metadata/ASSET_CATALOG.json in Caden Mega Asset Library v1.1",
+            "catalog_status": "candidate",
+            "catalog_metadata_status": "proposed_pending_visual_approval",
             "selection_status": "pilot_selected",
+            "approval_state": "pilot_selected_wayfarer_structural_recomposition_v5_approved",
+            "rights_status": "project_internal_rights_unverified",
+            "zone": "wayfarers_approach",
+            "intended_placement": spec.intended_placement,
+            "scene_path": "scenes/world/caden/WayfarersApproach.tscn",
+            "scene_node_path": spec.scene_node_path,
+            "world_position_xy": list(spec.world_position),
+            "scale_family": "medium_setpiece",
             "source_path": source_path.relative_to(ROOT).as_posix(),
             "source_sha256": spec.source_sha256,
             "source_dimensions": list(source.size),
             "source_bounds_xyxy": list(spec.source_bounds),
             "scale": SCALE,
             "resampling": "nearest-neighbor",
+            "target_runtime_dimensions": list(spec.target_dimensions),
             "manual_cleanup": {
                 "bright_halo_pixels_recolored_or_removed": halo_pixels,
                 "baked_shadow_pixels_removed": shadow_pixels,
@@ -226,16 +330,46 @@ def main() -> int:
             "pivot_xy": list(spec.pivot),
             "pivot_basis": "bottom-center structural ground contact; excludes flowers, stones, and shadow pixels",
             "import_scale": 1.0,
+            "intended_footprint": {
+                "solid_bounds_relative_to_pivot_xyxy": list(spec.solid_bounds),
+                "solid_bounds_size": [spec.solid_bounds[2] - spec.solid_bounds[0], spec.solid_bounds[3] - spec.solid_bounds[1]],
+                "passable_details": list(spec.passable_details),
+            },
             "collision_shapes": list(spec.collisions),
+            "sorting_strategy": "player-relative z-index from structural ground-contact Y; behind=9, neutral=10, front=11",
+            "post_cleanup_audit": post_cleanup_audit,
             "runtime_sha256": sha256(output_path),
         }
     manifest = {
-        "version": 1,
+        "version": 2,
         "generator": "tools/art/prepare_caden_wayfarer_pilot_runtime_v1.py",
         "generator_sha256": sha256(Path(__file__)),
         "source_package": "Caden Mega Asset Library v1.1",
         "source_package_sha256": "7859e29f917e1a3bca18334d831bac361d543a9be40f8b8e8cc03649ee3a98a1",
         "scope": "Limited two-asset Wayfarer pilot; no additional library assets authorized.",
+        "provenance_and_licensing": {
+            "source": "Caden Mega Asset Library v1.1",
+            "notes": "See docs/PROVENANCE_AND_LICENSE.md in the verified source package.",
+            "rights_status": "project_internal_rights_unverified",
+            "distribution_status": "do_not_publish_until_rights_are_verified",
+        },
+        "concept_authority": {
+            "allowed": ["palette", "materials", "lighting", "architectural language", "greenery", "relative density"],
+            "excluded": ["signs", "emblems", "central monument", "exact geometry", "lore-bearing details"],
+        },
+        "approval_decisions": {
+            "pilot_selected": ["sp_way_05_bench_luggage_lantern", "sp_way_07_hitching_rail_barrels"],
+            "scale_approved_alternates_not_selected": ["sp_way_06_bench_packs_planter", "sp_way_08_hitching_posts_supplies"],
+            "deferred": {
+                "sp_way_11": "corrected but absent from the approved scale-calibration board",
+                "sp_way_12": "corrected but absent from the approved scale-calibration board; may read as a Marketplace stall",
+                "sp_way_13": "corrected but absent from the approved scale-calibration board",
+                "sp_way_14": "reserved for an optional Festival-state pass",
+                "sp_way_15": "tree reads as a sapling; combined sprite creates collision and depth-sorting problems",
+            },
+            "rejected_as_is": ["all seven Wayfarer buildings", "sp_way_01-04", "sp_way_09-10", "sp_way_16"],
+        },
+        "gate": "Wayfarer's Approach structural recomposition v5 visually approved; Marketplace composition and candidate shortlist review is the next gate.",
         "assets": records,
     }
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")

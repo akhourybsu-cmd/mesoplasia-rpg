@@ -1,0 +1,217 @@
+{
+  "schema": "caden-wayfarer-landscape-surfaces-v1",
+  "generator": "tools/art/build_caden_wayfarer_landscape_surfaces_v1.py",
+  "generator_sha256": "94cc4625339079389f3f82339374de134ff6168d6aac5436858b363d564b8e6f",
+  "scope": "Wayfarer's Approach production landscape pass; no additional library candidate.",
+  "method": "Deterministic binary-alpha composites using exact live grass tiles and interior-derived color averages from approved wear textures; no rotation, scaling, blur, or antialiasing.",
+  "source_files": {
+    "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
+    "assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_a_v1.png": "c07d6de0212bab57a57f87fd717d2f050302ac44ee59c4c98166c55e3a6750d2",
+    "assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_b_v1.png": "cd03dc56ebcac9aaddbc7d2ae9e1165d88959bb16270f69fd835fe1768ecc628",
+    "assets/environments/caden/wayfarers_approach/terrain/rest_field_trampled_c_v1.png": "1a8d2441ee0e1a3bd00a554d04f62eafdf35dba6ff79b494a7b3c477b114c44d",
+    "assets/environments/caden/wayfarers_approach/terrain/rest_field_dirt_a_v1.png": "d508fa606c2635e042a213ee0e6db5a20fbab3e1d0f73a8eb3c24918a98c9553",
+    "assets/environments/caden/wayfarers_approach/terrain/rest_field_straw_v1.png": "cfdfe361580056b6aa784111ab95a263366d0817b8f4ef5f76812aac8504de3e",
+    "assets/environments/caden/wayfarers_approach/terrain/rest_field_mud_v1.png": "86bfbcbfb70e96d8b22f1f28f3d4c6f179126c67d7618aff3d78172de143a6f7",
+    "assets/environments/caden/wayfarers_approach/terrain/road_wear_patch_v1.png": "51496c1db2f79231ebd5599abde31821a2edd37518bfcdc35ae38bdb3559c6d9"
+  },
+  "surfaces": {
+    "inn_forecourt": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/inn_forecourt_surface_v1.png",
+      "runtime_sha256": "2a7b3c95549550b22c1da8b4545e904db0fe2cb059ba35a8ae159fc5ea2a5277",
+      "world_origin_xy": [
+        112,
+        188
+      ],
+      "runtime_dimensions": [
+        356,
+        104
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 28109,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "compacted_room_surface",
+      "intent": "Continuous inn precinct linking the unchanged foundation and porch approach into the road shoulder."
+    },
+    "traveler_working_yard": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/traveler_yard_surface_v1.png",
+      "runtime_sha256": "43026fcbdb85e3d25e6a8b3cf6d22ec1e4107cd5ccf684659aba3933827fb27a",
+      "world_origin_xy": [
+        124,
+        376
+      ],
+      "runtime_dimensions": [
+        588,
+        232
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 102650,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "compacted_room_surface",
+      "intent": "One connected compacted working surface with road and wagon-gate thresholds."
+    },
+    "rest_grove": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/rest_grove_surface_v1.png",
+      "runtime_sha256": "2dd43ee08a6758ec302e12bdc085465f57d66b4dc19ba279d2ac2d7cbbbbb2cb",
+      "world_origin_xy": [
+        774,
+        380
+      ],
+      "runtime_dimensions": [
+        204,
+        236
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 25381,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "compacted_room_surface",
+      "intent": "Subordinate rest-pocket surface with one narrow road approach and a planted outer crescent."
+    },
+    "road_northwest_shoulder": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_northwest_shoulder_surface_v1.png",
+      "runtime_sha256": "6ddfcf09ddc385fe0b6ba0e7255adf579b61fd32592360795977a189f0b709f3",
+      "world_origin_xy": [
+        -2,
+        242
+      ],
+      "runtime_dimensions": [
+        454,
+        44
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 10729,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "grass_road_shoulder",
+      "intent": "Irregular grass encroachment softening the northwest edge of the preserved main road."
+    },
+    "road_northeast_shoulder": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_northeast_shoulder_surface_v1.png",
+      "runtime_sha256": "1f61e9d611b8781de4b2c24d27957f1d7a4c68df2789bdd5ba3e68e5be66444a",
+      "world_origin_xy": [
+        574,
+        242
+      ],
+      "runtime_dimensions": [
+        452,
+        44
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 10760,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "grass_road_shoulder",
+      "intent": "Irregular grass encroachment softening the northeast edge of the preserved main road."
+    },
+    "road_southwest_shoulder": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_southwest_shoulder_surface_v1.png",
+      "runtime_sha256": "d77c58c625ea0ecc3e6674f821d83643ac638df86d17eb9cecfd8f69e2891a65",
+      "world_origin_xy": [
+        -2,
+        358
+      ],
+      "runtime_dimensions": [
+        454,
+        44
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 10683,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "grass_road_shoulder",
+      "intent": "Irregular grass encroachment softening the southwest edge of the preserved main road."
+    },
+    "road_southeast_shoulder": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_southeast_shoulder_surface_v1.png",
+      "runtime_sha256": "73e6a221a87549dd963cc8930ab6654774a821305feca77c29914d3370b0d41b",
+      "world_origin_xy": [
+        574,
+        358
+      ],
+      "runtime_dimensions": [
+        452,
+        44
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 10654,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "grass_road_shoulder",
+      "intent": "Irregular grass encroachment softening the southeast edge of the preserved main road."
+    },
+    "road_vertical_west_shoulder": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_vertical_west_shoulder_surface_v1.png",
+      "runtime_sha256": "540450586b5a971606e4752e326a2e9bedef8bf057552f8143d78b5f9f2c42c9",
+      "world_origin_xy": [
+        438,
+        -2
+      ],
+      "runtime_dimensions": [
+        34,
+        260
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 6042,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "grass_road_shoulder",
+      "intent": "Irregular grass encroachment softening the west edge of the preserved north road."
+    },
+    "road_vertical_east_shoulder": {
+      "runtime_path": "assets/environments/caden/wayfarers_approach/terrain/composed_v1/road_vertical_east_shoulder_surface_v1.png",
+      "runtime_sha256": "2cb90b92e30d530a4a5dbc227964f41667f2149fe7767a2971f32bb26c0864df",
+      "world_origin_xy": [
+        554,
+        -2
+      ],
+      "runtime_dimensions": [
+        34,
+        260
+      ],
+      "pivot": "top_left",
+      "import_scale": 1.0,
+      "visible_pixels": 6065,
+      "partial_alpha_pixels": 0,
+      "transparent_rgb_pixels": 0,
+      "canvas_edge_pixels": 0,
+      "connected_components": 1,
+      "collision": "none_walkable_surface",
+      "surface_role": "grass_road_shoulder",
+      "intent": "Irregular grass encroachment softening the east edge of the preserved north road."
+    }
+  }
+}
