@@ -1,0 +1,69 @@
+{
+  "schema": "caden-residential-terrain-runtime-v1",
+  "generator": "tools/art/build_caden_residential_terrain_v1.py",
+  "generator_sha256": "060c0da2391e3405f7bb2373bda3d8c4cbd0883ccd8671a48baf6208864772ab",
+  "source_atlas": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png",
+  "source_atlas_sha256": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
+  "output_path": "assets/environments/caden/residential/terrain/residential_terrain_runtime_v1.png",
+  "output_sha256": "d3d09685eac8f3343bba1c476266def1f7fc99bc13c56863b8445ce21ca03daf",
+  "dimensions": [
+    1152,
+    768
+  ],
+  "tile_size": [
+    32,
+    32
+  ],
+  "grid": [
+    36,
+    24
+  ],
+  "tile_counts": {
+    "grass": 624,
+    "road": 240
+  },
+  "route_contract": {
+    "primary_cells_xyxy": [
+      0,
+      10,
+      35,
+      13
+    ],
+    "commons_cells_xyxy": [
+      16,
+      14,
+      19,
+      23
+    ],
+    "northwest_lane_cells_xyxy": [
+      7,
+      3,
+      8,
+      9
+    ],
+    "northeast_lane_cells_xyxy": [
+      27,
+      3,
+      28,
+      9
+    ],
+    "southwest_lane_cells_xyxy": [
+      8,
+      14,
+      9,
+      20
+    ],
+    "southeast_lane_cells_xyxy": [
+      28,
+      14,
+      29,
+      20
+    ]
+  },
+  "collision": "none; authoritative scene collision remains separate",
+  "audit": {
+    "fully_opaque": true,
+    "resampling": "none; exact 32x32 atlas cells",
+    "runtime_scale": 1.0
+  }
+}

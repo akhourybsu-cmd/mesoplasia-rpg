@@ -1,0 +1,60 @@
+{
+  "schema": "caden-marketplace-terrain-runtime-v1",
+  "generator": "tools/art/build_caden_marketplace_terrain_v1.py",
+  "generator_sha256": "52341e664d4c1054a327999e649a8ba4a0e1044ddc9463dbae29819bc014a80c",
+  "source_atlas": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png",
+  "source_atlas_sha256": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
+  "output_path": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.png",
+  "output_sha256": "c5859ff2c71de3557da27d30df212f3ef7cc38cc0d83fde82e782c46bea14d93",
+  "dimensions": [
+    896,
+    640
+  ],
+  "tile_size": [
+    32,
+    32
+  ],
+  "grid": [
+    28,
+    20
+  ],
+  "tile_counts": {
+    "grass": 188,
+    "plaza": 182,
+    "road": 132,
+    "plaza_edge": 58
+  },
+  "collision": "none; authoritative scene collision remains separate",
+  "route_contract": {
+    "west_lane_cells_xyxy": [
+      0,
+      8,
+      8,
+      11
+    ],
+    "cross_lane_cells_xyxy": [
+      3,
+      9,
+      24,
+      10
+    ],
+    "central_lane_cells_xyxy": [
+      12,
+      2,
+      15,
+      19
+    ],
+    "market_precinct_cells_xyxy": [
+      3,
+      2,
+      24,
+      17
+    ]
+  },
+  "audit": {
+    "fully_opaque": true,
+    "canvas_edge_pixels_expected": true,
+    "resampling": "none; exact 32x32 atlas cells",
+    "runtime_scale": 1.0
+  }
+}

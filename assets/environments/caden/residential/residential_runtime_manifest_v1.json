@@ -1,0 +1,499 @@
+{
+  "schema": "caden-residential-runtime-manifest-v1",
+  "generator": "tools/art/prepare_caden_residential_runtime_v1.py",
+  "generator_sha256": "ed4a55e80ab7721cbb513ba734b5937caa07d3a8444c814849a88503b2164003",
+  "source_package": "Caden Mega Asset Library v1.1",
+  "source_package_location_policy": "staged outside res://; only selected cleaned runtime PNGs are imported",
+  "catalog_rows_verified": 222,
+  "scope": "Seven explicitly approved Residential candidates only.",
+  "gate_state": "residential_runtime_v1_visual_approved",
+  "provenance_and_licensing": {
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_until_rights_are_verified"
+  },
+  "preserved_rejections": {
+    "residential_and_townwide_building_masters": 24,
+    "mega_set": [
+      "01",
+      "02"
+    ]
+  },
+  "assets": {
+    "01": {
+      "catalog_asset_id": "caden_sp_res_01_fenced_flower_yard_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_01_fenced_flower_yard_master_v1.png",
+      "source_sha256": "11cba966d5420ee32c1e41bb520a1d1cc5bcdb5aded52299c33cb0bcccf42e02",
+      "source_dimensions": [
+        656,
+        422
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        624,
+        390
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/fenced_flower_yard_runtime_v1.png",
+      "runtime_sha256": "c460ea940d385900f7fcac6ec00eba4ee93af43f576503313cd7f0da0684c667",
+      "runtime_dimensions": [
+        115,
+        71
+      ],
+      "pivot_xy": [
+        57,
+        69
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northeast maintained flower yard",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/FencedFlowerYard",
+      "world_position_xy": [
+        608,
+        288
+      ],
+      "collision": "64x16 garden fence base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 112,
+        "bright_halo_pixels_recolored_or_removed": 33,
+        "detached_fragments_removed": 4,
+        "detached_fragment_pixels_removed": 4,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          112,
+          69
+        ],
+        "visible_pixels": 4942,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 2,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4929,
+        "smallest_component_pixels": 13
+      }
+    },
+    "04": {
+      "catalog_asset_id": "caden_sp_res_04_woodpile_barrel_fence_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_04_woodpile_barrel_fence_master_v1.png",
+      "source_sha256": "bd43b4418c446c688f112e188ab6c00aba05848e69ed1ca0c847a7bd0999e787",
+      "source_dimensions": [
+        651,
+        370
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        619,
+        338
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/woodpile_barrel_fence_runtime_v1.png",
+      "runtime_sha256": "83794464d7216db8934638f4bcffcc47ed0ca1d0696192b930c9e48dc22bc104",
+      "runtime_dimensions": [
+        114,
+        61
+      ],
+      "pivot_xy": [
+        57,
+        59
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southwest household wood storage",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/WoodpileBarrelFence",
+      "world_position_xy": [
+        80,
+        688
+      ],
+      "collision": "64x16 storage base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 172,
+        "bright_halo_pixels_recolored_or_removed": 51,
+        "detached_fragments_removed": 5,
+        "detached_fragment_pixels_removed": 5,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          111,
+          59
+        ],
+        "visible_pixels": 3723,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 3723,
+        "smallest_component_pixels": 3723
+      }
+    },
+    "05": {
+      "catalog_asset_id": "caden_sp_res_05_laundry_line_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_05_laundry_line_master_v1.png",
+      "source_sha256": "fd4d421f5bf6df17813bac141d2254cc0afe877916e07156ee56215f54036469",
+      "source_dimensions": [
+        535,
+        387
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        503,
+        355
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/laundry_line_runtime_v1.png",
+      "runtime_sha256": "3f760f6d107f79fdfa95194a2db92a45439e500860878af8391dacb703bdf3ea",
+      "runtime_dimensions": [
+        92,
+        65
+      ],
+      "pivot_xy": [
+        46,
+        63
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southwest private laundry yard",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/LaundryLine",
+      "world_position_xy": [
+        400,
+        536
+      ],
+      "collision": "two 10x12 post bases; center passable",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 115,
+        "bright_halo_pixels_recolored_or_removed": 42,
+        "detached_fragments_removed": 4,
+        "detached_fragment_pixels_removed": 5,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          3,
+          2,
+          87,
+          63
+        ],
+        "visible_pixels": 3265,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 3265,
+        "smallest_component_pixels": 3265
+      }
+    },
+    "06": {
+      "catalog_asset_id": "caden_sp_res_06_small_garden_patch_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_06_small_garden_patch_master_v1.png",
+      "source_sha256": "477959dd39f1fcfb8fddd78a51a7a709dfe9e1f3c4639fbe59059568d8d995f5",
+      "source_dimensions": [
+        583,
+        452
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        551,
+        420
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/small_garden_patch_runtime_v1.png",
+      "runtime_sha256": "51df59e4dfed40871474954376790142c42a44501bcab27f3205e07083cd4aa6",
+      "runtime_dimensions": [
+        101,
+        77
+      ],
+      "pivot_xy": [
+        50,
+        75
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southeast productive garden",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/SmallGardenPatch",
+      "world_position_xy": [
+        752,
+        536
+      ],
+      "collision": "56x16 raised garden base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 116,
+        "bright_halo_pixels_recolored_or_removed": 37,
+        "detached_fragments_removed": 1,
+        "detached_fragment_pixels_removed": 1,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          95,
+          75
+        ],
+        "visible_pixels": 4089,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 2,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4085,
+        "smallest_component_pixels": 4
+      }
+    },
+    "08": {
+      "catalog_asset_id": "caden_sp_res_08_doorstep_flower_cluster_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_08_doorstep_flower_cluster_master_v1.png",
+      "source_sha256": "7f93294507d2309562ab2c6ebc8c1c8960d524c3e06caa463f7b5502c85a1192",
+      "source_dimensions": [
+        568,
+        411
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        536,
+        379
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/doorstep_flower_cluster_runtime_v1.png",
+      "runtime_sha256": "f33c4994454224d819a0eeba2cd785799e7b8c66971277caeac2b61ea259ba4f",
+      "runtime_dimensions": [
+        98,
+        69
+      ],
+      "pivot_xy": [
+        49,
+        67
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northwest home threshold",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/DoorstepFlowerCluster",
+      "world_position_xy": [
+        384,
+        256
+      ],
+      "collision": "two 12x12 planter bases; central steps passable",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 128,
+        "bright_halo_pixels_recolored_or_removed": 38,
+        "detached_fragments_removed": 2,
+        "detached_fragment_pixels_removed": 3,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          3,
+          2,
+          92,
+          67
+        ],
+        "visible_pixels": 4140,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4140,
+        "smallest_component_pixels": 4140
+      }
+    },
+    "09": {
+      "catalog_asset_id": "caden_sp_res_09_rain_barrels_crates_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_09_rain_barrels_crates_master_v1.png",
+      "source_sha256": "b5d88b2a5401738083b47cdbbda2f5338b0d1d5f170380b2090804666d029e8b",
+      "source_dimensions": [
+        548,
+        493
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        516,
+        461
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/rain_barrels_crates_runtime_v1.png",
+      "runtime_sha256": "eec5fef860821e30c5bce796d03a019d0c209a2b76108e2ca2191a2e6e209cd3",
+      "runtime_dimensions": [
+        95,
+        84
+      ],
+      "pivot_xy": [
+        47,
+        82
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southeast side-yard storage",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/RainBarrelsCrates",
+      "world_position_xy": [
+        1080,
+        688
+      ],
+      "collision": "56x16 shed and storage base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 134,
+        "bright_halo_pixels_recolored_or_removed": 29,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          91,
+          82
+        ],
+        "visible_pixels": 4384,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4384,
+        "smallest_component_pixels": 4384
+      }
+    },
+    "11": {
+      "catalog_asset_id": "caden_sp_res_11_stepping_stone_flowers_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "residential_selected",
+      "approval_state": "approved_for_residential_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_08_residential_setpieces/assets/caden_sp_res_11_stepping_stone_flowers_master_v1.png",
+      "source_sha256": "7c55639d0574974ff73501cc51436038e1a23fd806899b102a867e83df4b8ea4",
+      "source_dimensions": [
+        522,
+        472
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        490,
+        440
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/residential/props/runtime_v1/stepping_stone_flowers_runtime_v1.png",
+      "runtime_sha256": "91f06ea924d9024fbd762c9c474d74e5fd55d96de9b2a1df4894b95903eb368d",
+      "runtime_dimensions": [
+        90,
+        80
+      ],
+      "pivot_xy": [
+        45,
+        78
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northeast doorstep path",
+      "scene_path": "scenes/world/caden/Residential.tscn",
+      "scene_node_path": "DomesticSetPieces/SteppingStoneFlowers",
+      "world_position_xy": [
+        800,
+        288
+      ],
+      "collision": "none; stepping stones and flowers remain walkable",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 53,
+        "bright_halo_pixels_recolored_or_removed": 32,
+        "detached_fragments_removed": 4,
+        "detached_fragment_pixels_removed": 4,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          85,
+          78
+        ],
+        "visible_pixels": 3958,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 2,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 3955,
+        "smallest_component_pixels": 3
+      }
+    }
+  }
+}

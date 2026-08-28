@@ -1,0 +1,582 @@
+{
+  "schema": "caden-marketplace-runtime-manifest-v1",
+  "generator": "tools/art/prepare_caden_marketplace_runtime_v1.py",
+  "generator_sha256": "61289855b847c27682205cc2d3fb4e58edc322f7cd912baa63eb53165e864aa5",
+  "source_package": "Caden Mega Asset Library v1.1",
+  "source_package_location_policy": "staged outside res://; only selected cleaned runtime PNGs are imported",
+  "catalog_rows_verified": 222,
+  "scope": "Seven explicitly approved Marketplace candidates only.",
+  "gate_state": "marketplace_runtime_v1_visual_approved",
+  "provenance_and_licensing": {
+    "notes": "See docs/PROVENANCE_AND_LICENSE.md in the verified source package.",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_until_rights_are_verified"
+  },
+  "preserved_rejections": {
+    "all_marketplace_structure_masters": "rejected",
+    "setpieces": [
+      "09",
+      "10",
+      "12",
+      "15"
+    ],
+    "mega_set": [
+      "01"
+    ]
+  },
+  "assets": {
+    "01": {
+      "catalog_asset_id": "caden_sp_mkt_01_produce_crate_display_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_01_produce_crate_display_master_v1.png",
+      "source_sha256": "122b42a5de97661904bd317c048f781a7be032fa0d6f8fbda3af4ada38098be0",
+      "source_dimensions": [
+        617,
+        379
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        585,
+        347
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/produce_crate_display_runtime_v1.png",
+      "runtime_sha256": "1bebd47cc1edd5c8b4598598d80e5b088ad1ecceb076bd64599b0f7f631e3037",
+      "runtime_dimensions": [
+        108,
+        63
+      ],
+      "pivot_xy": [
+        54,
+        61
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northwest produce frontage",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall01",
+      "primary_world_position_xy": [
+        208,
+        184
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          56,
+          16
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -8
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 190,
+        "bright_halo_pixels_recolored_or_removed": 23,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          103,
+          61
+        ],
+        "visible_pixels": 4739,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4739,
+        "smallest_component_pixels": 4739
+      }
+    },
+    "03": {
+      "catalog_asset_id": "caden_sp_mkt_03_folded_cloth_display_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_03_folded_cloth_display_master_v1.png",
+      "source_sha256": "81395d232e4ee912497b007a549ab3c1f5d4c5941b6ae279b203403e93d74b99",
+      "source_dimensions": [
+        532,
+        344
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        500,
+        312
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/folded_cloth_display_runtime_v1.png",
+      "runtime_sha256": "0048d6254663a4a67a34285c752237f4f8131951ddca089dd31a527e8e548bd0",
+      "runtime_dimensions": [
+        92,
+        56
+      ],
+      "pivot_xy": [
+        46,
+        54
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northeast cloth frontage",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall03",
+      "primary_world_position_xy": [
+        560,
+        184
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          48,
+          16
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -8
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 188,
+        "bright_halo_pixels_recolored_or_removed": 23,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          86,
+          54
+        ],
+        "visible_pixels": 3902,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 3902,
+        "smallest_component_pixels": 3902
+      }
+    },
+    "04": {
+      "catalog_asset_id": "caden_sp_mkt_04_pottery_jars_display_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_04_pottery_jars_display_master_v1.png",
+      "source_sha256": "e8ffa8e91bc22c970fbb59ae99bb9b732f0cb23ab80ef901aa42b1d0c3740291",
+      "source_dimensions": [
+        549,
+        368
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        517,
+        336
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/pottery_jars_display_runtime_v1.png",
+      "runtime_sha256": "7f0f61b8ab8e78df5f39e7b889f5024941d37e0615ce3b43d18004c7d697ee06",
+      "runtime_dimensions": [
+        95,
+        61
+      ],
+      "pivot_xy": [
+        47,
+        59
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northeast household frontage",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall04",
+      "primary_world_position_xy": [
+        688,
+        184
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          56,
+          16
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -8
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 216,
+        "bright_halo_pixels_recolored_or_removed": 22,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          90,
+          59
+        ],
+        "visible_pixels": 4273,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4273,
+        "smallest_component_pixels": 4273
+      }
+    },
+    "06": {
+      "catalog_asset_id": "caden_sp_mkt_06_barrel_sack_storage_master_v1",
+      "catalog_status": "candidate_review_required",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_06_barrel_sack_storage_master_v1.png",
+      "source_sha256": "ed85aaaa91886744a144730a2d6af215e150bb31a5ba3b8d95c09b7030395d65",
+      "source_dimensions": [
+        811,
+        545
+      ],
+      "source_bounds_xyxy": [
+        132,
+        97,
+        679,
+        469
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/barrel_sack_storage_runtime_v1.png",
+      "runtime_sha256": "d3bfda46de7181aa6872edd761c590da553ab849dfd77cad58dc93709091bd44",
+      "runtime_dimensions": [
+        107,
+        74
+      ],
+      "pivot_xy": [
+        53,
+        72
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southwest rear-of-stall backstock",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall06",
+      "primary_world_position_xy": [
+        336,
+        488
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          56,
+          16
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -8
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 4999,
+        "presentation_shadow_pixels_removed": 84,
+        "bright_halo_pixels_recolored_or_removed": 0,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          3,
+          3,
+          98,
+          71
+        ],
+        "visible_pixels": 4595,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4595,
+        "smallest_component_pixels": 4595
+      }
+    },
+    "07": {
+      "catalog_asset_id": "caden_sp_mkt_07_vendor_counter_mixed_goods_master_v1",
+      "catalog_status": "candidate_review_required",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_07_vendor_counter_mixed_goods_master_v1.png",
+      "source_sha256": "ccc9b15c2a5e13c23fefe4630d4c0de64a393be8fcfd8d937e440ed239e5c7bd",
+      "source_dimensions": [
+        832,
+        573
+      ],
+      "source_bounds_xyxy": [
+        175,
+        32,
+        800,
+        499
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/vendor_counter_mixed_goods_runtime_v1.png",
+      "runtime_sha256": "882e67c8d6f1fe5a09e264524cb68336f409402f0a1e27838ce8305a35e15a40",
+      "runtime_dimensions": [
+        121,
+        92
+      ],
+      "pivot_xy": [
+        60,
+        90
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "paired primary vendor anchors",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall02|Stalls/Stall05",
+      "primary_world_position_xy": [
+        336,
+        184
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          64,
+          24
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -12
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 7046,
+        "presentation_shadow_pixels_removed": 107,
+        "bright_halo_pixels_recolored_or_removed": 0,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          3,
+          4,
+          99,
+          88
+        ],
+        "visible_pixels": 6340,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 6340,
+        "smallest_component_pixels": 6340
+      }
+    },
+    "13": {
+      "catalog_asset_id": "caden_sp_mkt_13_empty_crates_barrels_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_13_empty_crates_barrels_master_v1.png",
+      "source_sha256": "866c19bf020b3770f1a0bc44000c8d0024653f6d19b89637a233903bb80ec719",
+      "source_dimensions": [
+        562,
+        450
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        530,
+        418
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/empty_crates_barrels_runtime_v1.png",
+      "runtime_sha256": "1e2a8a4aa1d0e599b383d27592d0e4b3bd9a5c9ed03ce50fb84348d42d45aecd",
+      "runtime_dimensions": [
+        97,
+        76
+      ],
+      "pivot_xy": [
+        48,
+        74
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southeast neutral service storage",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall07",
+      "primary_world_position_xy": [
+        560,
+        488
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          56,
+          16
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -8
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 127,
+        "bright_halo_pixels_recolored_or_removed": 21,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          89,
+          74
+        ],
+        "visible_pixels": 4224,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4224,
+        "smallest_component_pixels": 4224
+      }
+    },
+    "14": {
+      "catalog_asset_id": "caden_sp_mkt_14_shopfront_supply_cluster_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "marketplace_selected",
+      "approval_state": "approved_for_marketplace_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_06_marketplace_setpieces/assets/caden_sp_mkt_14_shopfront_supply_cluster_master_v1.png",
+      "source_sha256": "85c7b469993de7b9dacd9bf06cebb932872a4198cd00dec8890fad4761ae84b6",
+      "source_dimensions": [
+        574,
+        358
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        542,
+        326
+      ],
+      "scale_family": "medium_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/marketplace/props/runtime_v1/shopfront_supply_cluster_runtime_v1.png",
+      "runtime_sha256": "b14bc2c0772b9ef5c3e09f2c6033a2f011ef12630fd449251ed3390d72e43eab",
+      "runtime_dimensions": [
+        100,
+        59
+      ],
+      "pivot_xy": [
+        50,
+        57
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southeast mixed-goods backstock",
+      "scene_path": "scenes/world/caden/Marketplace.tscn",
+      "scene_node_path": "Stalls/Stall08",
+      "primary_world_position_xy": [
+        688,
+        488
+      ],
+      "collision": {
+        "shape": "rectangle",
+        "size": [
+          56,
+          16
+        ],
+        "offset_from_ground_contact_xy": [
+          0,
+          -8
+        ],
+        "strategy": "solid counter, crates, barrels, or storage base only; canvas bounds do not collide"
+      },
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 174,
+        "bright_halo_pixels_recolored_or_removed": 16,
+        "detached_fragments_removed": 0,
+        "detached_fragment_pixels_removed": 0,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          3,
+          2,
+          93,
+          57
+        ],
+        "visible_pixels": 3739,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 3739,
+        "smallest_component_pixels": 3739
+      }
+    }
+  }
+}

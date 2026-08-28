@@ -41,3 +41,9 @@ All fourteen Marketplace structure masters remain rejected under the v1.1 audit.
 ## Approval boundary
 
 This gate requests approval of the Marketplace composition and an explicit asset selection. Approval authorizes offline normalization and manual cleanup only for selected candidates, followed by one-zone integration and runtime comparison. It does not authorize alternates, deferred or rejected assets, lore-bearing signs, new NPCs, another zone, or changes to the established gameplay contract.
+
+## Approval decision
+
+The user approved proceeding on 2026-08-27. Runtime v1 therefore selects only the recommended shortlist: `01`, `03`, `04`, `06`, `07`, `13`, and `14`. Alternates `02`, `08`, and `11` remain unselected; deferred and rejected dispositions remain unchanged.
+
+The user subsequently authorized a Marketplace liveliness and perimeter-landscaping refinement. That follow-up permits existing Caden ambient patrol characters, denser tree and shrub layering on the outer grass, and fencing between the market court and green frame. It does not authorize another library asset, a vendor-bay change, a route closure, new dialogue or lore, or work in a later zone.

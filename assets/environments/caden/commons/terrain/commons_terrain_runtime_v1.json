@@ -1,0 +1,51 @@
+{
+  "schema": "caden-commons-terrain-runtime-v1",
+  "generator": "tools/art/build_caden_commons_terrain_v1.py",
+  "generator_sha256": "52f9be7d7bac38926178ba3505068fcb5a3c9731775690465ad8c5f3015eb230",
+  "source_atlas": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png",
+  "source_atlas_sha256": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
+  "output_path": "assets/environments/caden/commons/terrain/commons_terrain_runtime_v1.png",
+  "output_sha256": "1d6c7abf5985d41967101de640e19255694b8225e5e6b0e1e47bd8b1f02d56e0",
+  "dimensions": [
+    1024,
+    704
+  ],
+  "tile_size": [
+    32,
+    32
+  ],
+  "grid": [
+    32,
+    22
+  ],
+  "tile_counts": {
+    "grass": 596,
+    "road": 108
+  },
+  "route_contract": {
+    "town_square_cells_xyxy": [
+      0,
+      9,
+      15,
+      12
+    ],
+    "residential_cells_xyxy": [
+      14,
+      0,
+      17,
+      12
+    ]
+  },
+  "quiet_green_pixels_xywh": [
+    608,
+    128,
+    320,
+    448
+  ],
+  "collision": "none; scene collision remains separate",
+  "audit": {
+    "fully_opaque": true,
+    "resampling": "none; exact 32x32 atlas cells",
+    "runtime_scale": 1.0
+  }
+}

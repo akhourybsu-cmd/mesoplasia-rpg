@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=46 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -6,6 +6,33 @@
 [ext_resource type="Resource" path="res://data/dialogue/caden/market_stall_attendant.tres" id="4_attendant"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/market_shopper.tres" id="5_shopper"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/market_supply_traveler.tres" id="6_traveler"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.png" id="7_terrain"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/produce_crate_display_runtime_v1.png" id="8_produce"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/folded_cloth_display_runtime_v1.png" id="9_cloth"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/pottery_jars_display_runtime_v1.png" id="10_pottery"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/barrel_sack_storage_runtime_v1.png" id="11_backstock"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/vendor_counter_mixed_goods_runtime_v1.png" id="12_vendor"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/empty_crates_barrels_runtime_v1.png" id="13_crates"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/marketplace/props/runtime_v1/shopfront_supply_cluster_runtime_v1.png" id="14_supply"]
+[ext_resource type="Script" path="res://scripts/world/depth_sorted_static_prop.gd" id="15_depth"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="16_tree_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_02_v1.png" id="17_tree_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_bush_medium_01_v1.png" id="18_bush_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_bush_medium_02_v1.png" id="19_bush_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/nature/shrubs/caden_bush_medium_03_v1.png" id="20_bush_3"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_01_v1.png" id="21_planter_1"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/planters/caden_planter_box_02_v1.png" id="22_planter_2"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/lighting/caden_lantern_post_01_v1.png" id="23_lantern"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_young_woman_01/caden_npc_human_young_woman_01_sprite_frames_v1.tres" id="24_attendant_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_middle_man_01/caden_npc_human_middle_man_01_sprite_frames_v1.tres" id="25_shopper_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/dwarf_middle_woman_01/caden_npc_dwarf_middle_woman_01_sprite_frames_v1.tres" id="26_traveler_frames"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/PatrolNpc.tscn" id="27_patrol_npc"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_sprite_frames_v1.tres" id="28_walker_nw_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/elf_younger_man_01/caden_npc_elf_younger_man_01_sprite_frames_v1.tres" id="29_walker_ne_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/human_elder_woman_01/caden_npc_human_elder_woman_01_sprite_frames_v1.tres" id="30_walker_sw_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/dwarf_elder_man_01/caden_npc_dwarf_elder_man_01_sprite_frames_v1.tres" id="31_walker_se_frames"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/fences/caden_fence_straight_01_v1.png" id="32_fence_straight"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/props/fences/caden_fence_gate_01_v1.png" id="34_fence_gate"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(896, 32)
@@ -14,7 +41,22 @@ size = Vector2(896, 32)
 size = Vector2(32, 640)
 
 [sub_resource type="RectangleShape2D" id="Shape_stall"]
-size = Vector2(96, 48)
+size = Vector2(56, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_stall_narrow"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_vendor"]
+size = Vector2(64, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_tree"]
+size = Vector2(24, 18)
+
+[sub_resource type="RectangleShape2D" id="Shape_lantern"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_planter"]
+size = Vector2(60, 12)
 
 [sub_resource type="RectangleShape2D" id="Shape_exit_horizontal"]
 size = Vector2(96, 128)
@@ -22,129 +64,828 @@ size = Vector2(96, 128)
 [sub_resource type="RectangleShape2D" id="Shape_exit_vertical"]
 size = Vector2(128, 96)
 
+[sub_resource type="RectangleShape2D" id="Shape_fence_straight"]
+size = Vector2(96, 10)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence_gate"]
+size = Vector2(64, 10)
+
 [node name="Marketplace" type="Node2D"]
 script = ExtResource("1_zone")
 camera_bounds = Rect2i(0, 0, 896, 640)
 
+[node name="TerrainRuntime" type="Sprite2D" parent="."]
+z_index = -5
+texture = ExtResource("7_terrain")
+centered = false
+
 [node name="Ground" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, 0, 896, 0, 896, 640, 0, 640)
 color = Color(0.3, 0.44, 0.28, 1)
 
 [node name="MarketGround" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(96, 64, 800, 64, 800, 576, 96, 576)
 color = Color(0.67, 0.57, 0.4, 1)
 
 [node name="WestLane" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, 256, 288, 256, 288, 384, 0, 384)
 color = Color(0.56, 0.45, 0.32, 1)
 
 [node name="CentralLane" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(384, 64, 512, 64, 512, 640, 384, 640)
 color = Color(0.56, 0.45, 0.32, 1)
 
 [node name="CrossLane" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(96, 288, 800, 288, 800, 352, 96, 352)
 color = Color(0.56, 0.45, 0.32, 1)
 
 [node name="Stalls" type="Node2D" parent="."]
 
 [node name="Stall01" type="StaticBody2D" parent="Stalls"]
-position = Vector2(208, 160)
+position = Vector2(208, 184)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall01"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.8, 0.45, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall01"]
+position = Vector2(-54, -61)
+texture = ExtResource("8_produce")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall01"]
+position = Vector2(0, -8)
 shape = SubResource("Shape_stall")
 
 [node name="Stall02" type="StaticBody2D" parent="Stalls"]
-position = Vector2(336, 160)
+position = Vector2(336, 184)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall02"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.72, 0.32, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall02"]
+position = Vector2(-60, -90)
+texture = ExtResource("12_vendor")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall02"]
-shape = SubResource("Shape_stall")
+position = Vector2(0, -12)
+shape = SubResource("Shape_vendor")
 
 [node name="Stall03" type="StaticBody2D" parent="Stalls"]
-position = Vector2(560, 160)
+position = Vector2(560, 184)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall03"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.8, 0.45, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall03"]
+position = Vector2(-46, -54)
+texture = ExtResource("9_cloth")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall03"]
-shape = SubResource("Shape_stall")
+position = Vector2(0, -8)
+shape = SubResource("Shape_stall_narrow")
 
 [node name="Stall04" type="StaticBody2D" parent="Stalls"]
-position = Vector2(688, 160)
+position = Vector2(688, 184)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall04"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.72, 0.32, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall04"]
+position = Vector2(-47, -59)
+texture = ExtResource("10_pottery")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall04"]
+position = Vector2(0, -8)
 shape = SubResource("Shape_stall")
 
 [node name="Stall05" type="StaticBody2D" parent="Stalls"]
-position = Vector2(208, 464)
+position = Vector2(208, 488)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall05"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.8, 0.45, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall05"]
+position = Vector2(-61, -90)
+texture = ExtResource("12_vendor")
+centered = false
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall05"]
-shape = SubResource("Shape_stall")
+position = Vector2(0, -12)
+shape = SubResource("Shape_vendor")
 
 [node name="Stall06" type="StaticBody2D" parent="Stalls"]
-position = Vector2(336, 464)
+position = Vector2(336, 488)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall06"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.72, 0.32, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall06"]
+position = Vector2(-53, -72)
+texture = ExtResource("11_backstock")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall06"]
+position = Vector2(0, -8)
 shape = SubResource("Shape_stall")
 
 [node name="Stall07" type="StaticBody2D" parent="Stalls"]
-position = Vector2(560, 464)
+position = Vector2(560, 488)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall07"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.8, 0.45, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall07"]
+position = Vector2(-48, -74)
+texture = ExtResource("13_crates")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall07"]
+position = Vector2(0, -8)
 shape = SubResource("Shape_stall")
 
 [node name="Stall08" type="StaticBody2D" parent="Stalls"]
-position = Vector2(688, 464)
+position = Vector2(688, 488)
+script = ExtResource("15_depth")
 
-[node name="Visual" type="Polygon2D" parent="Stalls/Stall08"]
-polygon = PackedVector2Array(-48, -24, 48, -24, 48, 24, -48, 24)
-color = Color(0.72, 0.32, 0.2, 1)
+[node name="Visual" type="Sprite2D" parent="Stalls/Stall08"]
+position = Vector2(-50, -57)
+texture = ExtResource("14_supply")
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stalls/Stall08"]
+position = Vector2(0, -8)
 shape = SubResource("Shape_stall")
 
+[node name="EnvironmentalComposition" type="Node2D" parent="."]
+
+[node name="LowPlanting" type="Node2D" parent="EnvironmentalComposition"]
+z_index = 3
+
+[node name="BushNorthwestOuter" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(120, 48)
+texture = ExtResource("18_bush_1")
+
+[node name="BushNorthwestInner" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(184, 48)
+texture = ExtResource("19_bush_2")
+
+[node name="BushNortheastInner" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(712, 48)
+texture = ExtResource("20_bush_3")
+
+[node name="BushNortheastOuter" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(776, 48)
+texture = ExtResource("18_bush_1")
+
+[node name="BushNorthwestMiddle" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(248, 44)
+texture = ExtResource("20_bush_3")
+
+[node name="BushNorthService" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(448, 44)
+texture = ExtResource("19_bush_2")
+
+[node name="BushNortheastMiddle" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(648, 44)
+texture = ExtResource("19_bush_2")
+
+[node name="BushWestUpper" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(72, 224)
+texture = ExtResource("20_bush_3")
+
+[node name="BushWestUpperLayer" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(48, 160)
+texture = ExtResource("18_bush_1")
+
+[node name="BushWestLower" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(72, 448)
+texture = ExtResource("19_bush_2")
+
+[node name="BushWestLowerLayer" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(48, 544)
+texture = ExtResource("20_bush_3")
+
+[node name="BushEastUpper" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(824, 224)
+texture = ExtResource("19_bush_2")
+
+[node name="BushEastMiddle" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(840, 320)
+texture = ExtResource("18_bush_1")
+
+[node name="BushEastLower" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(824, 448)
+texture = ExtResource("20_bush_3")
+
+[node name="BushEastLowerLayer" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(848, 544)
+texture = ExtResource("19_bush_2")
+
+[node name="BushSouthwest" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(176, 600)
+texture = ExtResource("18_bush_1")
+
+[node name="BushSoutheast" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(720, 600)
+texture = ExtResource("19_bush_2")
+
+[node name="BushSouthwestInner" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(288, 600)
+texture = ExtResource("20_bush_3")
+
+[node name="BushSoutheastInner" type="Sprite2D" parent="EnvironmentalComposition/LowPlanting"]
+position = Vector2(608, 600)
+texture = ExtResource("18_bush_1")
+
+[node name="SolidFrame" type="Node2D" parent="EnvironmentalComposition"]
+
+[node name="TreeNorthwestCorner" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(64, 120)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeNorthwestCorner"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeNorthwestCorner"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeNorthwestService" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(848, 288)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeNorthwestService"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeNorthwestService"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeNortheastService" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(848, 368)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeNortheastService"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeNortheastService"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeNortheastCorner" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(832, 120)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeNortheastCorner"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeNortheastCorner"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeWestUpper" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(48, 208)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeWestUpper"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeWestUpper"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeWestLower" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(48, 512)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeWestLower"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeWestLower"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeEastUpper" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(848, 208)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeEastUpper"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeEastUpper"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeEastLower" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(848, 512)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeEastLower"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeEastLower"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeSouthwest" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(112, 608)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeSouthwest"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeSouthwest"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeSoutheast" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(784, 608)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeSoutheast"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeSoutheast"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeWestLowerLayer" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(48, 448)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeWestLowerLayer"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeWestLowerLayer"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeEastLowerLayer" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(848, 448)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeEastLowerLayer"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeEastLowerLayer"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeSouthwestMiddle" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(224, 616)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeSouthwestMiddle"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeSouthwestMiddle"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeSouthwestInner" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(320, 616)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeSouthwestInner"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeSouthwestInner"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeSoutheastInner" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(576, 616)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeSoutheastInner"]
+offset = Vector2(0, -48)
+texture = ExtResource("17_tree_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeSoutheastInner"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="TreeSoutheastMiddle" type="StaticBody2D" parent="EnvironmentalComposition/SolidFrame"]
+position = Vector2(672, 616)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/SolidFrame/TreeSoutheastMiddle"]
+offset = Vector2(0, -48)
+texture = ExtResource("16_tree_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/SolidFrame/TreeSoutheastMiddle"]
+position = Vector2(0, -9)
+shape = SubResource("Shape_tree")
+
+[node name="PerimeterFencing" type="Node2D" parent="EnvironmentalComposition"]
+z_index = 4
+
+[node name="NorthwestTop01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(144, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NorthwestTop01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NorthwestTop01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="NorthwestTop02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(240, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NorthwestTop02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NorthwestTop02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="NorthwestTop03" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(336, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NorthwestTop03"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NorthwestTop03"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="NorthServiceGate" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(448, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NorthServiceGate"]
+offset = Vector2(0, -32)
+texture = ExtResource("34_fence_gate")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NorthServiceGate"]
+shape = SubResource("Shape_fence_gate")
+
+[node name="NortheastTop01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(560, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NortheastTop01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NortheastTop01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="NortheastTop02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(656, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NortheastTop02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NortheastTop02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="NortheastTop03" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(752, 64)
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/NortheastTop03"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/NortheastTop03"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="SouthwestBottom01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(144, 576)
+rotation = 3.1415927
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/SouthwestBottom01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/SouthwestBottom01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="SouthwestBottom02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(240, 576)
+rotation = 3.1415927
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/SouthwestBottom02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/SouthwestBottom02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="SouthwestBottom03" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(336, 576)
+rotation = 3.1415927
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/SouthwestBottom03"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/SouthwestBottom03"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="SoutheastBottom01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(560, 576)
+rotation = 3.1415927
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/SoutheastBottom01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/SoutheastBottom01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="SoutheastBottom02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(656, 576)
+rotation = 3.1415927
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/SoutheastBottom02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/SoutheastBottom02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="SoutheastBottom03" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(752, 576)
+rotation = 3.1415927
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/SoutheastBottom03"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/SoutheastBottom03"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="WestUpper01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(96, 112)
+rotation = -1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/WestUpper01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/WestUpper01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="WestUpper02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(96, 208)
+rotation = -1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/WestUpper02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/WestUpper02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="WestLower01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(96, 432)
+rotation = -1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/WestLower01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/WestLower01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="WestLower02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(96, 528)
+rotation = -1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/WestLower02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/WestLower02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="EastUpper01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(800, 112)
+rotation = 1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/EastUpper01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/EastUpper01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="EastUpper02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(800, 208)
+rotation = 1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/EastUpper02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/EastUpper02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="EastServiceGate" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(800, 320)
+rotation = 1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/EastServiceGate"]
+offset = Vector2(0, -32)
+texture = ExtResource("34_fence_gate")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/EastServiceGate"]
+shape = SubResource("Shape_fence_gate")
+
+[node name="EastLower01" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(800, 432)
+rotation = 1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/EastLower01"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/EastLower01"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="EastLower02" type="StaticBody2D" parent="EnvironmentalComposition/PerimeterFencing"]
+position = Vector2(800, 528)
+rotation = 1.5707964
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/PerimeterFencing/EastLower02"]
+offset = Vector2(0, -32)
+texture = ExtResource("32_fence_straight")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/PerimeterFencing/EastLower02"]
+shape = SubResource("Shape_fence_straight")
+
+[node name="Planters" type="Node2D" parent="EnvironmentalComposition"]
+
+[node name="PlanterNorthwest" type="StaticBody2D" parent="EnvironmentalComposition/Planters"]
+position = Vector2(144, 240)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Planters/PlanterNorthwest"]
+offset = Vector2(0, -32)
+texture = ExtResource("21_planter_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Planters/PlanterNorthwest"]
+position = Vector2(0, -6)
+shape = SubResource("Shape_planter")
+
+[node name="PlanterNortheast" type="StaticBody2D" parent="EnvironmentalComposition/Planters"]
+position = Vector2(752, 240)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Planters/PlanterNortheast"]
+offset = Vector2(0, -32)
+texture = ExtResource("21_planter_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Planters/PlanterNortheast"]
+position = Vector2(0, -6)
+shape = SubResource("Shape_planter")
+
+[node name="PlanterSouthwest" type="StaticBody2D" parent="EnvironmentalComposition/Planters"]
+position = Vector2(144, 560)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Planters/PlanterSouthwest"]
+offset = Vector2(0, -32)
+texture = ExtResource("22_planter_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Planters/PlanterSouthwest"]
+position = Vector2(0, -6)
+shape = SubResource("Shape_planter")
+
+[node name="PlanterSoutheast" type="StaticBody2D" parent="EnvironmentalComposition/Planters"]
+position = Vector2(752, 560)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Planters/PlanterSoutheast"]
+offset = Vector2(0, -32)
+texture = ExtResource("22_planter_2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Planters/PlanterSoutheast"]
+position = Vector2(0, -6)
+shape = SubResource("Shape_planter")
+
+[node name="Lighting" type="Node2D" parent="EnvironmentalComposition"]
+
+[node name="LanternNorthwest" type="StaticBody2D" parent="EnvironmentalComposition/Lighting"]
+position = Vector2(112, 248)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Lighting/LanternNorthwest"]
+offset = Vector2(0, -48)
+texture = ExtResource("23_lantern")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Lighting/LanternNorthwest"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_lantern")
+
+[node name="LanternNortheast" type="StaticBody2D" parent="EnvironmentalComposition/Lighting"]
+position = Vector2(784, 248)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Lighting/LanternNortheast"]
+offset = Vector2(0, -48)
+texture = ExtResource("23_lantern")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Lighting/LanternNortheast"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_lantern")
+
+[node name="LanternSouthwest" type="StaticBody2D" parent="EnvironmentalComposition/Lighting"]
+position = Vector2(112, 408)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Lighting/LanternSouthwest"]
+offset = Vector2(0, -48)
+texture = ExtResource("23_lantern")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Lighting/LanternSouthwest"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_lantern")
+
+[node name="LanternSoutheast" type="StaticBody2D" parent="EnvironmentalComposition/Lighting"]
+position = Vector2(784, 408)
+script = ExtResource("15_depth")
+
+[node name="Sprite" type="Sprite2D" parent="EnvironmentalComposition/Lighting/LanternSoutheast"]
+offset = Vector2(0, -48)
+texture = ExtResource("23_lantern")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvironmentalComposition/Lighting/LanternSoutheast"]
+position = Vector2(0, -5)
+shape = SubResource("Shape_lantern")
+
 [node name="StallAttendant" parent="." instance=ExtResource("3_npc")]
+z_index = 10
 position = Vector2(208, 208)
 conversation = ExtResource("4_attendant")
 placeholder_color = Color(0.82, 0.4, 0.32, 1)
+character_sprite_frames = ExtResource("24_attendant_frames")
+character_visual_enabled = true
 facing_direction = Vector2(0, 1)
 
 [node name="MarketShopper" parent="." instance=ExtResource("3_npc")]
+z_index = 10
 position = Vector2(448, 320)
 conversation = ExtResource("5_shopper")
 placeholder_color = Color(0.36, 0.7, 0.72, 1)
+character_sprite_frames = ExtResource("25_shopper_frames")
+character_visual_enabled = true
 facing_direction = Vector2(-1, 0)
 
 [node name="SupplyTraveler" parent="." instance=ExtResource("3_npc")]
+z_index = 10
 position = Vector2(688, 400)
 conversation = ExtResource("6_traveler")
 placeholder_color = Color(0.7, 0.5, 0.82, 1)
+character_sprite_frames = ExtResource("26_traveler_frames")
+character_visual_enabled = true
 facing_direction = Vector2(0, -1)
+
+[node name="AmbientWalkers" type="Node2D" parent="."]
+
+[node name="NorthwestShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
+z_index = 10
+position = Vector2(272, 240)
+character_sprite_frames = ExtResource("28_walker_nw_frames")
+patrol_distance = 64.0
+move_speed = 20.0
+pause_duration = 0.8
+
+[node name="NortheastShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
+z_index = 10
+position = Vector2(624, 240)
+character_sprite_frames = ExtResource("29_walker_ne_frames")
+patrol_distance = 64.0
+move_speed = 22.0
+pause_duration = 1.1
+start_toward_positive = false
+
+[node name="SouthwestShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
+z_index = 10
+position = Vector2(272, 416)
+character_sprite_frames = ExtResource("30_walker_sw_frames")
+patrol_distance = 64.0
+move_speed = 18.0
+pause_duration = 1.3
+
+[node name="SoutheastShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
+z_index = 10
+position = Vector2(624, 416)
+character_sprite_frames = ExtResource("31_walker_se_frames")
+patrol_distance = 64.0
+move_speed = 21.0
+pause_duration = 0.9
+start_toward_positive = false
 
 [node name="Boundaries" type="Node2D" parent="."]
 
@@ -173,18 +914,22 @@ position = Vector2(880, 320)
 shape = SubResource("Shape_boundary_vertical")
 
 [node name="NorthVisual" type="Polygon2D" parent="Boundaries"]
+visible = false
 polygon = PackedVector2Array(0, 0, 896, 0, 896, 32, 0, 32)
 color = Color(0.12, 0.28, 0.14, 1)
 
 [node name="SouthVisual" type="Polygon2D" parent="Boundaries"]
+visible = false
 polygon = PackedVector2Array(0, 608, 896, 608, 896, 640, 0, 640)
 color = Color(0.12, 0.28, 0.14, 1)
 
 [node name="WestVisual" type="Polygon2D" parent="Boundaries"]
+visible = false
 polygon = PackedVector2Array(0, 0, 32, 0, 32, 640, 0, 640)
 color = Color(0.12, 0.28, 0.14, 1)
 
 [node name="EastVisual" type="Polygon2D" parent="Boundaries"]
+visible = false
 polygon = PackedVector2Array(864, 0, 896, 0, 896, 640, 864, 640)
 color = Color(0.12, 0.28, 0.14, 1)
 
@@ -217,6 +962,7 @@ destination_entry = &"from_marketplace"
 shape = SubResource("Shape_exit_vertical")
 
 [node name="ZoneLabel" type="Label" parent="."]
+visible = false
 offset_left = 32.0
 offset_top = 32.0
 offset_right = 220.0

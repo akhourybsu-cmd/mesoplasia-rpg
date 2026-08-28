@@ -282,3 +282,271 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 ### Remaining approval item
 
 - The Marketplace composition plan and candidate shortlist are the active visual gate. No candidate may be normalized or integrated until the user explicitly selects it, and no later Caden zone is authorized by this gate.
+
+## 2026-08-27 - Marketplace selective integration runtime v1
+
+### Scope
+
+- Implemented the approved Marketplace shortlist `01`, `03`, `04`, `06`, `07`, `13`, and `14`; retained every alternate, deferred, and rejected disposition.
+- Verified each source against the external Caden Mega Asset Library v1.1 manifest, normalized at exact `0.1875` nearest-neighbor scale, and imported only cleaned runtime PNGs at scale `1.0`.
+- Removed broad presentation shadows, bright boundary fringe, partial alpha, detached fragments, transparent RGB, and canvas-edge pixels without repainting source structures.
+- Replaced the flat Marketplace ground with a deterministic `896 x 640` terrain composition derived exclusively from exact cells in the approved Caden Terrain Runtime v1.1 atlas.
+- Rebuilt the eight fixed vendor bays as four paired commercial districts while preserving their centers and all primary circulation, transition, camera, NPC, dialogue, and interaction contracts.
+- Added structural bottom-center pivots, solid-only collision footprints, and player-relative depth sorting to every selected runtime prop.
+- Grouped approved repository trees, shrubs, planters, and lanterns around the perimeter and district edges while retaining open west, cross, central, and south corridors.
+- Replaced the three Marketplace placeholder polygons with existing approved Caden NPC visuals without changing identities, positions, dialogue, or behavior.
+- Produced a full-zone-first external before/after package and stopped at the Marketplace in-engine visual gate.
+
+### Files and systems changed
+
+- `scenes/world/caden/Marketplace.tscn`
+- `assets/environments/caden/marketplace/props/runtime_v1/`
+- `assets/environments/caden/marketplace/marketplace_runtime_manifest_v1.json`
+- `assets/environments/caden/marketplace/terrain/`
+- `tools/art/prepare_caden_marketplace_runtime_v1.py`
+- `tools/art/build_caden_marketplace_terrain_v1.py`
+- `tools/art/render_caden_marketplace_runtime_v1.gd`
+- `tools/art/build_caden_marketplace_runtime_review_v1.py`
+- `tests/caden_marketplace_runtime_test.gd`
+- `docs/art/CADEN_MARKETPLACE_RECONSTRUCTION_GATE_V1.md`
+- `docs/art/CADEN_MARKETPLACE_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+- Generated the external `caden_marketplace_runtime_v1_render` evidence directory and `caden_marketplace_runtime_review_v1` visual-approval package reported at handoff.
+
+### Validation
+
+- Marketplace source normalization and post-clean audit: PASS for all seven selected assets; exact target dimensions, binary alpha, zero transparent RGB, zero canvas-edge pixels, zero bright boundary halo candidates, zero tiny detached components, and one connected component each.
+- Marketplace terrain generator: PASS; protected atlas hash, exact `896 x 640` dimensions, full opacity, exact `32 x 32` cell derivation, scale `1.0`, and collision-free output verified.
+- `res://tests/caden_marketplace_runtime_test.gd`: PASS; source/runtime metadata, terrain, selections, pivots, scale, collision, sorting, route clearance, NPC visuals/dialogue, entries, exits, and camera contract verified.
+- `res://tests/caden_zone_transition_test.gd`: PASS; every Caden transition, arrival position, persistent Player instance, and camera limit remains valid.
+- `res://tests/caden_wayfarers_approach_runtime_test.gd`: PASS; the approved Wayfarer scene and two-asset pilot remain unchanged and valid.
+- `res://tests/caden_town_square_environmental_dressing_test.gd`: PASS; the validated Town Square contract remains intact.
+- Godot 4.7.2 headless editor import and main-scene launch: PASS; no project parser, resource, UID, or runtime failure.
+- Compatibility visual evidence: PASS; native full-zone and route/district frames, vendor and tree front/behind pairs, and exact byte-matched `1280 x 720` nearest-neighbor proof generated.
+- External review-package verification: PASS; all 24 packaged files match `SHA256SUMS.txt`.
+
+### Remaining approval item
+
+- Marketplace Runtime v1 is the active in-engine visual gate. Town Square, Residential Quarter, Commons, and all unselected library candidates remain unauthorized until this Marketplace comparison receives explicit visual approval.
+
+## 2026-08-27 - Marketplace lively perimeter refinement
+
+### Scope
+
+- Added four non-interactive ambient shoppers using the established Caden `PatrolNpc` component, with one bounded horizontal route in each vendor district.
+- Expanded the Marketplace edge from ten to sixteen trees and moved every structural tree contact onto the outer grass.
+- Added layered shrub understory around the north, west, east, and south planting frame.
+- Added 22 collidable fence segments along the grass side of the market boundary, including closed north and east service gates.
+- Preserved deliberate openings for the west Wayfarer's Approach route and south Town Square route, plus all vendor bays, central circulation, transitions, static NPC dialogue, and selected library assets.
+- Rendered the live Compatibility scene outside `res://` for the next Marketplace visual approval pass.
+
+### Files and systems changed
+
+- `scenes/world/caden/Marketplace.tscn`
+- `tests/caden_marketplace_runtime_test.gd`
+- `tools/art/build_caden_marketplace_lively_perimeter_review_v2.py`
+- `docs/art/CADEN_MARKETPLACE_RUNTIME_V1.md`
+- `docs/art/CADEN_MARKETPLACE_RECONSTRUCTION_GATE_V1.md`
+- `docs/CHANGELOG.md`
+- Generated external visual evidence under `caden_marketplace_lively_perimeter_review_v2`.
+
+### Validation
+
+- `res://tests/caden_marketplace_runtime_test.gd`: PASS; sixteen grass-grounded trees, 22 narrow fence collisions, both travel openings, four bounded walkers, selected assets, sorting, routes, entries, and exits validate.
+- `res://tests/caden_npc_variants_patrol_runtime_test.gd`: PASS; the reusable patrol animation and bounded-movement contract remains valid.
+- `res://tests/caden_zone_transition_test.gd`: PASS; every Caden connection, entry placement, persistent Player instance, and camera limit remains valid.
+- `res://tests/caden_wayfarers_approach_runtime_test.gd`: PASS; the approved two-prop Wayfarer pilot remains unchanged.
+- `res://tests/caden_town_square_environmental_dressing_test.gd`: PASS; the established Town Square composition remains unchanged.
+- Godot 4.7.2 headless main-scene launch: PASS; no project parser, resource, or runtime error.
+- Godot 4.7.2 Compatibility capture: PASS; full-zone, route, district, overlap, and exact 2x frames generated outside `res://`.
+- External v1/v2 comparison package: PASS; prior runtime and current landscaped captures, full-zone-first board, tool hashes, and package checksums generated outside `res://`.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The landscaped Marketplace perimeter and four ambient shoppers are the active visual gate. No additional library asset or later-zone integration is authorized by this pass.
+
+## 2026-08-27 - Marketplace approval and Residential reconstruction gate v1
+
+### Scope
+
+- Recorded visual approval of Marketplace Runtime v1 and its lively-perimeter refinement, allowing the ordered five-zone workflow to continue.
+- Audited the already validated Town Square against the master prompt and left its scene unchanged; its open octagonal plaza, reserved community space, four exits, ambient population, perimeter dressing, and Terrebonne closure already satisfy the restrained-refinement brief.
+- Reconstructed the untouched `1152 x 768` Residential contract: ten fixed cabin bodies, three fixed yard fences, six road/lane rectangles, two transitions, two entry markers, two interactive NPCs, camera bounds, and boundary collision.
+- Captured deterministic Residential baseline evidence outside `res://` at full-zone, gameplay, route, home-district, transition, and exact 2x display resolutions.
+- Verified all 222 Caden v1.1 catalog rows and all 297 package checksums.
+- Re-audited and displayed all 18 viable Residential set-piece and mega candidates at proposed runtime scale beside the approved `40 x 56` player.
+- Preserved rejection of all 24 Residential/townwide house masters for unsuitable baked shadows.
+- Recommended set pieces `01`, `04`, `05`, `06`, `08`, `09`, and `11`; retained `02`, `03`, `10`, `13`, `14`, and `15` as alternates; deferred `07`, `12`, `16`, and mega composites `01` and `02`.
+- Stopped before Residential normalization, import, or scene modification.
+
+### Files and systems changed
+
+- `assets/environments/caden/marketplace/marketplace_runtime_manifest_v1.json`
+- `tools/art/prepare_caden_marketplace_runtime_v1.py`
+- `tools/art/build_caden_marketplace_runtime_review_v1.py`
+- `tests/caden_marketplace_runtime_test.gd`
+- `docs/art/CADEN_MARKETPLACE_RUNTIME_V1.md`
+- `tools/art/render_caden_residential_baseline_v1.gd`
+- `tools/art/build_caden_residential_reconstruction_gate_v1.py`
+- `docs/art/CADEN_RESIDENTIAL_RECONSTRUCTION_GATE_V1.md`
+- `docs/CHANGELOG.md`
+- Generated external `caden_residential_baseline_v1_render` evidence and `caden_residential_reconstruction_gate_v1` approval materials.
+
+### Validation
+
+- Residential Compatibility baseline renderer: PASS; seven deterministic captures generated outside `res://`.
+- Residential gate builder: PASS; 222 catalog rows, 297 source-package checksums, 18 candidate hashes, source binary alpha, canvas-edge clearance, all candidate dispositions, and 24 preserved building rejections verified.
+- Exact 2x presentation proof: PASS; the `1280 x 720` primary frame byte-matches nearest-neighbor enlargement of the `640 x 360` source.
+- External gate-package verification: PASS; all 13 packaged files match `SHA256SUMS.txt`.
+- `res://tests/caden_marketplace_runtime_test.gd`: PASS with the approved Marketplace gate state and all scene contracts.
+- `res://tests/caden_town_square_environmental_dressing_test.gd`: PASS; Town Square remains unchanged and valid.
+- `res://tests/caden_zone_transition_test.gd`: PASS; every Caden connection, arrival placement, persistent Player instance, and camera limit remains valid.
+- Godot 4.7.2 headless main-scene launch: PASS; no project parser, resource, or runtime error.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- Residential candidate selection is the active visual gate. No Residential source may be normalized or imported, and Commons remains untouched, until the shortlist receives explicit approval.
+
+## 2026-08-27 - Residential Runtime v1 visual gate
+
+### Scope
+
+- Recorded approval of Residential candidates `01`, `04`, `05`, `06`, `08`, `09`, and `11` and normalized only those sources at exact `0.1875` nearest-neighbor scale.
+- Removed presentation shadows, bright fringes, partial alpha, detached fragments, edge-touching pixels, and transparent RGB from the selected runtime PNGs; retained structural bottom-center pivots and scale `1.0` imports.
+- Replaced the Residential greybox terrain with an exact `32 x 32` atlas-cell composition while preserving the full `1152 x 768` bounds, west-east road, Commons branch, and four household lanes.
+- Preserved all ten home centers and `128 x 96` collision bodies and reused already approved Caden runtime v2 building art; none of the 24 rejected baked-shadow building masters was imported.
+- Preserved all three fence centers and `192 x 24` collision bodies and aligned existing approved fence art to their fixed geometry.
+- Grouped the seven selected set pieces into household thresholds, maintained gardens, laundry, and storage yards with object-specific collision and player-relative depth sorting.
+- Added twelve grass-grounded perimeter trees, sixteen low plantings, and four lane lanterns while keeping both transitions and all protected roads clear.
+- Replaced the two existing NPC placeholders with approved character visuals without changing identity, dialogue, position, or facing.
+- Added five non-interactive neighbors on short bounded patrols, producing seven visible Residential NPCs without new dialogue, lore, persistence, or gameplay systems.
+- Rendered and packaged the pending Residential in-engine visual gate outside `res://`; Commons remains untouched.
+
+### Files and systems changed
+
+- `scenes/world/caden/Residential.tscn`
+- `assets/environments/caden/residential/residential_runtime_manifest_v1.json`
+- `assets/environments/caden/residential/props/runtime_v1/*.png`
+- `assets/environments/caden/residential/terrain/residential_terrain_runtime_v1.png`
+- `assets/environments/caden/residential/terrain/residential_terrain_runtime_v1.json`
+- `tools/art/prepare_caden_residential_runtime_v1.py`
+- `tools/art/build_caden_residential_terrain_v1.py`
+- `tools/art/render_caden_residential_runtime_v1.gd`
+- `tools/art/build_caden_residential_runtime_review_v1.py`
+- `tests/caden_residential_runtime_test.gd`
+- `docs/art/CADEN_RESIDENTIAL_RECONSTRUCTION_GATE_V1.md`
+- `docs/art/CADEN_RESIDENTIAL_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+- Generated external render evidence under `caden_residential_runtime_v1_render` and review materials under `caden_residential_runtime_review_v1`.
+
+### Validation
+
+- `res://tests/caden_residential_runtime_test.gd`: PASS; all 222 catalog rows, seven cleaned runtime hashes, terrain hash, ten homes, three fences, selected pivots, object-specific collisions, twelve trees, sixteen low plantings, four lanterns, seven residents, protected roads, sorting, entries, and exits validate.
+- `res://tests/caden_zone_transition_test.gd`: PASS; every Caden connection, entry placement, persistent Player instance, and camera limit remains valid.
+- `res://tests/caden_marketplace_runtime_test.gd`: PASS; the approved Marketplace runtime remains unchanged and valid.
+- `res://tests/caden_town_square_environmental_dressing_test.gd`: PASS; the established Town Square composition remains unchanged and valid.
+- `res://tests/caden_wayfarers_approach_runtime_test.gd`: PASS; the approved Wayfarer pilot remains unchanged and valid.
+- `res://tests/caden_npc_variants_patrol_runtime_test.gd`: PASS; approved character variants and bounded patrol behavior remain valid.
+- Godot 4.7.2 headless main-scene launch: PASS; no project parser, resource, UID, or runtime failure.
+- Compatibility visual evidence: PASS; eleven deterministic native captures include full-zone, route, household, transition, two front/behind sorting pairs, and exact byte-matched `1280 x 720` nearest-neighbor proof.
+- External review-package verification: PASS; all 24 packaged files match `SHA256SUMS.txt`, tooling is checksummed, and no hidden build artifact remains.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- Residential Runtime v1 is the active in-engine visual gate. Commons and all alternate, deferred, rejected, and mega assets remain unauthorized until this comparison receives explicit visual approval.
+
+## 2026-08-27 - Residential approval and Commons reconstruction gate v1
+
+### Scope
+
+- Recorded visual approval of Residential Runtime v1 and updated its runtime manifest and validation state accordingly.
+- Left the approved Residential scene and all integrated assets unchanged while advancing the ordered five-zone workflow.
+- Reconstructed the untouched `1024 x 704` Commons contract: two protected `128`-pixel approach routes, two transitions, two entry markers, three fixed `96 x 96` tree bodies, one fixed `64 x 48` rock body, one interactive resident, the eastern Quiet Green, camera bounds, and boundary collision.
+- Captured deterministic Commons baseline evidence outside `res://` at native full-zone, route, reserved-green, boundary, and exact 2x display resolutions.
+- Verified all 222 Caden v1.1 catalog rows and all 297 package checksums.
+- Audited 24 viable Commons set-piece, seam, and mega candidates at proposed runtime scale beside the approved `40 x 56` player.
+- Recommended Commons sources `01`, `04`, `09`, `11`, `14`, and `20`; retained `02`, `03`, `05`, `08`, `10`, `12`, `13`, `15`, and `18` as alternates.
+- Deferred `06`, `07`, `16`, `17`, `19`, both Town Square/Commons seam candidates, and both Commons mega composites.
+- Preserved rejection of both Residential/Commons seam sources for boundary fringe.
+- Defined the open Quiet Green as the dominant anchor, with natural density restricted to the northwest grove, southwest edge, southeast boundary, and at most one path-edge rest pocket.
+- Stopped before Commons normalization, import, or scene modification.
+
+### Files and systems changed
+
+- `assets/environments/caden/residential/residential_runtime_manifest_v1.json`
+- `tests/caden_residential_runtime_test.gd`
+- `docs/art/CADEN_RESIDENTIAL_RUNTIME_V1.md`
+- `tools/art/render_caden_commons_baseline_v1.gd`
+- `tools/art/build_caden_commons_reconstruction_gate_v1.py`
+- `tests/caden_commons_contract_test.gd`
+- `docs/art/CADEN_COMMONS_RECONSTRUCTION_GATE_V1.md`
+- `docs/CHANGELOG.md`
+- Generated external `caden_commons_baseline_v1_render` evidence and `caden_commons_reconstruction_gate_v1` approval materials.
+
+### Validation
+
+- Commons Compatibility baseline renderer: PASS; seven deterministic captures generated outside `res://`.
+- Commons gate builder: PASS; 222 catalog rows, 297 source-package checksums, 24 viable candidate hashes, hard alpha, source-edge clearance, two preserved seam rejections, all dispositions, and provenance metadata verified.
+- `res://tests/caden_commons_contract_test.gd`: PASS; bounds, protected routes, Quiet Green, fixed obstacles, resident, entries, exits, and transition collision validate.
+- Exact 2x presentation proof: PASS; the `1280 x 720` route frame byte-matches nearest-neighbor enlargement of the `640 x 360` source.
+- External gate-package verification: PASS; all packaged files match `SHA256SUMS.txt`, tools and tests are checksummed, and no Commons source enters `res://`.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- Commons candidate selection is the active visual gate. No Commons source may be normalized or imported until the recommended shortlist receives explicit visual approval.
+
+## 2026-08-27 - Commons Runtime v1 visual gate
+
+### Scope
+
+- Recorded approval of Commons candidates `01`, `04`, `09`, `11`, `14`, and `20` and normalized only those sources at exact `0.1875` nearest-neighbor scale.
+- Removed presentation shadows, bright fringes, partial alpha, detached fragments, edge-touching pixels, and transparent RGB from the selected runtime PNGs; retained structural bottom-center pivots and scale `1.0` imports.
+- Replaced Commons placeholder terrain with an exact `32 x 32` atlas-cell composition while preserving the `1024 x 704` bounds and the Town Square and Residential route polygons.
+- Preserved the three authored tree centers and southwest rock center while replacing oversized placeholder canopy collisions with trunk- and object-specific shapes.
+- Integrated one maintained grove, one shade-tree anchor, one walkable meadow, one natural rock mass, one boundary undergrowth mass, and one quiet path-edge rest pocket.
+- Kept the eastern Quiet Green mostly open and used it as the dominant visual anchor through negative space rather than a building, monument, shelter, or mega composite.
+- Added sixteen approved repository trees and seventeen low plantings around the outer grass without entering either protected route or transition corridor.
+- Replaced the existing Commons resident placeholder with approved character art without changing identity, dialogue, position, interaction, or facing.
+- Added two non-interactive residents on short bounded patrols, producing three visible Commons NPCs without new dialogue, lore, persistence, or gameplay systems.
+- Rendered and packaged the pending Commons in-engine visual gate outside `res://`.
+
+### Files and systems changed
+
+- `scenes/world/caden/Commons.tscn`
+- `assets/environments/caden/commons/commons_runtime_manifest_v1.json`
+- `assets/environments/caden/commons/props/runtime_v1/*.png`
+- `assets/environments/caden/commons/terrain/commons_terrain_runtime_v1.png`
+- `assets/environments/caden/commons/terrain/commons_terrain_runtime_v1.json`
+- `tools/art/prepare_caden_commons_runtime_v1.py`
+- `tools/art/build_caden_commons_terrain_v1.py`
+- `tools/art/render_caden_commons_runtime_v1.gd`
+- `tools/art/build_caden_commons_runtime_review_v1.py`
+- `tests/caden_commons_contract_test.gd`
+- `tests/caden_commons_runtime_test.gd`
+- `docs/art/CADEN_COMMONS_RECONSTRUCTION_GATE_V1.md`
+- `docs/art/CADEN_COMMONS_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+- Generated external render evidence under `caden_commons_runtime_v1_render` and review materials under `caden_commons_runtime_review_v1`.
+
+### Validation
+
+- `res://tests/caden_commons_contract_test.gd`: PASS; bounds, route polygons, Quiet Green, authored anchor centers, precise collision, resident, entries, exits, and transition collision validate.
+- `res://tests/caden_commons_runtime_test.gd`: PASS; all 222 catalog rows, six cleaned runtime hashes, terrain hash, selected pivots, object-specific collision, sixteen trees, seventeen plantings, protected routes, sorting, three residents, entries, and exits validate.
+- `res://tests/caden_zone_transition_test.gd`: PASS after the normal Godot import; every Caden connection, entry placement, persistent Player instance, and camera limit remains valid.
+- `res://tests/caden_marketplace_runtime_test.gd`: PASS; the approved Marketplace runtime remains unchanged and valid.
+- `res://tests/caden_town_square_environmental_dressing_test.gd`: PASS; the established Town Square composition remains unchanged and valid.
+- `res://tests/caden_residential_runtime_test.gd`: PASS; the approved Residential runtime remains unchanged and valid.
+- `res://tests/caden_wayfarers_approach_runtime_test.gd`: PASS; the approved Wayfarer pilot remains unchanged and valid.
+- `res://tests/caden_npc_variants_patrol_runtime_test.gd`: PASS; approved character variants and bounded patrol behavior remain valid.
+- Godot 4.7.2 headless asset import: PASS; all seven new PNGs imported through the normal editor workflow.
+- Compatibility visual evidence: PASS; eleven deterministic native captures include full-zone, routes, reserved green, southern boundary, bench and tree front/behind sorting pairs, and exact byte-matched `1280 x 720` nearest-neighbor proof.
+- External review-package verification: PASS; all packaged files match `SHA256SUMS.txt`, tooling and tests are checksummed, and no hidden build artifact remains.
+- Known sandbox-only notices remain limited to Godot user-log writes, editor-settings writes, and Windows certificate-store access.
+
+### Remaining approval item
+
+- Commons Runtime v1 is the final in-engine visual gate for the ordered five-zone Caden pass. Alternate, deferred, rejected, seam, and mega sources remain unauthorized.

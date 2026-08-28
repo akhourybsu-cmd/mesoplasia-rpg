@@ -1,0 +1,438 @@
+{
+  "schema": "caden-commons-runtime-manifest-v1",
+  "generator": "tools/art/prepare_caden_commons_runtime_v1.py",
+  "generator_sha256": "005a511944e4a7ab1502aabd70797d0b685230ee03e9f897a1a77399820ca598",
+  "source_package": "Caden Mega Asset Library v1.1",
+  "source_package_location_policy": "staged outside res://; only selected cleaned runtime PNGs are imported",
+  "catalog_rows_verified": 222,
+  "scope": "Six explicitly approved Commons candidates only.",
+  "gate_state": "commons_runtime_v1_pending_in_engine_visual_approval",
+  "provenance_and_licensing": {
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_until_rights_are_verified"
+  },
+  "preserved_rejections": {
+    "residential_commons_seams": [
+      "a",
+      "b"
+    ],
+    "deferred_mega_set": [
+      "01",
+      "02"
+    ],
+    "deferred_town_square_commons_seams": [
+      "a",
+      "b"
+    ]
+  },
+  "assets": {
+    "01": {
+      "catalog_asset_id": "caden_sp_com_01_large_tree_shrubs_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "commons_selected",
+      "approval_state": "approved_for_commons_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_09_commons_setpieces/assets/caden_sp_com_01_large_tree_shrubs_master_v1.png",
+      "source_sha256": "569456d8831c9c23b2a6e6fb6801d753d43c95224fba686e2ee042c5340ee995",
+      "source_dimensions": [
+        547,
+        606
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        515,
+        574
+      ],
+      "scale_family": "foliage_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/commons/props/runtime_v1/large_tree_shrubs_runtime_v1.png",
+      "runtime_sha256": "0b695267d766fbe70736505c7fbe700d7129acd9d3b3a0c08e34b560d0522909",
+      "runtime_dimensions": [
+        95,
+        106
+      ],
+      "pivot_xy": [
+        47,
+        104
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "Quiet Green shade tree anchor",
+      "scene_path": "scenes/world/caden/Commons.tscn",
+      "scene_node_path": "Greenery/TreeCluster02",
+      "world_position_xy": [
+        800,
+        224
+      ],
+      "collision": "24x18 trunk base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 156,
+        "bright_halo_pixels_recolored_or_removed": 58,
+        "detached_fragments_removed": 2,
+        "detached_fragment_pixels_removed": 2,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          86,
+          104
+        ],
+        "visible_pixels": 5746,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 5746,
+        "smallest_component_pixels": 5746
+      }
+    },
+    "04": {
+      "catalog_asset_id": "caden_sp_com_04_three_tree_grove_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "commons_selected",
+      "approval_state": "approved_for_commons_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_09_commons_setpieces/assets/caden_sp_com_04_three_tree_grove_master_v1.png",
+      "source_sha256": "4652c5a543ae9d649fe35e78b6edcf338a46f0bf6454e35eba4ab96994513fdc",
+      "source_dimensions": [
+        568,
+        470
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        536,
+        438
+      ],
+      "scale_family": "foliage_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/commons/props/runtime_v1/three_tree_grove_runtime_v1.png",
+      "runtime_sha256": "b653eff46526dd5c815c6b07c4214811adbea6addff520621df6aca187a93827",
+      "runtime_dimensions": [
+        98,
+        80
+      ],
+      "pivot_xy": [
+        49,
+        78
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "northwest maintained grove",
+      "scene_path": "scenes/world/caden/Commons.tscn",
+      "scene_node_path": "Greenery/TreeCluster01",
+      "world_position_xy": [
+        192,
+        160
+      ],
+      "collision": "three 14x12 trunk bases",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 97,
+        "bright_halo_pixels_recolored_or_removed": 67,
+        "detached_fragments_removed": 3,
+        "detached_fragment_pixels_removed": 3,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          91,
+          78
+        ],
+        "visible_pixels": 4366,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 2,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4363,
+        "smallest_component_pixels": 3
+      }
+    },
+    "09": {
+      "catalog_asset_id": "caden_sp_com_09_wildflower_meadow_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "commons_selected",
+      "approval_state": "approved_for_commons_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_09_commons_setpieces/assets/caden_sp_com_09_wildflower_meadow_master_v1.png",
+      "source_sha256": "eda1222657549fc0cf2013d57693e020b29f74091afc6b173b930a20af35c09e",
+      "source_dimensions": [
+        605,
+        410
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        573,
+        378
+      ],
+      "scale_family": "foliage_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/commons/props/runtime_v1/wildflower_meadow_runtime_v1.png",
+      "runtime_sha256": "b3f287d2fe21bcc56917afce852e84acf6d4f11747d054622eb590706122274e",
+      "runtime_dimensions": [
+        105,
+        69
+      ],
+      "pivot_xy": [
+        52,
+        67
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "restrained Quiet Green meadow",
+      "scene_path": "scenes/world/caden/Commons.tscn",
+      "scene_node_path": "CommonsComposition/WildflowerMeadow",
+      "world_position_xy": [
+        704,
+        352
+      ],
+      "collision": "none; meadow remains walkable",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 155,
+        "bright_halo_pixels_recolored_or_removed": 64,
+        "detached_fragments_removed": 6,
+        "detached_fragment_pixels_removed": 6,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          99,
+          67
+        ],
+        "visible_pixels": 3606,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 2,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 3594,
+        "smallest_component_pixels": 12
+      }
+    },
+    "11": {
+      "catalog_asset_id": "caden_sp_com_11_rock_shrub_cluster_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "commons_selected",
+      "approval_state": "approved_for_commons_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_09_commons_setpieces/assets/caden_sp_com_11_rock_shrub_cluster_master_v1.png",
+      "source_sha256": "1434eb7d83b4fa2cccb5334fb32d16080e92da301d2f7e537c58811a64e1acdc",
+      "source_dimensions": [
+        627,
+        424
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        595,
+        392
+      ],
+      "scale_family": "foliage_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/commons/props/runtime_v1/rock_shrub_cluster_runtime_v1.png",
+      "runtime_sha256": "02618fe14a50b2566977ec8bfa954eb6859fd11e873be52d30c78ae9f222c7a2",
+      "runtime_dimensions": [
+        110,
+        72
+      ],
+      "pivot_xy": [
+        55,
+        70
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southwest natural rock anchor",
+      "scene_path": "scenes/world/caden/Commons.tscn",
+      "scene_node_path": "Greenery/RockCluster",
+      "world_position_xy": [
+        288,
+        544
+      ],
+      "collision": "40x20 central rock base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 200,
+        "bright_halo_pixels_recolored_or_removed": 34,
+        "detached_fragments_removed": 2,
+        "detached_fragment_pixels_removed": 2,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          102,
+          70
+        ],
+        "visible_pixels": 4215,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4215,
+        "smallest_component_pixels": 4215
+      }
+    },
+    "14": {
+      "catalog_asset_id": "caden_sp_com_14_dense_undergrowth_edge_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "commons_selected",
+      "approval_state": "approved_for_commons_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_09_commons_setpieces/assets/caden_sp_com_14_dense_undergrowth_edge_master_v1.png",
+      "source_sha256": "8d15073d573341efde41c111eb03fe75e680d44d5fe6f3ce130464f8ccf27728",
+      "source_dimensions": [
+        605,
+        502
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        573,
+        470
+      ],
+      "scale_family": "foliage_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/commons/props/runtime_v1/dense_undergrowth_edge_runtime_v1.png",
+      "runtime_sha256": "27a0cb61657b47760450016e378b303fa47add42565730722a29147cfcb0dae7",
+      "runtime_dimensions": [
+        105,
+        86
+      ],
+      "pivot_xy": [
+        52,
+        84
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "southeast planted boundary mass",
+      "scene_path": "scenes/world/caden/Commons.tscn",
+      "scene_node_path": "CommonsComposition/BoundaryUndergrowth",
+      "world_position_xy": [
+        896,
+        624
+      ],
+      "collision": "56x16 fence and rock base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 60,
+        "bright_halo_pixels_recolored_or_removed": 63,
+        "detached_fragments_removed": 5,
+        "detached_fragment_pixels_removed": 5,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          2,
+          2,
+          103,
+          84
+        ],
+        "visible_pixels": 5114,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 1,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 5114,
+        "smallest_component_pixels": 5114
+      }
+    },
+    "20": {
+      "catalog_asset_id": "caden_sp_com_20_quiet_bench_rocks_wildflowers_master_v1",
+      "catalog_status": "candidate",
+      "selection_status": "commons_selected",
+      "approval_state": "approved_for_commons_runtime_v1_integration",
+      "rights_status": "project_internal_rights_unverified",
+      "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
+      "source_package_path": "candidates/batch_09_commons_setpieces/assets/caden_sp_com_20_quiet_bench_rocks_wildflowers_master_v1.png",
+      "source_sha256": "0de1de5331c7f1e904c01624b8382da17c08237df85b8ea693c55f9fade5fb12",
+      "source_dimensions": [
+        569,
+        515
+      ],
+      "source_bounds_xyxy": [
+        32,
+        32,
+        537,
+        483
+      ],
+      "scale_family": "foliage_setpiece",
+      "normalization_factor": 0.1875,
+      "resampling": "nearest-neighbor",
+      "runtime_path": "assets/environments/caden/commons/props/runtime_v1/quiet_bench_rocks_wildflowers_runtime_v1.png",
+      "runtime_sha256": "f0aff9ff0bfcf460c6b203938ce8ccf87795b8a0f12a62bb97b20dd4e3c8df0e",
+      "runtime_dimensions": [
+        99,
+        89
+      ],
+      "pivot_xy": [
+        49,
+        87
+      ],
+      "pivot_basis": "bottom-center structural ground contact; excludes removed presentation shadow",
+      "import_scale": 1.0,
+      "intended_placement": "single quiet path-edge rest pocket",
+      "scene_path": "scenes/world/caden/Commons.tscn",
+      "scene_node_path": "CommonsComposition/QuietRestPocket",
+      "world_position_xy": [
+        640,
+        480
+      ],
+      "collision": "52x14 bench plus 20x18 rock base",
+      "manual_cleanup": {
+        "partial_alpha_pixels_binarized": 0,
+        "presentation_shadow_pixels_removed": 88,
+        "bright_halo_pixels_recolored_or_removed": 65,
+        "detached_fragments_removed": 5,
+        "detached_fragment_pixels_removed": 5,
+        "transparent_rgb_pixels_zeroed": 0
+      },
+      "post_cleanup_audit": {
+        "visible_bounds_xyxy": [
+          3,
+          2,
+          97,
+          87
+        ],
+        "visible_pixels": 4837,
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "bright_boundary_halo_candidates": 0,
+        "connected_components": 3,
+        "detached_components_at_or_below_2_pixels": 0,
+        "largest_component_pixels": 4824,
+        "smallest_component_pixels": 6
+      }
+    }
+  }
+}
