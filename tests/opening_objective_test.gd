@@ -101,7 +101,7 @@ func _run_test() -> void:
 
 func _verify_dialogue_while_objective_active() -> bool:
 	var approach := _caden.get("_current_zone") as Node2D
-	var traveler := approach.get_node("RestingTraveler") as StaticBody2D
+	var traveler := approach.get_node("Actors/NPCs/RestingTraveler") as StaticBody2D
 	var detector := _player.get_node("InteractionDetector") as Area2D
 	var dialogue_ui := _player.get_node("DialogueUI") as CanvasLayer
 	_player.position = traveler.position + Vector2(0, -56)

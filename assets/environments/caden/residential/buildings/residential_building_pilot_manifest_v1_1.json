@@ -1,0 +1,773 @@
+{
+  "schema": "caden-residential-building-pilot-manifest-v1.1",
+  "generator": "tools/art/import_caden_residential_building_pilot_v1_1.py",
+  "generator_sha256": "df844f78929c8d8163007fe70d10103625108ca048d02381123f482b53f929c8",
+  "gate_state": "residential_building_pilot_v1_1_visual_approved",
+  "visual_approval": {
+    "recorded_date": "2026-08-29",
+    "decision": "approved_continue",
+    "evidence_package": "caden_residential_building_pilot_review_v1_1.zip",
+    "evidence_package_sha256": "9d404ee67929fb5bade7815014c62b9a6ebc8704b08f6a65ba34fe5bf1bc3363"
+  },
+  "scope": "Selective replacement of the ten existing Residential Cabin exterior sprites plus two one-tile background set-piece alignment corrections.",
+  "source_gate": {
+    "absolute_path": "C:\\Users\\AKHOURY\\.codex\\visualizations\\2026\\08\\26\\01a03b70-e60d-7872-b6bd-bb8e96a6ff44\\caden_building_terrain_gate_v1_1",
+    "package_manifest_sha256": "4ebb30cb24bb2cf8e7816ce1829fddaee93c05bbc3d7368402ff4134ba283bd5",
+    "checksummed_artifacts_verified": 47,
+    "catalog_rows_verified": 88,
+    "candidate_count_verified": 10,
+    "staging_policy": "Source masters and the complete approval gate remain outside res://; only ten approved canonical runtime PNGs are imported."
+  },
+  "preserved_contracts": [
+    "Residential scene geometry and all ten Cabin anchors",
+    "128x96 Cabin collision footprints",
+    "Residential terrain, roads, exits, entry markers, selected prop assets and collision shapes, landscaping, NPCs, and dialogue",
+    "all non-Residential zones and systems"
+  ],
+  "terrain": {
+    "status": "residential_runtime_v1_2_visual_approved",
+    "runtime_path": "assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.png",
+    "runtime_sha256": "828cfd64940b9bdd37fca40bac4d5a091432955d16f8e47b9701bef2028a98a0",
+    "runtime_manifest": "assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.json",
+    "rollback_runtime_path": "assets/environments/caden/residential/terrain/residential_terrain_runtime_v1.png",
+    "rollback_runtime_sha256": "d3d09685eac8f3343bba1c476266def1f7fc99bc13c56863b8445ce21ca03daf"
+  },
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
+    "rights_status": "project_internal_rights_unverified",
+    "license": "unverified",
+    "derivative_permission": "unverified",
+    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+  },
+  "runtime_asset_count": 10,
+  "assets": {
+    "Cabin01": {
+      "source_id": "cad_bld_v1_r01_c01",
+      "source_master_filename": "caden_buildings_volume_1_master.png",
+      "source_master_sha256": "1f9bc86b2e91aecd9ad455e6ca768fccb2c8c9699cc653ec695202dd3bbcc8a4",
+      "source_crop_xyxy": [
+        24,
+        68,
+        235,
+        292
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        45,
+        115,
+        206,
+        281
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c01_runtime_v1_1.png",
+      "runtime_sha256": "d7ee1902172ba5fde3dc91c759f80c04065004983362bdcfbed9606976a944f6",
+      "runtime_dimensions": [
+        150,
+        154
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        75,
+        148
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin01/ExteriorSprite",
+      "anchor_position_xy": [
+        160,
+        128
+      ],
+      "sprite_position_xy": [
+        0,
+        -23
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "compact chimney cottage",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 13164
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_northwest_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin02": {
+      "source_id": "cad_bld_v1_r01_c02",
+      "source_master_filename": "caden_buildings_volume_1_master.png",
+      "source_master_sha256": "1f9bc86b2e91aecd9ad455e6ca768fccb2c8c9699cc653ec695202dd3bbcc8a4",
+      "source_crop_xyxy": [
+        260,
+        62,
+        510,
+        292
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        279,
+        91,
+        472,
+        280
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c02_runtime_v1_1.png",
+      "runtime_sha256": "2f209c5627737e86b02f9752a585627edb2865271a880d595b763de78592ca36",
+      "runtime_dimensions": [
+        178,
+        174
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        89,
+        168
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin02/ExteriorSprite",
+      "anchor_position_xy": [
+        384,
+        160
+      ],
+      "sprite_position_xy": [
+        0,
+        -33
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "porch cottage",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 17521
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin03": {
+      "source_id": "cad_bld_v1_r01_c04",
+      "source_master_filename": "caden_buildings_volume_1_master.png",
+      "source_master_sha256": "1f9bc86b2e91aecd9ad455e6ca768fccb2c8c9699cc653ec695202dd3bbcc8a4",
+      "source_crop_xyxy": [
+        775,
+        65,
+        1018,
+        292
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        801,
+        114,
+        1009,
+        281
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c04_runtime_v1_1.png",
+      "runtime_sha256": "505ca4711410d3228b687fc6ad0997b932f2f9c21f0ce60de07c409b0b1256d6",
+      "runtime_dimensions": [
+        190,
+        154
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        95,
+        149
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin03/ExteriorSprite",
+      "anchor_position_xy": [
+        608,
+        128
+      ],
+      "sprite_position_xy": [
+        0,
+        -24
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "blue-roof maintained home",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 17622
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_south_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin04": {
+      "source_id": "cad_bld_v1_r01_c06",
+      "source_master_filename": "caden_buildings_volume_1_master.png",
+      "source_master_sha256": "1f9bc86b2e91aecd9ad455e6ca768fccb2c8c9699cc653ec695202dd3bbcc8a4",
+      "source_crop_xyxy": [
+        1278,
+        68,
+        1518,
+        292
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        1285,
+        122,
+        1480,
+        282
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c06_runtime_v1_1.png",
+      "runtime_sha256": "bd6e7042960de87b1f42dbaa4a772deadba0d06a155fa0a3495665febf1650eb",
+      "runtime_dimensions": [
+        180,
+        148
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        90,
+        143
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin04/ExteriorSprite",
+      "anchor_position_xy": [
+        800,
+        176
+      ],
+      "sprite_position_xy": [
+        0,
+        -21
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "moss-roof garden home",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 16086
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin05": {
+      "source_id": "cad_bld_v1_r02_c02",
+      "source_master_filename": "caden_buildings_volume_1_master.png",
+      "source_master_sha256": "1f9bc86b2e91aecd9ad455e6ca768fccb2c8c9699cc653ec695202dd3bbcc8a4",
+      "source_crop_xyxy": [
+        255,
+        316,
+        522,
+        548
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        283,
+        353,
+        502,
+        522
+      ],
+      "scale_family": "residential_broad",
+      "normalization_factor": 0.75,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r02_c02_runtime_v1_1.png",
+      "runtime_sha256": "5fb20f274af01fd256a4d4641bfffe175b507f48a7dfd92e3ec65ef725f9fdd0",
+      "runtime_dimensions": [
+        172,
+        136
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        86,
+        130
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin05/ExteriorSprite",
+      "anchor_position_xy": [
+        1024,
+        128
+      ],
+      "sprite_position_xy": [
+        0,
+        -14
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "broad two-dormer home",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 14984
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin06": {
+      "source_id": "cad_bld_v2_r01_c01",
+      "source_master_filename": "caden_buildings_volume_2_master.png",
+      "source_master_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "source_crop_xyxy": [
+        62,
+        62,
+        260,
+        298
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        97,
+        102,
+        233,
+        275
+      ],
+      "scale_family": "residential_small",
+      "normalization_factor": 1.0,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c01_runtime_v1_1.png",
+      "runtime_sha256": "d3e8acf92a09d0b55f2aedb69556cf0c3c707afa29299bcd6363819bc8282bde",
+      "runtime_dimensions": [
+        144,
+        182
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        72,
+        176
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin06/ExteriorSprite",
+      "anchor_position_xy": [
+        160,
+        592
+      ],
+      "sprite_position_xy": [
+        0,
+        -37
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "narrow red-roof cottage",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 15585
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin07": {
+      "source_id": "cad_bld_v2_r01_c02",
+      "source_master_filename": "caden_buildings_volume_2_master.png",
+      "source_master_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "source_crop_xyxy": [
+        270,
+        60,
+        505,
+        298
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        293,
+        115,
+        483,
+        275
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c02_runtime_v1_1.png",
+      "runtime_sha256": "d1d24c0a88c4c6c0fe8120d1df7fa064fa4dbfcd68897a249fa46f5f7a524024",
+      "runtime_dimensions": [
+        174,
+        148
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        87,
+        143
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin07/ExteriorSprite",
+      "anchor_position_xy": [
+        400,
+        624
+      ],
+      "sprite_position_xy": [
+        0,
+        -21
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "gabled entry cottage",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 16109
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_south_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin08": {
+      "source_id": "cad_bld_v2_r01_c03",
+      "source_master_filename": "caden_buildings_volume_2_master.png",
+      "source_master_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "source_crop_xyxy": [
+        515,
+        60,
+        750,
+        298
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        534,
+        106,
+        720,
+        274
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c03_runtime_v1_1.png",
+      "runtime_sha256": "a82fb91ec4a99bd253d67caab3bee651bed75eafdb3214399b9bac214535c0c6",
+      "runtime_dimensions": [
+        172,
+        156
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        86,
+        150
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin08/ExteriorSprite",
+      "anchor_position_xy": [
+        752,
+        608
+      ],
+      "sprite_position_xy": [
+        0,
+        -24
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "blue-roof flower-box home",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 14696
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin09": {
+      "source_id": "cad_bld_v2_r01_c05",
+      "source_master_filename": "caden_buildings_volume_2_master.png",
+      "source_master_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "source_crop_xyxy": [
+        995,
+        72,
+        1240,
+        298
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        1013,
+        130,
+        1214,
+        276
+      ],
+      "scale_family": "residential_standard",
+      "normalization_factor": 0.875,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c05_runtime_v1_1.png",
+      "runtime_sha256": "aec7d9e784ceea05c86b3c18d37ff750b9a4b2cb5fa1cf23fab4b57ea33d5856",
+      "runtime_dimensions": [
+        184,
+        136
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        92,
+        131
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin09/ExteriorSprite",
+      "anchor_position_xy": [
+        992,
+        576
+      ],
+      "sprite_position_xy": [
+        0,
+        -15
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "long-window red-roof home",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 15981
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    },
+    "Cabin10": {
+      "source_id": "cad_bld_v2_r02_c05",
+      "source_master_filename": "caden_buildings_volume_2_master.png",
+      "source_master_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "source_crop_xyxy": [
+        995,
+        310,
+        1218,
+        550
+      ],
+      "cleaned_alpha_bounds_in_master_xyxy": [
+        1008,
+        365,
+        1196,
+        522
+      ],
+      "scale_family": "residential_broad",
+      "normalization_factor": 0.75,
+      "runtime_path": "assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r02_c05_runtime_v1_1.png",
+      "runtime_sha256": "5c7310e51d10093e939d0116b57b66fa3c44f446edb95ae983114af47bc92059",
+      "runtime_dimensions": [
+        150,
+        126
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering",
+      "pivot_xy": [
+        75,
+        121
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "target_node": "Homes/Cabin10/ExteriorSprite",
+      "anchor_position_xy": [
+        1024,
+        256
+      ],
+      "sprite_position_xy": [
+        0,
+        -10
+      ],
+      "structural_ground_contact_local_xy": [
+        0,
+        48
+      ],
+      "collision_footprint": {
+        "shape": "RectangleShape2D",
+        "size_xy": [
+          128,
+          96
+        ],
+        "status": "retained_unchanged"
+      },
+      "intended_placement": "green-roof dormer home",
+      "status": "approved_residential_building_runtime_v1_1",
+      "approval_basis": "Gate 0 candidate set approved for the limited pilot; active in-engine comparison approved by user continuation on 2026-08-29",
+      "post_cleanup_audit": {
+        "alpha_value_count": 2,
+        "partial_alpha_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "bright_neutral_boundary_pixels": 0,
+        "connected_components": 1,
+        "unique_rgba_colors": 12045
+      },
+      "rollback_previous_texture_path": "assets/environments/caden/architecture/town_square/town_square_building_south_v2.png",
+      "rollback_previous_sprite_position_xy": [
+        0,
+        -16
+      ]
+    }
+  },
+  "supporting_alignment_adjustments": [
+    {
+      "node": "DomesticSetPieces/LaundryLine",
+      "from_xy": [
+        400,
+        536
+      ],
+      "to_xy": [
+        400,
+        504
+      ],
+      "reason": "Keep the retained laundry composite on grass and visually north of Cabin07's taller roof while preserving its two post collisions and depth behavior."
+    },
+    {
+      "node": "DomesticSetPieces/SmallGardenPatch",
+      "from_xy": [
+        752,
+        536
+      ],
+      "to_xy": [
+        752,
+        504
+      ],
+      "reason": "Keep the retained garden composite on grass and visually north of Cabin08's taller roof while preserving its object collision and depth behavior."
+    }
+  ],
+  "rollback": "Restore each recorded prior texture and Vector2(0, -16); remove only this manifest and the ten runtime_v1_1 PNGs after confirming no remaining references."
+}

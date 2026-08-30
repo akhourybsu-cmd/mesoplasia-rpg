@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_local_resident.tres" id="4_local"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/square_passing_visitor.tres" id="5_visitor"]
-[ext_resource type="TileSet" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres" id="6_terrain"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v2.png" id="7_building_nw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png" id="8_building_sw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png" id="9_building_ne"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png" id="10_building_se"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v2.png" id="11_building_s"]
+[ext_resource type="TileSet" path="res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.tres" id="6_terrain"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v3.png" id="7_building_nw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v3.png" id="8_building_sw"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v3.png" id="9_building_ne"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v3.png" id="10_building_se"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v3.png" id="11_building_s"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/ground/caden_nature_ground_runtime_v1.png" id="12_nature_ground"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_01_v1.png" id="13_tree_m1"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/nature/trees/caden_tree_medium_02_v1.png" id="14_tree_m2"]
@@ -590,7 +590,7 @@ polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
 color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
-position = Vector2(0, -16)
+position = Vector2(0, -11)
 texture = ExtResource("7_building_nw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingNorthwest"]
@@ -615,7 +615,7 @@ polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
 color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
-position = Vector2(0, -16)
+position = Vector2(0, -9)
 texture = ExtResource("8_building_sw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingSouthwest"]
@@ -640,7 +640,7 @@ polygon = PackedVector2Array(-51, 38, 54, 38, 59, 53, -45, 53)
 color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
-position = Vector2(0, -16)
+position = Vector2(0, -10)
 texture = ExtResource("9_building_ne")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingNortheast"]
@@ -665,7 +665,7 @@ polygon = PackedVector2Array(-67, 38, 70, 38, 75, 53, -61, 53)
 color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
-position = Vector2(0, -16)
+position = Vector2(0, -17)
 texture = ExtResource("10_building_se")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingSoutheast"]
@@ -690,7 +690,7 @@ polygon = PackedVector2Array(-51, 22, 54, 22, 59, 37, -45, 37)
 color = Color(0.145, 0.122, 0.098, 0.44)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]
-position = Vector2(0, -16)
+position = Vector2(0, -17)
 texture = ExtResource("11_building_s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidScenery/Buildings/GenericBuildingSouth"]

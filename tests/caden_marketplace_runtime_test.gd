@@ -2,7 +2,8 @@ extends SceneTree
 
 const MARKETPLACE_SCENE := preload("res://scenes/world/caden/Marketplace.tscn")
 const RUNTIME_MANIFEST_PATH := "res://assets/environments/caden/marketplace/marketplace_runtime_manifest_v1.json"
-const TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.json"
+const TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json"
+const ROLLBACK_TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.json"
 const EXPECTED_STALLS := {
 	"Stall01": {"position": Vector2(208, 184), "asset": "01", "shape": Vector2(56, 16), "sprite_position": Vector2(-54, -61)},
 	"Stall02": {"position": Vector2(336, 184), "asset": "07", "shape": Vector2(64, 24), "sprite_position": Vector2(-60, -90)},
@@ -39,6 +40,9 @@ func _run_test() -> void:
 		return
 	var terrain_manifest := _load_json(TERRAIN_MANIFEST_PATH)
 	if terrain_manifest.is_empty():
+		return
+	var rollback_terrain_manifest := _load_json(ROLLBACK_TERRAIN_MANIFEST_PATH)
+	if rollback_terrain_manifest.is_empty():
 		return
 	if runtime_manifest.get("catalog_rows_verified", 0) != 222:
 		_fail("Marketplace runtime manifest did not verify all 222 catalog rows.")
@@ -87,6 +91,32 @@ func _run_test() -> void:
 				return
 
 	var terrain_path := "res://%s" % terrain_manifest.get("output_path", "")
+	if terrain_manifest.get("gate_state", "") != "marketplace_terrain_runtime_v1_2_visual_approved":
+		_fail("Unexpected Marketplace terrain v1.2 gate state.")
+		return
+	var terrain_approval := terrain_manifest.get("approval", {}) as Dictionary
+	if terrain_approval.get("decision", "") != "approved_active_marketplace_terrain_runtime_v1_2":
+		_fail("Marketplace terrain v1.2 lacks the final approval decision.")
+		return
+	if terrain_approval.get("pilot_authorization_package_sha256", "") != "0a5c20462bf5c74d5052294701fce45cba5bd70b6219d9505207e10f129e9571" or terrain_approval.get("active_evidence_package_sha256", "") != "f013205e480e1fed8283772482a8cf0834aa300899e99a559db1985bf5d90f08":
+		_fail("Marketplace terrain v1.2 lacks its authorization or active visual evidence.")
+		return
+	if terrain_manifest.get("route_contract", {}) != rollback_terrain_manifest.get("route_contract", {}):
+		_fail("Marketplace terrain v1.2 changed the authoritative route contract.")
+		return
+	var terrain_grid := terrain_manifest.get("grid", []) as Array
+	var terrain_cell_size := terrain_manifest.get("cell_size", []) as Array
+	if terrain_manifest.get("maintained_material_footprint_cells", 0) != 372 or terrain_grid.size() != 2 or terrain_grid[0] != 28 or terrain_grid[1] != 20 or terrain_cell_size.size() != 2 or terrain_cell_size[0] != 32 or terrain_cell_size[1] != 32:
+		_fail("Marketplace terrain v1.2 grid or material footprint changed.")
+		return
+	var terrain_audit := terrain_manifest.get("pixel_audit", {}) as Dictionary
+	if not terrain_audit.get("fully_opaque", false) or terrain_audit.get("partial_alpha_pixels", -1) != 0 or terrain_audit.get("transparent_rgb_pixels", -1) != 0:
+		_fail("Marketplace terrain v1.2 failed its pixel audit.")
+		return
+	var rollback_path := "res://%s" % rollback_terrain_manifest.get("output_path", "")
+	if FileAccess.get_sha256(rollback_path) != terrain_manifest.get("rollback", {}).get("previous_runtime_sha256", ""):
+		_fail("Marketplace terrain rollback identity changed.")
+		return
 	if FileAccess.get_sha256(terrain_path) != terrain_manifest.get("output_sha256", ""):
 		_fail("Marketplace terrain hash mismatch.")
 		return

@@ -550,3 +550,416 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 ### Remaining approval item
 
 - Commons Runtime v1 is the final in-engine visual gate for the ordered five-zone Caden pass. Alternate, deferred, rejected, seam, and mega sources remain unauthorized.
+
+## 2026-08-28 - Building and terrain source-fidelity Gate 0 v1.1
+
+### Scope
+
+- Reviewed the two supplied building volumes and grass/stone terrain master against the current authored five-zone state instead of executing the obsolete greybox rollout premise.
+- Verified the three canonical `1535 x 1024` RGB source hashes and excluded the two byte-identical `(1)` duplicate downloads.
+- Cataloged all 88 source positions and prepared ten Residential-only house candidates from building rows 1-2 outside `res://`.
+- Reconstructed binary alpha with border-connected matte removal, removed broad neutral presentation shadows and bright boundary residue, retained one structural component, added transparent padding, and recorded crop, bounds, scale, dimensions, pivot, footprint, target Cabin, status, and hashes.
+- Built an inactive Residential comparison by loading the external preview PNGs into transient scene instances; no active scene or resource reference changed.
+- Reconstructed a minimal nine-variant grass and warm-stone family from native `32 x 32` source patches and produced repetition, transition, and current/candidate material boards without creating or activating a TileSet.
+- Generated a revised v1.1 master prompt, provenance/licensing note, tooling requirements, manifests, copied/checksummed tools, and a clean external approval package.
+
+### Files and systems changed
+
+- `tools/art/prepare_caden_building_terrain_gate_v1_1.py`
+- `tools/art/render_caden_building_terrain_gate_v1_1.gd`
+- `docs/art/CADEN_BUILDING_TERRAIN_GATE_V1_1.md`
+- `docs/CHANGELOG.md`
+- Generated external `caden_building_terrain_gate_v1_1` review materials and ZIP package.
+
+### Validation
+
+- Source intake: PASS; all three dimensions, RGB modes, and expected SHA-256 values match.
+- Candidate preparation: PASS; ten candidates have binary alpha, one connected component, transparent safety edges, zero transparent RGB residue, and zero bright-neutral boundary candidates.
+- Catalog reconstruction: PASS; 48 building plus 40 terrain rows are present with explicit selected/deferred dispositions.
+- Compatibility comparison renderer: PASS; eight matched current/candidate captures were generated from transient scene instances at native full-zone and `640 x 360` resolutions.
+- Active-reference audit: PASS; no live scene, TileSet, texture reference, collision, route, NPC, entry, exit, or camera contract was changed.
+- `res://tests/caden_residential_runtime_test.gd`, `caden_marketplace_runtime_test.gd`, both Commons tests, the Town Square dressing test, Wayfarer runtime test, and Caden zone-transition test: PASS; every protected active baseline remains valid.
+- External package verification: PASS; all 47 checksummed artifacts match, the ZIP contains 48 expected members, and it contains no source master, `.godot`, `.import`, `.uid`, `__pycache__`, or hidden OS artifact.
+- Final ZIP SHA-256: `80091a4a3a4780dbd9d8eec297871523c96d63a110dd94bdee3203f327d2fa33`.
+- Sandbox-only headless notices remain limited to Godot user-log writes and Windows certificate-store access; the Compatibility comparison renderer completed without those failures.
+
+### Remaining approval item
+
+- Gate 0 awaits visual approval of the ten-house Residential comparison and a separate accept/defer decision on the denser grass/warm-stone material. No candidate is authorized for active integration yet.
+
+## 2026-08-28 - Residential building pilot v1.1 visual gate
+
+### Scope
+
+- Activated only the ten Residential building candidates approved from the Gate 0 comparison; terrain and every non-Residential zone remain unchanged.
+- Imported ten byte-identical cleaned runtime PNGs after verifying all 47 Gate 0 checksums, the 88-row source catalog, and the exact approved assignment set.
+- Replaced the ten reused Town Square exterior references with one distinct source-faithful house per existing Cabin anchor at import scale `1.0`.
+- Preserved all ten `128 x 96` Cabin collision footprints and aligned every structural ground contact to local `y = 48` using recorded integer sprite offsets.
+- Moved the retained laundry and small garden composites one `32 px` tile north on grass after the live render exposed overlap with the taller south roofs; their selected assets, object-specific collision shapes, and player-relative depth behavior remain intact.
+- Kept Residential terrain, roads, exits, entry markers, landscaping, seven residents, dialogue, and all other five-zone contracts authoritative.
+- Rendered and packaged the active in-engine pilot for visual approval; no terrain or further library integration was performed.
+
+### Files and systems changed
+
+- `scenes/world/caden/Residential.tscn`
+- `assets/environments/caden/residential/buildings/runtime_v1_1/*.png`
+- `assets/environments/caden/residential/buildings/residential_building_pilot_manifest_v1_1.json`
+- `tools/art/import_caden_residential_building_pilot_v1_1.py`
+- `tools/art/render_caden_residential_building_pilot_v1_1.gd`
+- `tools/art/build_caden_residential_building_pilot_review_v1_1.py`
+- `tests/caden_residential_runtime_test.gd`
+- `docs/art/CADEN_RESIDENTIAL_BUILDING_PILOT_V1_1.md`
+- `docs/CHANGELOG.md`
+- Generated external Compatibility render evidence and a clean v1.1 review ZIP.
+
+### Validation
+
+- Gate 0 and import verification: PASS; all 47 package checksums, 88 catalog rows, ten assignments, source/runtime hashes, binary alpha, transparent RGB, and canvas-edge audits match.
+- Godot 4.7.2 import: PASS; all ten new PNGs imported through the normal editor workflow.
+- `res://tests/caden_residential_runtime_test.gd`: PASS; runtime hashes, dimensions, scale, pivots, structural contacts, Cabin anchors and collision, selected set pieces, two alignment records, terrain, seven residents, landscaping, routes, entries, exits, and transitions validate.
+- Marketplace, both Commons tests, Town Square dressing, Wayfarer runtime, NPC variants/patrol, and Caden zone-transition tests: PASS; protected active baselines remain valid.
+- Compatibility evidence: PASS; ten deterministic live-scene captures cover matched full/north/south/threshold comparisons, both arrival corridors, the primary route, two player-front overlaps, and an exact byte-matched nearest-neighbor `1280 x 720` proof.
+- Known sandbox-only notices remain limited to Godot log/editor-settings writes and Windows certificate-store access; Compatibility rendering completed through ANGLE successfully.
+
+### Remaining approval item
+
+- The active ten-house Residential pilot awaits visual approval. Terrain replacement remains deferred, and no additional building or library asset is authorized.
+
+## 2026-08-29 - Residential building pilot v1.1 approval
+
+### Scope
+
+- Recorded the user's continuation as visual approval of the active ten-house Residential building pilot.
+- Promoted the building manifest and all ten asset records from pending pilot status to approved Residential Runtime v1.1 status.
+- Bound the approval record to the delivered review ZIP SHA-256 `9d404ee67929fb5bade7815014c62b9a6ebc8704b08f6a65ba34fe5bf1bc3363`.
+- Kept terrain replacement, additional building candidates, and every other Caden zone outside this approval.
+
+### Files and systems changed
+
+- `assets/environments/caden/residential/buildings/residential_building_pilot_manifest_v1_1.json`
+- `tools/art/import_caden_residential_building_pilot_v1_1.py`
+- `tests/caden_residential_runtime_test.gd`
+- `docs/art/CADEN_RESIDENTIAL_BUILDING_PILOT_V1_1.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- The approved review ZIP hash matches the recorded visual evidence.
+- Residential runtime validation is extended to require the approved gate state, evidence hash, and per-building approved status.
+
+### Remaining approval item
+
+- Residential terrain remains unchanged. The next phase is an inactive Residential-only terrain comparison and requires a separate visual decision before any terrain reference changes.
+
+## 2026-08-29 - Residential terrain comparison Gate v1.2
+
+### Scope
+
+- Advanced only to the documented inactive Residential terrain comparison after recording approval of the ten-house building runtime.
+- Rejected the original Gate 0 terrain presentation for its yellow cast, high local contrast, and visible repetition.
+- Regraded the exact source-derived `32 x 32` Gate 0 cells toward the approved Residential palette without spatial resampling.
+- Retained nine grass variants, nine warm-stone variants, eight transitions, and the exact existing `36 x 24` route mask.
+- Rendered six matched current/candidate live-scene comparisons plus an exact nearest-neighbor `1280 x 720` proof through the Compatibility renderer.
+- Kept the candidate and all large evidence outside `res://`; no active terrain reference, scene, collision, route, entry, exit, NPC, or other zone was changed.
+- Built a clean external review package with candidate files, repetition/material audits, raw captures, manifests, approval checklist, provenance, tooling hashes, and package checksums.
+
+### Files and systems changed
+
+- `tools/art/prepare_caden_residential_terrain_gate_v1_2.py`
+- `tools/art/render_caden_residential_terrain_gate_v1_2.gd`
+- `tools/art/build_caden_residential_terrain_review_v1_2.py`
+- `docs/art/CADEN_RESIDENTIAL_TERRAIN_GATE_V1_2.md`
+- `docs/CHANGELOG.md`
+- Generated external preparation, Compatibility render, review folder, and ZIP artifacts.
+
+### Validation
+
+- Gate 0 verification: PASS; all 47 package checksums and the source-derived atlas hash match.
+- Candidate construction: PASS; output is `1152 x 768`, uses exact `32 x 32` cells, retains the approved road mask, and adds no collision.
+- Active-reference audit: PASS; `Residential.tscn` contains the current v1 terrain reference exactly once and contains no v1.2 candidate reference; active terrain bytes are unchanged.
+- `res://tests/caden_residential_runtime_test.gd`: PASS with the visually approved building manifest and unchanged terrain contract.
+- Marketplace, both Commons tests, Town Square dressing, Wayfarer runtime, NPC variants/patrol, and Caden zone-transition tests: PASS; all protected active baselines remain valid.
+- Compatibility evidence: PASS; thirteen deterministic captures include six matched pairs and one exact byte-matched nearest-neighbor `1280 x 720` proof.
+- External package verification: PASS; 29 packaged artifacts are checksummed, and no hidden/import/cache artifact is included.
+- Candidate runtime SHA-256: `828cfd64940b9bdd37fca40bac4d5a091432955d16f8e47b9701bef2028a98a0`.
+- Review ZIP SHA-256: `d6479402e753b782aaf299a3b7db823af11b13bd673e85d989f6190aac4571e8`.
+- Known sandbox-only notices remain limited to Godot log writes and Windows certificate-store access; Compatibility rendering completed through ANGLE successfully.
+
+### Remaining approval item
+
+- The inactive Residential terrain comparison awaits a separate accept, targeted-correction, or retain-current decision. No terrain integration is authorized yet.
+
+## 2026-08-29 - Residential terrain Runtime v1.2 active pilot
+
+### Scope
+
+- Recorded approval of the inactive v1.2 comparison and activated only the Residential terrain pilot.
+- Imported the approved composed `1152 x 768` runtime after verifying all 29 review-package checksums, the review ZIP hash, and the exact candidate hash.
+- Changed the single `TerrainRuntime` reference from v1 to v1.2 while preserving the exact `36 x 24` route mask, collision, buildings, props, landscaping, seven residents, entries, exits, and every non-Residential zone.
+- Bound the runtime manifest to the approved inactive evidence and retained the verified v1 hash and one-reference rollback instruction.
+- Rendered six active before/after pairs and an exact nearest-neighbor `1280 x 720` proof through the Compatibility renderer.
+- Built a clean external active-review package with source-audit boards, raw captures, metadata, provenance/licensing notes, tooling requirements, checksummed tools/tests, and no hidden Godot/import/cache artifacts.
+
+### Files and systems changed
+
+- `scenes/world/caden/Residential.tscn`
+- `assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.png`
+- `assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.json`
+- `assets/environments/caden/residential/buildings/residential_building_pilot_manifest_v1_1.json`
+- `tools/art/import_caden_residential_terrain_runtime_v1_2.py`
+- `tools/art/import_caden_residential_building_pilot_v1_1.py`
+- `tools/art/render_caden_residential_terrain_runtime_v1_2.gd`
+- `tools/art/build_caden_residential_terrain_runtime_review_v1_2.py`
+- `tests/caden_residential_runtime_test.gd`
+- `docs/art/CADEN_RESIDENTIAL_TERRAIN_GATE_V1_2.md`
+- `docs/art/CADEN_RESIDENTIAL_TERRAIN_RUNTIME_V1_2.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Approved evidence verification: PASS; all 29 inactive review checksums and review ZIP SHA-256 `d6479402e753b782aaf299a3b7db823af11b13bd673e85d989f6190aac4571e8` match.
+- Runtime import audit: PASS; output SHA-256 `828cfd64940b9bdd37fca40bac4d5a091432955d16f8e47b9701bef2028a98a0`, dimensions, exact cell grid, variant counts, route contract, opacity, and rollback hash validate.
+- `res://tests/caden_residential_runtime_test.gd`: PASS with the active v1.2 terrain and visually approved v1.1 buildings.
+- Marketplace, both Commons tests, Town Square dressing, Wayfarer runtime, NPC variants/patrol, and Caden zone-transition tests: PASS; protected active baselines remain valid.
+- Compatibility evidence: PASS through ANGLE; thirteen deterministic captures include six matched v1/v1.2 pairs and one exact byte-matched nearest-neighbor `1280 x 720` proof.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The active Residential terrain v1.2 pilot awaits visual approval. No further terrain, building, or library integration is authorized until that decision.
+
+## 2026-08-29 - Residential terrain Runtime v1.2 visual approval
+
+### Scope
+
+- Recorded visual approval of the active Residential terrain v1.2 pilot and promoted it to the approved Residential baseline.
+- Bound the approval to active review ZIP SHA-256 `7ef1484113357070bb867b7a02c3d70a1023798224af0904b17ff09b7bc77736` while retaining the earlier pilot-authorization evidence.
+- Kept the exact active runtime bytes, single scene reference, route mask, collision, content, and rollback identity unchanged.
+- Authorized only the next inactive Marketplace source-fit and terrain comparison; no Marketplace scene reference changed by this approval.
+
+### Files and systems changed
+
+- `assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.json`
+- `assets/environments/caden/residential/buildings/residential_building_pilot_manifest_v1_1.json`
+- `tools/art/import_caden_residential_terrain_runtime_v1_2.py`
+- `tools/art/import_caden_residential_building_pilot_v1_1.py`
+- `tests/caden_residential_runtime_test.gd`
+- `docs/art/CADEN_RESIDENTIAL_TERRAIN_RUNTIME_V1_2.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Active evidence verification: all 30 checksums, runtime hash, evidence manifest, and review ZIP hash match.
+- Residential runtime validation requires the approved terrain state and both authorization/evidence identities.
+
+### Remaining approval item
+
+- Marketplace Runtime v1 remains authoritative while an inactive Phase B comparison is prepared. Building-sheet storefront rows remain deferred for footprint mismatch unless a new scale audit proves a role-compatible fit.
+
+## 2026-08-29 - Marketplace terrain comparison Gate v1.2
+
+### Scope
+
+- Advanced to the next ordered phase as an inactive comparison because the live Marketplace already supersedes the replacement prompt's greybox premise.
+- Reconfirmed all twelve building-sheet storefront rows as deferred for shallow stall-footprint mismatch and retained the eight approved Runtime v1 vendor anchors.
+- Composed an external `896 x 640` terrain candidate from the approved harmonized grass/warm-stone family using exact `32 x 32` cells.
+- Preserved the exact 372-cell maintained-ground footprint, 188-cell grass frame, protected circulation spine, and route contract.
+- Rendered six matched current/candidate scene pairs plus an exact nearest-neighbor `1280 x 720` candidate proof through the Compatibility renderer.
+- Kept the candidate, source atlas, preparation workspace, and large evidence outside `res://`; no Marketplace scene or resource reference changed.
+
+### Files and systems changed
+
+- `tools/art/prepare_caden_marketplace_terrain_gate_v1_2.py`
+- `tools/art/render_caden_marketplace_terrain_gate_v1_2.gd`
+- `tools/art/build_caden_marketplace_terrain_review_v1_2.py`
+- `docs/art/CADEN_MARKETPLACE_TERRAIN_GATE_V1_2.md`
+- `docs/CHANGELOG.md`
+- Generated external Marketplace terrain preparation, Compatibility render, and review artifacts.
+
+### Validation
+
+- Source and baseline verification: PASS; Gate 0 checksums, approved terrain-review checksums, Residential v1.2 approval, Marketplace Runtime v1 state, active terrain hash, and the single current scene reference validate.
+- Candidate construction: PASS; SHA-256 `99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385`, exact grid, opacity, material footprint, route contract, and zero terrain collision validate.
+- Storefront source-fit audit: PASS; twelve rows retain explicit footprint-mismatch dispositions, with no building candidate imported or activated.
+- Residential, Marketplace, both Commons tests, Town Square dressing, Wayfarer runtime, NPC variants/patrol, and Caden zone-transition tests: PASS; all protected active baselines remain valid.
+- Compatibility evidence: PASS through ANGLE; thirteen deterministic captures include six matched pairs and one exact byte-matched nearest-neighbor `1280 x 720` proof.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The inactive Marketplace terrain comparison awaits an accept, targeted-correction, or retain-current decision. No Marketplace reference change is authorized yet.
+
+## 2026-08-29 - Marketplace terrain Runtime v1.2 active pilot
+
+### Scope
+
+- Recorded approval of the inactive Marketplace v1.2 terrain comparison and activated only the limited terrain pilot.
+- Imported the approved `896 x 640` runtime after verifying all 28 review-package checksums, the review ZIP hash, and the exact candidate hash.
+- Changed the single Marketplace `TerrainRuntime` reference from v1 to v1.2 while preserving the exact material footprint and route contract.
+- Kept all eight vendor anchors, approved set pieces, collision, fencing, trees, props, seven NPCs, entries, exits, and every non-Marketplace zone authoritative.
+- Retained all twelve building-sheet storefront rows as deferred for footprint mismatch.
+- Rendered six active before/after pairs and an exact nearest-neighbor `1280 x 720` proof through the Compatibility renderer.
+- Built a clean external active-review package with source-audit boards, raw captures, metadata, provenance/licensing notes, tooling requirements, checksummed tools/tests, and no hidden Godot/import/cache artifacts.
+
+### Files and systems changed
+
+- `scenes/world/caden/Marketplace.tscn`
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.png`
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json`
+- `tools/art/import_caden_marketplace_terrain_runtime_v1_2.py`
+- `tools/art/render_caden_marketplace_terrain_runtime_v1_2.gd`
+- `tools/art/build_caden_marketplace_terrain_runtime_review_v1_2.py`
+- `tests/caden_marketplace_runtime_test.gd`
+- `docs/art/CADEN_MARKETPLACE_TERRAIN_GATE_V1_2.md`
+- `docs/art/CADEN_MARKETPLACE_TERRAIN_RUNTIME_V1_2.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Approved evidence verification: PASS; all 28 inactive review checksums and review ZIP SHA-256 `0a5c20462bf5c74d5052294701fce45cba5bd70b6219d9505207e10f129e9571` match.
+- Runtime import audit: PASS; output SHA-256 `99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385`, dimensions, exact cell grid, maintained-ground footprint, route contract, opacity, and rollback hash validate.
+- `res://tests/caden_marketplace_runtime_test.gd`: PASS with the active v1.2 terrain and unchanged approved market content.
+- Residential, both Commons tests, Town Square dressing, Wayfarer runtime, NPC variants/patrol, and Caden zone-transition tests: PASS; protected active baselines remain valid.
+- Compatibility evidence: PASS through ANGLE; thirteen deterministic captures include six matched v1/v1.2 pairs and one exact byte-matched nearest-neighbor `1280 x 720` proof.
+- Known sandbox-only notices remain limited to Godot user-log/editor-settings writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The active Marketplace terrain v1.2 pilot awaits visual approval. Commons remains unchanged until that decision.
+
+## 2026-08-29 - Marketplace terrain Runtime v1.2 visual approval
+
+### Scope
+
+- Recorded final visual approval of the active Marketplace terrain v1.2 pilot.
+- Bound the approval to both the immutable inactive authorization package and the active in-engine evidence package.
+- Kept the reviewed terrain PNG, single active scene reference, route contract, collision, vendor anchors, perimeter, and population unchanged.
+- Advanced the rollout only to an inactive Commons terrain comparison.
+
+### Files and systems changed
+
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json`
+- `tools/art/import_caden_marketplace_terrain_runtime_v1_2.py`
+- `tests/caden_marketplace_runtime_test.gd`
+- `docs/art/CADEN_MARKETPLACE_TERRAIN_RUNTIME_V1_2.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Inactive authorization ZIP SHA-256 `0a5c20462bf5c74d5052294701fce45cba5bd70b6219d9505207e10f129e9571`: PASS.
+- Active evidence ZIP SHA-256 `f013205e480e1fed8283772482a8cf0834aa300899e99a559db1985bf5d90f08`: PASS.
+- Marketplace runtime remains byte-identical at SHA-256 `99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385`.
+- All eight protected Caden regressions: PASS.
+
+### Remaining limitations
+
+- The twelve complete source-sheet storefronts remain deferred for established footprint mismatch.
+- Source rights remain `project_internal_rights_unverified`.
+
+## 2026-08-29 - Commons terrain Gate v1.2 inactive comparison
+
+### Scope
+
+- Prepared an external, inactive Commons terrain comparison against the live Runtime v1 scene.
+- Reused the approved harmonized Caden material family while preserving the exact 108-cell Town Square/Residential route footprint and 596-cell grass field.
+- Kept the Quiet Green, all selected scenery, layered perimeter planting, precise collision, depth sorting, three visible residents, entries, exits, camera bounds, and dialogue authoritative.
+- Proposed no Commons building replacement and made no active scene or texture-reference change.
+- Rendered six matched current/candidate pairs and an exact nearest-neighbor `1280 x 720` proof through the Compatibility renderer.
+- Built a clean external review package with provenance/licensing notes, tooling requirements, checksummed source tools/test, and no hidden Godot/import/cache artifacts.
+
+### Files and systems changed
+
+- `tools/art/prepare_caden_commons_terrain_gate_v1_2.py`
+- `tools/art/render_caden_commons_terrain_gate_v1_2.gd`
+- `tools/art/build_caden_commons_terrain_review_v1_2.py`
+- `docs/art/CADEN_COMMONS_TERRAIN_GATE_V1_2.md`
+- `docs/CHANGELOG.md`
+- Generated external Commons preparation, Compatibility render, and review artifacts.
+
+### Validation
+
+- Candidate construction: PASS; SHA-256 `d3e07ee474f9ebc6f40df4d5074f82768e597ac25da8c79efbc5c0f6ebc27c48`, `1024 x 704`, fully opaque, exact cell footprint, exact route contract, and zero terrain collision.
+- Compatibility evidence: PASS through ANGLE; thirteen deterministic captures include six matched pairs and one byte-matched nearest-neighbor `1280 x 720` proof.
+- Residential, Marketplace, both Commons tests, Town Square dressing, Wayfarer runtime, NPC variants/patrol, and Caden zone-transition tests: PASS.
+- Review ZIP SHA-256 `e05c902b0cd8b940c27638f94f634f4b7f631551d6f433d3e5a36ca0eacfe903`; 28 checksummed artifacts and no hidden build artifacts.
+- Known sandbox-only notices remain limited to Godot user-log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The inactive Commons terrain comparison awaits an accept, targeted-correction, or retain-current decision. Commons Runtime v1 remains active and unchanged.
+
+## 2026-08-29 - Caden modular environment source library v1
+
+### Scope
+
+- Added the supplied Caden Modular Environment Expansion Library v1 to the repository's immutable source-art library.
+- Cataloged 180 source candidates across five RGBA master sheets: landscaping, fences and boundaries, architectural add-ons, yard furnishings, and connected compositions.
+- Preserved the supplied catalog, audit, provenance note, and package README alongside the original PNG bytes.
+- Kept every candidate at `SOURCE_CANDIDATE_CLEANUP_REQUIRED`; no runtime asset, scene, collision, gameplay contract, or approval state changed.
+- Excluded the archive's embedded integration prompt because it is instruction text rather than a source asset or provenance record.
+
+### Files and systems changed
+
+- `assets/source_art/caden/environment/modular_expansion_library_v1/`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Source archive SHA-256 verified as `20d97c303aeb7ac2444c5e3ea7d58e5cd7ceaaab78b89c8a3e362b4f1fdeb473`.
+- All nine checksums supplied by the archive passed before selective import, including all five source masters and their metadata.
+- Imported-file checksum verification: PASS for the five masters, catalog, audit, provenance note, and package README.
+- PNG structure verification: PASS; all five masters are `1312 x 1199`, 8-bit RGBA PNGs.
+
+### Remaining limitations
+
+- Runtime-approved assets remain at zero. Individual candidates still require explicit selection, extraction, cleanup, scale normalization, collision/depth planning, in-engine comparison, and visual approval before scene use.
+
+## 2026-08-30 - Caden five-zone rollout v1.3, ten-gate continuation
+
+### Scope
+
+- Activated and visually accepted Commons Terrain Runtime v1.2 while preserving its exact route footprint, Quiet Green, scenery, collision, population, entries, and exits.
+- Reconstructed and audited five fixed-footprint Town Square building candidates, rejected the coarse terrain candidate, and activated the approved facades as Architecture Runtime v3.
+- Prepared and activated Town Square Terrain Runtime v1.3 as a restrained tonal correction to the existing fine-brick atlas; all TileMap data, dirt rows, alpha topology, and collision remain unchanged.
+- Revalidated Wayfarer's Approach v5 and retained it unchanged after fourteen active captures byte-matched the accepted baseline.
+- Captured all six Caden zone connections in both directions before and after the Town Square tonal correction and confirmed route, arrival, terrain-role, edge-tree, and population continuity.
+- Corrected stale regression expectations for the approved multi-zone NPC population and the established `Actors/NPCs` hierarchy; no gameplay behavior changed.
+- Assembled a clean external ten-gate rollout package for consolidated visual review.
+
+### Files and systems changed
+
+- `scenes/world/caden/Commons.tscn`
+- `scenes/world/caden/TownSquare.tscn`
+- `assets/environments/caden/commons/terrain/commons_terrain_runtime_v1_2.png`
+- `assets/environments/caden/commons/terrain/commons_terrain_runtime_v1_2.json`
+- `assets/environments/caden/architecture/town_square/`
+- `assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.png`
+- `assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.tres`
+- `assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.json`
+- `tests/caden_npc_base_character_runtime_test.gd`
+- `tests/dialogue_foundation_test.gd`
+- `tests/opening_objective_test.gd`
+- `tools/art/*town_square*runtime_v3*`
+- `tools/art/*town_square*terrain*v1_3*`
+- `tools/art/*five_zone*transition*v1_2*`
+- `tools/art/build_caden_wayfarer_protection_audit_v1_2.py`
+- `docs/art/CADEN_TOWN_SQUARE_RUNTIME_V3_TERRAIN_V1_3.md`
+- `docs/art/CADEN_WAYFARER_PROTECTION_AUDIT_V1_2.md`
+- `docs/art/CADEN_FIVE_ZONE_ROLLOUT_V1_3.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Commons active evidence ZIP SHA-256 `6fc8c71f7217e05e14a26a40daf9746e6da3850359d3ca6fae60757b8cfffe92`: PASS.
+- Town Square architecture authorization ZIP SHA-256 `7ce5860927274ec7bfb8b3beb7247a5d32e81f737f5015742a1dc45234f675cd`: PASS.
+- Town Square tonal terrain authorization ZIP SHA-256 `e580e4582b6be79a937912a6f75b197b7a8a608da1803415d0235fb36411c771`: PASS.
+- Wayfarer protection ZIP SHA-256 `18ee4f5039ead183b1a6286dfd41389c339b6b0129f52031b63cec76fec96b21`: PASS.
+- Final twelve-capture transition ZIP SHA-256 `142e474ecad08802a777f818d61b618ba4a43d9b178cf05db2e26edf5935de63`: PASS.
+- Complete Godot regression suite: PASS, 23 of 23 executable test scripts.
+- Active Town Square full-zone and five gameplay captures byte-match the approved tonal candidate; the display proof is exact nearest-neighbor 2x.
+- Known sandbox-only notices remain limited to Godot `user://` log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The consolidated rollout package is the next visual gate. No further broad asset integration is authorized by this entry.
+- Source rights remain `project_internal_rights_unverified`.

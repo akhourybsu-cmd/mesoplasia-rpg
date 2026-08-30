@@ -1,16 +1,21 @@
-[gd_scene load_steps=47 format=3]
+[gd_scene load_steps=52 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
 [ext_resource type="PackedScene" path="res://scenes/npcs/StationaryNpc.tscn" id="3_npc"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/residential_home_resident.tres" id="4_home"]
 [ext_resource type="Resource" path="res://data/dialogue/caden/residential_path_resident.tres" id="5_path"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/terrain/residential_terrain_runtime_v1.png" id="6_terrain"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v2.png" id="7_house_nw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v2.png" id="8_house_sw"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v2.png" id="9_house_ne"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v2.png" id="10_house_se"]
-[ext_resource type="Texture2D" path="res://assets/environments/caden/architecture/town_square/town_square_building_south_v2.png" id="11_house_s"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.png" id="6_terrain"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c01_runtime_v1_1.png" id="7_house_01"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c02_runtime_v1_1.png" id="8_house_02"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c04_runtime_v1_1.png" id="9_house_03"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r01_c06_runtime_v1_1.png" id="10_house_04"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v1_r02_c02_runtime_v1_1.png" id="11_house_05"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c01_runtime_v1_1.png" id="12_house_06"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c02_runtime_v1_1.png" id="13_house_07"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c03_runtime_v1_1.png" id="14_house_08"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r01_c05_runtime_v1_1.png" id="15_house_09"]
+[ext_resource type="Texture2D" path="res://assets/environments/caden/residential/buildings/runtime_v1_1/cad_bld_v2_r02_c05_runtime_v1_1.png" id="16_house_10"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/residential/props/runtime_v1/fenced_flower_yard_runtime_v1.png" id="12_res_01"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/residential/props/runtime_v1/woodpile_barrel_fence_runtime_v1.png" id="13_res_04"]
 [ext_resource type="Texture2D" path="res://assets/environments/caden/residential/props/runtime_v1/laundry_line_runtime_v1.png" id="14_res_05"]
@@ -130,8 +135,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin01"]
-position = Vector2(0, -16)
-texture = ExtResource("7_house_nw")
+position = Vector2(0, -23)
+texture = ExtResource("7_house_01")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin01"]
 shape = SubResource("Shape_cabin")
@@ -149,8 +154,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin02"]
-position = Vector2(0, -16)
-texture = ExtResource("9_house_ne")
+position = Vector2(0, -33)
+texture = ExtResource("8_house_02")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin02"]
 shape = SubResource("Shape_cabin")
@@ -168,8 +173,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin03"]
-position = Vector2(0, -16)
-texture = ExtResource("11_house_s")
+position = Vector2(0, -24)
+texture = ExtResource("9_house_03")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin03"]
 shape = SubResource("Shape_cabin")
@@ -187,8 +192,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin04"]
-position = Vector2(0, -16)
-texture = ExtResource("8_house_sw")
+position = Vector2(0, -21)
+texture = ExtResource("10_house_04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin04"]
 shape = SubResource("Shape_cabin")
@@ -206,8 +211,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin05"]
-position = Vector2(0, -16)
-texture = ExtResource("10_house_se")
+position = Vector2(0, -14)
+texture = ExtResource("11_house_05")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin05"]
 shape = SubResource("Shape_cabin")
@@ -225,8 +230,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin06"]
-position = Vector2(0, -16)
-texture = ExtResource("10_house_se")
+position = Vector2(0, -37)
+texture = ExtResource("12_house_06")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin06"]
 shape = SubResource("Shape_cabin")
@@ -244,8 +249,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin07"]
-position = Vector2(0, -16)
-texture = ExtResource("11_house_s")
+position = Vector2(0, -21)
+texture = ExtResource("13_house_07")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin07"]
 shape = SubResource("Shape_cabin")
@@ -263,8 +268,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin08"]
-position = Vector2(0, -16)
-texture = ExtResource("9_house_ne")
+position = Vector2(0, -24)
+texture = ExtResource("14_house_08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin08"]
 shape = SubResource("Shape_cabin")
@@ -282,8 +287,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin09"]
-position = Vector2(0, -16)
-texture = ExtResource("8_house_sw")
+position = Vector2(0, -15)
+texture = ExtResource("15_house_09")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin09"]
 shape = SubResource("Shape_cabin")
@@ -301,8 +306,8 @@ polygon = PackedVector2Array(-62, 30, 60, 30, 68, 47, 56, 59, -54, 59, -68, 48)
 color = Color(0.16, 0.2, 0.12, 0.28)
 
 [node name="ExteriorSprite" type="Sprite2D" parent="Homes/Cabin10"]
-position = Vector2(0, -16)
-texture = ExtResource("11_house_s")
+position = Vector2(0, -10)
+texture = ExtResource("16_house_10")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Homes/Cabin10"]
 shape = SubResource("Shape_cabin")
@@ -395,7 +400,7 @@ position = Vector2(0, -8)
 shape = SubResource("Shape_setpiece_64")
 
 [node name="LaundryLine" type="StaticBody2D" parent="DomesticSetPieces"]
-position = Vector2(400, 536)
+position = Vector2(400, 504)
 script = ExtResource("19_depth")
 
 [node name="Visual" type="Sprite2D" parent="DomesticSetPieces/LaundryLine"]
@@ -412,7 +417,7 @@ position = Vector2(36, -6)
 shape = SubResource("Shape_post")
 
 [node name="SmallGardenPatch" type="StaticBody2D" parent="DomesticSetPieces"]
-position = Vector2(752, 536)
+position = Vector2(752, 504)
 script = ExtResource("19_depth")
 
 [node name="Visual" type="Sprite2D" parent="DomesticSetPieces/SmallGardenPatch"]

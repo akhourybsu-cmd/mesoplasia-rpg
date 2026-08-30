@@ -2,7 +2,8 @@ extends SceneTree
 
 const COMMONS_SCENE := preload("res://scenes/world/caden/Commons.tscn")
 const RUNTIME_MANIFEST_PATH := "res://assets/environments/caden/commons/commons_runtime_manifest_v1.json"
-const TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/commons/terrain/commons_terrain_runtime_v1.json"
+const TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/commons/terrain/commons_terrain_runtime_v1_2.json"
+const ROLLBACK_TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/commons/terrain/commons_terrain_runtime_v1.json"
 const EXPECTED_SELECTED := {
 	"01": {"node": "Greenery/TreeCluster02", "position": Vector2(800, 224), "sprite": "SelectedSprite", "pivot": Vector2(-47, -104)},
 	"04": {"node": "Greenery/TreeCluster01", "position": Vector2(192, 160), "sprite": "SelectedSprite", "pivot": Vector2(-49, -78)},
@@ -24,7 +25,8 @@ func _initialize() -> void:
 func _run_test() -> void:
 	var runtime_manifest := _load_json(RUNTIME_MANIFEST_PATH)
 	var terrain_manifest := _load_json(TERRAIN_MANIFEST_PATH)
-	if runtime_manifest.is_empty() or terrain_manifest.is_empty():
+	var rollback_terrain_manifest := _load_json(ROLLBACK_TERRAIN_MANIFEST_PATH)
+	if runtime_manifest.is_empty() or terrain_manifest.is_empty() or rollback_terrain_manifest.is_empty():
 		return
 	if runtime_manifest.get("catalog_rows_verified", 0) != 222 or runtime_manifest.get("gate_state", "") != "commons_runtime_v1_pending_in_engine_visual_approval":
 		_fail("Commons manifest verification or gate state changed.")
@@ -67,6 +69,32 @@ func _run_test() -> void:
 				return
 
 	var terrain_path := "res://%s" % terrain_manifest.get("output_path", "")
+	if terrain_manifest.get("gate_state", "") != "commons_terrain_runtime_v1_2_visual_approved":
+		_fail("Unexpected Commons terrain v1.2 gate state.")
+		return
+	var terrain_approval := terrain_manifest.get("approval", {}) as Dictionary
+	if terrain_approval.get("decision", "") != "approved_active_commons_terrain_runtime_v1_2":
+		_fail("Commons terrain v1.2 lacks the final approval decision.")
+		return
+	if terrain_approval.get("pilot_authorization_package_sha256", "") != "e05c902b0cd8b940c27638f94f634f4b7f631551d6f433d3e5a36ca0eacfe903" or terrain_approval.get("active_evidence_package_sha256", "") != "6fc8c71f7217e05e14a26a40daf9746e6da3850359d3ca6fae60757b8cfffe92":
+		_fail("Commons terrain v1.2 lacks its authorization or active visual evidence.")
+		return
+	if terrain_manifest.get("route_contract", {}) != rollback_terrain_manifest.get("route_contract", {}):
+		_fail("Commons terrain v1.2 changed the authoritative route contract.")
+		return
+	var terrain_grid := terrain_manifest.get("grid", []) as Array
+	var terrain_cell_size := terrain_manifest.get("cell_size", []) as Array
+	if terrain_manifest.get("route_footprint_cells", 0) != 108 or terrain_grid.size() != 2 or terrain_grid[0] != 32 or terrain_grid[1] != 22 or terrain_cell_size.size() != 2 or terrain_cell_size[0] != 32 or terrain_cell_size[1] != 32:
+		_fail("Commons terrain v1.2 grid or route footprint changed.")
+		return
+	var terrain_audit := terrain_manifest.get("pixel_audit", {}) as Dictionary
+	if not terrain_audit.get("fully_opaque", false) or terrain_audit.get("partial_alpha_pixels", -1) != 0 or terrain_audit.get("transparent_rgb_pixels", -1) != 0:
+		_fail("Commons terrain v1.2 failed its pixel audit.")
+		return
+	var rollback_path := "res://%s" % rollback_terrain_manifest.get("output_path", "")
+	if FileAccess.get_sha256(rollback_path) != terrain_manifest.get("rollback", {}).get("previous_runtime_sha256", ""):
+		_fail("Commons terrain rollback identity changed.")
+		return
 	if FileAccess.get_sha256(terrain_path) != terrain_manifest.get("output_sha256", ""):
 		_fail("Commons terrain hash mismatch.")
 		return

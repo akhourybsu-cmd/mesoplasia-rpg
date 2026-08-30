@@ -1,0 +1,196 @@
+{
+  "schema": "caden-marketplace-terrain-runtime-v1.2",
+  "generator": "tools/art/import_caden_marketplace_terrain_runtime_v1_2.py",
+  "generator_sha256": "dff1f764dbdcf40b74888678a496d5a905b737c0319256c59166975b33cb7e99",
+  "gate_state": "marketplace_terrain_runtime_v1_2_visual_approved",
+  "approval": {
+    "recorded_date": "2026-08-29",
+    "decision": "approved_active_marketplace_terrain_runtime_v1_2",
+    "pilot_authorization_package": "caden_marketplace_terrain_review_v1_2.zip",
+    "pilot_authorization_package_sha256": "0a5c20462bf5c74d5052294701fce45cba5bd70b6219d9505207e10f129e9571",
+    "pilot_authorization_manifest_sha256": "040d54a7b722c2232825c0a05fb2447a9f77a33c32297790551c7edc2d8bdae5",
+    "active_evidence_package": "caden_marketplace_terrain_runtime_review_v1_2.zip",
+    "active_evidence_package_sha256": "f013205e480e1fed8283772482a8cf0834aa300899e99a559db1985bf5d90f08",
+    "active_evidence_manifest_sha256": "77502bc3fb770bea832dfde35fe049befc7497f130de1aa46e705cea9d6a47ad"
+  },
+  "source_policy": "Source masters, harmonized atlas, preparation files, and review materials remain outside res://; only the approved composed runtime PNG is imported.",
+  "source": {
+    "original_master_filename": "caden_grass_stone_terrain_master.png",
+    "original_master_sha256": "eaf2dbf53d955e8e92a71c7b04e63b38bcc66710a7e28a06dbfe3956d354508e",
+    "approved_harmonized_atlas_sha256": "02a28c57d12b99408bda0f973320b46cea150ffc105bc9ef3784c4730c23af2f",
+    "external_candidate_sha256": "99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385"
+  },
+  "output_path": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.png",
+  "output_sha256": "99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385",
+  "dimensions": [
+    896,
+    640
+  ],
+  "cell_size": [
+    32,
+    32
+  ],
+  "grid": [
+    28,
+    20
+  ],
+  "variant_counts": {
+    "grass": 9,
+    "warm_stone": 9,
+    "transitions": 8
+  },
+  "composed_cell_counts": {
+    "grass": 188,
+    "warm_stone": 298,
+    "transition": 74
+  },
+  "maintained_material_footprint_cells": 372,
+  "route_contract": {
+    "west_lane_cells_xyxy": [
+      0,
+      8,
+      8,
+      11
+    ],
+    "cross_lane_cells_xyxy": [
+      3,
+      9,
+      24,
+      10
+    ],
+    "central_lane_cells_xyxy": [
+      12,
+      2,
+      15,
+      19
+    ],
+    "market_precinct_cells_xyxy": [
+      3,
+      2,
+      24,
+      17
+    ]
+  },
+  "import_scale": 1.0,
+  "filter": "nearest_neighbor_disabled_filtering",
+  "collision": "none; authoritative Marketplace collision remains separate and unchanged",
+  "pixel_audit": {
+    "dimensions": [
+      896,
+      640
+    ],
+    "fully_opaque": true,
+    "alpha_values": [
+      255
+    ],
+    "partial_alpha_pixels": 0,
+    "transparent_rgb_pixels": 0
+  },
+  "storefront_source_fit": {
+    "decision": "retain_all_eight_approved_runtime_v1_vendor_anchors",
+    "source_sheet_storefront_rows": [
+      {
+        "source_id": "cad_bld_v1_r03_c01",
+        "source_filename": "caden_buildings_volume_1_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v1_r03_c02",
+        "source_filename": "caden_buildings_volume_1_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v1_r03_c03",
+        "source_filename": "caden_buildings_volume_1_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v1_r03_c04",
+        "source_filename": "caden_buildings_volume_1_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v1_r03_c05",
+        "source_filename": "caden_buildings_volume_1_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v1_r03_c06",
+        "source_filename": "caden_buildings_volume_1_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v2_r03_c01",
+        "source_filename": "caden_buildings_volume_2_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v2_r03_c02",
+        "source_filename": "caden_buildings_volume_2_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v2_r03_c03",
+        "source_filename": "caden_buildings_volume_2_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v2_r03_c04",
+        "source_filename": "caden_buildings_volume_2_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v2_r03_c05",
+        "source_filename": "caden_buildings_volume_2_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      },
+      {
+        "source_id": "cad_bld_v2_r03_c06",
+        "source_filename": "caden_buildings_volume_2_master.png",
+        "visual_role": "storefront",
+        "status": "deferred_marketplace_stall_footprint_mismatch",
+        "rationale": "A complete storefront would exceed the established shallow vendor-bay role or compete with the protected central circulation spine; retain the approved market set piece."
+      }
+    ]
+  },
+  "preserved_contracts": [
+    "eight approved vendor anchors and their object-specific collision",
+    "minimum 128-pixel central circulation spine and authoritative west/cross/central lanes",
+    "fenced planted perimeter, trees, props, seven NPCs, dialogue, entries, exits, and bounds",
+    "Marketplace.tscn and all active resource references",
+    "all non-Marketplace zones"
+  ],
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+  },
+  "rollback": {
+    "previous_runtime_path": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.png",
+    "previous_runtime_sha256": "c5859ff2c71de3557da27d30df212f3ef7cc38cc0d83fde82e782c46bea14d93",
+    "instruction": "Restore the single Marketplace TerrainRuntime ext-resource path to the previous runtime path; do not change route or collision nodes."
+  }
+}

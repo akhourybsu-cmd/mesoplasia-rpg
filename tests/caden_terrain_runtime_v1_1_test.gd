@@ -1,10 +1,12 @@
 extends SceneTree
 
-const TERRAIN_TILESET := preload("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres")
+const TERRAIN_TILESET := preload("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.tres")
 const TOWN_SQUARE_SCENE := preload("res://scenes/world/caden/TownSquare.tscn")
 
 const EXPECTED_SOURCE_SHA256 := "36308c3fe4eb1bda2cca61c7778583440c07b8b859c2f597185f180ebdcb3b4c"
 const EXPECTED_V1_SHA256 := "0e0b6e5bad4c3a64acd427171212ba16ed2a75e10f0006df22d6445100fa0279"
+const EXPECTED_V1_1_SHA256 := "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a"
+const EXPECTED_V1_3_SHA256 := "aa290ab82c5f79b90b491d9f67c88d181f320a2078ca97c161d8925cec46b86d"
 const EXPECTED_ENTRY_POSITIONS := {
 	&"from_wayfarers_approach": Vector2(160, 352),
 	&"from_residential": Vector2(800, 352),
@@ -25,7 +27,7 @@ func _run_test() -> void:
 	if not await _verify_town_square():
 		return
 
-	print("PASS: Caden Terrain Runtime v1.1 resources, distributions, and preserved Town Square layout.")
+	print("PASS: Caden Terrain Runtime v1.3 tonal atlas, protected v1.1 rollback, distributions, and preserved Town Square layout.")
 	quit(0)
 
 
@@ -37,25 +39,29 @@ func _verify_protected_hashes() -> bool:
 	var v1_hash := FileAccess.get_sha256("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1.png")
 	if v1_hash != EXPECTED_V1_SHA256:
 		return _fail("The protected Terrain Runtime v1 atlas hash changed.")
+	if FileAccess.get_sha256("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png") != EXPECTED_V1_1_SHA256:
+		return _fail("The protected Terrain Runtime v1.1 rollback atlas hash changed.")
+	if FileAccess.get_sha256("res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.png") != EXPECTED_V1_3_SHA256:
+		return _fail("The approved Terrain Runtime v1.3 tonal atlas hash changed.")
 
 	return true
 
 
 func _verify_tileset() -> bool:
 	if TERRAIN_TILESET.tile_size != Vector2i(32, 32):
-		return _fail("Terrain Runtime v1.1 does not use 32x32 tiles.")
+		return _fail("Terrain Runtime v1.3 does not use 32x32 tiles.")
 	if TERRAIN_TILESET.get_physics_layers_count() != 0:
-		return _fail("Decorative Terrain Runtime v1.1 unexpectedly defines collision.")
+		return _fail("Decorative Terrain Runtime v1.3 unexpectedly defines collision.")
 	if not TERRAIN_TILESET.has_source(0):
-		return _fail("Terrain Runtime v1.1 is missing atlas source 0.")
+		return _fail("Terrain Runtime v1.3 is missing atlas source 0.")
 
 	var atlas_source := TERRAIN_TILESET.get_source(0) as TileSetAtlasSource
 	if atlas_source == null:
-		return _fail("Terrain Runtime v1.1 source 0 is not an atlas source.")
+		return _fail("Terrain Runtime v1.3 source 0 is not an atlas source.")
 	if atlas_source.texture_region_size != Vector2i(32, 32):
-		return _fail("Terrain Runtime v1.1 atlas regions are not 32x32.")
+		return _fail("Terrain Runtime v1.3 atlas regions are not 32x32.")
 	if atlas_source.texture == null or atlas_source.texture.get_size() != Vector2(256, 256):
-		return _fail("Terrain Runtime v1.1 atlas is not 256x256.")
+		return _fail("Terrain Runtime v1.3 atlas is not 256x256.")
 
 	var tile_count := 0
 	for y in range(8):
@@ -66,7 +72,7 @@ func _verify_tileset() -> bool:
 				return _fail("Missing documented v1.1 tile at %s." % Vector2i(x, y))
 			tile_count += 1
 	if tile_count != 58:
-		return _fail("Expected 58 documented v1.1 tiles, found %d." % tile_count)
+		return _fail("Expected 58 documented v1.3 tiles, found %d." % tile_count)
 
 	return true
 
@@ -77,7 +83,7 @@ func _verify_town_square() -> bool:
 	await process_frame
 
 	if town_square.get("camera_bounds") != Rect2i(0, 0, 960, 704):
-		return _fail("Town Square camera bounds changed during v1.1 integration.")
+		return _fail("Town Square camera bounds changed during v1.3 integration.")
 
 	var terrain_layers := town_square.get_node("TerrainLayers") as Node2D
 	for layer_name in [&"BaseTerrainTiles", &"RoadTiles", &"PlazaTiles", &"TerrainTransitions"]:
@@ -87,7 +93,7 @@ func _verify_town_square() -> bool:
 		if layer.position != Vector2.ZERO:
 			return _fail("Terrain layer %s has a non-integral placement." % layer_name)
 		if layer.tile_set == null or layer.tile_set.resource_path != TERRAIN_TILESET.resource_path:
-			return _fail("Terrain layer %s does not reference Runtime v1.1." % layer_name)
+			return _fail("Terrain layer %s does not reference Runtime v1.3." % layer_name)
 
 	if not _verify_grass_distribution(terrain_layers.get_node("BaseTerrainTiles") as TileMapLayer):
 		return false
@@ -102,7 +108,7 @@ func _verify_town_square() -> bool:
 	for entry_name: StringName in EXPECTED_ENTRY_POSITIONS:
 		var marker := entry_points.get_node(NodePath(entry_name)) as Marker2D
 		if marker.position != EXPECTED_ENTRY_POSITIONS[entry_name]:
-			return _fail("Town Square entry %s moved during v1.1 integration." % entry_name)
+			return _fail("Town Square entry %s moved during v1.3 integration." % entry_name)
 
 	if town_square.get_node("Exits").get_child_count() != 4:
 		return _fail("Town Square zone-exit count changed.")

@@ -1,0 +1,76 @@
+{
+  "schema": "caden-terrain-runtime-v1.3",
+  "gate_state": "town_square_tonal_terrain_runtime_v1_3_visual_approved",
+  "approval": {
+    "recorded_date": "2026-08-30",
+    "decision": "activate_versioned_tonal_atlas_and_tileset",
+    "review_package": "caden_town_square_tonal_terrain_review_v1_3.zip",
+    "review_package_sha256": "e580e4582b6be79a937912a6f75b197b7a8a608da1803415d0235fb36411c771",
+    "decision_manifest_sha256": "885d6e68eb42e4b93d15aeb395a0615a1be2d5a45e97d06666d7d7420672ecd5"
+  },
+  "generator": "tools/art/import_caden_town_square_tonal_terrain_runtime_v1_3.py",
+  "generator_sha256": "934ca9a46a879ffeda78e6d07cc196800c764685bd2a5d45783cad1aaea1e27f",
+  "atlas_path": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.png",
+  "atlas_sha256": "aa290ab82c5f79b90b491d9f67c88d181f320a2078ca97c161d8925cec46b86d",
+  "tileset_path": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.tres",
+  "tileset_sha256": "faaea9e476122a6265273fe18809ff12e46bd96e94088050c436f95e8b1e11e4",
+  "dimensions": [
+    256,
+    256
+  ],
+  "cell_size": [
+    32,
+    32
+  ],
+  "documented_tile_count": 58,
+  "dirt_rows": [
+    1,
+    2,
+    3
+  ],
+  "dirt_rows_status": "byte_identical_to_runtime_v1_1",
+  "alpha_topology": "byte_identical_to_runtime_v1_1",
+  "tonal_transfer": {
+    "current_grass_mean_rgb": [
+      107.178,
+      130.59,
+      71.904
+    ],
+    "target_grass_mean_rgb": [
+      107.137,
+      130.592,
+      71.963
+    ],
+    "current_stone_mean_rgb": [
+      180.256,
+      161.125,
+      139.549
+    ],
+    "target_stone_mean_rgb": [
+      173.887,
+      150.917,
+      112.94
+    ],
+    "grass_shift_strength": 0.72,
+    "stone_shift_strength": 0.68,
+    "grass_contrast": 0.92,
+    "stone_contrast": 0.86
+  },
+  "source_harmonized_atlas_sha256": "02a28c57d12b99408bda0f973320b46cea150ffc105bc9ef3784c4730c23af2f",
+  "collision": "none",
+  "import_scale": 1.0,
+  "filter": "nearest_neighbor_disabled_filtering",
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+  },
+  "rollback": {
+    "atlas_path": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png",
+    "atlas_sha256": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
+    "tileset_path": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres",
+    "tileset_sha256": "975330faa253d6845a155330c0fcfe43d564a97f5c122f00db04473889808c75",
+    "instruction": "Restore the single TownSquare TileSet ext-resource path to Runtime v1.1; do not change TileMap data or collision."
+  }
+}

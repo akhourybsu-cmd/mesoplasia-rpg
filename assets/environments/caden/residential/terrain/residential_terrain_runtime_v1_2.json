@@ -1,0 +1,140 @@
+{
+  "schema": "caden-residential-terrain-runtime-v1.2",
+  "generator": "tools/art/import_caden_residential_terrain_runtime_v1_2.py",
+  "generator_sha256": "1d9669f06022b0939d9c3afd3489dfa687cfd1bf8c5e1bdd8a1d810b568c9992",
+  "gate_state": "residential_terrain_runtime_v1_2_visual_approved",
+  "approval": {
+    "recorded_date": "2026-08-29",
+    "decision": "approved_active_residential_terrain_runtime_v1_2",
+    "pilot_authorization_package": "caden_residential_terrain_review_v1_2.zip",
+    "pilot_authorization_package_sha256": "d6479402e753b782aaf299a3b7db823af11b13bd673e85d989f6190aac4571e8",
+    "pilot_authorization_manifest_sha256": "06dfa8ecf7dd940823e2297c5ce68b7a254cd61ef40fdd5ff538c814f2b5cb92",
+    "active_evidence_package": "caden_residential_terrain_runtime_review_v1_2.zip",
+    "active_evidence_package_sha256": "7ef1484113357070bb867b7a02c3d70a1023798224af0904b17ff09b7bc77736",
+    "active_evidence_manifest_sha256": "b4c7c0cf8135f15fc6c63c021ab49cdd0eb3f65a825db283213d2d15a1ee41a7"
+  },
+  "source_policy": "Gate 0 atlas, original master, preparation files, and review materials remain outside res://; only the approved composed runtime PNG is imported.",
+  "source": {
+    "original_master_filename": "caden_grass_stone_terrain_master.png",
+    "original_master_sha256": "eaf2dbf53d955e8e92a71c7b04e63b38bcc66710a7e28a06dbfe3956d354508e",
+    "gate_zero_atlas_sha256": "3601f622e54683c1854ddd65ca932641f4c3384f31efc7a0a8c5cd3e66ed5903",
+    "external_candidate_sha256": "828cfd64940b9bdd37fca40bac4d5a091432955d16f8e47b9701bef2028a98a0"
+  },
+  "output_path": "assets/environments/caden/residential/terrain/residential_terrain_runtime_v1_2.png",
+  "output_sha256": "828cfd64940b9bdd37fca40bac4d5a091432955d16f8e47b9701bef2028a98a0",
+  "dimensions": [
+    1152,
+    768
+  ],
+  "cell_size": [
+    32,
+    32
+  ],
+  "grid": [
+    36,
+    24
+  ],
+  "variant_counts": {
+    "grass": 9,
+    "stone": 9,
+    "transitions": 8
+  },
+  "composed_cell_counts": {
+    "grass": 624,
+    "stone": 104,
+    "transition": 136
+  },
+  "palette_harmonization": {
+    "grass_source_mean_rgb": [
+      107.488,
+      114.19,
+      16.907
+    ],
+    "grass_target_mean_rgb": [
+      107.168,
+      130.577,
+      71.895
+    ],
+    "grass_contrast": 0.32,
+    "stone_source_mean_rgb": [
+      186.37,
+      157.997,
+      106.648
+    ],
+    "stone_target_mean_rgb": [
+      173.606,
+      150.536,
+      112.494
+    ],
+    "stone_contrast": 0.58,
+    "purpose": "reduce Gate 0 yellow cast, local contrast, and visual competition with approved architecture"
+  },
+  "route_contract": {
+    "primary_cells_xyxy": [
+      0,
+      10,
+      35,
+      13
+    ],
+    "commons_cells_xyxy": [
+      16,
+      14,
+      19,
+      23
+    ],
+    "northwest_lane_cells_xyxy": [
+      7,
+      3,
+      8,
+      9
+    ],
+    "northeast_lane_cells_xyxy": [
+      27,
+      3,
+      28,
+      9
+    ],
+    "southwest_lane_cells_xyxy": [
+      8,
+      14,
+      9,
+      20
+    ],
+    "southeast_lane_cells_xyxy": [
+      28,
+      14,
+      29,
+      20
+    ]
+  },
+  "import_scale": 1.0,
+  "filter": "nearest_neighbor_disabled_filtering",
+  "collision": "none; authoritative scene collision remains separate and unchanged",
+  "pixel_audit": {
+    "dimensions": [
+      1152,
+      768
+    ],
+    "fully_opaque": true,
+    "alpha_values": [
+      255
+    ],
+    "partial_alpha_pixels": 0,
+    "transparent_rgb_pixels": 0
+  },
+  "preserved_contracts": [
+    "Residential camera bounds, road mask, collision, buildings, props, landscaping, NPCs, dialogue, entries, and exits",
+    "all non-Residential zones"
+  ],
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+  },
+  "rollback": {
+    "previous_runtime_path": "assets/environments/caden/residential/terrain/residential_terrain_runtime_v1.png",
+    "previous_runtime_sha256": "d3d09685eac8f3343bba1c476266def1f7fc99bc13c56863b8445ce21ca03daf",
+    "instruction": "Restore the single Residential TerrainRuntime ext_resource path to the previous runtime path; do not change route or collision nodes."
+  }
+}

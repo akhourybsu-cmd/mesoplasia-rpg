@@ -12,30 +12,35 @@ const BUILDINGS := {
 		"footprint": Vector2(160, 96),
 		"texture": "res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1.png",
 		"texture_size": Vector2i(192, 160),
+		"sprite_position": Vector2(0, -11),
 	},
 	&"GenericBuildingSouthwest": {
 		"position": Vector2(144, 560),
 		"footprint": Vector2(160, 96),
 		"texture": "res://assets/environments/caden/architecture/town_square/town_square_building_southwest_v1.png",
 		"texture_size": Vector2i(192, 160),
+		"sprite_position": Vector2(0, -9),
 	},
 	&"GenericBuildingNortheast": {
 		"position": Vector2(832, 208),
 		"footprint": Vector2(128, 96),
 		"texture": "res://assets/environments/caden/architecture/town_square/town_square_building_northeast_v1.png",
 		"texture_size": Vector2i(160, 160),
+		"sprite_position": Vector2(0, -10),
 	},
 	&"GenericBuildingSoutheast": {
 		"position": Vector2(816, 560),
 		"footprint": Vector2(160, 96),
 		"texture": "res://assets/environments/caden/architecture/town_square/town_square_building_southeast_v1.png",
 		"texture_size": Vector2i(192, 160),
+		"sprite_position": Vector2(0, -17),
 	},
 	&"GenericBuildingSouth": {
 		"position": Vector2(352, 624),
 		"footprint": Vector2(128, 64),
 		"texture": "res://assets/environments/caden/architecture/town_square/town_square_building_south_v1.png",
 		"texture_size": Vector2i(160, 128),
+		"sprite_position": Vector2(0, -17),
 	},
 }
 const ENTRY_POSITIONS := {
@@ -149,8 +154,8 @@ func _verify_town_square() -> bool:
 		# becomes the scene's active visual; v1 stays available for rollback.
 		if sprite.texture.resource_path.contains("source_art"):
 			return _fail("%s references a source master directly." % building_name)
-		if sprite.position != Vector2(0, -16):
-			return _fail("%s no longer uses the documented integer anchor." % building_name)
+		if sprite.position != expected["sprite_position"]:
+			return _fail("%s no longer uses its documented structural contact anchor." % building_name)
 
 		var shadow := building.get_node("ContactShadow") as Polygon2D
 		if shadow == null:

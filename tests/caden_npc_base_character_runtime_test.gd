@@ -51,7 +51,7 @@ func _run_test() -> void:
 		return
 	if not await _verify_stationary_npc_defaults():
 		return
-	if not await _verify_town_square_interactive_visuals():
+	if not await _verify_configured_interactive_visuals():
 		return
 	if not await _verify_zone_unload_and_restore():
 		return
@@ -59,7 +59,7 @@ func _run_test() -> void:
 	if not project_configuration_error.is_empty():
 		return _fail(project_configuration_error)
 
-	print("PASS: NPC base contract, optional StationaryNpc visuals, Town Square interactive variants, collision, interaction, dialogue, and zone reload behavior.")
+	print("PASS: NPC base contract, optional StationaryNpc visuals, configured interactive variants, collision, interaction, dialogue, and zone reload behavior.")
 	quit(0)
 
 
@@ -166,8 +166,9 @@ func _verify_stationary_npc_defaults() -> bool:
 	return true
 
 
-func _verify_town_square_interactive_visuals() -> bool:
+func _verify_configured_interactive_visuals() -> bool:
 	var configured_count := 0
+	var town_square_configured_count := 0
 	for zone_scene: PackedScene in ZONE_SCENES:
 		var zone := zone_scene.instantiate() as Node2D
 		root.add_child(zone)
@@ -183,12 +184,13 @@ func _verify_town_square_interactive_visuals() -> bool:
 			var sprite := npc.get_node("VisualRoot/AnimatedSprite2D") as AnimatedSprite2D
 			if enabled or frames != null:
 				configured_count += 1
-				if zone.name != "TownSquare":
-					return _fail("NPC runtime art was assigned outside Town Square.")
 				if (npc.get_node("VisualRoot") as Node2D).position != Vector2(0, 10) or sprite.position != Vector2(0, -28):
-					return _fail("A configured Town Square NPC no longer uses the documented integer feet offset.")
+					return _fail("A configured interactive NPC no longer uses the documented integer feet offset.")
 				if not sprite.visible or placeholder.visible or marker.visible or sprite.is_playing():
-					return _fail("A configured Town Square NPC does not hide its placeholder and remain idle.")
+					return _fail("A configured interactive NPC does not hide its placeholder and remain idle.")
+				if zone.name != "TownSquare":
+					continue
+				town_square_configured_count += 1
 				var conversation := npc.get("conversation") as Resource
 				if npc.name == "SquareLocal":
 					if frames == null or frames.resource_path != SPRITE_FRAMES_PATH:
@@ -215,8 +217,10 @@ func _verify_town_square_interactive_visuals() -> bool:
 					return _fail("An unassigned Caden NPC placeholder changed visibility.")
 		zone.queue_free()
 		await process_frame
-	if configured_count != 2:
-		return _fail("Expected exactly two configured interactive Caden NPCs, found %d." % configured_count)
+	if configured_count != 11:
+		return _fail("Expected exactly 11 configured interactive Caden NPCs, found %d." % configured_count)
+	if town_square_configured_count != 2:
+		return _fail("Expected exactly two configured Town Square NPCs, found %d." % town_square_configured_count)
 	return true
 
 

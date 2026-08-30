@@ -19,7 +19,7 @@ func _run_test() -> void:
 
 	var player := caden.get_node("Player") as CharacterBody2D
 	var approach := caden.get("_current_zone") as Node2D
-	var traveler := approach.get_node("RestingTraveler") as StaticBody2D
+	var traveler := approach.get_node("Actors/NPCs/RestingTraveler") as StaticBody2D
 	var old_traveler_reference: WeakRef = weakref(traveler)
 	var detector := player.get_node("InteractionDetector") as Area2D
 	var interaction_prompt := player.get_node("InteractionPrompt") as CanvasLayer
@@ -100,7 +100,7 @@ func _run_test() -> void:
 	await physics_frame
 	await physics_frame
 	var reloaded_approach := caden.get("_current_zone") as Node2D
-	var reloaded_traveler := reloaded_approach.get_node("RestingTraveler") as StaticBody2D
+	var reloaded_traveler := reloaded_approach.get_node("Actors/NPCs/RestingTraveler") as StaticBody2D
 	player.position = reloaded_traveler.position + Vector2(0, -56)
 	await physics_frame
 	await physics_frame

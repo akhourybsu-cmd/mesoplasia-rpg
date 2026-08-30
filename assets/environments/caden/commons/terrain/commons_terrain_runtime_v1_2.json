@@ -1,0 +1,101 @@
+{
+  "schema": "caden-commons-terrain-runtime-v1.2",
+  "generator": "tools/art/import_caden_commons_terrain_runtime_v1_2.py",
+  "generator_sha256": "ab045506be8139e5fbd0fb8e735b1085e76445e89d0c3d33d9f036c20185c1b3",
+  "gate_state": "commons_terrain_runtime_v1_2_visual_approved",
+  "approval": {
+    "recorded_date": "2026-08-30",
+    "decision": "approved_active_commons_terrain_runtime_v1_2",
+    "pilot_authorization_package": "caden_commons_terrain_review_v1_2.zip",
+    "pilot_authorization_package_sha256": "e05c902b0cd8b940c27638f94f634f4b7f631551d6f433d3e5a36ca0eacfe903",
+    "pilot_authorization_manifest_sha256": "65907fe56a9a8b593052796d825448926464ef8e5a85f524fddd459793cdebc3",
+    "active_evidence_package": "caden_commons_terrain_runtime_review_v1_2.zip",
+    "active_evidence_package_sha256": "6fc8c71f7217e05e14a26a40daf9746e6da3850359d3ca6fae60757b8cfffe92",
+    "active_evidence_manifest_sha256": "9138f9c0ecf5ecf1460aab2489045c0e4a077bb42e55ef9a70765bef14ee734f"
+  },
+  "source_policy": "Source master, harmonized atlas, preparation files, and review materials remain outside res://; only the approved composed runtime PNG is imported.",
+  "source": {
+    "original_master_filename": "caden_grass_stone_terrain_master.png",
+    "original_master_sha256": "eaf2dbf53d955e8e92a71c7b04e63b38bcc66710a7e28a06dbfe3956d354508e",
+    "approved_harmonized_atlas_sha256": "02a28c57d12b99408bda0f973320b46cea150ffc105bc9ef3784c4730c23af2f",
+    "external_candidate_sha256": "d3e07ee474f9ebc6f40df4d5074f82768e597ac25da8c79efbc5c0f6ebc27c48"
+  },
+  "output_path": "assets/environments/caden/commons/terrain/commons_terrain_runtime_v1_2.png",
+  "output_sha256": "d3e07ee474f9ebc6f40df4d5074f82768e597ac25da8c79efbc5c0f6ebc27c48",
+  "dimensions": [
+    1024,
+    704
+  ],
+  "cell_size": [
+    32,
+    32
+  ],
+  "grid": [
+    32,
+    22
+  ],
+  "variant_counts": {
+    "grass": 9,
+    "warm_stone": 9,
+    "transitions": 8
+  },
+  "composed_cell_counts": {
+    "grass": 596,
+    "warm_stone": 55,
+    "transition": 53
+  },
+  "route_footprint_cells": 108,
+  "route_contract": {
+    "town_square_cells_xyxy": [
+      0,
+      9,
+      15,
+      12
+    ],
+    "residential_cells_xyxy": [
+      14,
+      0,
+      17,
+      12
+    ]
+  },
+  "quiet_green_pixels_xywh": [
+    608,
+    128,
+    320,
+    448
+  ],
+  "import_scale": 1.0,
+  "filter": "nearest_neighbor_disabled_filtering",
+  "collision": "none; authoritative Commons collision remains separate and unchanged",
+  "pixel_audit": {
+    "dimensions": [
+      1024,
+      704
+    ],
+    "fully_opaque": true,
+    "alpha_values": [
+      255
+    ],
+    "partial_alpha_pixels": 0,
+    "transparent_rgb_pixels": 0
+  },
+  "preserved_contracts": [
+    "approved Commons Runtime v1 scenery, pivots, collision, sorting, and three visible residents",
+    "exact Town Square and Residential route cells, entries, exits, camera bounds, and dialogue",
+    "open Quiet Green and existing maintained rest pocket",
+    "Commons.tscn and all active resource references",
+    "all non-Commons zones"
+  ],
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+  },
+  "rollback": {
+    "previous_runtime_path": "assets/environments/caden/commons/terrain/commons_terrain_runtime_v1.png",
+    "previous_runtime_sha256": "1d6c7abf5985d41967101de640e19255694b8225e5e6b0e1e47bd8b1f02d56e0",
+    "instruction": "Restore the single Commons TerrainRuntime ext-resource path to the previous runtime path; do not change route or collision nodes."
+  }
+}

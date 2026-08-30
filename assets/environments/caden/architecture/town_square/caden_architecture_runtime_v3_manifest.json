@@ -1,0 +1,325 @@
+{
+  "schema": "caden-architecture-runtime-v3",
+  "gate_state": "town_square_architecture_runtime_v3_visual_approved",
+  "approval": {
+    "recorded_date": "2026-08-30",
+    "decision": "activate_all_five_fixed_footprint_architecture_candidates",
+    "review_package": "caden_town_square_protected_review_v1_2_b.zip",
+    "review_package_sha256": "7ce5860927274ec7bfb8b3beb7247a5d32e81f737f5015742a1dc45234f675cd",
+    "decision_manifest_sha256": "34037b88c4b5d38e0646285662bb01e286904b69d87356989b68aeefe31752b8"
+  },
+  "generator": "tools/art/import_caden_town_square_architecture_runtime_v3.py",
+  "generator_sha256": "fdb1c55ac84716f0b6cea11084c3808971ea41dcac0d84d6bbf63ef1055a7596",
+  "source_policy": "Source masters, intermediate cleanup, and review material remain outside res://; only five approved runtime PNGs are imported.",
+  "concept_authority": "Palette, materials, lighting, architectural language, and density only; signs, emblems, central monument, and exact geometry are non-authoritative.",
+  "generated_buildings": {
+    "northwest": {
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_northwest_v3.png",
+      "sha256": "f0c26b6fee62fc89b93e7c29ee43968f89e8304ad7fb56ab1340b9dfa64f6f6e",
+      "status": "approved_active_runtime_v3",
+      "source_id": "cad_bld_v2_r04_c03",
+      "source_filename": "caden_buildings_volume_2_master.png",
+      "source_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "scale_family": "town_square_broad",
+      "normalization_factor": 0.72,
+      "dimensions": [
+        168,
+        130
+      ],
+      "pivot_xy": [
+        84,
+        124
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "sprite_offset_xy": [
+        0,
+        -11.0
+      ],
+      "collision_footprint": [
+        160,
+        96
+      ],
+      "scene_center": [
+        144,
+        112
+      ],
+      "target_node": "SolidScenery/Buildings/GenericBuildingNorthwest",
+      "intended_placement": "maintained public-house frontage",
+      "cleanup": {
+        "border_connected_checker_removed": true,
+        "neutral_shadow_pixels_removed": 306,
+        "bright_boundary_pixels_removed": 4,
+        "detached_components_removed": 1,
+        "detached_component_pixels_removed": 529,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          168,
+          130
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0
+      }
+    },
+    "southwest": {
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_southwest_v3.png",
+      "sha256": "968afcb3f1429ebf008dd5c33fcb5cf6b0fb81b2cc354f7786c0c9ef882cfd76",
+      "status": "approved_active_runtime_v3",
+      "source_id": "cad_bld_v2_r04_c04",
+      "source_filename": "caden_buildings_volume_2_master.png",
+      "source_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "scale_family": "town_square_broad",
+      "normalization_factor": 0.74,
+      "dimensions": [
+        180,
+        126
+      ],
+      "pivot_xy": [
+        90,
+        120
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "sprite_offset_xy": [
+        0,
+        -9.0
+      ],
+      "collision_footprint": [
+        160,
+        96
+      ],
+      "scene_center": [
+        144,
+        560
+      ],
+      "target_node": "SolidScenery/Buildings/GenericBuildingSouthwest",
+      "intended_placement": "workshop and service frontage",
+      "cleanup": {
+        "border_connected_checker_removed": true,
+        "neutral_shadow_pixels_removed": 208,
+        "bright_boundary_pixels_removed": 3,
+        "detached_components_removed": 2,
+        "detached_component_pixels_removed": 384,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          180,
+          126
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0
+      }
+    },
+    "northeast": {
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_northeast_v3.png",
+      "sha256": "5c7310e51d10093e939d0116b57b66fa3c44f446edb95ae983114af47bc92059",
+      "status": "approved_active_runtime_v3",
+      "source_id": "cad_bld_v2_r02_c05",
+      "source_filename": "caden_buildings_volume_2_master.png",
+      "source_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "scale_family": "town_square_standard",
+      "normalization_factor": 0.75,
+      "dimensions": [
+        150,
+        126
+      ],
+      "pivot_xy": [
+        75,
+        121
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "sprite_offset_xy": [
+        0,
+        -10.0
+      ],
+      "collision_footprint": [
+        128,
+        96
+      ],
+      "scene_center": [
+        832,
+        208
+      ],
+      "target_node": "SolidScenery/Buildings/GenericBuildingNortheast",
+      "intended_placement": "compact civic-side cottage",
+      "cleanup": {
+        "border_connected_checker_removed": true,
+        "neutral_shadow_pixels_removed": 225,
+        "bright_boundary_pixels_removed": 2,
+        "detached_components_removed": 0,
+        "detached_component_pixels_removed": 0,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          150,
+          126
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0
+      }
+    },
+    "southeast": {
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_southeast_v3.png",
+      "sha256": "e243f0ebba150353983aac91b0d75d727b2fa3d8ff80bfff22a48a2ce4c87343",
+      "status": "approved_active_runtime_v3",
+      "source_id": "cad_bld_v2_r04_c01",
+      "source_filename": "caden_buildings_volume_2_master.png",
+      "source_sha256": "d4df1a8fd892cc16153e32aa8b97d7760df4a3d718b01f0c804853a4ad34895f",
+      "scale_family": "town_square_broad",
+      "normalization_factor": 0.68,
+      "dimensions": [
+        178,
+        140
+      ],
+      "pivot_xy": [
+        89,
+        135
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "sprite_offset_xy": [
+        0,
+        -17.0
+      ],
+      "collision_footprint": [
+        160,
+        96
+      ],
+      "scene_center": [
+        816,
+        560
+      ],
+      "target_node": "SolidScenery/Buildings/GenericBuildingSoutheast",
+      "intended_placement": "two-story community frontage",
+      "cleanup": {
+        "border_connected_checker_removed": true,
+        "neutral_shadow_pixels_removed": 381,
+        "bright_boundary_pixels_removed": 1,
+        "detached_components_removed": 0,
+        "detached_component_pixels_removed": 0,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          178,
+          140
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0
+      }
+    },
+    "south": {
+      "path": "assets/environments/caden/architecture/town_square/town_square_building_south_v3.png",
+      "sha256": "63a0a21ec7c7a4d9590e70af69b6db98424b963b2987325e4a95b6291451bbee",
+      "status": "approved_active_runtime_v3",
+      "source_id": "cad_bld_v1_r04_c05",
+      "source_filename": "caden_buildings_volume_1_master.png",
+      "source_sha256": "1f9bc86b2e91aecd9ad455e6ca768fccb2c8c9699cc653ec695202dd3bbcc8a4",
+      "scale_family": "town_square_small",
+      "normalization_factor": 0.8,
+      "dimensions": [
+        138,
+        108
+      ],
+      "pivot_xy": [
+        69,
+        103
+      ],
+      "pivot_basis": "bottom-center structural contact inside the central half; detached decoration and removed shadow excluded",
+      "sprite_offset_xy": [
+        0,
+        -17.0
+      ],
+      "collision_footprint": [
+        128,
+        64
+      ],
+      "scene_center": [
+        352,
+        624
+      ],
+      "target_node": "SolidScenery/Buildings/GenericBuildingSouth",
+      "intended_placement": "small service outbuilding",
+      "cleanup": {
+        "border_connected_checker_removed": true,
+        "neutral_shadow_pixels_removed": 220,
+        "bright_boundary_pixels_removed": 1,
+        "detached_components_removed": 1,
+        "detached_component_pixels_removed": 647,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          138,
+          108
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0
+      }
+    }
+  },
+  "protected_contracts": [
+    "five StaticBody2D centers and authoritative collision rectangles",
+    "octagonal plaza, all TileMap cell coordinates, four travel corridors, and distinct dirt roads",
+    "blocked Terrebonne branch, reserved community space, entries, exits, NPCs, interactions, and bounds",
+    "TownSquare.tscn, Runtime v2 architecture, Runtime v1.1 TileSet, and all active references"
+  ],
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
+    "rights_status": "project_internal_rights_unverified",
+    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+  },
+  "terrain_decision": {
+    "active_path": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_3.tres",
+    "active_atlas_sha256": "aa290ab82c5f79b90b491d9f67c88d181f320a2078ca97c161d8925cec46b86d",
+    "status": "approved_active_tonal_runtime_v1_3",
+    "authorization_package_sha256": "e580e4582b6be79a937912a6f75b197b7a8a608da1803415d0235fb36411c771",
+    "coarse_candidate_status": "rejected_not_imported",
+    "rollback_path": "assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.tres",
+    "rollback_atlas_sha256": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a"
+  },
+  "rollback": {
+    "manifest": "assets/environments/caden/architecture/town_square/caden_architecture_runtime_v2_manifest.json",
+    "manifest_sha256": "73400baf9d3717440adb5433507a12e3a8b86402b73b3348696c2810cca3c024",
+    "building_sha256": {
+      "northeast": "8505d8435638e305544d6794d464d1c7249b595b2bf0cb279f42a68139c0f0b1",
+      "northwest": "24b29773c878b774b4f370ce812bb13ff5fb71fd1fe0a6f53c629f1c4174d479",
+      "south": "b33ca98d80e099c817fe8cc47894a93184e4aab7fb2a690f37818d41d2f22457",
+      "southeast": "00ae942961bfe3cf6abef30804e848f2b8565d2c38c3670c193f2993f8a3e2af",
+      "southwest": "a9b63a7d6ad67bdbe3d99c97bdd9b3c3e6f4ac9014bdd5f0fc2e8734187d1d93"
+    },
+    "instruction": "Restore the five TownSquare ExteriorSprite paths and offsets to Runtime v2; do not change building centers or collisions."
+  }
+}
