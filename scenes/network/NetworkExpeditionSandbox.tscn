@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/network_expedition_sandbox.gd" id="1_sandbox"]
+
+[node name="NetworkExpeditionSandbox" type="Node2D"]
+script = ExtResource("1_sandbox")
+
+[node name="PresentationRoot" type="Node2D" parent="."]
+
+[node name="ClientAgents" type="Node" parent="."]
+
+[node name="Runtimes" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 300
+
+[node name="TopPanel" type="PanelContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 162.0
+
+[node name="Margin" type="MarginContainer" parent="HUD/TopPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="HUD/TopPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Header" type="HBoxContainer" parent="HUD/TopPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="HUD/TopPanel/Margin/Rows/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "PHASE F — AUTHORED EXPEDITION INSTANCE"
+
+[node name="StartButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 Start"
+
+[node name="PrepareButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2 Prepare Party"
+
+[node name="LaunchButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3 Launch"
+
+[node name="Actions" type="HFlowContainer" parent="HUD/TopPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+
+[node name="RetreatButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Retreat"
+
+[node name="FailureButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stub Failure"
+
+[node name="ReconnectButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reconnect Guest"
+
+[node name="StopButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stop"
+
+[node name="StatusLabel" type="Label" parent="HUD/TopPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "STATUS: Start the authored expedition demo."
+text_overrun_behavior = 3
+
+[node name="PartyLabel" type="Label" parent="HUD/TopPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "PARTY: waiting"
+text_overrun_behavior = 3
+
+[node name="ExpeditionLabel" type="Label" parent="HUD/TopPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "EXPEDITION: waiting"
+text_overrun_behavior = 3
+
+[node name="HelpPanel" type="PanelContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 305.0
+offset_right = 632.0
+offset_bottom = 352.0
+
+[node name="Help" type="Label" parent="HUD/HelpPanel"]
+layout_mode = 2
+text = "WASD/Arrows move both test members • gather at the green exit and press E • reach the gold goal and press E"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

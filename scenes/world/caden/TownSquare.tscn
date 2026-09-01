@@ -1029,6 +1029,7 @@ facing_direction = Vector2(-1, 0)
 [node name="NorthPlazaWalker" parent="Actors/NPCs" instance=ExtResource("53_patrol_npc")]
 z_index = 10
 position = Vector2(160, 272)
+npc_id = &"caden.npc.town_square.north_plaza_walker"
 character_sprite_frames = ExtResource("55_north_walker_frames")
 patrol_distance = 64.0
 move_speed = 20.0
@@ -1037,6 +1038,7 @@ pause_duration = 1.2
 [node name="WestPlazaWalker" parent="Actors/NPCs" instance=ExtResource("53_patrol_npc")]
 z_index = 10
 position = Vector2(752, 352)
+npc_id = &"caden.npc.town_square.west_plaza_walker"
 character_sprite_frames = ExtResource("56_west_walker_frames")
 patrol_axis = 1
 patrol_distance = 96.0
@@ -1047,6 +1049,7 @@ start_toward_positive = false
 [node name="SouthPlazaWalker" parent="Actors/NPCs" instance=ExtResource("53_patrol_npc")]
 z_index = 10
 position = Vector2(656, 496)
+npc_id = &"caden.npc.town_square.south_plaza_walker"
 character_sprite_frames = ExtResource("57_south_walker_frames")
 patrol_distance = 64.0
 move_speed = 24.0

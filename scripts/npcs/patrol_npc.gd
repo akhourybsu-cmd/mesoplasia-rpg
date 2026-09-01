@@ -17,6 +17,7 @@ const REQUIRED_ANIMATIONS: Array[StringName] = [
 	&"walk_up",
 ]
 
+@export var npc_id: StringName
 @export var character_sprite_frames: SpriteFrames
 @export_enum("Horizontal", "Vertical") var patrol_axis: int = PatrolAxis.HORIZONTAL
 @export_range(32.0, 512.0, 1.0) var patrol_distance := 128.0
@@ -35,6 +36,7 @@ var _positive_endpoint := Vector2.ZERO
 var _target_endpoint := Vector2.ZERO
 var _pause_remaining := 0.0
 var _visual_is_valid := false
+var _network_presentation_enabled := false
 
 
 func _ready() -> void:
@@ -56,6 +58,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if _network_presentation_enabled:
+		return
 	if _pause_remaining > 0.0:
 		_pause_remaining = maxf(_pause_remaining - delta, 0.0)
 		velocity = Vector2.ZERO
@@ -77,6 +81,32 @@ func _physics_process(delta: float) -> void:
 	if collided:
 		_target_endpoint = _negative_endpoint if _target_endpoint == _positive_endpoint else _positive_endpoint
 		_begin_pause()
+
+
+func get_npc_id() -> StringName:
+	return npc_id
+
+
+func set_network_presentation_enabled(is_enabled: bool) -> void:
+	_network_presentation_enabled = is_enabled
+	set_physics_process(not is_enabled)
+	velocity = Vector2.ZERO
+
+
+func apply_authoritative_presentation_state(
+	new_global_position: Vector2,
+	movement_velocity: Vector2,
+	facing_direction: Vector2
+) -> bool:
+	if not _network_presentation_enabled:
+		return false
+	global_position = new_global_position
+	velocity = movement_velocity
+	if movement_velocity != Vector2.ZERO:
+		_play_walk(movement_velocity)
+	else:
+		_play_idle(facing_direction)
+	return true
 
 
 func _patrol_direction() -> Vector2:

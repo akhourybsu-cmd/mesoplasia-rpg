@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "abilities": [
+    {
+      "ability_id": "development.ability.strike",
+      "display_name": "Strike",
+      "target_rule": "ENEMY",
+      "resource_cost": 0,
+      "cooldown_turns": 0,
+      "effects": [
+        {"effect_type": "DAMAGE", "amount": 4, "variance": 2}
+      ]
+    },
+    {
+      "ability_id": "development.ability.mend",
+      "display_name": "Mend",
+      "target_rule": "ALLY",
+      "resource_cost": 2,
+      "cooldown_turns": 2,
+      "effects": [
+        {"effect_type": "HEAL", "amount": 5, "variance": 0}
+      ]
+    },
+    {
+      "ability_id": "development.ability.guard",
+      "display_name": "Guard",
+      "target_rule": "SELF",
+      "resource_cost": 0,
+      "cooldown_turns": 1,
+      "effects": [
+        {
+          "effect_type": "APPLY_STATUS",
+          "status_id": "development.status.guard",
+          "duration_turns": 1,
+          "magnitude": 2
+        }
+      ]
+    },
+    {
+      "ability_id": "development.ability.venom",
+      "display_name": "Venom",
+      "target_rule": "ENEMY",
+      "resource_cost": 1,
+      "cooldown_turns": 1,
+      "effects": [
+        {"effect_type": "DAMAGE", "amount": 2, "variance": 0},
+        {
+          "effect_type": "APPLY_STATUS",
+          "status_id": "development.status.poison",
+          "duration_turns": 2,
+          "magnitude": 1
+        }
+      ]
+    },
+    {
+      "ability_id": "development.ability.claw",
+      "display_name": "Claw",
+      "target_rule": "ENEMY",
+      "resource_cost": 0,
+      "cooldown_turns": 0,
+      "effects": [
+        {"effect_type": "DAMAGE", "amount": 3, "variance": 1}
+      ]
+    }
+  ],
+  "statuses": [
+    {
+      "status_id": "development.status.guard",
+      "display_name": "Guarded",
+      "timing_hook": "TURN_START",
+      "effect_type": "INCOMING_DAMAGE_REDUCTION"
+    },
+    {
+      "status_id": "development.status.poison",
+      "display_name": "Poisoned",
+      "timing_hook": "TURN_START",
+      "effect_type": "DAMAGE_OVER_TIME"
+    }
+  ],
+  "combatant_templates": [
+    {
+      "template_id": "development.combatant.vanguard",
+      "display_name": "Vanguard",
+      "team_id": "heroes",
+      "max_health": 18,
+      "max_resource": 3,
+      "speed": 6,
+      "ability_ids": [
+        "development.ability.strike",
+        "development.ability.guard"
+      ],
+      "ai_controlled": false
+    },
+    {
+      "template_id": "development.combatant.warden",
+      "display_name": "Warden",
+      "team_id": "heroes",
+      "max_health": 14,
+      "max_resource": 5,
+      "speed": 4,
+      "ability_ids": [
+        "development.ability.strike",
+        "development.ability.mend",
+        "development.ability.guard"
+      ],
+      "ai_controlled": false
+    },
+    {
+      "template_id": "development.combatant.venom_slime",
+      "display_name": "Venom Slime",
+      "team_id": "enemies",
+      "max_health": 16,
+      "max_resource": 4,
+      "speed": 5,
+      "ability_ids": [
+        "development.ability.claw",
+        "development.ability.venom",
+        "development.ability.guard"
+      ],
+      "ai_controlled": true
+    }
+  ]
+}

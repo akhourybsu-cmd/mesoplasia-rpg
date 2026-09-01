@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/interaction/interactable.gd" id="1_interactable"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(54, 128)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 18
+font_color = Color(0.88, 0.91, 0.82, 1)
+
+[node name="TestThresholdRoom" type="Node2D"]
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(64, 64, 576, 64, 576, 296, 64, 296)
+color = Color(0.105, 0.145, 0.13, 1)
+
+[node name="Path" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(92, 132, 548, 132, 548, 244, 92, 244)
+color = Color(0.29, 0.31, 0.25, 1)
+
+[node name="MarkerA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(262, 156, 282, 136, 302, 156, 282, 176)
+color = Color(0.45, 0.69, 0.58, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 76.0
+offset_right = 330.0
+offset_bottom = 104.0
+text = "DEVELOPMENT TEST THRESHOLD"
+label_settings = SubResource("LabelSettings_title")
+
+[node name="ExitGlow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(520, 116, 568, 116, 568, 252, 520, 252)
+color = Color(0.34, 0.66, 0.49, 0.65)
+
+[node name="ToDepths" type="Area2D" parent="."]
+position = Vector2(544, 184)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_interactable")
+prompt_text = "Enter Test Depths"
+interactable_id = &"development.connection.threshold_to_depths"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToDepths"]
+shape = SubResource("RectangleShape2D_exit")

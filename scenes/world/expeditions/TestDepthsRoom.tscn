@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/interaction/interactable.gd" id="1_interactable"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(54, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
+size = Vector2(54, 128)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 18
+font_color = Color(0.9, 0.85, 0.72, 1)
+
+[node name="TestDepthsRoom" type="Node2D"]
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(64, 64, 576, 64, 576, 296, 64, 296)
+color = Color(0.13, 0.105, 0.15, 1)
+
+[node name="Path" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(92, 132, 548, 132, 548, 244, 92, 244)
+color = Color(0.31, 0.25, 0.31, 1)
+
+[node name="MarkerA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(302, 146, 322, 166, 302, 186, 282, 166)
+color = Color(0.72, 0.55, 0.33, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 76.0
+offset_right = 330.0
+offset_bottom = 104.0
+text = "DEVELOPMENT TEST DEPTHS"
+label_settings = SubResource("LabelSettings_title")
+
+[node name="ReturnGlow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(72, 116, 120, 116, 120, 252, 72, 252)
+color = Color(0.36, 0.48, 0.64, 0.6)
+
+[node name="ToThreshold" type="Area2D" parent="."]
+position = Vector2(96, 184)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_interactable")
+prompt_text = "Return to Test Threshold"
+interactable_id = &"development.connection.depths_to_threshold"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToThreshold"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="GoalGlow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(520, 116, 568, 116, 568, 252, 520, 252)
+color = Color(0.78, 0.57, 0.26, 0.7)
+
+[node name="StubGoal" type="Area2D" parent="."]
+position = Vector2(544, 184)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_interactable")
+prompt_text = "Complete Test Expedition"
+interactable_id = &"development.expedition.stub.success"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StubGoal"]
+shape = SubResource("RectangleShape2D_goal")

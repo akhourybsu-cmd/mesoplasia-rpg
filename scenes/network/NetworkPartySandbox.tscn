@@ -1,0 +1,128 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/network_party_sandbox.gd" id="1_sandbox"]
+
+[node name="NetworkPartySandbox" type="Node2D"]
+script = ExtResource("1_sandbox")
+
+[node name="PresentationRoot" type="Node2D" parent="."]
+
+[node name="Runtimes" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 200
+
+[node name="PartyPanel" type="PanelContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 209.0
+
+[node name="Margin" type="MarginContainer" parent="HUD/PartyPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="HUD/PartyPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Header" type="HBoxContainer" parent="HUD/PartyPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="HUD/PartyPanel/Margin/Rows/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "PHASE E — AUTHORITATIVE PARTY"
+
+[node name="StartButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start 2 Players"
+
+[node name="StopButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stop"
+
+[node name="FlowActions" type="HFlowContainer" parent="HUD/PartyPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 3
+
+[node name="InviteButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 Invite Guest"
+
+[node name="AcceptButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2 Guest Accept"
+
+[node name="SelectButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3 Select Test Expedition"
+
+[node name="LocalReadyButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "4 Local Ready"
+
+[node name="GuestReadyButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "5 Guest Ready"
+
+[node name="TransferButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Transfer Leader"
+
+[node name="ReconnectButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reconnect Guest"
+
+[node name="LeaveButton" type="Button" parent="HUD/PartyPanel/Margin/Rows/FlowActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Guest Leave"
+
+[node name="StatusLabel" type="Label" parent="HUD/PartyPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "STATUS: Start the two-player party demo when ready."
+text_overrun_behavior = 3
+
+[node name="LocalStateLabel" type="Label" parent="HUD/PartyPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "LOCAL: waiting"
+text_overrun_behavior = 3
+
+[node name="GuestStateLabel" type="Label" parent="HUD/PartyPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "GUEST: waiting"
+text_overrun_behavior = 3
+
+[node name="HelpPanel" type="PanelContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 310.0
+offset_right = 632.0
+offset_bottom = 352.0
+
+[node name="Help" type="Label" parent="HUD/HelpPanel"]
+layout_mode = 2
+text = "Follow buttons 1→5 • both projections must match • reconnect preserves membership but clears guest ready"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

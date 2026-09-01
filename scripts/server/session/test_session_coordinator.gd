@@ -9,9 +9,12 @@ const STATE_AUTHENTICATED := "authenticated"
 const RATE_WINDOW_MSEC := 1000
 const MAX_MESSAGES_PER_WINDOW := 8
 const MAX_MALFORMED_BEFORE_DISCONNECT := 3
+const MAX_APPLICATION_MESSAGES_PER_WINDOW := 12
+const MAX_MOVEMENT_MESSAGES_PER_WINDOW := 40
 
 var _access_code := ""
 var _server_name := "Mesoplasia Phase C Sandbox"
+var _capabilities: Array[String] = ["connection_sandbox", "avatar_presence"]
 var _maximum_connections := 4
 var _connections_by_peer: Dictionary = {}
 var _identities_by_reconnect_hash: Dictionary = {}
@@ -42,6 +45,11 @@ func connect_peer(peer_id: int, now_msec: int = 0) -> bool:
 		"malformed_count": 0,
 		"rate_window_started_msec": now_msec,
 		"rate_count": 0,
+		"application_rate_window_msec": now_msec,
+		"application_rate_count": 0,
+		"movement_rate_window_msec": now_msec,
+		"movement_rate_count": 0,
+		"last_movement_envelope_sequence": 0,
 		"session_id": "",
 		"account_id": "",
 		"character_id": "",
@@ -133,6 +141,20 @@ func get_connection_snapshot(peer_id: int) -> Dictionary:
 	return (_connections_by_peer[peer_id] as Dictionary).duplicate(true)
 
 
+func authorize_application_command(peer_id: int, envelope: Variant, now_msec: int) -> Dictionary:
+	return _authorize_authenticated_envelope(peer_id, envelope, now_msec, false)
+
+
+func authorize_movement_envelope(peer_id: int, envelope: Variant, now_msec: int) -> Dictionary:
+	return _authorize_authenticated_envelope(peer_id, envelope, now_msec, true)
+
+
+func enable_capability(capability: String) -> void:
+	if not capability.is_empty() and not _capabilities.has(capability):
+		_capabilities.append(capability)
+		_capabilities.sort()
+
+
 func get_authenticated_peer_ids() -> Array[int]:
 	var peer_ids: Array[int] = []
 	for peer_id: Variant in _connections_by_peer:
@@ -149,6 +171,14 @@ func get_connection_count() -> int:
 
 func get_authenticated_count() -> int:
 	return get_authenticated_peer_ids().size()
+
+
+func make_application_server_envelope(
+	message_type: String,
+	command_id: String,
+	payload: Dictionary
+) -> Dictionary:
+	return _server_envelope(message_type, command_id, payload)
 
 
 func _handle_client_hello(
@@ -294,6 +324,84 @@ func _consume_rate(connection: Dictionary, now_msec: int) -> bool:
 	return connection.rate_count <= MAX_MESSAGES_PER_WINDOW
 
 
+func _authorize_authenticated_envelope(
+	peer_id: int,
+	envelope: Variant,
+	now_msec: int,
+	is_movement: bool
+) -> Dictionary:
+	if not _connections_by_peer.has(peer_id):
+		return _authorization_rejected(Protocol.REASON_INVALID_STATE, "Transport peer is not registered.")
+	var connection := _connections_by_peer[peer_id] as Dictionary
+	if connection.state != STATE_AUTHENTICATED:
+		return _authorization_rejected(Protocol.REASON_INVALID_STATE, "Session is not authenticated.")
+	if not _consume_authenticated_rate(connection, now_msec, is_movement):
+		return _authorization_rejected(Protocol.REASON_RATE_LIMITED, "Command rate exceeded.")
+	var validation := Protocol.validate_client_envelope(envelope)
+	if not validation.valid:
+		connection.malformed_count += 1
+		var malformed := _authorization_rejected(Protocol.REASON_MALFORMED, validation.reason_text)
+		malformed.disconnect_peer = connection.malformed_count >= MAX_MALFORMED_BEFORE_DISCONNECT
+		return malformed
+	var command := envelope as Dictionary
+	if command.protocol_version != Protocol.PROTOCOL_VERSION:
+		return _authorization_rejected(Protocol.REASON_VERSION_MISMATCH, "Protocol version is incompatible.")
+	if command.session_id != connection.session_id:
+		return _authorization_rejected(Protocol.REASON_SESSION_MISMATCH, "Session binding does not match the sender.")
+	if is_movement:
+		if command.message_type != Protocol.MOVEMENT_INPUT:
+			return _authorization_rejected(Protocol.REASON_MALFORMED, "Movement channel received another command type.")
+		if command.client_sequence <= connection.last_movement_envelope_sequence:
+			return _authorization_rejected(Protocol.REASON_STALE_SEQUENCE, "Movement envelope sequence is stale.")
+		connection.last_movement_envelope_sequence = command.client_sequence
+	else:
+		if not command.message_type in [
+			Protocol.INTERACT,
+			Protocol.ZONE_TRANSITION,
+			Protocol.REQUEST_HUB_SNAPSHOT,
+			Protocol.PARTY_INVITE,
+			Protocol.PARTY_ACCEPT,
+			Protocol.PARTY_DECLINE,
+			Protocol.PARTY_LEAVE,
+			Protocol.PARTY_KICK,
+			Protocol.PARTY_TRANSFER_LEADERSHIP,
+			Protocol.PARTY_READY,
+			Protocol.PARTY_SELECT_EXPEDITION,
+			Protocol.PARTY_REQUEST_SNAPSHOT,
+			Protocol.EXPEDITION_LAUNCH,
+			Protocol.EXPEDITION_CONTENT_READY,
+			Protocol.EXPEDITION_ROOM_TRANSITION,
+			Protocol.EXPEDITION_STUB_OUTCOME,
+			Protocol.EXPEDITION_RETURN_ACK,
+			Protocol.EXPEDITION_REQUEST_SNAPSHOT,
+		]:
+			return _authorization_rejected(Protocol.REASON_MALFORMED, "Unsupported authenticated command type.")
+		if command.client_sequence <= connection.last_client_sequence:
+			return _authorization_rejected(Protocol.REASON_STALE_SEQUENCE, "Client sequence is stale.")
+		connection.last_client_sequence = command.client_sequence
+	return {"accepted": true, "reason_code": Protocol.REASON_OK, "disconnect_peer": false}
+
+
+func _consume_authenticated_rate(connection: Dictionary, now_msec: int, is_movement: bool) -> bool:
+	var window_key := "movement_rate_window_msec" if is_movement else "application_rate_window_msec"
+	var count_key := "movement_rate_count" if is_movement else "application_rate_count"
+	var maximum := MAX_MOVEMENT_MESSAGES_PER_WINDOW if is_movement else MAX_APPLICATION_MESSAGES_PER_WINDOW
+	if now_msec - int(connection[window_key]) >= RATE_WINDOW_MSEC:
+		connection[window_key] = now_msec
+		connection[count_key] = 0
+	connection[count_key] = int(connection[count_key]) + 1
+	return int(connection[count_key]) <= maximum
+
+
+func _authorization_rejected(reason_code: String, reason_text: String) -> Dictionary:
+	return {
+		"accepted": false,
+		"reason_code": reason_code,
+		"reason_text": reason_text,
+		"disconnect_peer": false,
+	}
+
+
 func _server_hello(
 	accepted: bool,
 	reason_code: String,
@@ -313,7 +421,7 @@ func _server_hello(
 			"content_version": Protocol.CONTENT_VERSION,
 			"content_manifest_hash": Protocol.CONTENT_MANIFEST_HASH,
 			"server_name": _server_name,
-			"capabilities": ["connection_sandbox", "avatar_presence"],
+			"capabilities": _capabilities.duplicate(),
 			"session_challenge": challenge,
 		}
 	)

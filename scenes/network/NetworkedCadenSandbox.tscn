@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/networked_caden_sandbox.gd" id="1_sandbox"]
+
+[node name="NetworkedCadenSandbox" type="Node2D"]
+script = ExtResource("1_sandbox")
+
+[node name="PresentationRoot" type="Node2D" parent="."]
+
+[node name="Runtimes" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="TopPanel" type="PanelContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 106.0
+
+[node name="Margin" type="MarginContainer" parent="HUD/TopPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="HUD/TopPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Header" type="HBoxContainer" parent="HUD/TopPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="HUD/TopPanel/Margin/Rows/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "PHASE D — NETWORKED CADEN"
+
+[node name="StartButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start 2-Client Demo"
+
+[node name="ReconnectButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reconnect Local"
+
+[node name="StopButton" type="Button" parent="HUD/TopPanel/Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stop"
+
+[node name="StatusLabel" type="Label" parent="HUD/TopPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Status: Start the two-client demo when ready."
+text_overrun_behavior = 3
+
+[node name="IdentityLabel" type="Label" parent="HUD/TopPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Identity: waiting"
+text_overrun_behavior = 3
+
+[node name="ZoneLabel" type="Label" parent="HUD/TopPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Zone: waiting  •  Same-zone avatars: 0"
+
+[node name="HelpPanel" type="PanelContainer" parent="HUD"]
+offset_left = 8.0
+offset_top = 308.0
+offset_right = 632.0
+offset_bottom = 352.0
+
+[node name="Help" type="Label" parent="HUD/HelpPanel"]
+layout_mode = 2
+text = "WASD/Arrows: move • E: interact • the guest walks automatically • exits are server-validated"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

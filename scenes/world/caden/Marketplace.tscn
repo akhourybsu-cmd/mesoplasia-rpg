@@ -792,6 +792,7 @@ facing_direction = Vector2(0, -1)
 [node name="NorthwestShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(272, 240)
+npc_id = &"caden.npc.marketplace.northwest_shopper"
 character_sprite_frames = ExtResource("28_walker_nw_frames")
 patrol_distance = 64.0
 move_speed = 20.0
@@ -800,6 +801,7 @@ pause_duration = 0.8
 [node name="NortheastShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(624, 240)
+npc_id = &"caden.npc.marketplace.northeast_shopper"
 character_sprite_frames = ExtResource("29_walker_ne_frames")
 patrol_distance = 64.0
 move_speed = 22.0
@@ -809,6 +811,7 @@ start_toward_positive = false
 [node name="SouthwestShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(272, 416)
+npc_id = &"caden.npc.marketplace.southwest_shopper"
 character_sprite_frames = ExtResource("30_walker_sw_frames")
 patrol_distance = 64.0
 move_speed = 18.0
@@ -817,6 +820,7 @@ pause_duration = 1.3
 [node name="SoutheastShopper" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(624, 416)
+npc_id = &"caden.npc.marketplace.southeast_shopper"
 character_sprite_frames = ExtResource("31_walker_se_frames")
 patrol_distance = 64.0
 move_speed = 21.0

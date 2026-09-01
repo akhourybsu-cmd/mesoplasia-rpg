@@ -749,6 +749,7 @@ facing_direction = Vector2(-1, 0)
 [node name="NorthwestNeighbor" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(336, 272)
+npc_id = &"caden.npc.residential.northwest_neighbor"
 character_sprite_frames = ExtResource("30_walker_nw_frames")
 patrol_distance = 64.0
 move_speed = 18.0
@@ -757,6 +758,7 @@ pause_duration = 1.3
 [node name="NortheastNeighbor" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(704, 272)
+npc_id = &"caden.npc.residential.northeast_neighbor"
 character_sprite_frames = ExtResource("31_walker_ne_frames")
 patrol_distance = 64.0
 move_speed = 20.0
@@ -766,6 +768,7 @@ start_toward_positive = false
 [node name="SouthwestNeighbor" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(368, 480)
+npc_id = &"caden.npc.residential.southwest_neighbor"
 character_sprite_frames = ExtResource("32_walker_sw_frames")
 patrol_distance = 64.0
 move_speed = 17.0
@@ -774,6 +777,7 @@ pause_duration = 1.4
 [node name="SoutheastNeighbor" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(816, 480)
+npc_id = &"caden.npc.residential.southeast_neighbor"
 character_sprite_frames = ExtResource("33_walker_se_frames")
 patrol_distance = 64.0
 move_speed = 19.0
@@ -783,6 +787,7 @@ start_toward_positive = false
 [node name="MainLaneNeighbor" parent="AmbientWalkers" instance=ExtResource("27_patrol_npc")]
 z_index = 10
 position = Vector2(576, 384)
+npc_id = &"caden.npc.residential.main_lane_neighbor"
 character_sprite_frames = ExtResource("34_walker_route_frames")
 patrol_distance = 96.0
 move_speed = 22.0

@@ -1,0 +1,170 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/offline_combat_sandbox.gd" id="1_sandbox"]
+
+[node name="OfflineCombatSandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sandbox")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.055, 0.075, 0.09, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Rows" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Header" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/Rows/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "PHASE G — OFFLINE COMBAT DOMAIN VIEWER"
+
+[node name="RestartButton" type="Button" parent="Margin/Rows/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Restart"
+
+[node name="Subtitle" type="Label" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Intent-only controls; the pure combat domain owns and reports every result."
+
+[node name="StateLabel" type="Label" parent="Margin/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Combat state"
+autowrap_mode = 2
+
+[node name="Body" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CombatantsPanel" type="PanelContainer" parent="Margin/Rows/Body"]
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CombatantsMargin" type="MarginContainer" parent="Margin/Rows/Body/CombatantsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="Margin/Rows/Body/CombatantsPanel/CombatantsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Heading" type="Label" parent="Margin/Rows/Body/CombatantsPanel/CombatantsMargin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Combatants"
+
+[node name="CombatantsLabel" type="Label" parent="Margin/Rows/Body/CombatantsPanel/CombatantsMargin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+text = "Combatants"
+autowrap_mode = 2
+
+[node name="EventsPanel" type="PanelContainer" parent="Margin/Rows/Body"]
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EventsMargin" type="MarginContainer" parent="Margin/Rows/Body/EventsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="Margin/Rows/Body/EventsPanel/EventsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Heading" type="Label" parent="Margin/Rows/Body/EventsPanel/EventsMargin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Authoritative Events"
+
+[node name="EventsLabel" type="Label" parent="Margin/Rows/Body/EventsPanel/EventsMargin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 10
+text = "Events"
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="Margin/Rows/Actions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Actions"
+vertical_alignment = 1
+
+[node name="StrikeButton" type="Button" parent="Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Strike"
+
+[node name="MendButton" type="Button" parent="Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mend"
+
+[node name="GuardButton" type="Button" parent="Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Guard"
+
+[node name="ResultLabel" type="Label" parent="Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "Result"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Boundary" type="Label" parent="Margin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Development-only • provisional target rules • no network, inventory, loot, rewards, or expedition integration"
+horizontal_alignment = 1

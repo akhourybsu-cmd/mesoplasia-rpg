@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "statuses": [],
+  "abilities": [
+    {
+      "ability_id": "development.ability.invalid",
+      "display_name": "Invalid",
+      "target_rule": "ANYTHING",
+      "resource_cost": -1,
+      "cooldown_turns": 0,
+      "effects": [
+        {
+          "effect_type": "APPLY_STATUS",
+          "status_id": "development.status.missing",
+          "duration_turns": 0,
+          "magnitude": 1
+        }
+      ]
+    }
+  ],
+  "combatant_templates": [
+    {
+      "template_id": "development.combatant.invalid",
+      "display_name": "Invalid",
+      "team_id": "none",
+      "max_health": 0,
+      "max_resource": 0,
+      "speed": 0,
+      "ability_ids": ["development.ability.missing"],
+      "ai_controlled": false
+    }
+  ]
+}

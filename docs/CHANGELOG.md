@@ -1366,3 +1366,301 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 - The automated integration uses real ENet sockets and three independent `SceneMultiplayer` branches in one headless process. A separate multi-process network harness remains future test-infrastructure work.
 - Phase D has not started: production Caden is still single-player, and no client position or gameplay state is network-authoritative yet.
 - Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-08-31 - Cooperative roadmap Phase D networked Caden hub
+
+### Scope
+
+- Added a server-owned, memory-only Caden hub domain that registers all five authored zones, entry points, stable exit IDs, stable interactable IDs, collision rectangles, and fourteen stable patrol NPC IDs without rewriting Caden content or layout.
+- Added sequenced cardinal movement intent on a dedicated unreliable-ordered channel. Clients never submit position; the server applies movement speed, input timeout, authored bounds, collision validation, rate limits, and stale-sequence rejection.
+- Added zone-scoped compact snapshots at 15 Hz plus reliable full snapshots for authentication, transfer, and explicit resynchronization. Each client receives only connected avatars and patrol NPCs in its current zone.
+- Added validated server interaction and zone-transfer commands. Interaction checks current-zone registration and range; ordinary NPC conversations remain concurrent and player-scoped. Transfer destination and entry are derived from the registered server route rather than trusted client data.
+- Added stable reconnect behavior that retains a valid server-owned Caden location, rotates transient session/avatar runtime IDs, and replaces an unsafe retained location with the authored safe start.
+- Added a network presentation mode to the existing `Player.tscn` composition. The local avatar samples input and owns the only camera/prompt/dialogue UI but consumes authoritative position; remote avatars are visual-only. Existing local single-player and Phase B presentation behavior remain available.
+- Moved authored patrol motion into server hub state for networked Caden while retaining the existing local patrol implementation for legacy Caden. Network presenters apply server position, velocity, facing, and animation state to the same authored NPC scenes.
+- Bumped the private development wire protocol to version 2 for the incompatible Phase D message/schema additions.
+- Added an isolated one-click `NetworkedCadenSandbox.tscn` that starts a server, local client, and automated moving loopback guest, plus local-peer reconnect and clean stop controls. Production `Main.tscn` remains unchanged as the rollback path.
+
+### Files and systems changed
+
+- `scripts/server/hub/caden_hub_service.gd`
+- `scripts/world/caden_zone_registry.gd`
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/network/protocol/network_protocol_gateway.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/client/network/caden_hub_state_store.gd`
+- `scripts/client/world/networked_caden_presenter.gd`
+- `scripts/player.gd`
+- `scripts/npcs/patrol_npc.gd`
+- `scripts/development/networked_caden_sandbox.gd`
+- `scenes/network/NetworkedCadenPresenter.tscn`
+- `scenes/network/NetworkedCadenSandbox.tscn`
+- `scenes/world/caden/Commons.tscn`
+- `scenes/world/caden/Marketplace.tscn`
+- `scenes/world/caden/Residential.tscn`
+- `scenes/world/caden/TownSquare.tscn`
+- `tests/networked_caden_hub_domain_test.gd`
+- `tests/networked_caden_hub_integration_test.gd`
+- `tests/networked_caden_sandbox_test.gd`
+- `docs/architecture/PHASE_D_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Five-zone hub domain: PASS for five authored zone records, twelve exits, eleven interactables, fourteen patrol NPCs, collision metadata, two-player same/different-zone relevance, server movement, stale/diagonal input rejection, forged/out-of-range exit rejection, concurrent interaction, independent transfer, patrol advancement, stable reconnect, and unsafe-location fallback.
+- Actual ENet integration: PASS for one authoritative hub server plus two independently rooted clients, compact snapshot convergence, local/remote presentation, exclusive local camera/UI ownership, server-owned movement, malformed movement rejection, independent zone transfer, concurrent same-NPC interaction, NPC convergence, disconnect, stable replacement peer, and join-in-progress reconstruction.
+- One-click development scene: PASS for automatic server/two-client authentication, two-avatar presentation, and visibly changing server-owned guest position.
+- Complete executable Godot regression suite: PASS, 33 of 33 scripts.
+- Headless production Main startup and `git diff --check`: PASS.
+- Snapshot payloads were reduced below the loopback ENet MTU warning threshold observed during the first integration pass.
+- Production `project.godot`, `scenes/Main.tscn`, and legacy `scenes/world/caden/Caden.tscn` remain unchanged by Phase D; no autoload, dependency, renderer change, or Phase E party work was introduced.
+
+### Remaining limitations and manual gate
+
+- The workflow in `docs/architecture/PHASE_D_MANUAL_TEST.md` still requires manual acceptance for movement feel, remote readability, camera/UI ownership, interactions, five-zone travel, and visible reconnect behavior.
+- Transitional movement intentionally has no client prediction or interpolation, so server-snapshot stepping is expected and should be judged during the manual pass before choosing a later presentation refinement.
+- Hub/session/reconnect state remains memory-only, and direct ENet/UDP remains an unencrypted private-development transport. Persistence and Internet-ready hosting remain later approved phases.
+- The current server collision projection uses authored static-shape axis-aligned bounds; it is correct for the present rectangle/circle content but should evolve with the registry if future zones add unsupported or rotated collision shapes.
+- Phase E has not started. There is no party, invitation, readiness, expedition, combat, inventory, persistence, relay, discovery, or matchmaking implementation.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-08-31 - Phase D reconnect movement sequence correction
+
+### Scope
+
+- Corrected reattachment so a replacement session resets its transient hub movement input sequence and movement-rate window while preserving stable character identity, zone, safe position, and facing.
+- Previously, the replacement presenter began input sequencing at one while the server retained the disconnected session's higher sequence, causing valid post-reconnect movement to be rejected as stale.
+- Extended both the real-ENet integration test and the exact one-click sandbox reconnect workflow to require visible movement within 750 milliseconds after reconnect.
+
+### Files and systems changed
+
+- `scripts/server/hub/caden_hub_service.gd`
+- `scripts/development/networked_caden_sandbox.gd`
+- `tests/networked_caden_hub_domain_test.gd`
+- `tests/networked_caden_hub_integration_test.gd`
+- `tests/networked_caden_sandbox_test.gd`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Phase D hub domain, actual ENet integration, and one-click sandbox tests: PASS, including a fresh movement sequence beginning at one and post-reconnect presenter movement.
+- Phase C ENet/session regressions and Phase B local multi-avatar regression: PASS.
+- Focused reconnect regression set: PASS, 6 of 6 scripts.
+- `git diff --check`: PASS.
+
+## 2026-08-31 - Cooperative roadmap Phase E authoritative parties
+
+### Scope
+
+- Added a pure, server-authoritative, memory-only party state machine with configurable capacity, invitation lifetime, and disconnect grace. Stable party/invitation IDs, membership, revisions, readiness, expedition-definition selection, leadership, and disbanding are all server-owned.
+- Added leader-only invitation, kick, expedition-selection, and leadership-transfer commands; recipient-bound invitation acceptance/decline; member-owned ready/leave commands; aggregate revision checks; capacity and connected-eligibility validation; invitation expiry; and deterministic leader succession after grace expiry.
+- Added compact party projections scoped to each authenticated character. Client stores normalize the wire rows, reject stale projection revisions, and remain disposable rather than authoritative.
+- Extended the private development protocol to version 3 with strict exact-field schemas for party commands, snapshots, and command results. The gateway derives the acting CharacterId from the authenticated server session; clients cannot submit an actor identity.
+- Composed the party service with the existing authoritative Caden runtime without an autoload. Authentication registers party presence, disconnect enters grace, reconnect restores stable membership while clearing the disconnected member's readiness, and expiry is driven by the server clock.
+- Added an isolated `NetworkPartySandbox.tscn` with a numbered invite → accept → select → ready flow, matched local/guest projections, leadership transfer, guest reconnect, guest leave, and clean stop controls.
+- Kept expedition reservation/launch, dungeon transfer, combat, inventory, persistence, relay, discovery, matchmaking, and production Main migration outside Phase E.
+
+### Files and systems changed
+
+- `scripts/server/party/party_service.gd`
+- `scripts/client/network/party_state_store.gd`
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/network/protocol/network_protocol_gateway.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/development/network_party_sandbox.gd`
+- `scenes/network/NetworkPartySandbox.tscn`
+- `tests/party_service_domain_test.gd`
+- `tests/network_party_integration_test.gd`
+- `tests/network_party_sandbox_test.gd`
+- `docs/architecture/PHASE_E_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Pure party domain: PASS for configurable capacity, implicit party creation, duplicate/forged/stale invite rejection, recipient binding, leader authority, membership readiness reset, individual readiness, expedition-definition selection, transfer, kick, disconnect/reconnect grace, grace expiry, deterministic succession, invite decline/expiry, defensive query copies, leave, and disband.
+- Actual ENet integration: PASS for two authenticated clients, party projection delivery, invitation identity binding, stale revision rejection, two-member convergence, non-leader rejection, leader selection, ready convergence, disconnect grace, stable reconnect with readiness reset, leadership transfer, leave, and final-member disband.
+- One-click development scene: PASS for numbered start/invite/accept/select/ready actions, matching two-client projections, reconnect membership retention, readiness clearing, and absence of an out-of-scope launch control.
+- Complete executable Godot regression suite: PASS, 36 of 36 scripts.
+- Headless production Main startup and `git diff --check`: PASS.
+- Production `project.godot`, `scenes/Main.tscn`, and legacy `scenes/world/caden/Caden.tscn` remain unchanged by Phase E; no autoload, dependency, or renderer change was introduced.
+
+### Remaining limitations and manual gate
+
+- The numbered workflow in `docs/architecture/PHASE_E_MANUAL_TEST.md` still requires manual acceptance for UI clarity and visible two-client state convergence.
+- Parties, invitations, reconnect proofs, and sessions are memory-only and intentionally disappear when the sandbox server stops.
+- The default capacity of four, invitation lifetime, disconnect grace, leader selection, and all-present readiness behavior remain provisional server policies pending later product approval; the implementation keeps capacity and durations configurable.
+- Expedition selection stores only a stable definition placeholder. Phase F expedition reservation, allocation, transfer, and recovery have not started.
+- Direct ENet/UDP and the development access code remain private-test infrastructure rather than Internet-ready transport or production authentication.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-09-01 - Draft Caden ambient content pack
+
+### Scope
+
+- Added the supplied draft-only Caden ambient content-preproduction package for creator review.
+- Preserved its explicit non-canon boundary, draft review handles, canon-risk audit, and future conversion gate without importing dialogue into Godot resources or assigning production content IDs.
+
+### Files and systems changed
+
+- `docs/content/CADEN_AMBIENT_CONTENT_PACK_DRAFT_V1.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Verified the repository copy matches the supplied document after normalizing line endings.
+- Confirmed the document contains 66 uniquely labeled ambient dialogue variants and 20 inspectable/environmental concepts.
+- No scenes, scripts, `.tres` resources, project settings, or production content registries were changed.
+
+### Remaining limitations
+
+- The package remains `DRAFT / NON-CANON / DO NOT IMPORT INTO GODOT` and requires creator review before any production conversion.
+- The document records its original review baseline at commit `f28f57bc09066a9c89d55d520c1f4ecc8473d78b`; production conversion must be reviewed against the then-current repository state.
+
+## 2026-09-01 - Phase E manual acceptance
+
+### Validation follow-up
+
+- User playtesting confirmed the authoritative party sandbox works as expected, including its reconnect correction.
+- This closes the Phase E manual completion gate without changing production Main/Caden.
+
+## 2026-09-01 - Cooperative roadmap Phase F authored expedition instance
+
+### Scope
+
+- Added a validated registry-backed definition for one two-room authored development dungeon with stable expedition, dungeon, room, connection, checkpoint, return-entry, and goal IDs.
+- Added a pure server-authoritative expedition lifecycle covering reservation, content-ready load barrier, shared-room real-time exploration, leader/cohesion-gated room transfer, reconnect reconstruction, success/retreat/failure outcome stubs, safe Caden return acknowledgements, closure, and load-timeout rollback.
+- Added distinct server-issued ExpeditionId and DungeonInstanceId values plus deterministic seeds. A configurable provisional policy permits one active expedition per server; clients cannot author lifecycle identity or state.
+- Added an in-memory checkpoint store with a checksum and failure seam. Launch, room transfer, outcome, return closure, and timeout paths checkpoint before mutation or preserve/restore the previous valid party state.
+- Extended the private-development protocol to version 4 with strict expedition commands, compact MTU-safe snapshots, authenticated actor derivation, revision checks, and movement reuse on the existing unreliable-ordered channel.
+- Composed expedition state with the existing party and Caden services. Transfer detaches party avatars from Caden; every outcome restores connected members at the authored Wayfarer's Approach entry and returns the party to `FORMING`.
+- Added a revision-filtered client expedition projection and a disposable presenter that loads authored room scenes, presents only the scoped party avatars, preserves exclusive local camera/UI ownership, routes interactions, and reconstructs after reconnect or presenter reload.
+- Added an isolated `NetworkExpeditionSandbox.tscn` with one-click two-client startup, automatic ready-party preparation, launch, movement mirroring, authored room interaction, guest reconnect, success/retreat/failure controls, and safe Caden return.
+- Kept combat resolution, enemies, rewards, inventory mutation, procedural generation, durable persistence, production Main migration, public hosting, relay, discovery, and matchmaking outside Phase F.
+
+### Files and systems changed
+
+- `data/expeditions/development_test_expedition.json`
+- `scripts/server/expedition/expedition_definition_registry.gd`
+- `scripts/server/expedition/in_memory_expedition_checkpoint_store.gd`
+- `scripts/server/expedition/expedition_service.gd`
+- `scripts/server/party/party_service.gd`
+- `scripts/server/hub/caden_hub_service.gd`
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/network/protocol/network_protocol_gateway.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/client/network/expedition_state_store.gd`
+- `scripts/client/network/party_state_store.gd`
+- `scripts/client/world/networked_expedition_presenter.gd`
+- `scripts/development/network_expedition_sandbox.gd`
+- `scenes/network/NetworkedExpeditionPresenter.tscn`
+- `scenes/network/NetworkExpeditionSandbox.tscn`
+- `scenes/world/expeditions/TestThresholdRoom.tscn`
+- `scenes/world/expeditions/TestDepthsRoom.tscn`
+- `tests/expedition_service_domain_test.gd`
+- `tests/network_expedition_integration_test.gd`
+- `tests/network_expedition_sandbox_test.gd`
+- `docs/architecture/PHASE_F_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Pure expedition domain: PASS for definition validation, stable IDs/seed, one-active policy, load barrier, authenticated authority, movement, cohesion, checkpoint rollback, reconnect, success/failure return, load timeout, and launch rollback.
+- Actual ENet integration: PASS for launch/load barrier, Caden detachment, real-time movement, authority rejection, shared-room transfer, reconnect reconstruction, success return, final acknowledgements, cleanup, and checkpoint closure.
+- One-click development scene: PASS for automatic party preparation, content-ready launch, two-avatar authored-room presentation, authoritative mirrored movement, presenter reload, cohesive room transfer, guest reconnect, retreat, final checkpoint, and Caden restoration.
+- Phase C session, Phase D Caden, and Phase E party focused regressions remain passing after the protocol/runtime composition changes.
+- Complete executable Godot regression suite: PASS, 39 of 39 scripts after the normal import pass.
+
+### Remaining limitations and manual gate
+
+- The workflow in `docs/architecture/PHASE_F_MANUAL_TEST.md` still requires manual acceptance for movement feel, room readability, interaction clarity, reconnect presentation, and the three visible outcome paths.
+- The authored rooms, single-active policy, deterministic seed base, load timeout, and automatic development acknowledgements are provisional, configurable test policies rather than final product decisions.
+- Checkpoints and all network state are memory-only. A durable save/recovery system remains a later approved phase.
+- Combat is deliberately absent; the gold goal and buttons invoke outcome stubs only and grant no rewards.
+- Production `project.godot`, `scenes/Main.tscn`, and legacy `scenes/world/caden/Caden.tscn` remain unchanged; no autoload, external dependency, addon, renderer change, or Phase G system was introduced.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-09-01 - Phase F manual acceptance
+
+### Validation follow-up
+
+- User playtesting confirmed the authored expedition sandbox works through party preparation, launch, shared-room exploration, and the Phase F test workflow.
+- This closes the Phase F manual completion gate without changing the implementation, production Main/Caden, or beginning Phase G.
+
+## 2026-09-01 - Cooperative roadmap Phase G offline combat domain
+
+### Scope
+
+- Added immutable, validated, non-canon development definitions for five abilities, two statuses, and three combatant templates with namespaced stable IDs and explicit dependencies.
+- Added a serializable deterministic combat RNG with separate initiative/effect streams, draw counts, state restoration, and fixed-seed reproducibility.
+- Added a replaceable `TargetBasedCombatSpatialRules` policy supporting explicit self, living-ally, and living-enemy validation. The non-grid model remains provisional and is not treated as final product canon.
+- Added a pure scene-independent combat service with a controller-ready barrier, explicit initiative queues/tie values, rounds/turns, configurable deadlines, controller authority, aggregate revisions, replay-safe action nonces, resource/cooldown checks, ordered effects/events, terminal outcomes, and clean closure.
+- Added minimal damage, healing, Guard, and Poison effects with declared turn-start timing, damage reduction, damage-over-time, health clamping, defeat events, and terminal evaluation before turn advancement.
+- Added a deterministic server-style enemy decision policy that scores only legal abilities/targets from a constrained state view. AI intent passes through the same validator and resolver as player intent.
+- Added disconnect-safe timeout behavior using deterministic Guard fallback or explicit end-turn fallback, so the offline domain cannot freeze indefinitely.
+- Added bounded ordered event recovery, full snapshots, checksummed in-memory checkpoint serialization, restoration of explicit queue/RNG/status/cooldown/nonce state, aged-window resync signaling, and tamper rejection.
+- Added an isolated optional `OfflineCombatSandbox.tscn`. It submits local intent and reflects snapshots/events only; it contains no network runtime and does not integrate with Phase F expeditions.
+- Kept network RPC, encounter/expedition integration, tactical grids/formations, production balance/canon, inventory/items, loot/rewards, durable persistence, PvP, and Phase H work outside Phase G.
+
+### Files and systems changed
+
+- `data/combat/development_combat_definitions.json`
+- `scripts/domain/combat/combat_rng.gd`
+- `scripts/domain/combat/target_based_combat_spatial_rules.gd`
+- `scripts/domain/combat/combat_definition_registry.gd`
+- `scripts/domain/combat/enemy_decision_policy.gd`
+- `scripts/domain/combat/combat_service.gd`
+- `scripts/development/offline_combat_sandbox.gd`
+- `scenes/development/OfflineCombatSandbox.tscn`
+- `tests/fixtures/combat_invalid_definitions.json`
+- `tests/combat/combat_foundation_test.gd`
+- `tests/combat/combat_action_pipeline_test.gd`
+- `tests/combat/combat_cooldown_nonce_test.gd`
+- `tests/combat/combat_status_ai_determinism_test.gd`
+- `tests/combat/combat_timeout_snapshot_test.gd`
+- `tests/combat/offline_combat_sandbox_test.gd`
+- `docs/architecture/PHASE_G_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Definition/RNG/spatial foundation: PASS for valid and invalid content, stable fixture families, deterministic sequences/state restoration, and self/ally/enemy target rules.
+- Action pipeline: PASS for ready barrier, turn/controller authority, stale revision and target rejection, ordered damage/heal events, resource costs, and cooldown mutation.
+- Replay/timing validation: PASS for insufficient resources, action nonce replay, malformed nonces, cooldown duration, Guard expiration, and rejection atomicity.
+- Initiative/effects/AI: PASS for identical seeded snapshot/event results, AI use of the normal pipeline, Guard mitigation, Venom/Poison turn timing, defeat, and terminal outcome.
+- Recovery: PASS for disconnect timeout fallback, bounded events, aged-event resync, checkpoint checksum/tamper rejection, complete snapshot round-trip, RNG/queue restoration, and closure.
+- Optional viewer: PASS for snapshot-driven state, intent-only buttons, deterministic AI advancement, terminal outcome reflection, clean restart, and absence of network state.
+- Stabilized the existing Phase F sandbox regression by waiting for authoritative zero-input settlement before its structural room-transition command; this changes no Phase F runtime behavior.
+- Complete executable Godot regression suite: PASS, 45 of 45 scripts.
+- Headless production Main startup, `git diff --check`, and rollback-file comparison: PASS.
+
+### Remaining limitations and manual gate
+
+- The workflow in `docs/architecture/PHASE_G_MANUAL_TEST.md` still requires manual acceptance for viewer clarity and observable action/status/event sequencing.
+- The target-based spatial policy, initiative formula, 60-second domain default, ten-second viewer timeout, abilities, stats, names, and AI scoring are explicitly provisional development fixtures.
+- Phase G checkpoints have no durable repository and are not wired to expedition recovery. Phase I owns persistence; Phase H owns networked encounter/combat integration.
+- The optional viewer is deliberately functional rather than a production combat presentation; it has no character art, animation, target-selection UI, audio, or final accessibility design.
+- Production `project.godot`, `scenes/Main.tscn`, and legacy `scenes/world/caden/Caden.tscn` remain unchanged; no autoload, external dependency, addon, renderer change, network protocol change, or Phase H system was introduced.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-09-01 - Phase G combat viewer viewport correction
+
+### Scope
+
+- Reworked the optional offline combat viewer from fixed desktop-width columns into a compact layout sized for the project's 640x360 gameplay viewport.
+- Kept combatants and authoritative events side by side while moving Restart into the header and consolidating the complete action menu and result text into a visible footer row.
+- Added a regression assertion covering the viewer's combined minimum size and every essential menu region at both initial and terminal combat states.
+- Changed presentation only; the combat domain, fixture definitions, networking boundary, and production scenes remain untouched.
+
+### Validation
+
+- Focused offline viewer regression: PASS for 640x360 bounds, snapshot-driven state, intent submission, deterministic AI advancement, terminal outcome, restart, and no-network ownership.
+- Visual Godot runtime check: PASS at the configured gameplay viewport before and after Strike, with Restart, state, combatants, Strike/Mend/Guard, result feedback, events, and the development boundary all visible.
+- Complete executable Godot regression suite: PASS, 45 of 45 scripts.
+- Headless production Main startup and `git diff --check`: PASS.

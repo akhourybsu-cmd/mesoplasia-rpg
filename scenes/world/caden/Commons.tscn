@@ -386,6 +386,7 @@ facing_direction = Vector2(-1, 0)
 [node name="MeadowStroller" parent="AmbientWalkers" instance=ExtResource("18_patrol_npc")]
 z_index = 10
 position = Vector2(640, 256)
+npc_id = &"caden.npc.commons.meadow_stroller"
 character_sprite_frames = ExtResource("20_walker_green_frames")
 patrol_distance = 64.0
 move_speed = 17.0
@@ -394,6 +395,7 @@ pause_duration = 1.5
 [node name="WestGreenStroller" parent="AmbientWalkers" instance=ExtResource("18_patrol_npc")]
 z_index = 10
 position = Vector2(352, 464)
+npc_id = &"caden.npc.commons.west_green_stroller"
 character_sprite_frames = ExtResource("21_walker_west_frames")
 patrol_distance = 96.0
 move_speed = 16.0

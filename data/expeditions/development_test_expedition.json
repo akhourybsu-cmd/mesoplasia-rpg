@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "expedition_definition_id": "development.expedition.placeholder",
+  "dungeon_definition_id": "development.dungeon.test_corridor",
+  "display_name": "Development Test Expedition",
+  "entry_room_id": "development.room.test_threshold",
+  "return_zone_id": "wayfarers_approach",
+  "return_entry_id": "arrival",
+  "rooms": [
+    {
+      "room_id": "development.room.test_threshold",
+      "display_name": "Test Threshold",
+      "scene_path": "res://scenes/world/expeditions/TestThresholdRoom.tscn",
+      "bounds": [64, 64, 512, 232],
+      "spawn_positions": [[152, 180], [192, 180], [152, 220], [192, 220]],
+      "checkpoint_id": "development.checkpoint.test_threshold",
+      "goal_rect": [],
+      "connections": [
+        {
+          "connection_id": "development.connection.threshold_to_depths",
+          "destination_room_id": "development.room.test_depths",
+          "activation_rect": [500, 104, 76, 152],
+          "destination_positions": [[140, 180], [180, 180], [140, 220], [180, 220]]
+        }
+      ]
+    },
+    {
+      "room_id": "development.room.test_depths",
+      "display_name": "Test Depths",
+      "scene_path": "res://scenes/world/expeditions/TestDepthsRoom.tscn",
+      "bounds": [64, 64, 512, 232],
+      "spawn_positions": [[140, 180], [180, 180], [140, 220], [180, 220]],
+      "checkpoint_id": "development.checkpoint.test_depths",
+      "goal_rect": [500, 104, 76, 152],
+      "connections": [
+        {
+          "connection_id": "development.connection.depths_to_threshold",
+          "destination_room_id": "development.room.test_threshold",
+          "activation_rect": [64, 104, 76, 152],
+          "destination_positions": [[480, 180], [440, 180], [480, 220], [440, 220]]
+        }
+      ]
+    }
+  ]
+}
