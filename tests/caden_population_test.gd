@@ -103,7 +103,13 @@ func _test_population_zone_unload_safety() -> bool:
 		return _fail("Starting-zone NPC was not detected before zone replacement.")
 
 	var marketplace_exit := approach.get_node("Exits/ToMarketplace") as Area2D
-	marketplace_exit.emit_signal("transition_requested", &"marketplace", &"from_wayfarers_approach")
+	marketplace_exit.emit_signal(
+		"transition_requested",
+		player.call("get_character_id") as StringName,
+		marketplace_exit.get("exit_id") as StringName,
+		&"marketplace",
+		&"from_wayfarers_approach"
+	)
 	await physics_frame
 	await physics_frame
 	await physics_frame

@@ -2,16 +2,16 @@ extends SceneTree
 
 const MARKETPLACE_SCENE := preload("res://scenes/world/caden/Marketplace.tscn")
 const RUNTIME_MANIFEST_PATH := "res://assets/environments/caden/marketplace/marketplace_runtime_manifest_v1.json"
-const TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json"
-const ROLLBACK_TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.json"
+const TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_3.json"
+const ROLLBACK_TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json"
 const EXPECTED_STALLS := {
 	"Stall01": {"position": Vector2(208, 184), "asset": "01", "shape": Vector2(56, 16), "sprite_position": Vector2(-54, -61)},
 	"Stall02": {"position": Vector2(336, 184), "asset": "07", "shape": Vector2(64, 24), "sprite_position": Vector2(-60, -90)},
 	"Stall03": {"position": Vector2(560, 184), "asset": "03", "shape": Vector2(48, 16), "sprite_position": Vector2(-46, -54)},
 	"Stall04": {"position": Vector2(688, 184), "asset": "04", "shape": Vector2(56, 16), "sprite_position": Vector2(-47, -59)},
 	"Stall05": {"position": Vector2(208, 488), "asset": "07", "shape": Vector2(64, 24), "sprite_position": Vector2(-61, -90)},
-	"Stall06": {"position": Vector2(336, 488), "asset": "06", "shape": Vector2(56, 16), "sprite_position": Vector2(-53, -72)},
-	"Stall07": {"position": Vector2(560, 488), "asset": "13", "shape": Vector2(56, 16), "sprite_position": Vector2(-48, -74)},
+	"Stall06": {"position": Vector2(336, 488), "asset": "01", "shape": Vector2(56, 16), "sprite_position": Vector2(-54, -61)},
+	"Stall07": {"position": Vector2(560, 488), "asset": "07", "shape": Vector2(56, 16), "sprite_position": Vector2(-60, -90)},
 	"Stall08": {"position": Vector2(688, 488), "asset": "14", "shape": Vector2(56, 16), "sprite_position": Vector2(-50, -57)},
 }
 const EXPECTED_ENTRIES := {
@@ -54,8 +54,11 @@ func _run_test() -> void:
 		_fail("Marketplace source package staging policy is missing.")
 		return
 	var rights := runtime_manifest.get("provenance_and_licensing", {}) as Dictionary
-	if rights.get("rights_status", "") != "project_internal_rights_unverified":
+	if rights.get("rights_status", "") != "openai_output_provenance_verified":
 		_fail("Unexpected Marketplace rights status.")
+		return
+	if rights.get("distribution_status", "") != "project_distribution_allowed_subject_to_applicable_law_and_third_party_rights":
+		_fail("Unexpected Marketplace distribution status.")
 		return
 
 	var records := runtime_manifest.get("assets", {}) as Dictionary
@@ -91,27 +94,20 @@ func _run_test() -> void:
 				return
 
 	var terrain_path := "res://%s" % terrain_manifest.get("output_path", "")
-	if terrain_manifest.get("gate_state", "") != "marketplace_terrain_runtime_v1_2_visual_approved":
-		_fail("Unexpected Marketplace terrain v1.2 gate state.")
-		return
-	var terrain_approval := terrain_manifest.get("approval", {}) as Dictionary
-	if terrain_approval.get("decision", "") != "approved_active_marketplace_terrain_runtime_v1_2":
-		_fail("Marketplace terrain v1.2 lacks the final approval decision.")
-		return
-	if terrain_approval.get("pilot_authorization_package_sha256", "") != "0a5c20462bf5c74d5052294701fce45cba5bd70b6219d9505207e10f129e9571" or terrain_approval.get("active_evidence_package_sha256", "") != "f013205e480e1fed8283772482a8cf0834aa300899e99a559db1985bf5d90f08":
-		_fail("Marketplace terrain v1.2 lacks its authorization or active visual evidence.")
+	if terrain_manifest.get("gate_state", "") != "blueprint_v3_active_runtime":
+		_fail("Unexpected Marketplace terrain v1.3 gate state.")
 		return
 	if terrain_manifest.get("route_contract", {}) != rollback_terrain_manifest.get("route_contract", {}):
-		_fail("Marketplace terrain v1.2 changed the authoritative route contract.")
+		_fail("Marketplace terrain v1.3 changed the authoritative route contract.")
 		return
 	var terrain_grid := terrain_manifest.get("grid", []) as Array
 	var terrain_cell_size := terrain_manifest.get("cell_size", []) as Array
-	if terrain_manifest.get("maintained_material_footprint_cells", 0) != 372 or terrain_grid.size() != 2 or terrain_grid[0] != 28 or terrain_grid[1] != 20 or terrain_cell_size.size() != 2 or terrain_cell_size[0] != 32 or terrain_cell_size[1] != 32:
-		_fail("Marketplace terrain v1.2 grid or material footprint changed.")
+	if terrain_manifest.get("maintained_cell_count", 0) != 348 or terrain_manifest.get("grass_cut_in_cell_count", 0) != 24 or terrain_manifest.get("route_cells_preserved", 0) != 132 or terrain_grid.size() != 2 or terrain_grid[0] != 28 or terrain_grid[1] != 20 or terrain_cell_size.size() != 2 or terrain_cell_size[0] != 32 or terrain_cell_size[1] != 32:
+		_fail("Marketplace terrain v1.3 grid, cut-ins, or maintained footprint changed.")
 		return
 	var terrain_audit := terrain_manifest.get("pixel_audit", {}) as Dictionary
 	if not terrain_audit.get("fully_opaque", false) or terrain_audit.get("partial_alpha_pixels", -1) != 0 or terrain_audit.get("transparent_rgb_pixels", -1) != 0:
-		_fail("Marketplace terrain v1.2 failed its pixel audit.")
+		_fail("Marketplace terrain v1.3 failed its pixel audit.")
 		return
 	var rollback_path := "res://%s" % rollback_terrain_manifest.get("output_path", "")
 	if FileAccess.get_sha256(rollback_path) != terrain_manifest.get("rollback", {}).get("previous_runtime_sha256", ""):
@@ -168,14 +164,14 @@ func _run_test() -> void:
 			return
 
 	for corridor in [Rect2(0, 256, 288, 128), Rect2(96, 288, 704, 64), Rect2(384, 64, 128, 576)]:
-		for solid_path in ["Stalls", "EnvironmentalComposition/SolidFrame", "EnvironmentalComposition/Planters", "EnvironmentalComposition/Lighting"]:
+		for solid_path in ["Stalls", "VendorBackstock", "SpineEdgePlanters", "EnvironmentalComposition/SolidFrame", "EnvironmentalComposition/Planters", "EnvironmentalComposition/Lighting"]:
 			for child: Node in marketplace.get_node(solid_path).get_children():
 				if child is StaticBody2D and corridor.has_point((child as StaticBody2D).position):
 					_fail("Solid scenery entered a protected route: %s" % child.get_path())
 					return
 
 	var solid_frame := marketplace.get_node("EnvironmentalComposition/SolidFrame")
-	if solid_frame.get_child_count() != 16:
+	if solid_frame.get_child_count() != 6:
 		_fail("Marketplace perimeter tree mass count changed.")
 		return
 	var paved_market_bounds := Rect2(96, 64, 704, 512)
@@ -198,8 +194,30 @@ func _run_test() -> void:
 	if marketplace.get_node("EnvironmentalComposition/Planters").get_child_count() != 4:
 		_fail("Marketplace district planter count changed.")
 		return
+	if marketplace.get_node("SpineEdgePlanters").get_child_count() != 2:
+		_fail("Marketplace spine-edge planter count changed.")
+		return
 	if marketplace.get_node("EnvironmentalComposition/Lighting").get_child_count() != 4:
 		_fail("Marketplace lane-lighting count changed.")
+		return
+	var backstock := marketplace.get_node("VendorBackstock")
+	if backstock.get_child_count() != 2:
+		_fail("Marketplace vendor backstock must remain two attached service pockets.")
+		return
+	var expected_backstock := {
+		"SouthwestDeliveryStock": {"position": Vector2(288, 552), "asset": "06", "sprite": Vector2(-53, -72)},
+		"SoutheastDeliveryStock": {"position": Vector2(608, 552), "asset": "13", "sprite": Vector2(-48, -74)},
+	}
+	for stock_name: String in expected_backstock:
+		var expected_stock := expected_backstock[stock_name] as Dictionary
+		var stock := backstock.get_node(stock_name) as StaticBody2D
+		var stock_sprite := stock.get_node("Visual") as Sprite2D
+		var stock_record := records[expected_stock["asset"]] as Dictionary
+		if stock.position != expected_stock["position"] or stock_sprite.position != expected_stock["sprite"] or stock_sprite.texture.resource_path != "res://%s" % stock_record["runtime_path"]:
+			_fail("Marketplace backstock placement changed: %s" % stock_name)
+			return
+	if marketplace.get_node_or_null("ZoneIdentityV1") != null:
+		_fail("Rejected Marketplace entry comparison remains active.")
 		return
 
 	for npc_name in ["StallAttendant", "MarketShopper", "SupplyTraveler"]:

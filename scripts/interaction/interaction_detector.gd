@@ -2,6 +2,11 @@ class_name InteractionDetector
 extends Area2D
 
 signal prompt_changed(prompt_text: String, is_visible: bool)
+signal interaction_requested(
+	character_id: StringName,
+	interactable_id: StringName,
+	interactable: Area2D
+)
 
 const FORWARD_PREFERENCE_WEIGHT := 4096.0
 
@@ -11,6 +16,7 @@ var _facing_direction := Vector2.DOWN
 var _interactor: Node2D
 var _interaction_enabled := true
 var _last_prompt_text := ""
+var _character_id: StringName
 
 
 func _ready() -> void:
@@ -34,13 +40,22 @@ func set_facing_direction(direction: Vector2) -> void:
 		_facing_direction = direction.normalized()
 
 
-func try_interact() -> void:
+func configure_interactor(character_id: StringName, is_enabled: bool) -> void:
+	_character_id = character_id
+	set_interaction_enabled(is_enabled)
+
+
+func try_interact() -> bool:
 	if not _interaction_enabled:
-		return
+		return false
 
 	_refresh_active_interactable()
 	if _is_valid_candidate(_active_interactable):
-		_active_interactable.call("interact", _interactor)
+		var interactable_id := _active_interactable.call("get_interactable_id") as StringName
+		if interactable_id != &"" and _character_id != &"":
+			interaction_requested.emit(_character_id, interactable_id, _active_interactable)
+			return true
+	return false
 
 
 func get_active_interactable() -> Area2D:
@@ -107,6 +122,7 @@ func _is_valid_candidate(candidate: Area2D) -> bool:
 		and candidate.is_inside_tree()
 		and candidate.is_in_group(&"interactables")
 		and candidate.has_method("can_interact")
+		and candidate.has_method("get_interactable_id")
 		and candidate.call("can_interact", _interactor)
 	)
 

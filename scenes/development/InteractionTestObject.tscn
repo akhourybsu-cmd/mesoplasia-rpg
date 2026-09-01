@@ -32,6 +32,7 @@ collision_layer = 2
 collision_mask = 0
 monitoring = false
 script = ExtResource("2_interactable")
+interactable_id = &"development.interactable.test_object"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
 shape = SubResource("Shape_interaction")

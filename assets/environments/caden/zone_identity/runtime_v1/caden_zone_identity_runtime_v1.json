@@ -1,0 +1,423 @@
+{
+  "schema": "caden-zone-identity-runtime-v1",
+  "gate_state": "limited_four_asset_in_engine_comparison",
+  "preparation_manifest_sha256": "6d8fb8851036b3a8513f0e5f6f78e2c24f4401ffa2bb4990b1a6a9dab0b80660",
+  "generator": "tools/art/import_caden_zone_identity_runtime_v1.py",
+  "generator_sha256": "649c1ba6572ce8e87492d73957432fecc1e7f8b667bb15c1938c5e5076085081",
+  "runtime_assets": {
+    "CAD-COMP-10": {
+      "source_id": "CAD-COMP-10",
+      "source_filename": "caden_connected_compositions_source_master_v1.png",
+      "source_sha256": "99dce2b61b83be498805acac20c9f2fda720b7c29141a13a54eaa20317602f1b",
+      "source_cell": [
+        4,
+        2
+      ],
+      "source_crop_xyxy": [
+        656,
+        200,
+        875,
+        400
+      ],
+      "cleaned_bounds_within_cell_xyxy": [
+        15,
+        41,
+        209,
+        200
+      ],
+      "source_partial_alpha_pixels": 22513,
+      "normalization_factor": 0.6,
+      "scale_family": "market_entry",
+      "target_zone": "marketplace",
+      "intended_placement": "south market entrance frame on the paved side of the perimeter opening",
+      "pivot_xy": [
+        62,
+        99
+      ],
+      "pivot_basis": "bottom-center structural ground contact; loose flowers, grass, and removed fringe excluded",
+      "footprint_dimensions": [
+        124,
+        29
+      ],
+      "status": "active_limited_zone_identity_comparison",
+      "collision_guidance": [
+        {
+          "role": "west_lantern_post",
+          "shape": "rectangle",
+          "size": [
+            12,
+            18
+          ],
+          "offset": [
+            -31,
+            -22
+          ]
+        },
+        {
+          "role": "east_lantern_post",
+          "shape": "rectangle",
+          "size": [
+            12,
+            18
+          ],
+          "offset": [
+            31,
+            -22
+          ]
+        }
+      ],
+      "cleanup": {
+        "alpha_threshold": 128,
+        "boundary_contamination_pixels_removed": 0,
+        "tiny_components_removed": 1,
+        "tiny_component_pixels_removed": 1,
+        "runtime_boundary_contamination_pixels_removed": 0,
+        "runtime_tiny_components_removed": 0,
+        "runtime_tiny_component_pixels_removed": 0,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          124,
+          103
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "connected_components": 1,
+        "smallest_component_pixels": 5608,
+        "boundary_contamination_pixels": 0
+      },
+      "source_clean_path": "candidates/source_clean/cad_comp_10_source_clean.png",
+      "source_clean_sha256": "5ae9805c98e68843a10a6ccf172363d2cfa9977e62e9cd6c932e6cf1ac8d5395",
+      "runtime_preview_path": "candidates/runtime_preview/cad_comp_10_runtime_preview.png",
+      "runtime_preview_sha256": "6c17ee6b33daec4b00f61668cac3974e68f38bcc03b4b2b90809f7a22268a418",
+      "runtime_path": "assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_market_entry_v1.png",
+      "runtime_sha256": "6c17ee6b33daec4b00f61668cac3974e68f38bcc03b4b2b90809f7a22268a418",
+      "target_scene": "scenes/world/caden/Marketplace.tscn",
+      "target_node": "ZoneIdentityV1/MarketEntryFrame",
+      "placement_position_xy": [
+        448,
+        608
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering"
+    },
+    "CAD-COMP-13": {
+      "source_id": "CAD-COMP-13",
+      "source_filename": "caden_connected_compositions_source_master_v1.png",
+      "source_sha256": "99dce2b61b83be498805acac20c9f2fda720b7c29141a13a54eaa20317602f1b",
+      "source_cell": [
+        1,
+        3
+      ],
+      "source_crop_xyxy": [
+        0,
+        400,
+        219,
+        600
+      ],
+      "cleaned_bounds_within_cell_xyxy": [
+        17,
+        22,
+        205,
+        198
+      ],
+      "source_partial_alpha_pixels": 27947,
+      "normalization_factor": 0.56,
+      "scale_family": "civic_garden",
+      "target_zone": "town_square",
+      "intended_placement": "northeast civic lawn edge outside the plaza and travel corridors",
+      "pivot_xy": [
+        56,
+        103
+      ],
+      "pivot_basis": "bottom-center structural ground contact; loose flowers, grass, and removed fringe excluded",
+      "footprint_dimensions": [
+        113,
+        30
+      ],
+      "status": "active_limited_zone_identity_comparison",
+      "collision_guidance": [
+        {
+          "role": "low_wall",
+          "shape": "rectangle",
+          "size": [
+            62,
+            12
+          ],
+          "offset": [
+            -4,
+            -18
+          ]
+        },
+        {
+          "role": "lantern_post",
+          "shape": "rectangle",
+          "size": [
+            10,
+            14
+          ],
+          "offset": [
+            36,
+            -22
+          ]
+        }
+      ],
+      "cleanup": {
+        "alpha_threshold": 128,
+        "boundary_contamination_pixels_removed": 0,
+        "tiny_components_removed": 2,
+        "tiny_component_pixels_removed": 73,
+        "runtime_boundary_contamination_pixels_removed": 5,
+        "runtime_tiny_components_removed": 0,
+        "runtime_tiny_component_pixels_removed": 0,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          113,
+          107
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "connected_components": 1,
+        "smallest_component_pixels": 6382,
+        "boundary_contamination_pixels": 0
+      },
+      "source_clean_path": "candidates/source_clean/cad_comp_13_source_clean.png",
+      "source_clean_sha256": "97d2825824e4a4093bc2838735a00c4d5cb09ff361e59e595533f17761cc65d6",
+      "runtime_preview_path": "candidates/runtime_preview/cad_comp_13_runtime_preview.png",
+      "runtime_preview_sha256": "4b8f63f46f5e15d92faeedf6e8e5779bba2d7b06e83a30149ae8181db26b7a94",
+      "runtime_path": "assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_civic_garden_v1.png",
+      "runtime_sha256": "4b8f63f46f5e15d92faeedf6e8e5779bba2d7b06e83a30149ae8181db26b7a94",
+      "target_scene": "scenes/world/caden/TownSquare.tscn",
+      "target_node": "ZoneIdentityV1/CivicGardenEdge",
+      "placement_position_xy": [
+        700,
+        288
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering"
+    },
+    "CAD-YARD-35": {
+      "source_id": "CAD-YARD-35",
+      "source_filename": "caden_yard_furnishings_source_master_v1.png",
+      "source_sha256": "f574ee25b761b2dc2f16250fb95fb73329139959228902726daa7b7787b8ef51",
+      "source_cell": [
+        5,
+        6
+      ],
+      "source_crop_xyxy": [
+        875,
+        999,
+        1093,
+        1199
+      ],
+      "cleaned_bounds_within_cell_xyxy": [
+        11,
+        5,
+        207,
+        181
+      ],
+      "source_partial_alpha_pixels": 27686,
+      "normalization_factor": 0.58,
+      "scale_family": "domestic_utility",
+      "target_zone": "residential",
+      "intended_placement": "southwest domestic side yard beside the house and away from the lane",
+      "pivot_xy": [
+        61,
+        106
+      ],
+      "pivot_basis": "bottom-center structural ground contact; loose flowers, grass, and removed fringe excluded",
+      "footprint_dimensions": [
+        122,
+        31
+      ],
+      "status": "active_limited_zone_identity_comparison",
+      "collision_guidance": [
+        {
+          "role": "storage_stack",
+          "shape": "rectangle",
+          "size": [
+            46,
+            24
+          ],
+          "offset": [
+            -18,
+            -12
+          ]
+        },
+        {
+          "role": "fence_return",
+          "shape": "rectangle",
+          "size": [
+            24,
+            12
+          ],
+          "offset": [
+            34,
+            -8
+          ]
+        }
+      ],
+      "cleanup": {
+        "alpha_threshold": 128,
+        "boundary_contamination_pixels_removed": 0,
+        "tiny_components_removed": 0,
+        "tiny_component_pixels_removed": 0,
+        "runtime_boundary_contamination_pixels_removed": 10,
+        "runtime_tiny_components_removed": 1,
+        "runtime_tiny_component_pixels_removed": 1,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          122,
+          110
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "connected_components": 1,
+        "smallest_component_pixels": 7136,
+        "boundary_contamination_pixels": 0
+      },
+      "source_clean_path": "candidates/source_clean/cad_yard_35_source_clean.png",
+      "source_clean_sha256": "28a716a9ecc5034bda4e0bcad13dc51c0a0f580c757c67645bc9a944f7517588",
+      "runtime_preview_path": "candidates/runtime_preview/cad_yard_35_runtime_preview.png",
+      "runtime_preview_sha256": "2b2438fc6f089f55a3cfc32edf5f13a7b474003123336abf1c377e816fb3bb7d",
+      "runtime_path": "assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_domestic_utility_v1.png",
+      "runtime_sha256": "2b2438fc6f089f55a3cfc32edf5f13a7b474003123336abf1c377e816fb3bb7d",
+      "target_scene": "scenes/world/caden/Residential.tscn",
+      "target_node": "ZoneIdentityV1/DomesticUtilityYard",
+      "placement_position_xy": [
+        320,
+        592
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering"
+    },
+    "CAD-LAND-33": {
+      "source_id": "CAD-LAND-33",
+      "source_filename": "caden_landscaping_source_master_v1.png",
+      "source_sha256": "cf40f2f86fec6bd0d21c980869d644c8ca9e53708f72a587d68201b5142d9602",
+      "source_cell": [
+        3,
+        6
+      ],
+      "source_crop_xyxy": [
+        437,
+        999,
+        656,
+        1199
+      ],
+      "cleaned_bounds_within_cell_xyxy": [
+        0,
+        0,
+        213,
+        176
+      ],
+      "source_partial_alpha_pixels": 31396,
+      "normalization_factor": 0.62,
+      "scale_family": "natural_boundary",
+      "target_zone": "commons",
+      "intended_placement": "southwest natural boundary mass outside the maintained path and Quiet Green",
+      "pivot_xy": [
+        70,
+        113
+      ],
+      "pivot_basis": "bottom-center structural ground contact; loose flowers, grass, and removed fringe excluded",
+      "footprint_dimensions": [
+        140,
+        33
+      ],
+      "status": "active_limited_zone_identity_comparison",
+      "collision_guidance": [
+        {
+          "role": "rock_and_wood_core",
+          "shape": "rectangle",
+          "size": [
+            38,
+            18
+          ],
+          "offset": [
+            2,
+            -9
+          ]
+        }
+      ],
+      "cleanup": {
+        "alpha_threshold": 128,
+        "boundary_contamination_pixels_removed": 0,
+        "tiny_components_removed": 0,
+        "tiny_component_pixels_removed": 0,
+        "runtime_boundary_contamination_pixels_removed": 1,
+        "runtime_tiny_components_removed": 0,
+        "runtime_tiny_component_pixels_removed": 0,
+        "alpha_policy": "binary 0/255",
+        "safety_padding_pixels": 4
+      },
+      "pixel_audit": {
+        "dimensions": [
+          140,
+          117
+        ],
+        "alpha_values": [
+          0,
+          255
+        ],
+        "partial_alpha_pixels": 0,
+        "transparent_rgb_pixels": 0,
+        "canvas_edge_pixels": 0,
+        "connected_components": 1,
+        "smallest_component_pixels": 9359,
+        "boundary_contamination_pixels": 0
+      },
+      "source_clean_path": "candidates/source_clean/cad_land_33_source_clean.png",
+      "source_clean_sha256": "8e52fd877a119bf2f3ff8bc0cd52e6e3b8014914de1c87fb096f3a8963405427",
+      "runtime_preview_path": "candidates/runtime_preview/cad_land_33_runtime_preview.png",
+      "runtime_preview_sha256": "1b378cf1cf07a2f78f811a4935e5b91ae910d4aff6f28d4b372a8459b6fc12db",
+      "runtime_path": "assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_natural_boundary_v1.png",
+      "runtime_sha256": "1b378cf1cf07a2f78f811a4935e5b91ae910d4aff6f28d4b372a8459b6fc12db",
+      "target_scene": "scenes/world/caden/Commons.tscn",
+      "target_node": "ZoneIdentityV1/NaturalBoundaryMass",
+      "placement_position_xy": [
+        160,
+        576
+      ],
+      "import_scale": 1.0,
+      "filter": "nearest_neighbor_disabled_filtering"
+    }
+  },
+  "wayfarer_decision": "retain_v5_unchanged_to_preserve_open_rustic_identity",
+  "protected_contracts": [
+    "all existing buildings, terrain, roads, routes, entries, exits, collision, camera bounds, NPCs, dialogue, and interactions",
+    "Town Square reserved center and all four travel corridors",
+    "Marketplace central circulation and perimeter openings",
+    "Residential road mask and domestic lanes",
+    "Commons maintained paths and Quiet Green"
+  ],
+  "rollback": "Remove the four ZoneIdentityV1 nodes and their four ext_resource references; no prior node or resource requires restoration.",
+  "provenance_and_licensing": {
+    "created_for": "Mesoplasia RPG / Caden",
+    "generation_note": "OpenAI image generation recorded by the supplied library",
+    "rights_status": "subject_to_applicable_OpenAI_terms_and_project_policy"
+  }
+}

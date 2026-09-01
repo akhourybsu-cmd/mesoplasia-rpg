@@ -1,0 +1,175 @@
+{
+  "schema": "caden-marketplace-terrain-runtime-v1.3",
+  "gate_state": "blueprint_v3_active_runtime",
+  "generator": "tools/art/build_caden_marketplace_terrain_runtime_v1_3.py",
+  "generator_sha256": "c2102825d6f78ab7d11873b1227dce554d17083ef7c954eb537917bd326ef1ab",
+  "source_runtime": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.png",
+  "source_runtime_sha256": "99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385",
+  "output_path": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_3.png",
+  "output_sha256": "b38224635d629980cd342d13a8ed50238224edfdaf9ae378ff91d8eb5a805e33",
+  "dimensions": [
+    896,
+    640
+  ],
+  "cell_size": [
+    32,
+    32
+  ],
+  "grid": [
+    28,
+    20
+  ],
+  "composed_cell_counts": {
+    "grass": 212,
+    "warm_stone": 281,
+    "transition": 67
+  },
+  "maintained_cell_count": 348,
+  "grass_cut_in_cell_count": 24,
+  "grass_cut_in_cells_xy": [
+    [
+      3,
+      2
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      9,
+      2
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      18,
+      2
+    ],
+    [
+      23,
+      2
+    ],
+    [
+      24,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      3,
+      6
+    ],
+    [
+      24,
+      6
+    ],
+    [
+      24,
+      12
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      24,
+      13
+    ],
+    [
+      3,
+      16
+    ],
+    [
+      24,
+      16
+    ],
+    [
+      3,
+      17
+    ],
+    [
+      4,
+      17
+    ],
+    [
+      5,
+      17
+    ],
+    [
+      9,
+      17
+    ],
+    [
+      10,
+      17
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      23,
+      17
+    ],
+    [
+      24,
+      17
+    ]
+  ],
+  "route_contract": {
+    "west_lane_cells_xyxy": [
+      0,
+      8,
+      8,
+      11
+    ],
+    "cross_lane_cells_xyxy": [
+      3,
+      9,
+      24,
+      10
+    ],
+    "central_lane_cells_xyxy": [
+      12,
+      2,
+      15,
+      19
+    ],
+    "market_precinct_cells_xyxy": [
+      3,
+      2,
+      24,
+      17
+    ]
+  },
+  "route_cells_preserved": 132,
+  "method": "native 32x32 cells sampled from approved v1.2 without rotation, mirroring, scaling, or interpolation",
+  "collision": "none; scene collision and transition nodes remain authoritative",
+  "import_scale": 1.0,
+  "filter": "nearest_neighbor_disabled_filtering",
+  "pixel_audit": {
+    "fully_opaque": true,
+    "partial_alpha_pixels": 0,
+    "transparent_rgb_pixels": 0
+  },
+  "provenance_and_licensing": {
+    "provided_by": "project owner via local Downloads intake",
+    "creator_or_generation_tool": "ChatGPT/OpenAI output provenance verified from Windows download origin and project source records",
+    "rights_record": "assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json",
+    "rights_status": "openai_output_provenance_verified",
+    "distribution_status": "project_distribution_allowed_subject_to_applicable_law_and_third_party_rights"
+  },
+  "rollback": {
+    "previous_runtime_path": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.png",
+    "previous_runtime_sha256": "99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385",
+    "instruction": "Restore Marketplace TerrainRuntime to v1.2; do not change routes, stalls, transitions, or collision."
+  }
+}

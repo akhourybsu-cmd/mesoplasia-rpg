@@ -228,19 +228,19 @@ func _verify_zone_unload_and_restore() -> bool:
 	var caden := CADEN_SCENE.instantiate() as Node2D
 	root.add_child(caden)
 	await physics_frame
-	caden.call("_on_transition_requested", &"town_square", &"from_wayfarers_approach")
+	_request_current_exit(caden, ^"Exits/ToTownSquare")
 	await _wait_for_transition()
 	var town_square := caden.get("_current_zone") as Node2D
 	var square_local := town_square.get_node("Actors/NPCs/SquareLocal") as StaticBody2D
 	var old_square_local: WeakRef = weakref(square_local)
 	var old_interactable: WeakRef = weakref(square_local.get_node("Interactable"))
 
-	caden.call("_on_transition_requested", &"residential", &"from_town_square")
+	_request_current_exit(caden, ^"Exits/ToResidential")
 	await _wait_for_transition()
 	if old_square_local.get_ref() != null or old_interactable.get_ref() != null:
 		return _fail("SquareLocal or its interaction area survived Town Square unloading.")
 
-	caden.call("_on_transition_requested", &"town_square", &"from_residential")
+	_request_current_exit(caden, ^"Exits/ToTownSquare")
 	await _wait_for_transition()
 	var reloaded_square := (caden.get("_current_zone") as Node2D).get_node("Actors/NPCs/SquareLocal") as StaticBody2D
 	var reloaded_sprite := reloaded_square.get_node("VisualRoot/AnimatedSprite2D") as AnimatedSprite2D
@@ -260,6 +260,19 @@ func _wait_for_transition() -> void:
 	await physics_frame
 	await physics_frame
 	await physics_frame
+
+
+func _request_current_exit(caden: Node2D, exit_path: NodePath) -> void:
+	var player := caden.get_node("Player") as CharacterBody2D
+	var current_zone := caden.get("_current_zone") as Node2D
+	var zone_exit := current_zone.get_node(exit_path) as Area2D
+	zone_exit.emit_signal(
+		"transition_requested",
+		player.call("get_character_id") as StringName,
+		zone_exit.get("exit_id") as StringName,
+		zone_exit.get("destination_zone") as StringName,
+		zone_exit.get("destination_entry") as StringName
+	)
 
 
 func _fail(message: String) -> bool:

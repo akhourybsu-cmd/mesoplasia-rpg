@@ -1,12 +1,12 @@
 class_name Player
 extends CharacterBody2D
 
-enum MovementAxis {
-	HORIZONTAL,
-	VERTICAL,
-}
-
 const DIALOGUE_CONTROL_LOCK: StringName = &"dialogue"
+const CharacterIdentityContract := preload("res://scripts/core/character_identity.gd")
+
+@export_category("Identity")
+@export var character_id: StringName = CharacterIdentityContract.LOCAL_PRIMARY
+@export var is_local_avatar := true
 
 @export_category("Movement")
 @export var movement_speed: float = 96.0
@@ -14,20 +14,51 @@ const DIALOGUE_CONTROL_LOCK: StringName = &"dialogue"
 @export_category("Camera")
 @export var camera_limits := Rect2i()
 
-var _active_movement_axis: MovementAxis = MovementAxis.VERTICAL
 var facing_direction := Vector2.DOWN
 var _control_locks: Dictionary[StringName, bool] = {}
 
-@onready var _camera: Camera2D = $Camera2D
-@onready var _interaction_detector: Area2D = $InteractionDetector
-@onready var _dialogue_ui: CanvasLayer = $DialogueUI
 @onready var _character_visual: AnimatedSprite2D = $VisualRoot/AnimatedSprite2D
+@onready var _movement_adapter: Node = $AvatarMovementAdapter
+@onready var _local_presentation: Node = $LocalAvatarPresentation
+@onready var _local_interaction_service: Node = $LocalInteractionService
 
 
 func _ready() -> void:
+	if not CharacterIdentityContract.is_valid(character_id):
+		push_error("Player requires a stable, normalized CharacterId.")
+		set_physics_process(false)
+		return
+
+	_local_presentation.call("configure", character_id, is_local_avatar)
+	set_physics_process(is_local_avatar)
+	if not is_local_avatar:
+		_local_interaction_service.queue_free()
 	_apply_camera_limits()
-	_interaction_detector.call("set_facing_direction", facing_direction)
+	_local_presentation.call("set_facing_direction", facing_direction)
 	_update_character_visual(Vector2.ZERO)
+
+
+func get_character_id() -> StringName:
+	return character_id
+
+
+func is_locally_controlled() -> bool:
+	return is_local_avatar
+
+
+func apply_remote_presentation_state(
+	new_global_position: Vector2,
+	movement_direction: Vector2,
+	new_facing_direction: Vector2
+) -> bool:
+	if is_local_avatar:
+		return false
+
+	global_position = new_global_position
+	if new_facing_direction != Vector2.ZERO:
+		facing_direction = new_facing_direction.normalized()
+	_update_character_visual(movement_direction)
+	return true
 
 
 func set_camera_limits(bounds: Rect2i) -> void:
@@ -38,15 +69,11 @@ func set_camera_limits(bounds: Rect2i) -> void:
 func _apply_camera_limits() -> void:
 	if not camera_limits.has_area() or not is_node_ready():
 		return
-
-	_camera.limit_left = camera_limits.position.x
-	_camera.limit_top = camera_limits.position.y
-	_camera.limit_right = camera_limits.end.x
-	_camera.limit_bottom = camera_limits.end.y
+	_local_presentation.call("set_camera_limits", camera_limits)
 
 
 func start_dialogue(conversation: Resource) -> bool:
-	var dialogue_started: bool = _dialogue_ui.call("start_dialogue", conversation)
+	var dialogue_started: bool = _local_presentation.call("start_dialogue", conversation)
 	if dialogue_started:
 		lock_controls(DIALOGUE_CONTROL_LOCK)
 	return dialogue_started
@@ -54,13 +81,13 @@ func start_dialogue(conversation: Resource) -> bool:
 
 func lock_controls(reason: StringName) -> void:
 	_control_locks[reason] = true
-	_interaction_detector.call("set_interaction_enabled", false)
+	_local_presentation.call("set_interaction_enabled", false)
 
 
 func unlock_controls(reason: StringName) -> void:
 	_control_locks.erase(reason)
 	if not is_control_locked():
-		_interaction_detector.call("set_interaction_enabled", true)
+		_local_presentation.call("set_interaction_enabled", true)
 
 
 func is_control_locked() -> bool:
@@ -72,60 +99,36 @@ func _on_dialogue_closed() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_control_locked():
-		velocity = Vector2.ZERO
-		_update_character_visual(Vector2.ZERO)
-		move_and_slide()
-		return
-
-	var movement_direction := _get_four_direction_input()
+	var movement_direction := Vector2.ZERO
+	if not is_control_locked():
+		movement_direction = _local_presentation.call("get_movement_direction") as Vector2
 	if movement_direction != Vector2.ZERO:
 		facing_direction = movement_direction
-		_interaction_detector.call("set_facing_direction", facing_direction)
+		_local_presentation.call("set_facing_direction", facing_direction)
 
-	velocity = movement_direction * movement_speed
-	_update_character_visual(movement_direction)
-	move_and_slide()
+	var applied_direction: Vector2 = _movement_adapter.call(
+		"simulate_movement",
+		self,
+		movement_direction,
+		movement_speed,
+		is_control_locked()
+	)
+	_update_character_visual(applied_direction)
 
 
 func _update_character_visual(movement_direction: Vector2) -> void:
 	_character_visual.call("update_visual_state", movement_direction, facing_direction)
 
 
-func _get_four_direction_input() -> Vector2:
-	var input_direction := Input.get_vector(
-		"move_left",
-		"move_right",
-		"move_up",
-		"move_down"
+func _on_interaction_requested(
+	requesting_character_id: StringName,
+	interactable_id: StringName,
+	interactable: Area2D
+) -> void:
+	_local_interaction_service.call(
+		"request_interaction",
+		requesting_character_id,
+		self,
+		interactable_id,
+		interactable
 	)
-
-	if input_direction == Vector2.ZERO:
-		return Vector2.ZERO
-
-	_update_active_movement_axis(input_direction)
-
-	if _active_movement_axis == MovementAxis.HORIZONTAL:
-		return Vector2.RIGHT if input_direction.x > 0.0 else Vector2.LEFT
-
-	return Vector2.DOWN if input_direction.y > 0.0 else Vector2.UP
-
-
-func _update_active_movement_axis(input_direction: Vector2) -> void:
-	var horizontal_just_pressed := (
-		Input.is_action_just_pressed("move_left")
-		or Input.is_action_just_pressed("move_right")
-	)
-	var vertical_just_pressed := (
-		Input.is_action_just_pressed("move_up")
-		or Input.is_action_just_pressed("move_down")
-	)
-
-	if horizontal_just_pressed and not vertical_just_pressed:
-		_active_movement_axis = MovementAxis.HORIZONTAL
-	elif vertical_just_pressed and not horizontal_just_pressed:
-		_active_movement_axis = MovementAxis.VERTICAL
-	elif absf(input_direction.x) > absf(input_direction.y):
-		_active_movement_axis = MovementAxis.HORIZONTAL
-	elif absf(input_direction.y) > absf(input_direction.x):
-		_active_movement_axis = MovementAxis.VERTICAL

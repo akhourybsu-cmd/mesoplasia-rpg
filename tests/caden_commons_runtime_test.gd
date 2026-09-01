@@ -7,7 +7,7 @@ const ROLLBACK_TERRAIN_MANIFEST_PATH := "res://assets/environments/caden/commons
 const EXPECTED_SELECTED := {
 	"01": {"node": "Greenery/TreeCluster02", "position": Vector2(800, 224), "sprite": "SelectedSprite", "pivot": Vector2(-47, -104)},
 	"04": {"node": "Greenery/TreeCluster01", "position": Vector2(192, 160), "sprite": "SelectedSprite", "pivot": Vector2(-49, -78)},
-	"09": {"node": "CommonsComposition/WildflowerMeadow", "position": Vector2(704, 352), "sprite": "Visual", "pivot": Vector2(-52, -67)},
+	"09": {"node": "CommonsComposition/WildflowerMeadow", "position": Vector2(816, 448), "sprite": "Visual", "pivot": Vector2(-52, -67)},
 	"11": {"node": "Greenery/RockCluster", "position": Vector2(288, 544), "sprite": "SelectedSprite", "pivot": Vector2(-55, -70)},
 	"14": {"node": "CommonsComposition/BoundaryUndergrowth", "position": Vector2(896, 624), "sprite": "Visual", "pivot": Vector2(-52, -84)},
 	"20": {"node": "CommonsComposition/QuietRestPocket", "position": Vector2(640, 480), "sprite": "Visual", "pivot": Vector2(-49, -87)},
@@ -136,6 +136,11 @@ func _run_test() -> void:
 	if rest_pocket.find_children("*", "CollisionShape2D", true, false).size() != 2:
 		_fail("Commons rest pocket must retain separate bench and rock collisions.")
 		return
+	var north_rest := commons.get_node("CommonsComposition/NorthShadeRestPocket") as StaticBody2D
+	var north_rest_shape := (north_rest.get_node("CollisionShape2D") as CollisionShape2D).shape as RectangleShape2D
+	if north_rest.position != Vector2(640, 208) or north_rest_shape == null or north_rest_shape.size != Vector2(52, 14):
+		_fail("Commons north shade rest pocket changed.")
+		return
 
 	var protected_routes := [Rect2(0, 288, 576, 128), Rect2(448, 0, 128, 416)]
 	for solid_root in [commons.get_node("Greenery"), commons.get_node("CommonsComposition/PerimeterTrees")]:
@@ -145,14 +150,14 @@ func _run_test() -> void:
 					if route.has_point((solid as StaticBody2D).position):
 						_fail("Commons solid scenery entered a protected route: %s" % solid.get_path())
 						return
-	for solid_name in ["BoundaryUndergrowth", "QuietRestPocket"]:
+	for solid_name in ["BoundaryUndergrowth", "QuietRestPocket", "NorthShadeRestPocket"]:
 		var solid := commons.get_node("CommonsComposition/%s" % solid_name) as StaticBody2D
 		for route: Rect2 in protected_routes:
 			if route.has_point(solid.position):
 				_fail("Commons selected solid entered a protected route: %s" % solid_name)
 				return
 	var perimeter_trees := commons.get_node("CommonsComposition/PerimeterTrees")
-	if perimeter_trees.get_child_count() != 16:
+	if perimeter_trees.get_child_count() != 6:
 		_fail("Commons perimeter tree count changed.")
 		return
 	for tree: StaticBody2D in perimeter_trees.get_children():

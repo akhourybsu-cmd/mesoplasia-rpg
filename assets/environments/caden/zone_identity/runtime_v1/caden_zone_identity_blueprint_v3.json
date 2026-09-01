@@ -1,0 +1,63 @@
+{
+  "schema": "caden-zone-identity-blueprint-v3",
+  "gate_state": "blueprint_v3_user_approved_integration",
+  "source_runtime_manifest": "assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_runtime_v1.json",
+  "source_runtime_manifest_sha256": "e0d7b615a82f7c6224d56edfc97e568ee511819dd452e381d742f63f673d2e99",
+  "decisions": {
+    "CAD-COMP-10": {
+      "zone": "marketplace",
+      "state": "rejected_not_referenced",
+      "reason": "The 124-pixel entry composition and both post collisions occupy the live south transition rectangle and its required 32-pixel safety ring.",
+      "active_scene_reference_count": 0
+    },
+    "CAD-COMP-13": {
+      "zone": "town_square",
+      "state": "active_blueprint_v3",
+      "scene": "scenes/world/caden/TownSquare.tscn",
+      "assembly_scene": "scenes/world/caden/comparisons/TownSquareBlueprintV3Overlay.tscn",
+      "node": "BlueprintV3CivicGarden/CivicGardenEdge",
+      "position_xy": [700, 288],
+      "pivot_xy": [56, 103],
+      "collision": [
+        {"node": "LowWallCollision", "position_xy": [-4, -18], "size_xy": [62, 12]},
+        {"node": "LanternPostCollision", "position_xy": [36, -22], "size_xy": [10, 14]}
+      ],
+      "active_scene_reference_count": 1,
+      "approval": "explicit_user_approval_2026-08-30"
+    },
+    "CAD-YARD-35": {
+      "zone": "residential",
+      "state": "active_blueprint_v3",
+      "scene": "scenes/world/caden/Residential.tscn",
+      "node": "ZoneIdentityV1/DomesticUtilityYard",
+      "position_xy": [320, 704],
+      "pivot_xy": [61, 106],
+      "collision": [
+        {"node": "StorageCollision", "position_xy": [-18, -12], "size_xy": [46, 24]},
+        {"node": "FenceReturnCollision", "position_xy": [34, -8], "size_xy": [24, 12]}
+      ],
+      "route_decision": "Moved below the protected southwest branch lane; structure and collision now sit outside y=448..672."
+    },
+    "CAD-LAND-33": {
+      "zone": "commons",
+      "state": "active_blueprint_v3",
+      "scene": "scenes/world/caden/Commons.tscn",
+      "node": "ZoneIdentityV1/NaturalBoundaryMass",
+      "position_xy": [160, 576],
+      "pivot_xy": [70, 113],
+      "collision": [
+        {"node": "CoreCollision", "position_xy": [2, -9], "size_xy": [38, 18]}
+      ],
+      "route_decision": "Retained in the southwest meadow bank outside both protected L-route rectangles."
+    }
+  },
+  "wayfarer_decision": "retain_v5_unchanged_to_preserve_open_rustic_identity",
+  "town_square_decision": "activate_versioned_overlay_by_explicit_user_approval",
+  "protected_contracts": [
+    "Wayfarer's Approach v5 scene bytes and active references remain unchanged.",
+    "Town Square architecture, terrain, plaza, roads, buildings, entries, exits, NPCs, and reserved center remain unchanged; the approved civic-garden overlay is referenced once.",
+    "Marketplace west, cross, and 128-pixel central routes remain free of new solid contacts.",
+    "Residential cabin and authoritative fence-body centers remain unchanged.",
+    "Commons L-route, fixed greenery/rock anchors, entries, exits, NPCs, and bounds remain unchanged."
+  ]
+}

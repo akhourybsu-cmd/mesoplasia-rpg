@@ -13,6 +13,8 @@ script = ExtResource("1_caden")
 
 [node name="Player" parent="." unique_id=474583093 instance=ExtResource("2_player")]
 z_index = 10
+character_id = &"local.character.primary"
+is_local_avatar = true
 
 [node name="ObjectiveTracker" type="Node" parent="." unique_id=238192612]
 script = ExtResource("3_tracker")

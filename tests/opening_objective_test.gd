@@ -132,6 +132,8 @@ func _travel(exit_path: NodePath, expected_zone_name: StringName) -> bool:
 	var zone_exit := current_zone.get_node(exit_path) as Area2D
 	zone_exit.emit_signal(
 		"transition_requested",
+		_player.call("get_character_id") as StringName,
+		zone_exit.get("exit_id") as StringName,
 		zone_exit.get("destination_zone") as StringName,
 		zone_exit.get("destination_entry") as StringName
 	)

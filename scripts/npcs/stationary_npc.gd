@@ -13,6 +13,7 @@ const REQUIRED_ANIMATIONS: Array[StringName] = [
 ]
 
 @export var conversation: Resource
+@export var interactable_id: StringName
 @export var placeholder_color := Color(0.78, 0.52, 0.3)
 @export var character_sprite_frames: SpriteFrames
 @export var character_visual_enabled := false
@@ -25,9 +26,11 @@ const REQUIRED_ANIMATIONS: Array[StringName] = [
 @onready var _placeholder_visual: Polygon2D = $PlaceholderVisual
 @onready var _facing_marker: Polygon2D = $FacingMarker
 @onready var _character_visual: AnimatedSprite2D = $VisualRoot/AnimatedSprite2D
+@onready var _interactable: Area2D = $Interactable
 
 
 func _ready() -> void:
+	_interactable.call("set_interactable_id", interactable_id)
 	_placeholder_visual.color = placeholder_color
 	_character_visual.sprite_frames = character_sprite_frames
 	var visual_is_valid := character_visual_enabled and _validate_character_sprite_frames()

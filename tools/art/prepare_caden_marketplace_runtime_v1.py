@@ -16,6 +16,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2]
 RUNTIME_ROOT = ROOT / "assets/environments/caden/marketplace/props/runtime_v1"
 MANIFEST_PATH = ROOT / "assets/environments/caden/marketplace/marketplace_runtime_manifest_v1.json"
+RIGHTS_RECORD_PATH = ROOT / "assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json"
 SCALE = 0.1875
 PADDING = 2
 
@@ -74,6 +75,16 @@ def load_catalog(library_root: Path) -> dict[str, dict[str, str]]:
         if row is None or row["status"] not in {"candidate", "candidate_review_required"}:
             raise RuntimeError(f"Approved candidate is missing or ineligible: {spec.asset_id}")
     return by_id
+
+
+def load_rights_decision() -> dict[str, str]:
+    payload = json.loads(RIGHTS_RECORD_PATH.read_text(encoding="utf-8"))
+    decision = payload.get("decision", {})
+    if payload.get("gate_state") != "operational_distribution_clearance_recorded":
+        raise RuntimeError("Marketplace rights clearance is not active.")
+    if decision.get("rights_status") != "openai_output_provenance_verified":
+        raise RuntimeError("Marketplace rights clearance has an unexpected status.")
+    return decision
 
 
 def visible_boundary(image: Image.Image) -> set[tuple[int, int]]:
@@ -277,6 +288,7 @@ def main() -> int:
     if ROOT == library_root or ROOT in library_root.parents:
         raise RuntimeError("The Caden Mega Asset Library archive must remain staged outside res://.")
     catalog = load_catalog(library_root)
+    rights = load_rights_decision()
     RUNTIME_ROOT.mkdir(parents=True, exist_ok=True)
     records: dict[str, object] = {}
 
@@ -318,7 +330,7 @@ def main() -> int:
             "catalog_status": row["status"],
             "selection_status": "marketplace_selected",
             "approval_state": "approved_for_marketplace_runtime_v1_integration",
-            "rights_status": row["rights_status"],
+            "rights_status": rights["rights_status"],
             "source_package": "Caden Mega Asset Library v1.1 staged outside res://",
             "source_package_path": row["package_path"],
             "source_sha256": row["package_sha256"],
@@ -364,9 +376,10 @@ def main() -> int:
         "scope": "Seven explicitly approved Marketplace candidates only.",
         "gate_state": "marketplace_runtime_v1_visual_approved",
         "provenance_and_licensing": {
-            "notes": "See docs/PROVENANCE_AND_LICENSE.md in the verified source package.",
-            "rights_status": "project_internal_rights_unverified",
-            "distribution_status": "do_not_publish_until_rights_are_verified",
+            "rights_record": RIGHTS_RECORD_PATH.relative_to(ROOT).as_posix(),
+            "notes": "Operational project clearance records ChatGPT delivery provenance, OpenAI output-ownership terms, third-party-mark review, and two disclosed corrected-source archival exceptions.",
+            "rights_status": rights["rights_status"],
+            "distribution_status": rights["distribution_status"],
         },
         "preserved_rejections": {
             "all_marketplace_structure_masters": "rejected",

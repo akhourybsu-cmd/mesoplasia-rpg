@@ -28,3 +28,7 @@ The active renderer instantiates the serialized scene for every after frame and 
 To restore v1, change only the `TerrainRuntime` ext-resource path in `Marketplace.tscn` to `res://assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.png`. Do not modify route or collision nodes.
 
 The approval is bound to active evidence ZIP SHA-256 `f013205e480e1fed8283772482a8cf0834aa300899e99a559db1985bf5d90f08`. The next authorized step is an inactive Commons terrain comparison against its approved Runtime v1; no Commons reference changes are implied.
+
+## Current provenance status
+
+The historical unverified-rights state is superseded by `assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json`. ChatGPT delivery provenance, the official OpenAI output-ownership terms, and a third-party-mark visual review support limited project distribution clearance. The user remains responsible for applicable law, authorized source inputs, and third-party rights.

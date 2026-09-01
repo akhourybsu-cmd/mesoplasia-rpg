@@ -52,4 +52,4 @@ Marketplace Runtime v1, including the lively perimeter refinement, received visu
 
 ## Provenance
 
-Source rights remain `project_internal_rights_unverified`. Runtime assets and review materials must not be published until rights are independently confirmed.
+The prior `project_internal_rights_unverified` status is superseded by `assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json`. The selected runtime derivatives are `openai_output_provenance_verified` and may be distributed with the Mesoplasia RPG project subject to applicable law and third-party rights. See `CADEN_MARKETPLACE_PROVENANCE_AND_RIGHTS_V1.md` for the evidence chain and disclosed archival limitations.

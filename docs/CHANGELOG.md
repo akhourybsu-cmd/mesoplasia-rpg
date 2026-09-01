@@ -963,3 +963,406 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 
 - The consolidated rollout package is the next visual gate. No further broad asset integration is authorized by this entry.
 - Source rights remain `project_internal_rights_unverified`.
+
+## 2026-08-30 - Caden Zone Identity Runtime v1 limited comparison
+
+### Scope
+
+- Selected four candidates from the modular expansion source library for a limited zone-differentiation pass: Marketplace `CAD-COMP-10`, Town Square `CAD-COMP-13`, Residential `CAD-YARD-35`, and Commons `CAD-LAND-33`.
+- Staged source masters outside `res://`, performed binary-alpha cleanup, removed fringe contamination and detached components, added transparent safety padding, and normalized once with nearest-neighbor interpolation.
+- Imported four audited runtime PNGs at Godot scale `1.0` and placed them below dedicated `ZoneIdentityV1` layers with bottom-center structural pivots and object-specific collisions.
+- Preserved all existing terrain, buildings, routes, entries, exits, camera bounds, NPCs, dialogue, interactions, and the Town Square reserved center.
+- Retained Wayfarer's Approach v5 unchanged so its open roadside character remains a distinct fifth zone identity.
+- Produced matched before/after, full-zone, player depth-order, and current transition evidence for visual approval.
+
+### Files and systems changed
+
+- `assets/environments/caden/zone_identity/runtime_v1/`
+- `scenes/world/caden/Marketplace.tscn`
+- `scenes/world/caden/TownSquare.tscn`
+- `scenes/world/caden/Residential.tscn`
+- `scenes/world/caden/Commons.tscn`
+- `tools/art/prepare_caden_zone_identity_gate_v1.py`
+- `tools/art/import_caden_zone_identity_runtime_v1.py`
+- `tools/art/render_caden_zone_identity_runtime_v1.gd`
+- `tools/art/build_caden_zone_identity_runtime_review_v1.py`
+- `tests/caden_zone_identity_runtime_v1_test.gd`
+- `docs/art/CADEN_ZONE_IDENTITY_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Runtime pixel audits: PASS for all four assets; zero partial-alpha, transparent-RGB, canvas-edge, and boundary-contamination pixels, with one retained connected composition per asset.
+- Zone Identity runtime contract and twelve related Marketplace, Town Square, Residential, Commons, Wayfarer, transition, population, architecture, and terrain regression scripts: PASS (13 of 13).
+- Compatibility evidence: PASS through ANGLE; 25 deterministic identity captures plus 12 current bidirectional arrival captures.
+- Player depth sorting, structural collision counts, exact scene placement, import scale `1.0`, and Wayfarer exclusion: PASS.
+- Review ZIP SHA-256 `5afa81f26b33a022a3dd7e40b01de221a182b8b0e677b35cf8b3c41482938db1`; 72 checksummed artifacts.
+- Known sandbox-only notices remain limited to Godot `user://` log writes and Windows certificate-store access.
+
+### Remaining approval item
+
+- The four-asset in-engine comparison awaits user visual approval, targeted correction, or per-asset rejection.
+- No other modular expansion asset is authorized for import before this gate passes.
+
+## 2026-08-30 - Caden five-zone detailed placement blueprint v3
+
+### Scope
+
+- Implemented the constrained five-zone blueprint while preserving Wayfarer's Approach v5 byte-for-byte and restoring the protected active Town Square scene.
+- Upgraded Marketplace with a route-preserving 32-pixel terrain derivative, restrained grass cut-ins, organized north/south vendor streets, two attached backstock pockets, two asymmetrical spine-edge planters, and a reduced six-tree perimeter mass.
+- Upgraded Residential with three L-return property boundaries, wider route-safe gates, clustered twelve-shrub/eight-tree landscaping, and a domestic utility composition moved below the protected south-west lane.
+- Upgraded Commons with four unequal vegetation masses, six perimeter trees, a south-east meadow, a broad open central lawn, and exactly two rest pockets.
+- Rejected Marketplace `CAD-COMP-10` because it intersected the live south transition and 32-pixel safety ring; isolated Town Square `CAD-COMP-13` in an inactive, unreferenced comparison scene.
+- Preserved all camera bounds, fixed building and obstacle anchors, entries, exits, NPCs, dialogue, interactions, and the six bidirectional seam contracts.
+
+### Files and systems changed
+
+- `scenes/world/caden/Marketplace.tscn`
+- `scenes/world/caden/Residential.tscn`
+- `scenes/world/caden/Commons.tscn`
+- `scenes/world/caden/comparisons/TownSquareBlueprintV3Overlay.tscn`
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_3.png`
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_3.json`
+- `assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_blueprint_v3.json`
+- `tests/caden_marketplace_runtime_test.gd`
+- `tests/caden_residential_runtime_test.gd`
+- `tests/caden_commons_runtime_test.gd`
+- `tests/caden_zone_identity_runtime_v1_test.gd`
+- `tools/art/build_caden_marketplace_terrain_runtime_v1_3.py`
+- `tools/art/render_caden_five_zone_blueprint_v3.gd`
+- `tools/art/build_caden_five_zone_blueprint_v3_review.py`
+- `docs/art/CADEN_FIVE_ZONE_BLUEPRINT_V3.md`
+- `docs/art/CADEN_ZONE_IDENTITY_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Complete executable Godot regression suite: PASS, 24 of 24 scripts.
+- Focused active-zone, protected-zone, identity-decision, fixed-anchor, and transition contracts: PASS.
+- Godot 4.7.2 Compatibility review render through ANGLE: PASS; 15 baseline and 17 final deterministic captures.
+- Five-zone before/after and approval-boundary evidence ZIP SHA-256 `8b934fbcdd7e6be2c1dee7701b5e730e463d0c966223400e7b65df90ed3286ac`.
+- Twelve-capture bidirectional seam audit ZIP SHA-256 `ee755a0f256cec98a76bc9b013d1ca9d62849c0b056dabbd2aca05472fa02bd7`.
+- Marketplace terrain v1.3 pixel audit: PASS; fully opaque, zero partial-alpha pixels, zero transparent-RGB pixels, 24 grass cut-ins, and all 132 protected route cells preserved.
+- Zone Identity runtime audits: PASS for active Residential and Commons assets and inactive Town Square comparison; Wayfarer scene SHA-256 remains `9c247c02e526f70a0e5ea1b5f927d9b3dee3f82bb948541dce522ce6e3b79613`.
+- Known sandbox-only notices remain limited to blocked Godot `user://` log writes and Windows certificate-store access during headless tests.
+
+### Remaining approval items
+
+- Town Square `CAD-COMP-13` remains inactive and requires explicit approval before any active-scene reference is added.
+- Marketplace source-package rights remain `project_internal_rights_unverified`; do not publish or ship the affected art until rights are verified.
+
+## 2026-08-30 - Marketplace source-rights operational clearance
+
+### Scope
+
+- Closed the remaining Blueprint v3 source-rights gate for the selected Marketplace runtime derivatives with a machine-readable, scoped provenance record.
+- Verified that the Caden Mega Asset Library archive and grass/stone terrain master retain Windows download provenance from `chatgpt.com` through the ChatGPT content endpoint.
+- Bound the clearance to the OpenAI Terms of Use effective 2026-01-01: output ownership is assigned to the user as between the user and OpenAI, while responsibility for authorized input, applicable law, appropriateness review, and third-party rights remains with the user.
+- Visually reviewed the terrain master and Marketplace contact sheet; no obvious third-party logo, readable brand, franchise mark, civic crest, religious symbol, or third-party text was observed.
+- Verified direct archive hash matches for Marketplace source IDs `01`, `03`, `04`, `13`, and `14`.
+- Disclosed rather than concealed that the current archive variants for IDs `06` and `07` differ from the approved corrected-source hashes and that those exact corrected source bytes are not present in the current local intake.
+- Recorded limited project distribution clearance subject to applicable law and third-party rights; this is not a legal opinion, copyrightability decision, uniqueness guarantee, or non-infringement warranty.
+
+### Files and systems changed
+
+- `assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json`
+- `assets/environments/caden/marketplace/marketplace_runtime_manifest_v1.json`
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json`
+- `assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_3.json`
+- `tests/caden_marketplace_rights_clearance_test.gd`
+- `tests/caden_marketplace_runtime_test.gd`
+- `tools/art/prepare_caden_marketplace_runtime_v1.py`
+- `tools/art/import_caden_marketplace_terrain_runtime_v1_2.py`
+- `tools/art/build_caden_zone_identity_runtime_review_v1.py`
+- `docs/art/CADEN_MARKETPLACE_PROVENANCE_AND_RIGHTS_V1.md`
+- `docs/art/CADEN_MARKETPLACE_RUNTIME_V1.md`
+- `docs/art/CADEN_MARKETPLACE_TERRAIN_RUNTIME_V1_2.md`
+- `docs/art/CADEN_FIVE_ZONE_BLUEPRINT_V3.md`
+- `docs/art/CADEN_ZONE_IDENTITY_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Marketplace rights clearance test: PASS.
+- Marketplace runtime and terrain contract test after the normal Godot editor import pass: PASS.
+- Complete executable Godot regression suite: PASS, 26 of 26 scripts.
+- Direct source rehash: PASS for five selected archive sources; the two corrected-source exceptions are exact, explicit, and test-bound.
+- Release-clearance proof package: PASS; ZIP SHA-256 `f044224797d4a9d51b0a7f9ce0c12ce580f5dd6eaf2082e6366f3a6afb2acd0b`.
+
+### Remaining limitations
+
+- Restore the exact corrected source masters for Marketplace IDs `06` and `07` to the archival intake if those files become available. Their absence does not change active runtime bytes or approval, but it prevents a fresh regeneration from those exact corrected inputs.
+- The project owner remains responsible for applicable law, authorized source inputs, and third-party rights. No unconditional legal or non-infringement guarantee is recorded.
+
+## 2026-08-30 - Blueprint v3 final acceptance record
+
+### Status
+
+- The final authoritative acceptance gate supersedes the earlier proof-only package while preserving it as historical evidence.
+- Complete executable Godot regression suite: PASS, 25 of 25 scripts after the normal editor import pass.
+- Real-Player structural blocking, adjacent bypass clearance, and both depth-order states: PASS for Town Square `CAD-COMP-13`, Residential `CAD-YARD-35`, and Commons `CAD-LAND-33`.
+- Final acceptance ZIP SHA-256 `4830f409dfb6e3484c12b20b7c2de59233d23a0d6659c71e55538111ae473f52`.
+- Generated Godot import/cache sidecars used by local validation are excluded from the intended source change.
+
+### Remaining external item
+
+- Marketplace source-package rights remain `project_internal_rights_unverified`; do not publish or ship the affected art until rights are verified.
+
+## 2026-08-30 - Town Square blueprint v3 civic-garden approval
+
+### Scope
+
+- Recorded the user's explicit approval of Town Square `CAD-COMP-13` and activated the versioned civic-garden assembly exactly once in `TownSquare.tscn`.
+- Retained the approved `(700,288)` placement, bottom-center pivot, depth sorting, low-wall collision, and lantern-post collision from the reviewed comparison.
+- Preserved Town Square architecture, terrain, plaza, reserved center, five locked building centers, four travel corridors, entries, exits, NPCs, dialogue, and existing environmental composition.
+- Kept Marketplace `CAD-COMP-10` rejected and kept the Marketplace distribution-rights warning unchanged; visual approval does not establish publishing rights.
+
+### Files and systems changed
+
+- `scenes/world/caden/TownSquare.tscn`
+- `scenes/world/caden/comparisons/TownSquareBlueprintV3Overlay.tscn`
+- `assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_blueprint_v3.json`
+- `tests/caden_zone_identity_runtime_v1_test.gd`
+- `tools/art/render_caden_five_zone_blueprint_v3.gd`
+- `tools/art/build_caden_five_zone_blueprint_v3_review.py`
+- `docs/art/CADEN_FIVE_ZONE_BLUEPRINT_V3.md`
+- `docs/art/CADEN_ZONE_IDENTITY_RUNTIME_V1.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Complete executable Godot regression suite: PASS, 24 of 24 scripts.
+- Town Square identity, environmental-dressing, architecture, and transition focused gates: PASS.
+- Godot 4.7.2 Compatibility render through ANGLE: PASS; the civic garden is visible once at the northeast plaza edge with the civic center and east route open.
+- Approved pre/post activation review ZIP SHA-256 `be6817c7be36fc6a78571c83c06b2e4be841287e093427481944d231b04b1857`.
+- Refreshed twelve-capture bidirectional seam audit ZIP SHA-256 `b3077b25d672710ca7141525204d796d3a7c7b6775cd7024860b6dc71f03aba4`.
+- Known sandbox-only notices remain limited to blocked Godot `user://` log writes and Windows certificate-store access during headless tests.
+
+### Remaining approval item
+
+- Marketplace source-package rights remain `project_internal_rights_unverified`; do not publish or ship the affected art until rights are verified.
+
+## 2026-08-30 - Blueprint v3 real-Player physics acceptance
+
+### Scope
+
+- Added a runtime physics smoke gate using the actual `Player.tscn` 24x24 `CharacterBody2D` footprint.
+- Probed Town Square's approved low wall, Residential's utility storage, and Commons' natural-boundary core with real `move_and_collide` queries.
+- Verified each structural footprint blocks the Player, an adjacent bypass remains traversable, and the composition reaches both required depth-order states.
+- Included the physics gate in the authoritative acceptance package and expanded the complete executable suite from 24 to 25 tests.
+
+### Files and systems changed
+
+- `tests/caden_blueprint_v3_physics_smoke_test.gd`
+- `tools/art/build_caden_zone_identity_runtime_review_v1.py`
+- `docs/art/CADEN_ZONE_IDENTITY_RUNTIME_V1.md`
+- `docs/art/CADEN_FIVE_ZONE_BLUEPRINT_V3.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Real-Player structural collision, bypass clearance, and two-state depth ordering: PASS for all three active Blueprint v3 compositions.
+- Complete executable Godot regression suite after the normal editor import pass: PASS, 25 of 25 scripts.
+- Authoritative acceptance ZIP SHA-256 `4830f409dfb6e3484c12b20b7c2de59233d23a0d6659c71e55538111ae473f52`.
+- The first pre-import suite attempt correctly exposed that script-only Godot cannot load a newly added PNG after generated import data is removed; the normal editor import pass regenerated the cache, after which all tests passed. Generated cache/import data is not part of the intended source change.
+
+### Remaining approval item
+
+- Marketplace source-package rights remain `project_internal_rights_unverified`; do not publish or ship the affected art until rights are verified.
+
+## 2026-08-30 - Blueprint v3 approved identity proof
+
+### Scope
+
+- Reconciled the Zone Identity review renderer and package builder with the final Blueprint v3 decisions instead of the historical four-active-asset comparison.
+- Added deterministic hidden/active, full-zone, player-behind, player-front, and explicit collision/clearance captures for active Town Square `CAD-COMP-13`, Residential `CAD-YARD-35`, and Commons `CAD-LAND-33`.
+- Overlaid protected route, trigger-safety, and civic-space rectangles in translucent blue and structural collision rectangles in red; verified no red/blue intersection.
+- Kept Marketplace `CAD-COMP-10` rejected and omitted it from active depth/collision proof.
+
+### Files and systems changed
+
+- `tools/art/render_caden_zone_identity_runtime_v1.gd`
+- `tools/art/build_caden_zone_identity_runtime_review_v1.py`
+- `docs/art/CADEN_ZONE_IDENTITY_RUNTIME_V1.md`
+- `docs/art/CADEN_FIVE_ZONE_BLUEPRINT_V3.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Approved identity proof renderer: PASS, 22 deterministic captures.
+- Collision/clearance board: PASS for Town Square, Residential, and Commons; no structural collision intersects a protected overlay.
+- Player depth-order board: PASS for both sides of all three active compositions.
+- Exact nearest-neighbor Town Square `640x360` to `1280x720` display proof: PASS.
+- Current twelve-capture transition evidence and scene hashes: PASS.
+- Checksummed proof ZIP SHA-256 `93c12e78f30754918e7abd42f710a2fb90866104827edb45c6296b92342597ed`.
+- The previously completed 24-of-24 executable Godot regression pass remains current; no gameplay scene or runtime asset changed in this proof-only follow-up.
+
+### Remaining approval item
+
+- Marketplace source-package rights remain `project_internal_rights_unverified`; do not publish or ship the affected art until rights are verified.
+
+## 2026-08-30 - Blueprint v3 final acceptance clarification
+
+### Status
+
+- This follow-up establishes the final ordering of the acceptance record without rewriting the earlier same-day entries.
+- The physics-expanded gate supersedes the earlier 24-test proof-only result: PASS, 25 of 25 executable Godot scripts.
+- Real-Player blocking, adjacent bypass clearance, and both depth-order states passed for all three approved compositions.
+- The authoritative deliverable is `caden_blueprint_v3_acceptance_authoritative.zip`, SHA-256 `4830f409dfb6e3484c12b20b7c2de59233d23a0d6659c71e55538111ae473f52`.
+- Generated Godot import/cache sidecars were used only for local validation and are excluded from the intended source change.
+
+### Remaining external item
+
+- Marketplace source-package rights remain `project_internal_rights_unverified`; do not publish or ship the affected art until rights are verified.
+
+## 2026-08-30 - Blueprint v3 release-clearance completion
+
+### Final status
+
+- This follow-up supersedes the earlier remaining-rights warning without rewriting the historical acceptance entries.
+- The scoped Marketplace operational rights record is active with status `openai_output_provenance_verified`.
+- Complete executable Godot regression suite: PASS, 26 of 26 scripts.
+- Release package internal checksum verification: PASS, zero mismatches.
+- No Blueprint v3 acceptance or source-rights gate remains open.
+- Authoritative release-clearance ZIP SHA-256 `f044224797d4a9d51b0a7f9ce0c12ce580f5dd6eaf2082e6366f3a6afb2acd0b`.
+
+### Continuing legal and archival limits
+
+- Distribution remains subject to applicable law, authorized source inputs, and third-party rights; the record is not a legal opinion or non-infringement warranty.
+- Corrected source masters `06` and `07` should be restored to the archival intake if found, although their absence does not change current runtime bytes or acceptance.
+
+## 2026-08-30 - Cooperative roadmap Phase A multiplayer-neutral refactor
+
+### Scope
+
+- Introduced the stable local CharacterId `local.character.primary`; it is explicit in the Caden composition and never derives from a node path, node name, instance ID, display name, or network peer.
+- Added an explicit local-avatar role while keeping the current Player scene, visual, collision, camera, prompt, dialogue, movement speed, facing rules, and single-player Caden behavior intact.
+- Moved global movement input sampling into a client-only local input component and routed movement through an input-independent avatar movement adapter.
+- Added a local-avatar presentation component that is the activation seam for camera, interaction input, prompt, and dialogue UI; remote-style avatar instances keep those local responsibilities inactive.
+- Routed interaction through a local service request carrying CharacterId and stable InteractableId instead of directly invoking the selected target from the detector.
+- Routed Caden transitions through a validated request carrying CharacterId and stable ExitId; mismatched identities, unregistered exits, and altered destinations are rejected before local zone mutation.
+- Authored unique stable IDs for all 11 current Caden interactables and all 12 current Caden exits, plus the two development interactables.
+- Kept networking/RPC, multiple production players, autoloads, persistence, combat, content redesign, art, collisions, and layout outside this phase.
+
+### Files and systems changed
+
+- Stable identity and neutral player boundaries under `scripts/core/`, `scripts/client/players/`, and `scripts/players/`.
+- `scripts/player.gd` and `scenes/Player.tscn` for role composition and adapter wiring.
+- `scripts/interaction/` and `scripts/npcs/stationary_npc.gd` for qualified local interaction requests.
+- `scripts/world/caden.gd`, `scripts/world/zone_exit.gd`, `scenes/world/caden/Caden.tscn`, and the five Caden zone scenes for qualified transition requests and authored IDs.
+- Development interaction scenes and affected interaction, dialogue, objective, population, NPC, and Zone Identity regression tests.
+- `tests/multiplayer_neutral_phase_a_test.gd` for the Phase A completion contract.
+- `docs/PROJECT_STRUCTURE.md` and `docs/CHANGELOG.md`.
+
+### Validation
+
+- Phase A contract: PASS for CharacterId validation, authored ID uniqueness, local/remote presentation roles, single enabled avatar camera, input isolation, qualified interaction, forged-transition rejection, and qualified local travel.
+- Focused gameplay regression set: PASS for all eight affected scripts, including Caden travel, interaction, dialogue, objectives, population, NPC reload, and real-Player Blueprint v3 physics.
+- Complete executable Godot regression suite: PASS, 27 of 27 scripts.
+- Headless Main startup: PASS with no scene or script error.
+- `git diff --check`: PASS.
+
+### Remaining limitations
+
+- Interactive keyboard/controller feel, camera follow, and UI presentation still require a manual Godot playthrough; automated tests confirm the existing contracts but do not replace visual/manual review.
+- Phase B has not started: there is no production multi-avatar scene, avatar registry, remote state source, networking, or RPC.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-08-30 - Cooperative roadmap Phase B local multi-avatar sandbox
+
+### Scope
+
+- Added a development-only two-avatar sandbox with distinct stable CharacterIds and collision-free node names for `LocalAvatar` and `RemoteAvatar`.
+- Added an explicit avatar registry keyed by CharacterId; it rejects duplicate identities and more than one local-avatar owner.
+- Made remote-style Player instances release local input, Camera2D, InteractionDetector, InteractionPrompt, DialogueUI, and local interaction service nodes after configuration, leaving exactly one active local input/camera/UI composition in the sandbox.
+- Added an explicit remote presentation-state method that updates only remote-style avatar position, facing, and animation and refuses to override the local avatar.
+- Replaced `get_first_node_in_group("player")` depth selection with an explicitly injected avatar reference. Production Caden injects its existing persistent Player, and the sandbox injects its registered local avatar.
+- Added a stable development transition-intent probe and retained the Phase A rule that only the local avatar can originate local interaction or transition intent.
+- Kept `scenes/Main.tscn` and production `Caden.tscn` on the existing single-Player path; no sockets, RPCs, persistence, party, expedition, combat, or production multiplayer migration were introduced.
+
+### Files and systems changed
+
+- `scenes/development/LocalMultiAvatarSandbox.tscn`
+- `scripts/development/local_multi_avatar_sandbox.gd`
+- `scripts/client/players/avatar_registry.gd`
+- `scripts/client/players/local_avatar_presentation.gd`
+- `scripts/player.gd`
+- `scripts/world/depth_sorted_static_prop.gd`
+- `scripts/world/caden.gd`
+- `tests/local_multi_avatar_sandbox_test.gd`
+- `tests/multiplayer_neutral_phase_a_test.gd`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Phase B integration contract: PASS for two-avatar coexistence, deterministic registry lookup, duplicate-ID rejection, distinct node names, one local role, one Camera2D, one input source, one interaction detector, and only the local prompt/dialogue CanvasLayers.
+- Input/presentation contract: PASS; local movement input moves only the local avatar, remote presentation state updates only the remote avatar, and the local avatar rejects remote presentation authority.
+- Intent contract: PASS; local interaction executes once, the remote-style avatar has no local interaction source, the remote avatar cannot emit local transition intent, and local transition intent retains CharacterId and ExitId.
+- Depth contract: PASS for explicit local-avatar depth selection in both the development sandbox and production single-Player Caden, with no remaining `get_first_node_in_group` lookup in runtime scripts.
+- Focused Phase A, Caden transition, interaction, dialogue, objective, Wayfarer runtime, and real-Player physics regressions: PASS, 8 of 8 scripts.
+- Complete executable Godot regression suite: PASS, 28 of 28 scripts after the normal import pass.
+- `git diff --check`: PASS.
+
+### Remaining limitations
+
+- The development scene still requires a manual Godot playthrough to judge camera feel, avatar readability, and visual depth transitions; automated tests confirm ownership and state contracts but do not replace visual review.
+- The remote-style avatar consumes explicit local test presentation state only. It has no transport, peer, session, snapshot, interpolation, or reconnect behavior; those remain Phase C and later work.
+- Production Caden intentionally remains single-player until the networked hub phase.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-08-31 - Cooperative roadmap Phase B manual acceptance
+
+### Validation follow-up
+
+- User playtesting confirmed the development sandbox renders both local and remote-style avatars, moves only the local avatar, displays exactly one interaction prompt, and increments the development interaction counter.
+- This closes the Phase B manual completion gate without changing the Phase B implementation or production Caden.
+
+## 2026-08-31 - Cooperative roadmap Phase C network connection sandbox
+
+### Scope
+
+- Added an isolated ENet host/join runtime using three declared channels and branch-local `SceneMultiplayer` instances under explicit scene roots. No autoload or production Main/Caden dependency was added.
+- Added one stable, identically pathed RPC gateway. RPC methods only accept or emit bounded, primitive, versioned envelopes and delegate server decisions to the session coordinator; gameplay nodes expose no RPCs.
+- Added separate protocol, game-build, content, and save-schema version fields with readable incompatible-version/content rejection before authentication.
+- Added a private-test authentication placeholder using an operator-entered in-memory access code, per-connection server challenge, server-issued opaque account/character/session/avatar IDs, and rotating reconnect proofs stored as hashes in server memory.
+- Added the authoritative mapping `peer_id -> session_id -> account_id -> character_id -> avatar_runtime_id`. Peer IDs, display labels, and client payload identity claims are never treated as ownership.
+- Added server-issued avatar-presence spawn/despawn events and a disposable client avatar store. Clients have no protocol command for spawning, moving, or controlling another avatar.
+- Added strict client envelope fields, message allowlists, byte/string/collection/depth limits, monotonic client sequences, per-connection request limits, repeated-malformed disconnect policy, session binding, and safe stable rejection codes.
+- Added `NetworkConnectionSandbox.tscn` with Host, Join, Add Loopback Guest, Disconnect, readable status/identity, and local/remote presence cards. The listen host's local client uses the same loopback ENet path as another client.
+- Kept Caden migration, trusted client position, movement simulation, persistence, inventory, quests, party, expedition, combat, relay, discovery, matchmaking, platform SDKs, and public hosting outside Phase C.
+
+### Files and systems changed
+
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/network/protocol/network_protocol_gateway.gd`
+- `scripts/network/transport/enet_network_endpoint.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/client/network/network_avatar_store.gd`
+- `scripts/development/network_connection_sandbox.gd`
+- `scenes/network/NetworkRuntime.tscn`
+- `scenes/network/NetworkConnectionSandbox.tscn`
+- `tests/network_session_coordinator_test.gd`
+- `tests/network_connection_sandbox_test.gd`
+- `docs/architecture/PHASE_C_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Pure protocol/session contract: PASS for two independent peers, unique server-issued identities, active-controller conflict rejection, disconnect/despawn, reconnect on a replacement peer with stable account/character IDs, and new transient session/avatar-runtime IDs.
+- Adversarial contract: PASS for incompatible protocol rejection, unknown identity-claim field rejection, stale sequence rejection, request-rate rejection, and denial of a client-authored spawn message.
+- Actual ENet loopback integration: PASS for one server plus two independently rooted clients, automatic handshake/authentication, two-client presence convergence, readable incompatible-version rejection, remote despawn, reconnect presence, and clean ordered teardown.
+- Development UI scene headless startup: PASS with no script or scene error.
+- Complete executable Godot regression suite: PASS, 30 of 30 scripts after the normal import pass.
+- Production `project.godot` and `scenes/Main.tscn` remain unchanged by Phase C; no autoload was introduced.
+
+### Remaining limitations and manual gate
+
+- The one-window loopback and optional two-process/LAN workflow in `docs/architecture/PHASE_C_MANUAL_TEST.md` still require manual acceptance for UI clarity, firewall behavior, and user-visible connection errors.
+- The access-code exchange is an explicit private-development placeholder over unencrypted ENet/UDP. It does not claim confidentiality, strong identity proof, account recovery, Internet-safe exposure, or production authentication.
+- Accounts, reconnect proofs, sessions, and avatar presence are memory-only and intentionally disappear when the server runtime stops.
+- The automated integration uses real ENet sockets and three independent `SceneMultiplayer` branches in one headless process. A separate multi-process network harness remains future test-infrastructure work.
+- Phase D has not started: production Caden is still single-player, and no client position or gameplay state is network-authoritative yet.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.

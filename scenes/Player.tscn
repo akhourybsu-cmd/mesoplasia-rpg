@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/interaction/interaction_detector.gd" id="2_detector"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" path="res://ui/DialogueUI.tscn" id="4_dialogue"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/player/caden_player_sprite_frames_v1.tres" id="5_player_frames"]
 [ext_resource type="Script" path="res://scripts/visuals/directional_character_visual.gd" id="6_character_visual"]
+[ext_resource type="Script" path="res://scripts/client/players/local_avatar_input.gd" id="7_local_input"]
+[ext_resource type="Script" path="res://scripts/client/players/local_avatar_presentation.gd" id="8_local_presentation"]
+[ext_resource type="Script" path="res://scripts/players/avatar_movement_adapter.gd" id="9_movement_adapter"]
+[ext_resource type="Script" path="res://scripts/interaction/local_interaction_service.gd" id="10_interaction_service"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(24, 24)
@@ -34,6 +38,23 @@ fallback_path = NodePath("../../PlaceholderVisual")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_player")
 
+[node name="LocalAvatarInput" type="Node" parent="."]
+script = ExtResource("7_local_input")
+
+[node name="AvatarMovementAdapter" type="Node" parent="."]
+script = ExtResource("9_movement_adapter")
+
+[node name="LocalInteractionService" type="Node" parent="."]
+script = ExtResource("10_interaction_service")
+
+[node name="LocalAvatarPresentation" type="Node" parent="."]
+script = ExtResource("8_local_presentation")
+input_source_path = NodePath("../LocalAvatarInput")
+camera_path = NodePath("../Camera2D")
+interaction_detector_path = NodePath("../InteractionDetector")
+interaction_prompt_path = NodePath("../InteractionPrompt")
+dialogue_ui_path = NodePath("../DialogueUI")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = true
 
@@ -51,4 +72,5 @@ shape = SubResource("CircleShape2D_interaction")
 [node name="DialogueUI" parent="." instance=ExtResource("4_dialogue")]
 
 [connection signal="prompt_changed" from="InteractionDetector" to="InteractionPrompt" method="update_prompt"]
+[connection signal="interaction_requested" from="InteractionDetector" to="." method="_on_interaction_requested"]
 [connection signal="dialogue_closed" from="DialogueUI" to="." method="_on_dialogue_closed"]

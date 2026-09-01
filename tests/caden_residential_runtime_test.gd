@@ -224,19 +224,28 @@ func _run_test() -> void:
 			return
 
 	var fences := residential.get_node("YardFences")
-	if fences.get_child_count() != 3:
+	if fences.get_child_count() != 4:
 		_fail("Residential must retain three authoritative yard-fence bodies.")
 		return
 	for fence_name: String in EXPECTED_FENCES:
 		var fence := fences.get_node(fence_name) as StaticBody2D
-		var shape := (fence.get_node("CollisionShape2D") as CollisionShape2D).shape as RectangleShape2D
-		if fence.position != EXPECTED_FENCES[fence_name] or shape == null or shape.size != Vector2(192, 24):
+		var collision := fence.get_node("CollisionShape2D") as CollisionShape2D
+		var shape := collision.shape as RectangleShape2D
+		if fence.position != EXPECTED_FENCES[fence_name] or collision.position != Vector2(-48, 0) or shape == null or shape.size != Vector2(96, 24):
 			_fail("%s moved or changed collision." % fence_name)
 			return
-		for sprite_name in ["FenceWest", "FenceEast"]:
-			if (fence.get_node(sprite_name) as Sprite2D).texture == null:
-				_fail("%s lacks aligned fence art." % fence_name)
-				return
+		if (fence.get_node("FenceWest") as Sprite2D).texture == null or fence.get_node_or_null("FenceEast") != null:
+			_fail("%s does not preserve its open 64-pixel-plus gate approach." % fence_name)
+			return
+	var property_returns := fences.get_node("PropertyReturns")
+	if property_returns.get_child_count() != 3:
+		_fail("Residential L-yard return count changed.")
+		return
+	for return_body: StaticBody2D in property_returns.get_children():
+		var return_shape := (return_body.get_node("CollisionShape2D") as CollisionShape2D).shape as RectangleShape2D
+		if return_shape == null or return_shape.size != Vector2(24, 12):
+			_fail("Residential property return lacks base-only collision: %s" % return_body.get_path())
+			return
 
 	var set_pieces := residential.get_node("DomesticSetPieces")
 	if set_pieces.get_child_count() != 7:
@@ -264,7 +273,7 @@ func _run_test() -> void:
 		return
 
 	var trees := residential.get_node("ResidentialLandscaping/PerimeterTrees")
-	if trees.get_child_count() != 12:
+	if trees.get_child_count() != 8:
 		_fail("Residential perimeter tree count changed.")
 		return
 	var protected_routes := [Rect2(0, 320, 1152, 128), Rect2(512, 448, 128, 320)]
@@ -276,7 +285,7 @@ func _run_test() -> void:
 			if route.has_point(tree.position):
 				_fail("Perimeter tree entered a protected road: %s" % tree.get_path())
 				return
-	if residential.get_node("ResidentialLandscaping/LowPlanting").get_child_count() != 16 or residential.get_node("ResidentialLandscaping/LaneLighting").get_child_count() != 4:
+	if residential.get_node("ResidentialLandscaping/LowPlanting").get_child_count() != 12 or residential.get_node("ResidentialLandscaping/LaneLighting").get_child_count() != 4:
 		_fail("Residential landscaping density contract changed.")
 		return
 

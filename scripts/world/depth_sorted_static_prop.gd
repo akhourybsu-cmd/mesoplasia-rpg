@@ -1,12 +1,11 @@
 class_name DepthSortedStaticProp
 extends StaticBody2D
 
-@export var player_group: StringName = &"player"
 @export var behind_player_z_index := 9
 @export var neutral_z_index := 10
 @export var in_front_of_player_z_index := 11
 
-var _player: Node2D
+var _depth_reference: Node2D
 
 
 func _ready() -> void:
@@ -14,12 +13,18 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if not is_instance_valid(_player):
-		_player = get_tree().get_first_node_in_group(player_group) as Node2D
-	if _player == null:
+	if not is_instance_valid(_depth_reference):
 		z_index = neutral_z_index
 		return
-	update_depth_for_player(_player.global_position.y)
+	update_depth_for_player(_depth_reference.global_position.y)
+
+
+func set_depth_reference(avatar: Node2D) -> void:
+	_depth_reference = avatar
+
+
+func get_depth_reference() -> Node2D:
+	return _depth_reference if is_instance_valid(_depth_reference) else null
 
 
 func update_depth_for_player(player_global_y: float) -> void:

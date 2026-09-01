@@ -18,6 +18,7 @@ OUTPUT_PATH = ROOT / "assets/environments/caden/marketplace/terrain/marketplace_
 MANIFEST_PATH = ROOT / "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1_2.json"
 PRIOR_PATH = ROOT / "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.png"
 PRIOR_MANIFEST_PATH = ROOT / "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.json"
+RIGHTS_RECORD_PATH = ROOT / "assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json"
 EXPECTED_REVIEW_ZIP_SHA256 = "0a5c20462bf5c74d5052294701fce45cba5bd70b6219d9505207e10f129e9571"
 EXPECTED_ACTIVE_REVIEW_ZIP_SHA256 = "f013205e480e1fed8283772482a8cf0834aa300899e99a559db1985bf5d90f08"
 EXPECTED_CANDIDATE_SHA256 = "99757fe28552111674322d9574f7e355ba4b8ee0c5dcc28c8d30f49cf0d9b385"
@@ -125,6 +126,12 @@ def main() -> int:
     if not source_path.is_file() or sha256(source_path) != EXPECTED_CANDIDATE_SHA256:
         raise RuntimeError("Approved Marketplace terrain candidate hash mismatch.")
     prior_manifest = load_json(PRIOR_MANIFEST_PATH)
+    rights_record = load_json(RIGHTS_RECORD_PATH)
+    rights = rights_record.get("decision", {})
+    if rights_record.get("gate_state") != "operational_distribution_clearance_recorded":
+        raise RuntimeError("Marketplace rights clearance is not active.")
+    if rights.get("rights_status") != "openai_output_provenance_verified":
+        raise RuntimeError("Marketplace rights clearance has an unexpected status.")
     if sha256(PRIOR_PATH) != prior_manifest.get("output_sha256"):
         raise RuntimeError("Prior Marketplace terrain identity mismatch.")
     if candidate_record.get("route_contract") != prior_manifest.get("route_contract"):
@@ -172,7 +179,13 @@ def main() -> int:
         "pixel_audit": audit,
         "storefront_source_fit": prep_manifest["storefront_source_fit"],
         "preserved_contracts": prep_manifest["protected_contracts"],
-        "provenance_and_licensing": prep_manifest["provenance_and_licensing"],
+        "provenance_and_licensing": {
+            "provided_by": "project owner via local Downloads intake",
+            "creator_or_generation_tool": "ChatGPT/OpenAI output provenance verified from Windows download origin and project source records",
+            "rights_record": RIGHTS_RECORD_PATH.relative_to(ROOT).as_posix(),
+            "rights_status": rights["rights_status"],
+            "distribution_status": rights["distribution_status"],
+        },
         "rollback": {
             "previous_runtime_path": prior_manifest["output_path"],
             "previous_runtime_sha256": prior_manifest["output_sha256"],

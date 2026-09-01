@@ -1,7 +1,7 @@
 {
   "schema": "caden-marketplace-terrain-runtime-v1.2",
   "generator": "tools/art/import_caden_marketplace_terrain_runtime_v1_2.py",
-  "generator_sha256": "dff1f764dbdcf40b74888678a496d5a905b737c0319256c59166975b33cb7e99",
+  "generator_sha256": "11b9f963a7116f9e88cf15a84ef87bf087d2e68e3a8df25dc4f7f52d56712d29",
   "gate_state": "marketplace_terrain_runtime_v1_2_visual_approved",
   "approval": {
     "recorded_date": "2026-08-29",
@@ -184,9 +184,10 @@
   ],
   "provenance_and_licensing": {
     "provided_by": "project owner via local Downloads intake",
-    "creator_or_generation_tool": "not documented in supplied prompt or sidecars",
-    "rights_status": "project_internal_rights_unverified",
-    "distribution_status": "do_not_publish_or_ship_until rights are verified"
+    "creator_or_generation_tool": "ChatGPT/OpenAI output provenance verified from Windows download origin and project source records",
+    "rights_record": "assets/environments/caden/marketplace/caden_marketplace_source_rights_v1.json",
+    "rights_status": "openai_output_provenance_verified",
+    "distribution_status": "project_distribution_allowed_subject_to_applicable_law_and_third_party_rights"
   },
   "rollback": {
     "previous_runtime_path": "assets/environments/caden/marketplace/terrain/marketplace_terrain_runtime_v1.png",

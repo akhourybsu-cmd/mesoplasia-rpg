@@ -1,0 +1,95 @@
+{
+  "schema": "caden-marketplace-source-rights-v1",
+  "gate_state": "operational_distribution_clearance_recorded",
+  "recorded_date": "2026-08-30",
+  "scope": {
+    "zone": "Marketplace",
+    "source_library": "Caden Mega Asset Library v1.1",
+    "selected_source_ids": [
+      "01",
+      "03",
+      "04",
+      "06",
+      "07",
+      "13",
+      "14"
+    ],
+    "terrain_source": "caden_grass_stone_terrain_master.png",
+    "covers_runtime_derivatives": true
+  },
+  "evidence": {
+    "library_archive": {
+      "filename": "caden_mega_asset_library_v1.zip",
+      "sha256": "bd7688541dfeb53e2c5b2252587c3dbebce782c938d418dd3d475b83749f3947",
+      "windows_download_provenance": {
+        "zone_id": 3,
+        "referrer_origin": "https://chatgpt.com",
+        "host_origin": "https://chatgpt.com",
+        "host_path": "/backend-api/estuary/content",
+        "zone_identifier_sha256": "8579988d5aac6ca60466dbd73e2428085c81c569e31b2a231baf2dd19106656a"
+      },
+      "archive_generation_record": "README.md identifies source_masters as individually generated and source_sheets as accepted generation sheets.",
+      "selected_source_verification": {
+        "direct_archive_hash_matches": {
+          "01": "122b42a5de97661904bd317c048f781a7be032fa0d6f8fbda3af4ada38098be0",
+          "03": "81395d232e4ee912497b007a549ab3c1f5d4c5941b6ae279b203403e93d74b99",
+          "04": "e8ffa8e91bc22c970fbb59ae99bb9b732f0cb23ab80ef901aa42b1d0c3740291",
+          "13": "866c19bf020b3770f1a0bc44000c8d0024653f6d19b89637a233903bb80ec719",
+          "14": "85c7b469993de7b9dacd9bf06cebb932872a4198cd00dec8890fad4761ae84b6"
+        },
+        "corrected_intake_manifest_records": {
+          "06": {
+            "approved_source_sha256": "ed85aaaa91886744a144730a2d6af215e150bb31a5ba3b8d95c09b7030395d65",
+            "current_archive_variant_sha256": "d112e25effe1c525e309f3feef1906e0080b672acf82d188bcba78302cd99223",
+            "status": "approved corrected source hash retained in the runtime manifest; corrected source bytes are not present in the current local intake"
+          },
+          "07": {
+            "approved_source_sha256": "ccc9b15c2a5e13c23fefe4630d4c0de64a393be8fcfd8d937e440ed239e5c7bd",
+            "current_archive_variant_sha256": "8f394014b41d547fa89ff814619786c2d2e712de2bbdf07e4059e03e5cdef50c",
+            "status": "approved corrected source hash retained in the runtime manifest; corrected source bytes are not present in the current local intake"
+          }
+        }
+      }
+    },
+    "terrain_master": {
+      "filename": "caden_grass_stone_terrain_master.png",
+      "sha256": "eaf2dbf53d955e8e92a71c7b04e63b38bcc66710a7e28a06dbfe3956d354508e",
+      "windows_download_provenance": {
+        "zone_id": 3,
+        "referrer_origin": "https://chatgpt.com",
+        "host_origin": "https://chatgpt.com",
+        "host_path": "/backend-api/estuary/content",
+        "zone_identifier_sha256": "951e0c6a3401ebf7136645fbb0d6118c3eadd83ed810aa7b5b028de4e94d8ddc"
+      },
+      "embedded_png_text_metadata": "none",
+      "visual_review": "No readable brand, logo, franchise mark, civic crest, religious symbol, or third-party text was observed."
+    },
+    "marketplace_visual_review": {
+      "reviewed_material": "terrain master plus Batch 06 Marketplace contact sheet",
+      "result": "no_obvious_third_party_marks_or_readable_brands",
+      "reviewed_date": "2026-08-30"
+    }
+  },
+  "openai_terms": {
+    "title": "OpenAI Terms of Use",
+    "url": "https://openai.com/policies/terms-of-use/",
+    "effective_date": "2026-01-01",
+    "accessed_date": "2026-08-30",
+    "ownership_basis": "As between the user and OpenAI, the user owns Output to the extent permitted by applicable law, and OpenAI assigns any right, title, and interest it has in Output.",
+    "user_responsibilities": "The user remains responsible for authorized Input, legal compliance, appropriateness review, and third-party rights.",
+    "similarity_caveat": "Output may not be unique and the assignment does not extend to another user's output or Third Party Output."
+  },
+  "decision": {
+    "supersedes_rights_status": "project_internal_rights_unverified",
+    "rights_status": "openai_output_provenance_verified",
+    "distribution_status": "project_distribution_allowed_subject_to_applicable_law_and_third_party_rights",
+    "clearance_scope": "Mesoplasia RPG project distribution of the covered Marketplace runtime derivatives",
+    "legal_character": "operational project provenance record, not a legal opinion or non-infringement warranty",
+    "limitations": [
+      "OpenAI's assignment applies only as between the user and OpenAI and only to the extent permitted by applicable law.",
+      "The project owner remains responsible for Input rights and third-party-rights review.",
+      "Corrected source bytes for Marketplace IDs 06 and 07 are not present in the current local intake; their approved source hashes remain recorded in the runtime manifest.",
+      "The clearance does not approve any rejected, deferred, or unselected Marketplace asset."
+    ]
+  }
+}

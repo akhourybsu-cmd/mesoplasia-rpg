@@ -63,7 +63,7 @@ func _run_test() -> void:
 		return _fail("Opening interaction press skipped the first dialogue line.")
 
 	var blocked_exit := approach.get_node("Exits/ToMarketplace") as Area2D
-	blocked_exit.emit_signal("transition_requested", &"marketplace", &"from_wayfarers_approach")
+	_emit_transition_request(blocked_exit, player)
 	await physics_frame
 	await physics_frame
 	if caden.get("_current_zone") != approach:
@@ -84,7 +84,7 @@ func _run_test() -> void:
 	if detector.call("get_active_interactable") == null or not interaction_prompt.visible:
 		return _fail("Normal interaction did not resume after dialogue closed.")
 
-	blocked_exit.emit_signal("transition_requested", &"marketplace", &"from_wayfarers_approach")
+	_emit_transition_request(blocked_exit, player)
 	await physics_frame
 	await physics_frame
 	await physics_frame
@@ -95,7 +95,7 @@ func _run_test() -> void:
 		return _fail("Traveler from the unloaded zone remained alive.")
 
 	var return_exit := marketplace.get_node("Exits/ToWayfarersApproach") as Area2D
-	return_exit.emit_signal("transition_requested", &"wayfarers_approach", &"from_marketplace")
+	_emit_transition_request(return_exit, player)
 	await physics_frame
 	await physics_frame
 	await physics_frame
@@ -119,6 +119,16 @@ func _make_interact_event(is_pressed: bool) -> InputEventAction:
 	event.action = &"interact"
 	event.pressed = is_pressed
 	return event
+
+
+func _emit_transition_request(zone_exit: Area2D, player: CharacterBody2D) -> void:
+	zone_exit.emit_signal(
+		"transition_requested",
+		player.call("get_character_id") as StringName,
+		zone_exit.get("exit_id") as StringName,
+		zone_exit.get("destination_zone") as StringName,
+		zone_exit.get("destination_entry") as StringName
+	)
 
 
 func _fail(message: String) -> bool:

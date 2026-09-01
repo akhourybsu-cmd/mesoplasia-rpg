@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/caden/zone_identity/runtime_v1/caden_zone_identity_civic_garden_v1.png" id="1_civic_garden"]
+[ext_resource type="Script" path="res://scripts/world/depth_sorted_static_prop.gd" id="2_depth"]
+
+[sub_resource type="RectangleShape2D" id="Shape_civic_wall"]
+size = Vector2(62, 12)
+
+[sub_resource type="RectangleShape2D" id="Shape_civic_post"]
+size = Vector2(10, 14)
+
+[node name="TownSquareBlueprintV3Overlay" type="Node2D"]
+
+[node name="CivicGardenEdge" type="StaticBody2D" parent="."]
+position = Vector2(700, 288)
+script = ExtResource("2_depth")
+
+[node name="Sprite" type="Sprite2D" parent="CivicGardenEdge"]
+position = Vector2(-56, -103)
+texture = ExtResource("1_civic_garden")
+centered = false
+
+[node name="LowWallCollision" type="CollisionShape2D" parent="CivicGardenEdge"]
+position = Vector2(-4, -18)
+shape = SubResource("Shape_civic_wall")
+
+[node name="LanternPostCollision" type="CollisionShape2D" parent="CivicGardenEdge"]
+position = Vector2(36, -22)
+shape = SubResource("Shape_civic_post")

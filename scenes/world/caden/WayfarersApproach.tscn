@@ -757,6 +757,7 @@ y_sort_enabled = true
 position = Vector2(128, 448)
 z_index = 10
 conversation = ExtResource("4_resting")
+interactable_id = &"caden.interactable.wayfarers_approach.resting_traveler"
 placeholder_color = Color(0.82, 0.54, 0.3, 1)
 character_sprite_frames = ExtResource("42_resting_frames")
 character_visual_enabled = true
@@ -766,6 +767,7 @@ facing_direction = Vector2(1, 0)
 position = Vector2(768, 448)
 z_index = 10
 conversation = ExtResource("5_continuing")
+interactable_id = &"caden.interactable.wayfarers_approach.continuing_traveler"
 placeholder_color = Color(0.68, 0.42, 0.78, 1)
 character_sprite_frames = ExtResource("43_continuing_frames")
 character_visual_enabled = true
@@ -775,6 +777,7 @@ facing_direction = Vector2(-1, 0)
 position = Vector2(416, 352)
 z_index = 10
 conversation = ExtResource("6_local")
+interactable_id = &"caden.interactable.wayfarers_approach.roadside_local"
 placeholder_color = Color(0.88, 0.58, 0.36, 1)
 character_sprite_frames = ExtResource("44_local_frames")
 character_visual_enabled = true
@@ -822,6 +825,7 @@ position = Vector2(512, 128)
 [node name="ToTownSquare" type="Area2D" parent="Exits"]
 position = Vector2(960, 320)
 script = ExtResource("2_exit")
+exit_id = &"caden.exit.wayfarers_approach.to_town_square"
 destination_zone = &"town_square"
 destination_entry = &"from_wayfarers_approach"
 
@@ -831,6 +835,7 @@ shape = SubResource("Shape_exit_horizontal")
 [node name="ToMarketplace" type="Area2D" parent="Exits"]
 position = Vector2(512, 64)
 script = ExtResource("2_exit")
+exit_id = &"caden.exit.wayfarers_approach.to_marketplace"
 destination_zone = &"marketplace"
 destination_entry = &"from_wayfarers_approach"
 

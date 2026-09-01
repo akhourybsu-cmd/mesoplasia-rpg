@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3]
+[gd_scene load_steps=73 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/world_zone.gd" id="1_zone"]
 [ext_resource type="Script" path="res://scripts/world/zone_exit.gd" id="2_exit"]
@@ -57,6 +57,7 @@
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/half_elf_young_nonbinary_01/caden_npc_half_elf_young_nonbinary_01_sprite_frames_v1.tres" id="55_north_walker_frames"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/dwarf_middle_woman_01/caden_npc_dwarf_middle_woman_01_sprite_frames_v1.tres" id="56_west_walker_frames"]
 [ext_resource type="SpriteFrames" path="res://assets/characters/caden/npc/variants/elf_younger_man_01/caden_npc_elf_younger_man_01_sprite_frames_v1.tres" id="57_south_walker_frames"]
+[ext_resource type="PackedScene" path="res://scenes/world/caden/comparisons/TownSquareBlueprintV3Overlay.tscn" id="58_blueprint_v3_civic_garden"]
 
 [sub_resource type="RectangleShape2D" id="Shape_boundary_horizontal"]
 size = Vector2(960, 32)
@@ -998,6 +999,8 @@ position = Vector2(912, 112)
 offset = Vector2(0, -16)
 texture = ExtResource("19_bush_m3")
 
+[node name="BlueprintV3CivicGarden" parent="." instance=ExtResource("58_blueprint_v3_civic_garden")]
+
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="NPCs" type="Node2D" parent="Actors"]
@@ -1007,6 +1010,7 @@ y_sort_enabled = true
 z_index = 10
 position = Vector2(288, 448)
 conversation = ExtResource("4_local")
+interactable_id = &"caden.interactable.town_square.square_local"
 placeholder_color = Color(0.88, 0.62, 0.3, 1)
 character_sprite_frames = ExtResource("52_npc_frames")
 character_visual_enabled = true
@@ -1016,6 +1020,7 @@ facing_direction = Vector2(1, 0)
 z_index = 10
 position = Vector2(352, 448)
 conversation = ExtResource("5_visitor")
+interactable_id = &"caden.interactable.town_square.passing_visitor"
 placeholder_color = Color(0.42, 0.68, 0.84, 1)
 character_sprite_frames = ExtResource("54_visitor_frames")
 character_visual_enabled = true
@@ -1095,6 +1100,7 @@ position = Vector2(480, 544)
 [node name="ToWayfarersApproach" type="Area2D" parent="Exits"]
 position = Vector2(64, 352)
 script = ExtResource("2_exit")
+exit_id = &"caden.exit.town_square.to_wayfarers_approach"
 destination_zone = &"wayfarers_approach"
 destination_entry = &"from_town_square"
 
@@ -1104,6 +1110,7 @@ shape = SubResource("Shape_exit_horizontal")
 [node name="ToResidential" type="Area2D" parent="Exits"]
 position = Vector2(896, 352)
 script = ExtResource("2_exit")
+exit_id = &"caden.exit.town_square.to_residential"
 destination_zone = &"residential"
 destination_entry = &"from_town_square"
 
@@ -1113,6 +1120,7 @@ shape = SubResource("Shape_exit_horizontal")
 [node name="ToMarketplace" type="Area2D" parent="Exits"]
 position = Vector2(480, 64)
 script = ExtResource("2_exit")
+exit_id = &"caden.exit.town_square.to_marketplace"
 destination_zone = &"marketplace"
 destination_entry = &"from_town_square"
 
@@ -1122,6 +1130,7 @@ shape = SubResource("Shape_exit_vertical")
 [node name="ToCommons" type="Area2D" parent="Exits"]
 position = Vector2(480, 640)
 script = ExtResource("2_exit")
+exit_id = &"caden.exit.town_square.to_commons"
 destination_zone = &"commons"
 destination_entry = &"from_town_square"
 

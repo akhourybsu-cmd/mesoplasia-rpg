@@ -98,7 +98,13 @@ func _test_zone_unload_clears_active_target() -> bool:
 		return _fail("Town Square NPC was not detected before zone unload.")
 
 	var to_residential := town_square.get_node("Exits/ToResidential") as Area2D
-	to_residential.emit_signal("transition_requested", &"residential", &"from_town_square")
+	to_residential.emit_signal(
+		"transition_requested",
+		player.call("get_character_id") as StringName,
+		to_residential.get("exit_id") as StringName,
+		&"residential",
+		&"from_town_square"
+	)
 	await physics_frame
 	await physics_frame
 	await physics_frame

@@ -5,6 +5,7 @@ signal interacted(interactor: Node2D)
 
 @export var interaction_enabled := true
 @export var prompt_text := "Interact"
+@export var interactable_id: StringName
 
 
 func _ready() -> void:
@@ -22,3 +23,11 @@ func interact(interactor: Node2D) -> void:
 
 func get_prompt_text() -> String:
 	return prompt_text
+
+
+func set_interactable_id(value: StringName) -> void:
+	interactable_id = value
+
+
+func get_interactable_id() -> StringName:
+	return interactable_id
