@@ -7,6 +7,11 @@
 export.cfg
 export_credentials.cfg
 
+# Dedicated server local secrets, runtime state, and generated builds
+config/dedicated_server.local.json
+server-data/
+build/server/
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 

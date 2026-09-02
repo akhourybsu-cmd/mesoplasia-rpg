@@ -60,6 +60,10 @@ Encounter, room, checkpoint, and expedition rewards produce `RewardEntitlement` 
 
 The server owns all loot RNG. Settlement may group inventory, currency, XP/progression (if later approved), and quest updates in one save transaction. On crash/retry, an already committed entitlement returns the original result. An unresolved entitlement resumes or rolls back; it never rolls again silently.
 
+## Phase K development deposit boundary
+
+Phase K proves one narrow post-settlement transfer without deciding the final economy. A registered development resource may move from the authenticated character's durable inventory into the shared Caden world stockpile through one atomic inventory/world/outcome transaction. The deposit ID is the persistent idempotency key; replay returns its original result and a conflicting reuse is rejected. A development-only project derives `AWAITING_RESOURCES` or `FUNDED` from the stockpile threshold. Funding does not spend the stockpile, unlock gameplay, or change production visuals; those policies remain explicit future decisions.
+
 ## Replication and privacy
 
 An owning client receives full inventory/equipment snapshots and transaction results. Other clients receive only approved visible equipment/cosmetic projections, not private stacks/currency. Party loot sessions expose only policy-relevant entitlement/vote state.

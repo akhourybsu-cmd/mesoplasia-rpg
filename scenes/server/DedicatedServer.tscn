@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/server/dedicated/dedicated_server_app.gd" id="1_app"]
+
+[node name="DedicatedServer" type="Node"]
+script = ExtResource("1_app")

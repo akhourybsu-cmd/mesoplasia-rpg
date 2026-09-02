@@ -1760,3 +1760,114 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 - A live 640x360 Godot check initially exposed vertical clipping in the new sandbox. The layout was compacted and rechecked with the title, all six actions, durable record view, wrapped authority status, and footer visible simultaneously.
 - Live controls confirmed atomic initialization, reward settlement, duplicate reward replay, process reconstruction, and failed-save rejection while the quantity remained exactly one and maintenance mode remained off.
 - Added an automated 640x360 bounds assertion for the title, final action, and footer to prevent the clipping regression.
+
+## 2026-09-01 - Phase I sandbox repeatable backup correction
+
+- A user-requested live test confirmed reward replay, process reconstruction, and failed-save rejection, then exposed that the development sandbox reset its backup counter on every process launch.
+- Updated the sandbox to reconstruct the latest sandbox backup ID and sequence from durable storage, so a reopened process creates `.002`, `.003`, and later backups instead of reusing `.001`.
+- Extended the sandbox regression to create a backup, reconstruct the process, create the next backup, and restore that latest validated backup.
+- Validation: all three focused persistence regressions passed after the correction. Live retesting then created `development.backup.sandbox.002`, restored it successfully, retained Edenite quantity `1` and the committed entitlement across reward replay and process reconstruction, rejected the injected failed save without mutation, and kept maintenance mode off.
+
+## 2026-09-01 - Phase J dedicated server and private friend hosting
+
+### Scope
+
+- Added an explicit headless dedicated application composition that validates versioned private configuration before opening ENet and composes the authoritative Caden, party, expedition, combat, and durable persistence services without an autoload.
+- Added environment-only access-code loading, bounded allowlist policy, generic authentication failures, stable durable account/character identity, separated save/backup/log roots, structured log redaction, and restart recovery.
+- Added protected local admin commands for status, players, save validation, backup, drain, kick, and graceful shutdown. Interactive stdin is opt-in with `--interactive-admin`; ordinary gameplay clients have no route to these commands.
+- Added shutdown draining, required live-record validation, rotating shutdown backup, transport close, and maintenance-state refusal when persistence cannot be safely finalized.
+- Added approved Windows and Linux dedicated export presets, a feature-specific server main scene override, console output flushing, ignored runtime/build paths, a secret-free example config, and a private hosting/manual acceptance guide.
+- Advanced only the development build label to Phase J. Protocol version 5, Phase H content compatibility, and save schema 1 remain unchanged.
+
+### Files and systems changed
+
+- `config/dedicated_server.example.json`
+- `export_presets.cfg`
+- `project.godot`
+- `.gitignore`
+- `scenes/server/DedicatedServer.tscn`
+- `scripts/server/dedicated/`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/network/transport/enet_network_endpoint.gd`
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/persistence/server_persistence_coordinator.gd`
+- `scripts/persistence/versioned_file_backend.gd`
+- `tests/dedicated/dedicated_server_controller_test.gd`
+- `docs/architecture/PHASE_J_HOSTING_GUIDE.md`
+- `docs/architecture/SELF_HOSTING_AND_DEPLOYMENT.md`
+- `docs/PROJECT_STRUCTURE.md`
+
+### Validation
+
+- Focused dedicated-controller test: PASS for config/path guards, loopback client join, allowlist denial, durable identity bootstrap, redacted logs, local admin status/players/backup, drain, graceful shutdown, and same-identity restart recovery.
+- Final editor scan, explicit application startup, export-preset validation, and full regression results are recorded in the follow-up entry after execution.
+
+### Remaining limitations and manual gate
+
+- Windows and Linux export templates must be installed locally before release executables can be produced; each exported binary still requires a target-OS smoke test.
+- LAN/direct-IP firewall and router forwarding must be accepted manually using the guide. Phase J does not add relay/NAT traversal, transport encryption, discovery, matchmaking, web administration, cloud identity, or production listen/solo menus.
+- The existing network connection sandbox is the Phase J friend-client gate; production Main/Caden remains on the rollback-safe local path.
+
+### Follow-up validation
+
+- Godot 4.7 editor filesystem/script scan: PASS with no parse errors or broken scene/resource references.
+- Explicit dedicated application startup: PASS; the server bound loopback from the example config, printed a redacted ready status, validated durable records, created a shutdown backup, and exited with code `0` through `--validate-and-stop`.
+- Dedicated export pack validation: PASS for the committed `Windows Dedicated Server` preset, including the dedicated resource remap/visual stripping pass. The packaged PCK then selected `DedicatedServer.tscn` through the exported feature override, started headlessly, performed validated shutdown, and exited with code `0`. Release executables were not produced because platform export-template installation and target-OS smoke tests remain operator gates.
+- Complete executable Godot regression suite: PASS, 51 of 51 scripts. The Town Square project-configuration guard was advanced only for the approved dedicated-server main-scene feature override and stdout flush setting, then passed.
+- Git diff whitespace check: PASS. Godot continued to report the known sandbox-only Windows certificate-store and `user://logs` access notices; server-owned structured logs under the configured instance root were exercised successfully.
+
+## 2026-09-01 - Phase K Caden resource deposit foundation
+
+### Scope
+
+- Added validated data-driven definitions for one existing development Edenite item as a depositable resource and one noncanonical fortification probe with `AWAITING_RESOURCES` and `FUNDED` states.
+- Added a scene-independent authoritative Caden resource service that derives project funding from the durable shared stockpile and exposes owner-private inventory plus shared stockpile/project projections.
+- Added one atomic persistence transaction spanning character inventory, Caden world state, and an outcome/idempotency record. Failed writes leave all records unchanged; committed deposit IDs replay their original result and conflicting reuse is rejected.
+- Advanced the private development protocol to version 6 with strict deposit/snapshot commands, command results, revision checks, a disposable client state store, and the `caden_resources` capability. Phase K authority is composed into the dedicated runtime and recovers through the existing save/backup path.
+- Added `CadenResourceSandbox.tscn` with Grant Test, Deposit 1, Replay, Reconnect, and Fail Deposit controls plus a compact 640×360 private inventory/shared stockpile/project-state view.
+- Kept production Caden scenes, visuals, collisions, interactions, narrative, and local entry behavior unchanged. No final economy, resource acquisition, spending, unlock, shortage, siege, defense, or canon policy was introduced.
+- Advanced `CONTENT_VERSION`/manifest for the new authoritative definitions and the development build label to Phase K. Save schema remains 1 because the existing extensible world/outcome payload contract stores the added fields without structural migration.
+
+### Files and systems changed
+
+- `data/caden/development_resource_projects.json`
+- `scripts/server/caden/caden_resource_definition_registry.gd`
+- `scripts/server/caden/caden_resource_service.gd`
+- `scripts/persistence/server_persistence_coordinator.gd`
+- `scripts/client/network/caden_resource_state_store.gd`
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/network/protocol/network_protocol_gateway.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/server/dedicated/dedicated_server_controller.gd`
+- `scripts/development/caden_resource_sandbox.gd`
+- `scenes/development/CadenResourceSandbox.tscn`
+- `tests/caden_resource_service_test.gd`
+- `tests/network_caden_resource_integration_test.gd`
+- `tests/caden_resource_sandbox_test.gd`
+- `docs/architecture/IMPLEMENTATION_ROADMAP.md`
+- `docs/architecture/INVENTORY_LOOT_AND_REWARDS.md`
+- `docs/architecture/PHASE_K_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+
+### Validation
+
+- Pure/persistence-backed resource service: PASS for definitions, unknown/stale input, injected save failure, atomic commit, first project transition, replay, transaction-ID conflict, and restart recovery.
+- Real ENet integration: PASS for authentication, owner-private inventory projection, shared stockpile/project convergence, accepted/replayed/rejected results, and server restart with stable identity.
+- Development sandbox regression: PASS for complete 640×360 bounds, failed-deposit visibility, atomic deposit, funded state, replay, and disposable-client reconnect.
+- Final editor scan, compatibility tests, full suite, and manual acceptance remain recorded in the follow-up entry after execution.
+
+### Remaining limitations and manual gate
+
+- Run the workflow in `docs/architecture/PHASE_K_MANUAL_TEST.md` and confirm the status language and three-state presentation are understandable.
+- The project fixture becomes funded at one deposited development Edenite and deliberately does not consume it. This is a test threshold, not a balance or economy decision.
+- Resource acquisition/extraction, final categories, project spending/selection/stages, production visual state, unlocks, shortages, siege pressure, defense consequences, and canon remain outside Phase K.
+
+### Follow-up validation
+
+- Godot 4.7 editor filesystem/script scan: PASS with no parse errors or broken scene/resource references.
+- Two-client ENet privacy/share check: PASS; the depositing character's inventory remained owner-private while the observer received the shared stockpile and funded-project transition.
+- Complete executable Godot regression suite: PASS, 54 of 54 scripts.
+- Dedicated export pack validation: PASS for the committed `Windows Dedicated Server` preset. The packaged PCK loaded protocol 6, the Phase K content manifest and Caden resource definitions, started the feature-selected dedicated scene, validated durable state, and exited cleanly through `--validate-and-stop`.
+- Git diff whitespace check: PASS. Temporary pack and server-data artifacts were removed. Godot continued to report only the known sandbox-specific Windows certificate-store, global editor-settings, and `user://logs` access notices.

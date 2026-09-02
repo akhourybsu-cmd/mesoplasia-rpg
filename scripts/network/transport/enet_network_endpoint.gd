@@ -25,10 +25,14 @@ func configure(multiplayer_api: MultiplayerAPI) -> void:
 	_connect_api_signal(_multiplayer_api.server_disconnected, _on_server_disconnected)
 
 
-func start_server(port: int, maximum_connections: int) -> Error:
+func start_server(
+	port: int, maximum_connections: int, bind_address: String = "0.0.0.0"
+) -> Error:
 	if _multiplayer_api == null or _peer != null:
 		return ERR_ALREADY_IN_USE
 	_peer = ENetMultiplayerPeer.new()
+	if bind_address != "0.0.0.0":
+		_peer.set_bind_ip(bind_address)
 	var error := _peer.create_server(port, clampi(maximum_connections, 1, 8), CHANNEL_COUNT)
 	if error != OK:
 		_peer = null

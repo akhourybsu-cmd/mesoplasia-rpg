@@ -1,10 +1,10 @@
 class_name NetworkProtocolContract
 extends RefCounted
 
-const PROTOCOL_VERSION := 5
-const GAME_BUILD_VERSION := "phase-i-development-1"
-const CONTENT_VERSION := "phase-h-network-combat-content-1"
-const CONTENT_MANIFEST_HASH := "phase-h-network-combat-manifest-v1"
+const PROTOCOL_VERSION := 6
+const GAME_BUILD_VERSION := "phase-k-development-1"
+const CONTENT_VERSION := "phase-k-caden-resources-content-1"
+const CONTENT_MANIFEST_HASH := "phase-k-caden-resources-manifest-v1"
 const SAVE_SCHEMA_VERSION := 1
 
 const MAX_ENVELOPE_BYTES := 8192
@@ -20,6 +20,8 @@ const MOVEMENT_INPUT := "movement_input"
 const INTERACT := "interact"
 const ZONE_TRANSITION := "zone_transition"
 const REQUEST_HUB_SNAPSHOT := "request_hub_snapshot"
+const CADEN_RESOURCE_DEPOSIT := "caden_resource_deposit"
+const CADEN_RESOURCE_REQUEST_SNAPSHOT := "caden_resource_request_snapshot"
 const PARTY_INVITE := "party_invite"
 const PARTY_ACCEPT := "party_accept"
 const PARTY_DECLINE := "party_decline"
@@ -49,6 +51,8 @@ const PONG := "pong"
 const HUB_SNAPSHOT := "hub_snapshot"
 const INTERACTION_RESULT := "interaction_result"
 const ZONE_TRANSFER_RESULT := "zone_transfer_result"
+const CADEN_RESOURCE_SNAPSHOT := "caden_resource_snapshot"
+const CADEN_RESOURCE_COMMAND_RESULT := "caden_resource_command_result"
 const PARTY_SNAPSHOT := "party_snapshot"
 const PARTY_COMMAND_RESULT := "party_command_result"
 const EXPEDITION_SNAPSHOT := "expedition_snapshot"
@@ -76,6 +80,8 @@ const _CLIENT_MESSAGE_TYPES := [
 	INTERACT,
 	ZONE_TRANSITION,
 	REQUEST_HUB_SNAPSHOT,
+	CADEN_RESOURCE_DEPOSIT,
+	CADEN_RESOURCE_REQUEST_SNAPSHOT,
 	PARTY_INVITE,
 	PARTY_ACCEPT,
 	PARTY_DECLINE,
@@ -106,6 +112,8 @@ const _SERVER_MESSAGE_TYPES := [
 	HUB_SNAPSHOT,
 	INTERACTION_RESULT,
 	ZONE_TRANSFER_RESULT,
+	CADEN_RESOURCE_SNAPSHOT,
+	CADEN_RESOURCE_COMMAND_RESULT,
 	PARTY_SNAPSHOT,
 	PARTY_COMMAND_RESULT,
 	EXPEDITION_SNAPSHOT,
@@ -154,7 +162,7 @@ static func make_client_hello_payload(client_nonce: String) -> Dictionary:
 		"content_version": CONTENT_VERSION,
 		"content_manifest_hash": CONTENT_MANIFEST_HASH,
 		"requested_capabilities": [
-			"connection_sandbox", "avatar_presence", "caden_hub", "party", "expedition", "combat"
+			"connection_sandbox", "avatar_presence", "caden_hub", "caden_resources", "party", "expedition", "combat"
 		],
 		"client_nonce": client_nonce,
 	}
@@ -316,6 +324,31 @@ static func _validate_client_payload(message_type: String, payload: Dictionary) 
 		REQUEST_HUB_SNAPSHOT:
 			if not payload.is_empty():
 				return _invalid("Hub snapshot request payload must be empty.")
+		CADEN_RESOURCE_DEPOSIT:
+			if not _has_exact_keys(
+				payload,
+				[
+					"deposit_id",
+					"resource_id",
+					"quantity",
+					"expected_inventory_revision",
+					"expected_world_revision",
+				]
+			):
+				return _invalid("Caden resource deposit fields are invalid.")
+			if (
+				not _valid_party_id_field(payload.deposit_id)
+				or not _valid_party_id_field(payload.resource_id)
+				or not payload.quantity is int
+				or payload.quantity < 1
+				or payload.quantity > 9999
+				or not _valid_expected_revision(payload.expected_inventory_revision)
+				or not _valid_expected_revision(payload.expected_world_revision)
+			):
+				return _invalid("Caden resource deposit values are invalid.")
+		CADEN_RESOURCE_REQUEST_SNAPSHOT:
+			if not payload.is_empty():
+				return _invalid("Caden resource snapshot request payload must be empty.")
 		PARTY_INVITE:
 			if not _has_exact_keys(payload, ["recipient_character_id", "expected_revision"]):
 				return _invalid("Party invite fields are invalid.")
@@ -505,6 +538,29 @@ static func _validate_server_payload(message_type: String, payload: Dictionary) 
 				"zone_id",
 				"entry_id",
 				"world_revision",
+			]
+		CADEN_RESOURCE_SNAPSHOT:
+			expected_keys = [
+				"resource_snapshot_schema_version",
+				"projection_revision",
+				"world_id",
+				"world_record_revision",
+				"inventory_record_revision",
+				"inventory_resources",
+				"stockpiles",
+				"projects",
+			]
+		CADEN_RESOURCE_COMMAND_RESULT:
+			expected_keys = [
+				"accepted",
+				"reason_code",
+				"reason_text",
+				"command_type",
+				"deposit_id",
+				"inventory_record_revision",
+				"world_record_revision",
+				"changed_project_ids",
+				"replayed",
 			]
 		PARTY_SNAPSHOT:
 			expected_keys = [

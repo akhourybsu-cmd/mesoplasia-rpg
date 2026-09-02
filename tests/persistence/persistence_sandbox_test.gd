@@ -48,6 +48,12 @@ func _run_test() -> void:
 	if not (sandbox.create_backup() as Dictionary).get("accepted", false):
 		_fail("Sandbox backup control failed.")
 		return
+	if not sandbox.simulate_restart():
+		_fail("Sandbox could not reconstruct after its first backup.")
+		return
+	if not (sandbox.create_backup() as Dictionary).get("accepted", false):
+		_fail("Sandbox did not resume its durable backup sequence after restart.")
+		return
 	if not (sandbox.restore_last_backup() as Dictionary).get("accepted", false):
 		_fail("Sandbox restore control failed.")
 		return

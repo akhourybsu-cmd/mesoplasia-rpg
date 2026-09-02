@@ -4,7 +4,7 @@
 
 Support Windows and Linux dedicated headless servers, listen servers, and local solo hosts from the same project/ruleset. Initial connectivity is LAN or direct IP/domain using a configurable UDP port. Internet hosts may need router port forwarding and firewall configuration.
 
-Godot supports `--headless` and dedicated-server exports; the dedicated export mode adds the `dedicated_server` feature tag and can strip visuals while preserving references. Plan a server export preset only in the later dedicated-server phase—this task does not modify export presets. Reference: [Godot dedicated server exports](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_dedicated_servers.html).
+Godot supports `--headless` and dedicated-server exports; the dedicated export mode adds the `dedicated_server` feature tag and can strip visuals while preserving references. Phase J commits Windows and Linux server presets and a feature-specific server entry scene. See `PHASE_J_HOSTING_GUIDE.md` for the operator workflow. Reference: [Godot dedicated server exports](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_dedicated_servers.html).
 
 ## Runtime starts
 
@@ -42,7 +42,7 @@ Validate types, ranges, resolved paths, permissions, and conflicts before openin
 
 ## Private configuration and `.gitignore` strategy
 
-Commit only an example/template with placeholders and no secrets. Ignore instance-specific config, secret/invite files, allowlists if private, save directories, backups, and logs. Prefer an operator-selected directory outside `res://`/the install directory for production data. Future implementation should propose exact patterns for approval; this planning task does not edit `.gitignore`.
+Commit only an example/template with placeholders and no secrets. Phase J ignores `config/dedicated_server.local.json`, `server-data/`, and `build/server/`. Prefer an operator-selected directory outside `res://`/the install directory for production data.
 
 Never log or commit raw passwords/invite tokens. On shared hosts, restrict filesystem permissions. The server—not clients—resolves allowed save/log/backup roots.
 
@@ -64,7 +64,7 @@ Start with local console commands and structured logs, not a web dashboard.
 
 | Command | Safety behavior |
 | --- | --- |
-| `status`, `list players` | read-only summary; avoid secrets/private inventory |
+| `status`, `players` | read-only summary; avoid secrets/private inventory |
 | `inspect party/expedition/combat` | read-only stable IDs/revisions/status |
 | `announce` | sanitize/limit text; audit sender/local console |
 | `kick`, `ban`, `unban` | explicit account/session target; reason; audit |

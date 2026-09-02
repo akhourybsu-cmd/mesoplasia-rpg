@@ -1,0 +1,18 @@
+{
+  "config_schema_version": 1,
+  "server_name": "Mesoplasia Private Server",
+  "listen_address": "127.0.0.1",
+  "port": 24567,
+  "max_connections": 4,
+  "max_party_size": 4,
+  "allowlist_enabled": true,
+  "allowed_display_labels": ["Alex"],
+  "access_code_env_var": "MESOPLASIA_SERVER_ACCESS_CODE",
+  "save_path": "saves",
+  "backup_path": "backups",
+  "log_path": "logs",
+  "backup_retention": 5,
+  "load_timeout_msec": 15000,
+  "turn_timeout_msec": 10000,
+  "reconnect_grace_msec": 15000
+}

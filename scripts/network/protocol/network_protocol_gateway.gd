@@ -11,6 +11,8 @@ signal server_peer_disconnected_identity(peer_id: int, identity: Dictionary)
 signal hub_snapshot_received(snapshot: Dictionary)
 signal interaction_result_received(result: Dictionary)
 signal zone_transfer_result_received(result: Dictionary)
+signal caden_resource_snapshot_received(snapshot: Dictionary)
+signal caden_resource_command_result_received(result: Dictionary)
 signal party_snapshot_received(snapshot: Dictionary)
 signal party_command_result_received(result: Dictionary)
 signal expedition_snapshot_received(snapshot: Dictionary)
@@ -23,6 +25,9 @@ signal server_expedition_return_required(return_data: Dictionary)
 const Protocol := preload("res://scripts/network/protocol/network_protocol_contract.gd")
 const AvatarStore := preload("res://scripts/client/network/network_avatar_store.gd")
 const HubStateStore := preload("res://scripts/client/network/caden_hub_state_store.gd")
+const CadenResourceStateStore := preload(
+	"res://scripts/client/network/caden_resource_state_store.gd"
+)
 const PartyStateStore := preload("res://scripts/client/network/party_state_store.gd")
 const ExpeditionStateStore := preload("res://scripts/client/network/expedition_state_store.gd")
 const CombatStateStore := preload("res://scripts/client/network/combat_state_store.gd")
@@ -34,10 +39,12 @@ var _session_coordinator: RefCounted
 var _endpoint: Node
 var _avatar_store: RefCounted = AvatarStore.new()
 var _hub_state_store: RefCounted = HubStateStore.new()
+var _caden_resource_state_store: RefCounted = CadenResourceStateStore.new()
 var _party_state_store: RefCounted = PartyStateStore.new()
 var _expedition_state_store: RefCounted = ExpeditionStateStore.new()
 var _combat_state_store: RefCounted = CombatStateStore.new()
 var _caden_hub_service: RefCounted
+var _caden_resource_service: RefCounted
 var _party_service: RefCounted
 var _expedition_service: RefCounted
 var _combat_coordinator: RefCounted
@@ -59,6 +66,9 @@ func _ready() -> void:
 	_avatar_store.avatar_spawned.connect(_on_avatar_store_spawned)
 	_avatar_store.avatar_despawned.connect(_on_avatar_store_despawned)
 	_hub_state_store.snapshot_applied.connect(_on_hub_snapshot_applied)
+	_caden_resource_state_store.snapshot_applied.connect(
+		_on_caden_resource_snapshot_applied
+	)
 	_party_state_store.snapshot_applied.connect(_on_party_snapshot_applied)
 	_expedition_state_store.snapshot_applied.connect(_on_expedition_snapshot_applied)
 	_combat_state_store.snapshot_applied.connect(_on_combat_snapshot_applied)
@@ -92,6 +102,11 @@ func configure_client(
 func configure_caden_hub(caden_hub_service: RefCounted) -> void:
 	_caden_hub_service = caden_hub_service
 	status_changed.emit("Caden hub protocol enabled.")
+
+
+func configure_caden_resource_service(caden_resource_service: RefCounted) -> void:
+	_caden_resource_service = caden_resource_service
+	status_changed.emit("Authoritative Caden resource protocol enabled.")
 
 
 func configure_party_service(party_service: RefCounted) -> void:
@@ -187,6 +202,29 @@ func request_hub_snapshot() -> bool:
 		return false
 	_send_client_message(Protocol.REQUEST_HUB_SNAPSHOT, {}, _client_session_id)
 	return true
+
+
+func send_caden_resource_deposit(
+	deposit_id: String,
+	resource_id: String,
+	quantity: int,
+	expected_inventory_revision: int,
+	expected_world_revision: int
+) -> bool:
+	return _send_caden_resource_command(
+		Protocol.CADEN_RESOURCE_DEPOSIT,
+		{
+			"deposit_id": deposit_id,
+			"resource_id": resource_id,
+			"quantity": quantity,
+			"expected_inventory_revision": expected_inventory_revision,
+			"expected_world_revision": expected_world_revision,
+		}
+	)
+
+
+func request_caden_resource_snapshot() -> bool:
+	return _send_caden_resource_command(Protocol.CADEN_RESOURCE_REQUEST_SNAPSHOT, {})
 
 
 func send_party_invite(recipient_character_id: String, expected_revision: int) -> bool:
@@ -388,6 +426,10 @@ func get_hub_state_store() -> RefCounted:
 	return _hub_state_store
 
 
+func get_caden_resource_state_store() -> RefCounted:
+	return _caden_resource_state_store
+
+
 func get_party_state_store() -> RefCounted:
 	return _party_state_store
 
@@ -421,6 +463,7 @@ func reset() -> void:
 	_session_coordinator = null
 	_endpoint = null
 	_caden_hub_service = null
+	_caden_resource_service = null
 	_party_service = null
 	_expedition_service = null
 	_combat_coordinator = null
@@ -437,6 +480,7 @@ func reset() -> void:
 	_last_pong_tick = -1
 	_avatar_store.clear()
 	_hub_state_store.clear()
+	_caden_resource_state_store.clear()
 	_party_state_store.clear()
 	_expedition_state_store.clear()
 	_combat_state_store.clear()
@@ -448,6 +492,16 @@ func submit_client_envelope(envelope: Variant) -> void:
 		return
 	var sender_peer_id := multiplayer.get_remote_sender_id()
 	if sender_peer_id <= 1:
+		return
+	if (
+		_caden_resource_service != null
+		and envelope is Dictionary
+		and (envelope as Dictionary).get("message_type", "") in [
+			Protocol.CADEN_RESOURCE_DEPOSIT,
+			Protocol.CADEN_RESOURCE_REQUEST_SNAPSHOT,
+		]
+	):
+		_handle_caden_resource_application_command(sender_peer_id, envelope)
 		return
 	if (
 		_combat_coordinator != null
@@ -610,6 +664,17 @@ func _handle_received_server_envelope(envelope: Variant) -> void:
 			zone_transfer_result_received.emit(transfer_result)
 			if transfer_result.accepted:
 				status_changed.emit("Transferred to %s." % transfer_result.zone_id)
+		Protocol.CADEN_RESOURCE_SNAPSHOT:
+			_caden_resource_state_store.apply_snapshot(message.payload)
+		Protocol.CADEN_RESOURCE_COMMAND_RESULT:
+			var resource_result := (message.payload as Dictionary).duplicate(true)
+			caden_resource_command_result_received.emit(resource_result)
+			status_changed.emit(
+				"Caden resource command %s: %s." % [
+					"accepted" if resource_result.accepted else "rejected",
+					resource_result.reason_code,
+				]
+			)
 		Protocol.PARTY_SNAPSHOT:
 			_party_state_store.apply_snapshot(message.payload)
 		Protocol.PARTY_COMMAND_RESULT:
@@ -720,6 +785,30 @@ func send_hub_snapshot_to_peer(peer_id: int, reliable: bool = true) -> void:
 		"make_application_server_envelope", Protocol.HUB_SNAPSHOT, "", snapshot
 	) as Dictionary
 	_send_server_envelope(peer_id, envelope, reliable)
+
+
+func broadcast_caden_resource_snapshots() -> void:
+	if _role != GatewayRole.SERVER or _caden_resource_service == null:
+		return
+	for peer_id: int in _session_coordinator.call("get_authenticated_peer_ids"):
+		send_caden_resource_snapshot_to_peer(peer_id)
+
+
+func send_caden_resource_snapshot_to_peer(peer_id: int) -> void:
+	if _role != GatewayRole.SERVER or _caden_resource_service == null:
+		return
+	var connection := _session_coordinator.call("get_connection_snapshot", peer_id) as Dictionary
+	if connection.get("state", "") != "authenticated":
+		return
+	var snapshot := _caden_resource_service.call(
+		"get_snapshot_for", connection.character_id
+	) as Dictionary
+	if snapshot.is_empty():
+		return
+	var envelope := _session_coordinator.call(
+		"make_application_server_envelope", Protocol.CADEN_RESOURCE_SNAPSHOT, "", snapshot
+	) as Dictionary
+	_send_server_envelope(peer_id, envelope, true)
 
 
 func broadcast_party_snapshots() -> void:
@@ -839,6 +928,57 @@ func _handle_hub_application_command(sender_peer_id: int, envelope: Variant) -> 
 				broadcast_hub_snapshots(true)
 		Protocol.REQUEST_HUB_SNAPSHOT:
 			send_hub_snapshot_to_peer(sender_peer_id, true)
+
+
+func _handle_caden_resource_application_command(
+	sender_peer_id: int,
+	envelope: Variant
+) -> void:
+	var authorization := _session_coordinator.call(
+		"authorize_application_command", sender_peer_id, envelope, Time.get_ticks_msec()
+	) as Dictionary
+	if not authorization.accepted:
+		_send_command_rejection(sender_peer_id, envelope, authorization)
+		if authorization.get("disconnect_peer", false):
+			_disconnect_after_delivery(sender_peer_id)
+		return
+	var connection := _session_coordinator.call(
+		"get_connection_snapshot", sender_peer_id
+	) as Dictionary
+	var command := envelope as Dictionary
+	var payload := command.payload as Dictionary
+	if command.message_type == Protocol.CADEN_RESOURCE_REQUEST_SNAPSHOT:
+		send_caden_resource_snapshot_to_peer(sender_peer_id)
+		return
+	var result := _caden_resource_service.call(
+		"request_deposit",
+		connection.character_id,
+		payload.deposit_id,
+		payload.resource_id,
+		payload.quantity,
+		payload.expected_inventory_revision,
+		payload.expected_world_revision
+	) as Dictionary
+	_send_application_result(
+		sender_peer_id,
+		Protocol.CADEN_RESOURCE_COMMAND_RESULT,
+		command.command_id,
+		{
+			"accepted": result.get("accepted", false),
+			"reason_code": result.get("reason_code", "RESOURCE_DEPOSIT_REJECTED"),
+			"reason_text": result.get("reason_text", "Caden resource deposit rejected."),
+			"command_type": command.message_type,
+			"deposit_id": payload.deposit_id,
+			"inventory_record_revision": result.get("inventory_record_revision", -1),
+			"world_record_revision": result.get("world_record_revision", -1),
+			"changed_project_ids": (result.get("changed_project_ids", []) as Array).duplicate(),
+			"replayed": result.get("replayed", false),
+		}
+	)
+	if result.get("accepted", false):
+		broadcast_caden_resource_snapshots()
+	else:
+		send_caden_resource_snapshot_to_peer(sender_peer_id)
 
 
 func _handle_party_application_command(sender_peer_id: int, envelope: Variant) -> void:
@@ -1209,6 +1349,13 @@ func _send_party_command(message_type: String, payload: Dictionary) -> bool:
 	return true
 
 
+func _send_caden_resource_command(message_type: String, payload: Dictionary) -> bool:
+	if _role != GatewayRole.CLIENT or _client_session_id.is_empty():
+		return false
+	_send_client_message(message_type, payload, _client_session_id)
+	return true
+
+
 func _send_expedition_command(message_type: String, payload: Dictionary) -> bool:
 	if _role != GatewayRole.CLIENT or _client_session_id.is_empty():
 		return false
@@ -1249,6 +1396,10 @@ func _set_rejection(reason_code: String, reason_text: String) -> void:
 	_last_rejection = {"reason_code": reason_code, "reason_text": reason_text}
 	status_changed.emit("Rejected: %s — %s" % [reason_code, reason_text])
 	client_rejected.emit(reason_code, reason_text)
+
+
+func _on_caden_resource_snapshot_applied(snapshot: Dictionary) -> void:
+	caden_resource_snapshot_received.emit(snapshot)
 
 
 func _make_nonce() -> String:

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "resources": [
+    {
+      "resource_id": "development.item.edenite",
+      "display_name": "Edenite",
+      "maximum_deposit_quantity": 9999
+    }
+  ],
+  "projects": [
+    {
+      "project_id": "development.project.fortification_probe",
+      "display_name": "Development Fortification Probe",
+      "initial_state": "AWAITING_RESOURCES",
+      "funded_state": "FUNDED",
+      "required_resources": {
+        "development.item.edenite": 1
+      }
+    }
+  ]
+}

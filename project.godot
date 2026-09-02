@@ -12,6 +12,8 @@ config_version=5
 
 config/name="Mesoplasia RPG"
 run/main_scene="uid://bhjv2s6hu8uvu"
+run/main_scene.dedicated_server="res://scenes/server/DedicatedServer.tscn"
+run/flush_stdout_on_print=true
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

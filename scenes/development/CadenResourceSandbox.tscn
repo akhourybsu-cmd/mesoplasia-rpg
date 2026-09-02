@@ -1,0 +1,216 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/development/caden_resource_sandbox.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StylePanel"]
+bg_color = Color(0.105882, 0.145098, 0.137255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.352941, 0.619608, 0.470588, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleButton"]
+bg_color = Color(0.215686, 0.360784, 0.294118, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleButtonHover"]
+bg_color = Color(0.294118, 0.517647, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="CadenResourceSandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0823529, 0.0745098, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
+
+[node name="Layout" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.690196, 0.945098, 0.776471, 1)
+theme_override_font_sizes/font_size = 24
+text = "PHASE K — CADEN RESOURCE DEPOSIT"
+
+[node name="Subtitle" type="Label" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.8, 0.760784, 1)
+text = "Private inventory → atomic server transaction → shared persistent world"
+
+[node name="StatusLabel" type="Label" parent="Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+text = "Starting isolated local server…"
+autowrap_mode = 2
+
+[node name="ResourceRow" type="HBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InventoryPanel" type="PanelContainer" parent="Margin/Layout/ResourceRow"]
+custom_minimum_size = Vector2(192, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StylePanel")
+
+[node name="Box" type="VBoxContainer" parent="Margin/Layout/ResourceRow/InventoryPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Margin/Layout/ResourceRow/InventoryPanel/Box"]
+layout_mode = 2
+text = "PRIVATE EDENITE"
+horizontal_alignment = 1
+
+[node name="InventoryValue" type="Label" parent="Margin/Layout/ResourceRow/InventoryPanel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+horizontal_alignment = 1
+
+[node name="StockpilePanel" type="PanelContainer" parent="Margin/Layout/ResourceRow"]
+custom_minimum_size = Vector2(192, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StylePanel")
+
+[node name="Box" type="VBoxContainer" parent="Margin/Layout/ResourceRow/StockpilePanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Margin/Layout/ResourceRow/StockpilePanel/Box"]
+layout_mode = 2
+text = "SHARED STOCKPILE"
+horizontal_alignment = 1
+
+[node name="StockpileValue" type="Label" parent="Margin/Layout/ResourceRow/StockpilePanel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+horizontal_alignment = 1
+
+[node name="ProjectPanel" type="PanelContainer" parent="Margin/Layout/ResourceRow"]
+custom_minimum_size = Vector2(192, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StylePanel")
+
+[node name="Box" type="VBoxContainer" parent="Margin/Layout/ResourceRow/ProjectPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Margin/Layout/ResourceRow/ProjectPanel/Box"]
+layout_mode = 2
+text = "PROJECT STATE"
+horizontal_alignment = 1
+
+[node name="ProjectValue" type="Label" parent="Margin/Layout/ResourceRow/ProjectPanel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.964706, 0.803922, 0.403922, 1)
+theme_override_font_sizes/font_size = 18
+text = "NOT LOADED"
+horizontal_alignment = 1
+
+[node name="Explanation" type="Label" parent="Margin/Layout"]
+layout_mode = 2
+text = "The development project becomes FUNDED at one deposited unit. Funding does not consume the stockpile or change production Caden visuals."
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="GrantButton" type="Button" parent="Margin/Layout/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleButton")
+theme_override_styles/hover = SubResource("StyleButtonHover")
+text = "Grant Test"
+
+[node name="DepositButton" type="Button" parent="Margin/Layout/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleButton")
+theme_override_styles/hover = SubResource("StyleButtonHover")
+text = "Deposit 1"
+
+[node name="ReplayButton" type="Button" parent="Margin/Layout/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleButton")
+theme_override_styles/hover = SubResource("StyleButtonHover")
+text = "Replay"
+
+[node name="ReconnectButton" type="Button" parent="Margin/Layout/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleButton")
+theme_override_styles/hover = SubResource("StyleButtonHover")
+text = "Reconnect"
+
+[node name="FailButton" type="Button" parent="Margin/Layout/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleButton")
+theme_override_styles/hover = SubResource("StyleButtonHover")
+text = "Fail Deposit"
+
+[node name="Footer" type="Label" parent="Margin/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.611765, 0.686275, 0.639216, 1)
+text = "DEVELOPMENT-ONLY FIXTURE • no economy balance • no siege rules • no canon state • no production world visuals"
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Runtimes" type="Node" parent="."]

@@ -9,6 +9,8 @@ signal avatar_despawned(character_id: String, avatar_runtime_id: String, reason:
 signal hub_snapshot_received(snapshot: Dictionary)
 signal interaction_result_received(result: Dictionary)
 signal zone_transfer_result_received(result: Dictionary)
+signal caden_resource_snapshot_received(snapshot: Dictionary)
+signal caden_resource_command_result_received(result: Dictionary)
 signal party_snapshot_received(snapshot: Dictionary)
 signal party_command_result_received(result: Dictionary)
 signal expedition_snapshot_received(snapshot: Dictionary)
@@ -20,6 +22,12 @@ const SessionCoordinator := preload("res://scripts/server/session/test_session_c
 const Protocol := preload("res://scripts/network/protocol/network_protocol_contract.gd")
 const CadenHubService := preload("res://scripts/server/hub/caden_hub_service.gd")
 const CadenZoneRegistry := preload("res://scripts/world/caden_zone_registry.gd")
+const CadenResourceDefinitionRegistry := preload(
+	"res://scripts/server/caden/caden_resource_definition_registry.gd"
+)
+const CadenResourceService := preload(
+	"res://scripts/server/caden/caden_resource_service.gd"
+)
 const PartyService := preload("res://scripts/server/party/party_service.gd")
 const ExpeditionDefinitionRegistry := preload(
 	"res://scripts/server/expedition/expedition_definition_registry.gd"
@@ -43,6 +51,7 @@ var _role := RuntimeRole.NONE
 var _multiplayer_api: SceneMultiplayer
 var _session_coordinator: RefCounted
 var _caden_hub_service: RefCounted
+var _caden_resource_service: RefCounted
 var _party_service: RefCounted
 var _expedition_service: RefCounted
 var _expedition_checkpoint_store: RefCounted
@@ -65,6 +74,12 @@ func _ready() -> void:
 	_gateway.hub_snapshot_received.connect(hub_snapshot_received.emit)
 	_gateway.interaction_result_received.connect(interaction_result_received.emit)
 	_gateway.zone_transfer_result_received.connect(zone_transfer_result_received.emit)
+	_gateway.caden_resource_snapshot_received.connect(
+		caden_resource_snapshot_received.emit
+	)
+	_gateway.caden_resource_command_result_received.connect(
+		caden_resource_command_result_received.emit
+	)
 	_gateway.party_snapshot_received.connect(party_snapshot_received.emit)
 	_gateway.party_command_result_received.connect(party_command_result_received.emit)
 	_gateway.expedition_snapshot_received.connect(expedition_snapshot_received.emit)
@@ -84,21 +99,82 @@ func start_server(
 	port: int,
 	access_code: String,
 	maximum_connections: int = 4,
-	server_name: String = "Mesoplasia Phase C Sandbox"
+	server_name: String = "Mesoplasia Phase C Sandbox",
+	bind_address: String = "0.0.0.0",
+	session_options: Dictionary = {}
 ) -> Error:
 	if _role != RuntimeRole.NONE or access_code.is_empty():
 		return ERR_INVALID_PARAMETER
 	_prepare_multiplayer_api()
 	_session_coordinator = SessionCoordinator.new()
 	_session_coordinator.call("configure", access_code, maximum_connections, server_name)
+	var identity_resolver := session_options.get("identity_resolver") as RefCounted
+	if identity_resolver != null:
+		_session_coordinator.call("configure_identity_resolver", identity_resolver)
+	if session_options.has("allowlist_enabled"):
+		if not _session_coordinator.call(
+			"configure_private_access",
+			session_options.get("allowlist_enabled", false),
+			session_options.get("allowed_display_labels", [])
+		):
+			_session_coordinator = null
+			return ERR_INVALID_DATA
 	_gateway.call("configure_server", _session_coordinator, _endpoint)
-	var error: Error = _endpoint.call("start_server", port, maximum_connections)
+	var error: Error = _endpoint.call("start_server", port, maximum_connections, bind_address)
 	if error != OK:
 		_gateway.call("reset")
 		_session_coordinator = null
 		return error
 	_role = RuntimeRole.SERVER
 	status_changed.emit("Server listening on UDP port %d." % port)
+	return OK
+
+
+func start_dedicated_server(
+	config: Dictionary,
+	identity_resolver: RefCounted,
+	expedition_checkpoint_store: RefCounted,
+	combat_checkpoint_store: RefCounted,
+	persistence_coordinator: RefCounted = null
+) -> Error:
+	if config.is_empty() or identity_resolver == null:
+		return ERR_INVALID_PARAMETER
+	var error := start_server(
+		int(config.port),
+		config.access_code,
+		int(config.max_connections),
+		config.server_name,
+		config.listen_address,
+		{
+			"identity_resolver": identity_resolver,
+			"allowlist_enabled": config.allowlist_enabled,
+			"allowed_display_labels": config.allowed_display_labels,
+		}
+	)
+	if error != OK:
+		return error
+	if not enable_caden_hub():
+		stop()
+		return ERR_CANT_CREATE
+	if persistence_coordinator != null and not enable_caden_resource_service(
+		persistence_coordinator
+	):
+		stop()
+		return ERR_CANT_CREATE
+	if not enable_party_service(
+		int(config.max_party_size),
+		PartyService.DEFAULT_INVITE_LIFETIME_MSEC,
+		int(config.reconnect_grace_msec)
+	):
+		stop()
+		return ERR_CANT_CREATE
+	if not enable_expedition_service(1, int(config.load_timeout_msec), expedition_checkpoint_store):
+		stop()
+		return ERR_CANT_CREATE
+	if not enable_network_combat(int(config.turn_timeout_msec), combat_checkpoint_store):
+		stop()
+		return ERR_CANT_CREATE
+	status_changed.emit("Dedicated authoritative stack is ready.")
 	return OK
 
 
@@ -225,6 +301,27 @@ func enable_caden_hub() -> bool:
 	return true
 
 
+func enable_caden_resource_service(
+	persistence_coordinator: RefCounted,
+	world_id: String = CadenResourceService.DEFAULT_WORLD_ID
+) -> bool:
+	if (
+		_role != RuntimeRole.SERVER
+		or persistence_coordinator == null
+		or _caden_resource_service != null
+	):
+		return false
+	var registry := CadenResourceDefinitionRegistry.new()
+	var service := CadenResourceService.new()
+	if not service.configure(registry, persistence_coordinator, world_id):
+		return false
+	_caden_resource_service = service
+	_session_coordinator.call("enable_capability", "caden_resources")
+	_gateway.call("configure_caden_resource_service", _caden_resource_service)
+	status_changed.emit("Authoritative persistent Caden resource service enabled.")
+	return true
+
+
 func enable_party_service(
 	max_party_size: int = PartyService.DEFAULT_MAX_PARTY_SIZE,
 	invite_lifetime_msec: int = PartyService.DEFAULT_INVITE_LIFETIME_MSEC,
@@ -245,7 +342,8 @@ func enable_party_service(
 
 func enable_expedition_service(
 	max_active_expeditions: int = ExpeditionService.DEFAULT_MAX_ACTIVE_EXPEDITIONS,
-	load_timeout_msec: int = ExpeditionService.DEFAULT_LOAD_TIMEOUT_MSEC
+	load_timeout_msec: int = ExpeditionService.DEFAULT_LOAD_TIMEOUT_MSEC,
+	checkpoint_store_override: RefCounted = null
 ) -> bool:
 	if (
 		_role != RuntimeRole.SERVER
@@ -255,7 +353,11 @@ func enable_expedition_service(
 	):
 		return false
 	var registry := ExpeditionDefinitionRegistry.new()
-	var checkpoint_store := ExpeditionCheckpointStore.new()
+	var checkpoint_store := (
+		checkpoint_store_override
+		if checkpoint_store_override != null
+		else ExpeditionCheckpointStore.new()
+	)
 	var service := ExpeditionService.new()
 	if not service.configure(
 		registry,
@@ -276,12 +378,13 @@ func enable_expedition_service(
 
 
 func enable_network_combat(
-	turn_timeout_msec: int = NetworkCombatCoordinator.DEFAULT_TURN_TIMEOUT_MSEC
+	turn_timeout_msec: int = NetworkCombatCoordinator.DEFAULT_TURN_TIMEOUT_MSEC,
+	checkpoint_store: RefCounted = null
 ) -> bool:
 	if _role != RuntimeRole.SERVER or _expedition_service == null or _combat_coordinator != null:
 		return false
 	var coordinator := NetworkCombatCoordinator.new()
-	if not coordinator.configure(_expedition_service, turn_timeout_msec, 32):
+	if not coordinator.configure(_expedition_service, turn_timeout_msec, 32, checkpoint_store):
 		return false
 	_combat_coordinator = coordinator
 	_session_coordinator.call("enable_capability", "combat")
@@ -297,6 +400,7 @@ func stop() -> void:
 	_gateway.call("reset")
 	_session_coordinator = null
 	_caden_hub_service = null
+	_caden_resource_service = null
 	_party_service = null
 	_expedition_service = null
 	_expedition_checkpoint_store = null
@@ -344,6 +448,11 @@ func get_hub_snapshot() -> Dictionary:
 	return store.call("get_snapshot") as Dictionary
 
 
+func get_caden_resource_snapshot() -> Dictionary:
+	var store := _gateway.call("get_caden_resource_state_store") as RefCounted
+	return store.call("get_snapshot") as Dictionary
+
+
 func get_party_snapshot() -> Dictionary:
 	var store := _gateway.call("get_party_state_store") as RefCounted
 	return store.call("get_snapshot") as Dictionary
@@ -377,6 +486,27 @@ func send_hub_zone_transition(exit_id: String) -> bool:
 
 func request_hub_snapshot() -> bool:
 	return _gateway.call("request_hub_snapshot") as bool
+
+
+func send_caden_resource_deposit(
+	deposit_id: String,
+	resource_id: String,
+	quantity: int,
+	expected_inventory_revision: int,
+	expected_world_revision: int
+) -> bool:
+	return _gateway.call(
+		"send_caden_resource_deposit",
+		deposit_id,
+		resource_id,
+		quantity,
+		expected_inventory_revision,
+		expected_world_revision
+	) as bool
+
+
+func request_caden_resource_snapshot() -> bool:
+	return _gateway.call("request_caden_resource_snapshot") as bool
 
 
 func send_party_invite(recipient_character_id: String, expected_revision: int) -> bool:
@@ -528,6 +658,10 @@ func get_caden_hub_service_for_test() -> RefCounted:
 	return _caden_hub_service
 
 
+func get_caden_resource_service_for_test() -> RefCounted:
+	return _caden_resource_service
+
+
 func get_party_service_for_test() -> RefCounted:
 	return _party_service
 
@@ -542,6 +676,49 @@ func get_expedition_checkpoint_store_for_test() -> RefCounted:
 
 func get_combat_coordinator_for_test() -> RefCounted:
 	return _combat_coordinator
+
+
+func set_accepting_connections(accepting: bool) -> bool:
+	if _role != RuntimeRole.SERVER or _session_coordinator == null:
+		return false
+	_session_coordinator.call("set_accepting_connections", accepting)
+	return true
+
+
+func get_server_status() -> Dictionary:
+	if _role != RuntimeRole.SERVER or _session_coordinator == null:
+		return {"running": false, "connections": 0, "authenticated": 0, "accepting": false}
+	return {
+		"running": true,
+		"connections": _session_coordinator.call("get_connection_count") as int,
+		"authenticated": _session_coordinator.call("get_authenticated_count") as int,
+		"accepting": _session_coordinator.call("is_accepting_connections") as bool,
+	}
+
+
+func get_authenticated_connections_for_admin() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if _role != RuntimeRole.SERVER or _session_coordinator == null:
+		return result
+	for peer_id: int in _session_coordinator.call("get_authenticated_peer_ids") as Array[int]:
+		var connection := _session_coordinator.call("get_connection_snapshot", peer_id) as Dictionary
+		result.append(
+			{
+				"peer_id": peer_id,
+				"session_id": connection.get("session_id", ""),
+				"account_id": connection.get("account_id", ""),
+				"character_id": connection.get("character_id", ""),
+				"display_label": connection.get("display_label", ""),
+			}
+		)
+	return result
+
+
+func disconnect_peer_for_admin(peer_id: int) -> bool:
+	if _role != RuntimeRole.SERVER or _endpoint == null or peer_id <= 1:
+		return false
+	_endpoint.call("disconnect_peer", peer_id)
+	return true
 
 
 func _physics_process(delta: float) -> void:
@@ -648,6 +825,8 @@ func _on_server_peer_authenticated(peer_id: int, identity: Dictionary) -> void:
 		else:
 			_gateway.call("send_hub_snapshot_to_peer", peer_id, true)
 			_gateway.call("broadcast_hub_snapshots", true)
+	if _caden_resource_service != null:
+		_gateway.call("send_caden_resource_snapshot_to_peer", peer_id)
 
 
 func _on_server_peer_disconnected_identity(_peer_id: int, identity: Dictionary) -> void:

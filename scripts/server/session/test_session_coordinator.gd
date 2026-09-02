@@ -24,6 +24,10 @@ var _account_serial := 0
 var _session_serial := 0
 var _avatar_serial := 0
 var _crypto := Crypto.new()
+var _identity_resolver: RefCounted
+var _allowlist_enabled := false
+var _allowed_display_labels: Dictionary = {}
+var _accepting_connections := true
 
 
 func configure(access_code: String, maximum_connections: int = 4, server_name: String = "") -> void:
@@ -33,8 +37,38 @@ func configure(access_code: String, maximum_connections: int = 4, server_name: S
 		_server_name = server_name.strip_edges().left(48)
 
 
+func configure_identity_resolver(identity_resolver: RefCounted) -> bool:
+	if identity_resolver == null or _identity_resolver != null:
+		return false
+	_identity_resolver = identity_resolver
+	return true
+
+
+func configure_private_access(allowlist_enabled: bool, allowed_display_labels: Array) -> bool:
+	if allowed_display_labels.size() > 64:
+		return false
+	_allowlist_enabled = allowlist_enabled
+	_allowed_display_labels.clear()
+	for label_value: Variant in allowed_display_labels:
+		if not label_value is String:
+			return false
+		var label := Protocol.sanitize_display_label(label_value as String)
+		if label.is_empty():
+			return false
+		_allowed_display_labels[label.to_lower()] = true
+	return not _allowlist_enabled or not _allowed_display_labels.is_empty()
+
+
+func set_accepting_connections(accepting: bool) -> void:
+	_accepting_connections = accepting
+
+
+func is_accepting_connections() -> bool:
+	return _accepting_connections
+
+
 func connect_peer(peer_id: int, now_msec: int = 0) -> bool:
-	if peer_id <= 1 or _connections_by_peer.has(peer_id):
+	if not _accepting_connections or peer_id <= 1 or _connections_by_peer.has(peer_id):
 		return false
 	if _connections_by_peer.size() >= _maximum_connections:
 		return false
@@ -241,7 +275,17 @@ func _handle_authenticate(
 		if _access_code.is_empty() or payload.access_code != _access_code:
 			_reject(result, peer_id, command.command_id, Protocol.REASON_AUTH_FAILED, "Authentication was not accepted.")
 			return
-		identity = _allocate_identity(Protocol.sanitize_display_label(payload.display_label))
+		var display_label := Protocol.sanitize_display_label(payload.display_label)
+		if not _display_label_allowed(display_label):
+			_reject(result, peer_id, command.command_id, Protocol.REASON_AUTH_FAILED, "Authentication was not accepted.")
+			return
+		identity = _allocate_identity(display_label)
+		if identity.is_empty():
+			_reject(result, peer_id, command.command_id, Protocol.REASON_AUTH_FAILED, "Authentication was not accepted.")
+			return
+	if not _display_label_allowed(identity.get("display_label", "") as String):
+		_reject(result, peer_id, command.command_id, Protocol.REASON_AUTH_FAILED, "Authentication was not accepted.")
+		return
 
 	_session_serial += 1
 	_avatar_serial += 1
@@ -308,12 +352,18 @@ func _handle_ping(
 
 
 func _allocate_identity(display_label: String) -> Dictionary:
+	if _identity_resolver != null:
+		return _identity_resolver.call("resolve_identity", display_label) as Dictionary
 	_account_serial += 1
 	return {
 		"account_id": "development.account.%d" % _account_serial,
 		"character_id": "development.character.%d" % _account_serial,
 		"display_label": display_label,
 	}
+
+
+func _display_label_allowed(display_label: String) -> bool:
+	return not _allowlist_enabled or _allowed_display_labels.has(display_label.to_lower())
 
 
 func _consume_rate(connection: Dictionary, now_msec: int) -> bool:
@@ -359,6 +409,8 @@ func _authorize_authenticated_envelope(
 			Protocol.INTERACT,
 			Protocol.ZONE_TRANSITION,
 			Protocol.REQUEST_HUB_SNAPSHOT,
+			Protocol.CADEN_RESOURCE_DEPOSIT,
+			Protocol.CADEN_RESOURCE_REQUEST_SNAPSHOT,
 			Protocol.PARTY_INVITE,
 			Protocol.PARTY_ACCEPT,
 			Protocol.PARTY_DECLINE,

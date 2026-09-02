@@ -20,6 +20,7 @@ const RECORD_CATEGORIES := [
 ]
 
 var _root_path := ""
+var _backup_root_path := ""
 var _schema_version := CURRENT_SAVE_SCHEMA_VERSION
 var _content_version := DEFAULT_CONTENT_VERSION
 var _initialized := false
@@ -33,11 +34,22 @@ var _interrupt_after_promotions := -1
 func configure(
 	root_path: String,
 	schema_version: int = CURRENT_SAVE_SCHEMA_VERSION,
-	content_version: String = DEFAULT_CONTENT_VERSION
+	content_version: String = DEFAULT_CONTENT_VERSION,
+	backup_root_path: String = ""
 ) -> bool:
-	if _initialized or not _valid_root_path(root_path) or schema_version < 1:
+	if (
+		_initialized
+		or not _valid_root_path(root_path)
+		or (not backup_root_path.is_empty() and not _valid_root_path(backup_root_path))
+		or schema_version < 1
+	):
 		return false
 	_root_path = _normalize_root(root_path)
+	_backup_root_path = (
+		_normalize_root(backup_root_path)
+		if not backup_root_path.is_empty()
+		else _path("backups")
+	)
 	_schema_version = schema_version
 	_content_version = content_version.strip_edges()
 	return not _content_version.is_empty()
@@ -52,7 +64,7 @@ func initialize_storage() -> bool:
 		_path("transactions"),
 		_path("staging"),
 		_path("rollback"),
-		_path("backups"),
+		_backup_root_path,
 	]:
 		if DirAccess.make_dir_recursive_absolute(path) != OK:
 			_enter_maintenance("STORAGE_CREATE_FAILED:%s" % path)
@@ -267,7 +279,7 @@ func create_backup(backup_id: String, retain_count: int = DEFAULT_BACKUP_LIMIT) 
 		return _rejected("BACKEND_UNAVAILABLE")
 	if not _valid_identifier(backup_id) or retain_count < 1:
 		return _rejected("INVALID_BACKUP_REQUEST")
-	var backup_root := _path("backups/%s" % backup_id)
+	var backup_root := _backup_path(backup_id)
 	if DirAccess.dir_exists_absolute(backup_root):
 		return _rejected("BACKUP_ALREADY_EXISTS")
 	if DirAccess.make_dir_recursive_absolute("%s/records" % backup_root) != OK:
@@ -315,7 +327,7 @@ func create_backup(backup_id: String, retain_count: int = DEFAULT_BACKUP_LIMIT) 
 func restore_backup(backup_id: String) -> Dictionary:
 	if not is_ready() or _busy or not _valid_identifier(backup_id):
 		return _rejected("BACKEND_UNAVAILABLE")
-	var backup_root := _path("backups/%s" % backup_id)
+	var backup_root := _backup_path(backup_id)
 	var manifest := _read_json("%s/manifest.json" % backup_root)
 	if not Codec.validate_checksum(manifest) or manifest.get("backup_id", "") != backup_id:
 		return _rejected("INVALID_BACKUP")
@@ -355,7 +367,7 @@ func get_backup_ids() -> Array[String]:
 	var result: Array[String] = []
 	if not _initialized:
 		return result
-	var directory := DirAccess.open(_path("backups"))
+	var directory := DirAccess.open(_backup_root_path)
 	if directory == null:
 		return result
 	directory.list_dir_begin()
@@ -557,6 +569,10 @@ func _path(relative_path: String) -> String:
 	return "%s/%s" % [_root_path, relative_path]
 
 
+func _backup_path(backup_id: String) -> String:
+	return "%s/%s" % [_backup_root_path, backup_id]
+
+
 func _record_category_path(category: String) -> String:
 	return _path("records/%s" % category)
 
@@ -658,7 +674,7 @@ func _cleanup_transaction_workspace(transaction_id: String) -> void:
 
 
 func _remove_tree(path: String) -> bool:
-	if not path.begins_with(_root_path + "/") or not DirAccess.dir_exists_absolute(path):
+	if not _path_is_scoped(path) or not DirAccess.dir_exists_absolute(path):
 		return not DirAccess.dir_exists_absolute(path)
 	var directory := DirAccess.open(path)
 	if directory == null:
@@ -702,7 +718,11 @@ func _clear_directory_files(path: String) -> bool:
 func _rotate_backups(retain_count: int) -> void:
 	var backups := get_backup_ids()
 	while backups.size() > retain_count:
-		_remove_tree(_path("backups/%s" % backups.pop_front()))
+		_remove_tree(_backup_path(backups.pop_front()))
+
+
+func _path_is_scoped(path: String) -> bool:
+	return path.begins_with(_root_path + "/") or path.begins_with(_backup_root_path + "/")
 
 
 func _enter_maintenance(reason: String) -> void:

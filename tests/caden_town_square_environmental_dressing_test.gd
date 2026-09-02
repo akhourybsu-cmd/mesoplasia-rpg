@@ -2,9 +2,9 @@ extends SceneTree
 
 const TOWN_SQUARE_SCENE := preload("res://scenes/world/caden/TownSquare.tscn")
 
-# The user had an unrelated project.godot working-tree change before this pass.
-# This hash records that pre-pass baseline so the dressing work cannot alter it.
-const EXPECTED_PROJECT_SHA256 := "d7d8343041bef8aa48c4f540a5ccbb8163832d148134662a5f39252b68044990"
+# Phase J intentionally adds only the dedicated-server feature entry and stdout flush setting.
+# Protect that approved project configuration alongside the established Town Square baseline.
+const EXPECTED_PROJECT_SHA256 := "04c281b4481724071db0fbf1aefc319da527b322774550b1bde83fb3959e97f4"
 const EXPECTED_RUNTIME_HASHES := {
 	"res://assets/tilesets/caden/terrain/caden_terrain_runtime_v1_1.png": "bf97e3cb3df741b0290cbac648bb356a33eb65354f79b094f87466f87c82559a",
 	"res://assets/environments/caden/architecture/town_square/town_square_building_northwest_v1_1.png": "55ee5c5c35e2f646e5b8b2295680111eba56e71168d5efed5b246ae9f2c0f770",

@@ -9,6 +9,7 @@ const CHARACTER_ID := "development.character.persistence_sandbox"
 const WORLD_ID := "development.world.persistence_sandbox"
 const ITEM_ID := "development.item.edenite"
 const ENTITLEMENT_ID := "development.entitlement.persistence_sandbox"
+const BACKUP_ID_PREFIX := "development.backup.sandbox."
 
 @export var data_root := "user://mesoplasia_phase_i_sandbox"
 
@@ -76,7 +77,7 @@ func simulate_restart() -> bool:
 
 func create_backup() -> Dictionary:
 	_backup_sequence += 1
-	_last_backup_id = "development.backup.sandbox.%03d" % _backup_sequence
+	_last_backup_id = "%s%03d" % [BACKUP_ID_PREFIX, _backup_sequence]
 	var result := _backend.call("create_backup", _last_backup_id, 3) as Dictionary
 	_set_status(
 		"Consistent backup created: %s" % _last_backup_id
@@ -146,6 +147,7 @@ func _compose(message: String) -> bool:
 	if not _coordinator.call("configure", _backend):
 		_set_status("Repository composition failed.", false)
 		return false
+	_sync_backup_state()
 	_set_status(message, true)
 	_refresh_records()
 	return true
@@ -170,6 +172,23 @@ func _refresh_records() -> void:
 		(_backend.call("get_backup_ids") as Array).size(),
 		"YES" if _backend.call("is_in_maintenance_mode") else "NO",
 	]
+
+
+func _sync_backup_state() -> void:
+	_backup_sequence = 0
+	_last_backup_id = ""
+	var backup_ids := _backend.call("get_backup_ids") as Array
+	for backup_id_value: Variant in backup_ids:
+		var backup_id := backup_id_value as String
+		if not backup_id.begins_with(BACKUP_ID_PREFIX):
+			continue
+		var suffix := backup_id.trim_prefix(BACKUP_ID_PREFIX)
+		if not suffix.is_valid_int():
+			continue
+		var sequence := int(suffix)
+		if sequence >= _backup_sequence:
+			_backup_sequence = sequence
+			_last_backup_id = backup_id
 
 
 func _set_status(message: String, successful: bool) -> void:

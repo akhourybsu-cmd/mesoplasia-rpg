@@ -13,6 +13,7 @@ flowchart LR
     G --> H[H Networked Combat]
     H --> I[I Persistence]
     I --> J[J Dedicated Server]
+    J --> K[K Caden Resource Deposit]
 ```
 
 Each arrow is a review/rollback checkpoint. Do not start the next phase automatically.
@@ -136,6 +137,18 @@ Each arrow is a review/rollback checkpoint. Do not start the next phase automati
 | Manual validation | LAN and direct-IP test with firewall/forwarding; listen and solo parity; ordinary consumer hardware profile. |
 | Completion gate | Alex can host, administer, back up, stop, and recover a private server with documented limitations. |
 | Rollback | keep listen/solo modes and previous export; restore server-data backup after verified schema compatibility. |
+
+## Phase K — Caden resource deposit foundation
+
+| Field | Plan |
+| --- | --- |
+| Scope | development-only resource/project definitions, server-authoritative character-inventory deposit into a persistent shared Caden stockpile, one funded project-state transition, atomic replay-safe settlement, private/shared client projection, reconnect/restart recovery, isolated sandbox. |
+| Likely files | `data/caden/`, server Caden resource service/registry, persistence coordinator, protocol/runtime/client state store, development sandbox, focused tests/docs. |
+| Forbidden | final economy/costs, resource gathering nodes, siege-pressure rules, defense consequences, production Caden visual mutation, unlock gameplay, final inventory/loot policy, new lore/canon. |
+| Automated tests | definition validation, stale/unknown/insufficient input, injected save failure, atomic inventory/world/outcome commit, duplicate/conflicting transaction ID, ENet projection/privacy, reconnect/restart, 640×360 sandbox bounds. |
+| Manual validation | grant development resource, inject failed deposit, deposit one, verify private inventory/shared stockpile/project transition, replay, reconnect, reopen sandbox. |
+| Completion gate | One authenticated character can durably move one registered development resource into the Caden stockpile exactly once and all clients reconstruct the same funded development-project state without production-world changes. |
+| Rollback | disable the Caden resource capability and sandbox; restore a pre-Phase-K server-data backup if removing persisted development world/outcome fields. |
 
 ## Proposed first implementation milestone
 
