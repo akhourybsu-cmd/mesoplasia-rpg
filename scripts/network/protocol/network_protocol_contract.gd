@@ -1,11 +1,11 @@
 class_name NetworkProtocolContract
 extends RefCounted
 
-const PROTOCOL_VERSION := 4
-const GAME_BUILD_VERSION := "phase-f-development-1"
-const CONTENT_VERSION := "phase-f-expedition-content-1"
-const CONTENT_MANIFEST_HASH := "phase-f-expedition-manifest-v1"
-const SAVE_SCHEMA_VERSION := 0
+const PROTOCOL_VERSION := 5
+const GAME_BUILD_VERSION := "phase-i-development-1"
+const CONTENT_VERSION := "phase-h-network-combat-content-1"
+const CONTENT_MANIFEST_HASH := "phase-h-network-combat-manifest-v1"
+const SAVE_SCHEMA_VERSION := 1
 
 const MAX_ENVELOPE_BYTES := 8192
 const MAX_STRING_LENGTH := 256
@@ -35,6 +35,10 @@ const EXPEDITION_ROOM_TRANSITION := "expedition_room_transition"
 const EXPEDITION_STUB_OUTCOME := "expedition_stub_outcome"
 const EXPEDITION_RETURN_ACK := "expedition_return_ack"
 const EXPEDITION_REQUEST_SNAPSHOT := "expedition_request_snapshot"
+const COMBAT_START_ENCOUNTER := "combat_start_encounter"
+const COMBAT_READY := "combat_ready"
+const COMBAT_ACTION := "combat_action"
+const COMBAT_REQUEST_SNAPSHOT := "combat_request_snapshot"
 
 const SERVER_HELLO := "server_hello"
 const AUTHENTICATION_RESULT := "authentication_result"
@@ -49,6 +53,8 @@ const PARTY_SNAPSHOT := "party_snapshot"
 const PARTY_COMMAND_RESULT := "party_command_result"
 const EXPEDITION_SNAPSHOT := "expedition_snapshot"
 const EXPEDITION_COMMAND_RESULT := "expedition_command_result"
+const COMBAT_SNAPSHOT := "combat_snapshot"
+const COMBAT_COMMAND_RESULT := "combat_command_result"
 
 const REASON_OK := "OK"
 const REASON_MALFORMED := "MALFORMED_MESSAGE"
@@ -85,6 +91,10 @@ const _CLIENT_MESSAGE_TYPES := [
 	EXPEDITION_STUB_OUTCOME,
 	EXPEDITION_RETURN_ACK,
 	EXPEDITION_REQUEST_SNAPSHOT,
+	COMBAT_START_ENCOUNTER,
+	COMBAT_READY,
+	COMBAT_ACTION,
+	COMBAT_REQUEST_SNAPSHOT,
 ]
 const _SERVER_MESSAGE_TYPES := [
 	SERVER_HELLO,
@@ -100,6 +110,8 @@ const _SERVER_MESSAGE_TYPES := [
 	PARTY_COMMAND_RESULT,
 	EXPEDITION_SNAPSHOT,
 	EXPEDITION_COMMAND_RESULT,
+	COMBAT_SNAPSHOT,
+	COMBAT_COMMAND_RESULT,
 ]
 
 
@@ -142,7 +154,7 @@ static func make_client_hello_payload(client_nonce: String) -> Dictionary:
 		"content_version": CONTENT_VERSION,
 		"content_manifest_hash": CONTENT_MANIFEST_HASH,
 		"requested_capabilities": [
-			"connection_sandbox", "avatar_presence", "caden_hub", "party", "expedition"
+			"connection_sandbox", "avatar_presence", "caden_hub", "party", "expedition", "combat"
 		],
 		"client_nonce": client_nonce,
 	}
@@ -385,6 +397,51 @@ static func _validate_client_payload(message_type: String, payload: Dictionary) 
 		EXPEDITION_REQUEST_SNAPSHOT:
 			if not payload.is_empty():
 				return _invalid("Expedition snapshot request payload must be empty.")
+		COMBAT_START_ENCOUNTER:
+			if not _has_exact_keys(
+				payload, ["expedition_id", "encounter_id", "expected_expedition_revision"]
+			):
+				return _invalid("Combat encounter fields are invalid.")
+			if (
+				not _valid_party_id_field(payload.expedition_id)
+				or not _valid_party_id_field(payload.encounter_id)
+				or not _valid_expected_revision(payload.expected_expedition_revision)
+			):
+				return _invalid("Combat encounter values are invalid.")
+		COMBAT_READY:
+			if not _has_exact_keys(payload, ["combat_id", "expected_revision"]):
+				return _invalid("Combat ready fields are invalid.")
+			if (
+				not _valid_party_id_field(payload.combat_id)
+				or not _valid_expected_revision(payload.expected_revision)
+			):
+				return _invalid("Combat ready values are invalid.")
+		COMBAT_ACTION:
+			if not _has_exact_keys(
+				payload,
+				[
+					"combat_id",
+					"expected_revision",
+					"action_nonce",
+					"actor_id",
+					"ability_id",
+					"target_ids",
+				]
+			):
+				return _invalid("Combat action fields are invalid.")
+			for key: String in ["combat_id", "action_nonce", "actor_id", "ability_id"]:
+				if not _valid_party_id_field(payload[key]):
+					return _invalid("Combat action identity is invalid.")
+			if not _valid_expected_revision(payload.expected_revision):
+				return _invalid("Combat action revision is invalid.")
+			if not payload.target_ids is Array or payload.target_ids.is_empty() or payload.target_ids.size() > 4:
+				return _invalid("Combat action targets are invalid.")
+			for target_id: Variant in payload.target_ids:
+				if not _valid_party_id_field(target_id):
+					return _invalid("Combat action target identity is invalid.")
+		COMBAT_REQUEST_SNAPSHOT:
+			if not payload.is_empty():
+				return _invalid("Combat snapshot request payload must be empty.")
 		_:
 			return _invalid("Unsupported client payload.")
 	return _valid()
@@ -487,8 +544,10 @@ static func _validate_server_payload(message_type: String, payload: Dictionary) 
 				"current_room_id",
 				"load_deadline_msec",
 				"outcome",
+				"active_combat_id",
 				"checkpoint_revision",
 				"visited_room_ids",
+				"encounters",
 				"avatars",
 			]
 		EXPEDITION_COMMAND_RESULT:
@@ -500,6 +559,33 @@ static func _validate_server_payload(message_type: String, payload: Dictionary) 
 				"expedition_id",
 				"revision",
 				"lifecycle_state",
+			]
+		COMBAT_SNAPSHOT:
+			expected_keys = [
+				"combat_snapshot_schema_version",
+				"projection_revision",
+				"combat_id",
+				"expedition_id",
+				"encounter_id",
+				"revision",
+				"lifecycle_state",
+				"round_number",
+				"current_actor_id",
+				"turn_deadline_msec",
+				"event_sequence",
+				"outcome",
+				"ready_controller_ids",
+				"combatants",
+				"events",
+			]
+		COMBAT_COMMAND_RESULT:
+			expected_keys = [
+				"accepted",
+				"reason_code",
+				"reason_text",
+				"command_type",
+				"combat_id",
+				"revision",
 			]
 		_:
 			return _invalid("Unsupported server payload.")

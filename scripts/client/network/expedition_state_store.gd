@@ -9,7 +9,7 @@ var _projection_revision := -1
 
 
 func apply_snapshot(payload: Dictionary) -> bool:
-	if int(payload.get("expedition_snapshot_schema_version", 0)) != 1:
+	if int(payload.get("expedition_snapshot_schema_version", 0)) != 2:
 		return false
 	var projection_revision := int(payload.get("projection_revision", -1))
 	if projection_revision <= _projection_revision:
@@ -36,7 +36,7 @@ func apply_snapshot(payload: Dictionary) -> bool:
 		)
 	var previous_lifecycle := _snapshot.get("lifecycle_state", "NONE") as String
 	_snapshot = {
-		"expedition_snapshot_schema_version": 1,
+		"expedition_snapshot_schema_version": 2,
 		"projection_revision": projection_revision,
 		"expedition_id": payload.get("expedition_id", ""),
 		"dungeon_instance_id": payload.get("dungeon_instance_id", ""),
@@ -48,8 +48,10 @@ func apply_snapshot(payload: Dictionary) -> bool:
 		"current_room_id": payload.get("current_room_id", ""),
 		"load_deadline_msec": payload.get("load_deadline_msec", 0),
 		"outcome": payload.get("outcome", "NONE"),
+		"active_combat_id": payload.get("active_combat_id", ""),
 		"checkpoint_revision": payload.get("checkpoint_revision", 0),
 		"visited_room_ids": (payload.get("visited_room_ids", []) as Array).duplicate(),
+		"encounters": (payload.get("encounters", []) as Array).duplicate(true),
 		"avatars": avatars,
 	}
 	_projection_revision = projection_revision

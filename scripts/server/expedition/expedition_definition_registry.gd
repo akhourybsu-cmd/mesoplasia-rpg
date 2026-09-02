@@ -73,6 +73,18 @@ func get_connection(
 	return connection.duplicate(true) if not connection.is_empty() else {}
 
 
+func get_encounter(
+	expedition_definition_id: String,
+	room_id: String,
+	encounter_id: String
+) -> Dictionary:
+	var room := get_room(expedition_definition_id, room_id)
+	if room.is_empty():
+		return {}
+	var encounter := (room.encounters as Dictionary).get(encounter_id, {}) as Dictionary
+	return encounter.duplicate(true) if not encounter.is_empty() else {}
+
+
 func _normalize_definition(source: Dictionary) -> Dictionary:
 	var rooms: Dictionary = {}
 	for room_value: Variant in source.get("rooms", []):
@@ -81,6 +93,7 @@ func _normalize_definition(source: Dictionary) -> Dictionary:
 		var raw_room := room_value as Dictionary
 		var room_id := raw_room.get("room_id", "") as String
 		var connections: Dictionary = {}
+		var encounters: Dictionary = {}
 		for connection_value: Variant in raw_room.get("connections", []):
 			if not connection_value is Dictionary:
 				continue
@@ -94,6 +107,18 @@ func _normalize_definition(source: Dictionary) -> Dictionary:
 					raw_connection.get("destination_positions", [])
 				),
 			}
+		for encounter_value: Variant in raw_room.get("encounters", []):
+			if not encounter_value is Dictionary:
+				continue
+			var raw_encounter := encounter_value as Dictionary
+			var encounter_id := raw_encounter.get("encounter_id", "") as String
+			encounters[encounter_id] = {
+				"encounter_id": encounter_id,
+				"activation_rect": _rect_from_array(raw_encounter.get("activation_rect", [])),
+				"enemy_template_ids": (
+					raw_encounter.get("enemy_template_ids", []) as Array
+				).duplicate(),
+			}
 		rooms[room_id] = {
 			"room_id": room_id,
 			"display_name": raw_room.get("display_name", room_id),
@@ -102,6 +127,7 @@ func _normalize_definition(source: Dictionary) -> Dictionary:
 			"spawn_positions": _vectors_from_array(raw_room.get("spawn_positions", [])),
 			"checkpoint_id": raw_room.get("checkpoint_id", ""),
 			"goal_rect": _rect_from_array(raw_room.get("goal_rect", [])),
+			"encounters": encounters,
 			"connections": connections,
 		}
 	return {
@@ -149,6 +175,17 @@ func _validate_definition(definition: Dictionary) -> Array[String]:
 				or (connection.destination_positions as Array).is_empty()
 			):
 				errors.append("Room connection is invalid: %s" % connection_id)
+		for encounter_id: Variant in room.encounters:
+			var encounter := (room.encounters as Dictionary)[encounter_id] as Dictionary
+			if (
+				not _stable_id(encounter_id as String)
+				or not (encounter.activation_rect as Rect2).has_area()
+				or (encounter.enemy_template_ids as Array).is_empty()
+			):
+				errors.append("Room encounter is invalid: %s" % encounter_id)
+			for template_id: Variant in encounter.enemy_template_ids:
+				if not template_id is String or not _stable_id(template_id as String):
+					errors.append("Encounter enemy template ID is invalid: %s" % template_id)
 	if errors.is_empty():
 		var reachable: Dictionary = {}
 		_visit_rooms(definition.entry_room_id, rooms, reachable)

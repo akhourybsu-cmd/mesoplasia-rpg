@@ -1,0 +1,150 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/client/combat/networked_combat_presenter.gd" id="1_presenter"]
+
+[node name="NetworkedCombatPresenter" type="CanvasLayer"]
+layer = 400
+script = ExtResource("1_presenter")
+
+[node name="CombatRoot" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="CombatRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.035, 0.05, 0.065, 1)
+
+[node name="Margin" type="MarginContainer" parent="CombatRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Rows" type="VBoxContainer" parent="CombatRoot/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="CombatRoot/Margin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "PHASE H — SERVER-AUTHORITATIVE NETWORK COMBAT"
+
+[node name="StateLabel" type="Label" parent="CombatRoot/Margin/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Combat state"
+
+[node name="Body" type="HBoxContainer" parent="CombatRoot/Margin/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CombatantsPanel" type="PanelContainer" parent="CombatRoot/Margin/Rows/Body"]
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="CombatRoot/Margin/Rows/Body/CombatantsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="CombatRoot/Margin/Rows/Body/CombatantsPanel/Margin"]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="CombatRoot/Margin/Rows/Body/CombatantsPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Network Combatants"
+
+[node name="CombatantsLabel" type="Label" parent="CombatRoot/Margin/Rows/Body/CombatantsPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+text = "Combatants"
+
+[node name="EventsPanel" type="PanelContainer" parent="CombatRoot/Margin/Rows/Body"]
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="CombatRoot/Margin/Rows/Body/EventsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Rows" type="VBoxContainer" parent="CombatRoot/Margin/Rows/Body/EventsPanel/Margin"]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="CombatRoot/Margin/Rows/Body/EventsPanel/Margin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Reliable Authoritative Events"
+
+[node name="EventsLabel" type="Label" parent="CombatRoot/Margin/Rows/Body/EventsPanel/Margin/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 10
+text = "Events"
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="CombatRoot/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="CombatRoot/Margin/Rows/Actions"]
+layout_mode = 2
+text = "Actions"
+
+[node name="StrikeButton" type="Button" parent="CombatRoot/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Strike"
+
+[node name="MendButton" type="Button" parent="CombatRoot/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mend"
+
+[node name="GuardButton" type="Button" parent="CombatRoot/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Guard"
+
+[node name="ResultLabel" type="Label" parent="CombatRoot/Margin/Rows/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "Waiting for reliable combat state."
+vertical_alignment = 1
+
+[node name="Boundary" type="Label" parent="CombatRoot/Margin/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Server owns turns, RNG, AI, outcomes, timeout fallback, reconnect, and expedition resume • no loot or PvP"
+horizontal_alignment = 1

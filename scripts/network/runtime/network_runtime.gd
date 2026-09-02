@@ -13,6 +13,8 @@ signal party_snapshot_received(snapshot: Dictionary)
 signal party_command_result_received(result: Dictionary)
 signal expedition_snapshot_received(snapshot: Dictionary)
 signal expedition_command_result_received(result: Dictionary)
+signal combat_snapshot_received(snapshot: Dictionary)
+signal combat_command_result_received(result: Dictionary)
 
 const SessionCoordinator := preload("res://scripts/server/session/test_session_coordinator.gd")
 const Protocol := preload("res://scripts/network/protocol/network_protocol_contract.gd")
@@ -26,6 +28,9 @@ const ExpeditionCheckpointStore := preload(
 	"res://scripts/server/expedition/in_memory_expedition_checkpoint_store.gd"
 )
 const ExpeditionService := preload("res://scripts/server/expedition/expedition_service.gd")
+const NetworkCombatCoordinator := preload(
+	"res://scripts/server/combat/network_combat_coordinator.gd"
+)
 
 const HUB_SNAPSHOT_INTERVAL_SECONDS := 1.0 / 15.0
 
@@ -41,6 +46,7 @@ var _caden_hub_service: RefCounted
 var _party_service: RefCounted
 var _expedition_service: RefCounted
 var _expedition_checkpoint_store: RefCounted
+var _combat_coordinator: RefCounted
 var _hub_snapshot_accumulator := 0.0
 var _expedition_snapshot_accumulator := 0.0
 
@@ -63,6 +69,8 @@ func _ready() -> void:
 	_gateway.party_command_result_received.connect(party_command_result_received.emit)
 	_gateway.expedition_snapshot_received.connect(expedition_snapshot_received.emit)
 	_gateway.expedition_command_result_received.connect(expedition_command_result_received.emit)
+	_gateway.combat_snapshot_received.connect(combat_snapshot_received.emit)
+	_gateway.combat_command_result_received.connect(combat_command_result_received.emit)
 	_gateway.server_peer_authenticated.connect(_on_server_peer_authenticated)
 	_gateway.server_peer_disconnected_identity.connect(_on_server_peer_disconnected_identity)
 	_gateway.server_expedition_transfer_committed.connect(
@@ -181,6 +189,26 @@ func start_expedition_caden_server(
 	return ERR_CANT_CREATE
 
 
+func start_combat_expedition_server(
+	port: int,
+	access_code: String,
+	maximum_connections: int = 4,
+	max_party_size: int = PartyService.DEFAULT_MAX_PARTY_SIZE,
+	load_timeout_msec: int = ExpeditionService.DEFAULT_LOAD_TIMEOUT_MSEC,
+	turn_timeout_msec: int = NetworkCombatCoordinator.DEFAULT_TURN_TIMEOUT_MSEC,
+	server_name: String = "Mesoplasia Phase H Network Combat Sandbox"
+) -> Error:
+	var error := start_expedition_caden_server(
+		port, access_code, maximum_connections, max_party_size, load_timeout_msec, server_name
+	)
+	if error != OK:
+		return error
+	if enable_network_combat(turn_timeout_msec):
+		return OK
+	stop()
+	return ERR_CANT_CREATE
+
+
 func enable_caden_hub() -> bool:
 	if _role != RuntimeRole.SERVER or _caden_hub_service != null:
 		return false
@@ -247,6 +275,22 @@ func enable_expedition_service(
 	return true
 
 
+func enable_network_combat(
+	turn_timeout_msec: int = NetworkCombatCoordinator.DEFAULT_TURN_TIMEOUT_MSEC
+) -> bool:
+	if _role != RuntimeRole.SERVER or _expedition_service == null or _combat_coordinator != null:
+		return false
+	var coordinator := NetworkCombatCoordinator.new()
+	if not coordinator.configure(_expedition_service, turn_timeout_msec, 32):
+		return false
+	_combat_coordinator = coordinator
+	_session_coordinator.call("enable_capability", "combat")
+	_gateway.call("configure_combat_coordinator", _combat_coordinator)
+	set_physics_process(true)
+	status_changed.emit("Authoritative expedition combat enabled.")
+	return true
+
+
 func stop() -> void:
 	set_physics_process(false)
 	_endpoint.call("stop")
@@ -256,6 +300,7 @@ func stop() -> void:
 	_party_service = null
 	_expedition_service = null
 	_expedition_checkpoint_store = null
+	_combat_coordinator = null
 	_hub_snapshot_accumulator = 0.0
 	_expedition_snapshot_accumulator = 0.0
 	_role = RuntimeRole.NONE
@@ -306,6 +351,11 @@ func get_party_snapshot() -> Dictionary:
 
 func get_expedition_snapshot() -> Dictionary:
 	var store := _gateway.call("get_expedition_state_store") as RefCounted
+	return store.call("get_snapshot") as Dictionary
+
+
+func get_combat_snapshot() -> Dictionary:
+	var store := _gateway.call("get_combat_state_store") as RefCounted
 	return store.call("get_snapshot") as Dictionary
 
 
@@ -422,6 +472,46 @@ func request_expedition_snapshot() -> bool:
 	return _gateway.call("request_expedition_snapshot") as bool
 
 
+func send_combat_start_encounter(
+	expedition_id: String,
+	encounter_id: String,
+	expected_expedition_revision: int
+) -> bool:
+	return _gateway.call(
+		"send_combat_start_encounter",
+		expedition_id,
+		encounter_id,
+		expected_expedition_revision
+	) as bool
+
+
+func send_combat_ready(combat_id: String, expected_revision: int) -> bool:
+	return _gateway.call("send_combat_ready", combat_id, expected_revision) as bool
+
+
+func send_combat_action(
+	combat_id: String,
+	expected_revision: int,
+	action_nonce: String,
+	actor_id: String,
+	ability_id: String,
+	target_ids: Array
+) -> bool:
+	return _gateway.call(
+		"send_combat_action",
+		combat_id,
+		expected_revision,
+		action_nonce,
+		actor_id,
+		ability_id,
+		target_ids
+	) as bool
+
+
+func request_combat_snapshot() -> bool:
+	return _gateway.call("request_combat_snapshot") as bool
+
+
 func send_raw_envelope_for_test(envelope: Variant) -> void:
 	_gateway.call("send_raw_envelope_for_test", envelope)
 
@@ -450,6 +540,10 @@ func get_expedition_checkpoint_store_for_test() -> RefCounted:
 	return _expedition_checkpoint_store
 
 
+func get_combat_coordinator_for_test() -> RefCounted:
+	return _combat_coordinator
+
+
 func _physics_process(delta: float) -> void:
 	if _role != RuntimeRole.SERVER:
 		return
@@ -474,6 +568,13 @@ func _physics_process(delta: float) -> void:
 				_expedition_snapshot_accumulator, HUB_SNAPSHOT_INTERVAL_SECONDS
 			)
 			_gateway.call("broadcast_expedition_snapshots", false)
+	if _combat_coordinator != null:
+		var combat_tick := _combat_coordinator.call("tick", now_msec) as Dictionary
+		if combat_tick.get("changed", false):
+			_gateway.call("broadcast_combat_snapshots")
+			_gateway.call("broadcast_expedition_snapshots", true)
+		for return_data: Variant in combat_tick.get("return_requests", []):
+			_on_server_expedition_return_required(return_data as Dictionary)
 
 
 func _prepare_multiplayer_api() -> void:
@@ -535,6 +636,9 @@ func _on_server_peer_authenticated(peer_id: int, identity: Dictionary) -> void:
 		) as Dictionary
 		in_active_expedition = expedition_result.get("in_expedition", false)
 		_gateway.call("broadcast_expedition_snapshots", true)
+	if _combat_coordinator != null:
+		_combat_coordinator.call("set_character_connected", identity.character_id, true)
+		_gateway.call("send_combat_snapshot_to_peer", peer_id)
 	if _caden_hub_service != null and not in_active_expedition:
 		var hub_result := _caden_hub_service.call(
 			"attach_avatar", identity, now_msec
@@ -561,6 +665,9 @@ func _on_server_peer_disconnected_identity(_peer_id: int, identity: Dictionary) 
 	if _expedition_service != null:
 		_expedition_service.call("disconnect_character", character_id, Time.get_ticks_msec())
 		_gateway.call("broadcast_expedition_snapshots", true)
+	if _combat_coordinator != null:
+		_combat_coordinator.call("set_character_connected", character_id, false)
+		_gateway.call("broadcast_combat_snapshots")
 
 
 func _on_server_expedition_transfer_committed(member_character_ids: Array) -> void:

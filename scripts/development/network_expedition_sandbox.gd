@@ -6,10 +6,14 @@ const CadenPresenterScene := preload("res://scenes/network/NetworkedCadenPresent
 const ExpeditionPresenterScene := preload(
 	"res://scenes/network/NetworkedExpeditionPresenter.tscn"
 )
+const CombatPresenterScene := preload("res://scenes/network/NetworkedCombatPresenter.tscn")
+const CombatAgent := preload("res://scripts/development/network_combat_agent.gd")
 
 const ACCESS_CODE := "phase-f-local-demo"
 const EXPEDITION_ID := "development.expedition.placeholder"
 const GUEST_INPUT_INTERVAL_SECONDS := 1.0 / 20.0
+
+@export var enable_network_combat := false
 
 enum SetupState {
 	IDLE,
@@ -27,6 +31,7 @@ enum SetupState {
 @onready var _launch_button: Button = %LaunchButton
 @onready var _retreat_button: Button = %RetreatButton
 @onready var _failure_button: Button = %FailureButton
+@onready var _enter_combat_button: Button = %EnterCombatButton
 @onready var _reconnect_button: Button = %ReconnectButton
 @onready var _stop_button: Button = %StopButton
 @onready var _status_label: Label = %StatusLabel
@@ -42,6 +47,8 @@ var _guest_runtime: Node
 var _caden_presenter: Node
 var _expedition_presenter: Node
 var _guest_expedition_agent: Node
+var _combat_presenter: Node
+var _guest_combat_agent: Node
 var _active_port := 0
 var _guest_reconnect_token := ""
 var _setup_state := SetupState.IDLE
@@ -55,9 +62,14 @@ func _ready() -> void:
 	_launch_button.pressed.connect(_on_launch_pressed)
 	_retreat_button.pressed.connect(_on_retreat_pressed)
 	_failure_button.pressed.connect(_on_failure_pressed)
+	_enter_combat_button.pressed.connect(_on_enter_combat_pressed)
 	_reconnect_button.pressed.connect(_on_reconnect_pressed)
 	_stop_button.pressed.connect(_on_stop_pressed)
 	_set_running(false)
+	_enter_combat_button.visible = enable_network_combat
+	if enable_network_combat:
+		$HUD/TopPanel/Margin/Rows/Header/Title.text = "PHASE H — NETWORKED EXPEDITION COMBAT"
+		$HUD/HelpPanel/Help.text = "Gather both members at the gold encounter • choose Enter Combat • local player uses combat actions"
 
 
 func _exit_tree() -> void:
@@ -98,6 +110,26 @@ func reload_expedition_presenter_for_test() -> void:
 	_create_local_expedition_presenter()
 
 
+func reload_combat_presenter_for_test() -> void:
+	_create_local_combat_presenter()
+
+
+func enter_combat_for_test() -> void:
+	_on_enter_combat_pressed()
+
+
+func place_party_at_encounter_for_test() -> bool:
+	if _server_runtime == null or _local_runtime == null or _guest_runtime == null:
+		return false
+	var service := _server_runtime.call("get_expedition_service_for_test") as RefCounted
+	var local_id := (_local_runtime.call("get_client_identity") as Dictionary).character_id as String
+	var guest_id := (_guest_runtime.call("get_client_identity") as Dictionary).character_id as String
+	return (
+		service.call("set_avatar_position_for_test", local_id, "development.room.test_depths", Vector2(530, 180))
+		and service.call("set_avatar_position_for_test", guest_id, "development.room.test_depths", Vector2(540, 200))
+	)
+
+
 func get_local_runtime_for_test() -> Node:
 	return _local_runtime
 
@@ -122,6 +154,10 @@ func get_guest_expedition_agent_for_test() -> Node:
 	return _guest_expedition_agent
 
 
+func get_combat_presenter_for_test() -> Node:
+	return _combat_presenter
+
+
 func _on_start_pressed() -> void:
 	_stop_all()
 	_server_runtime = _create_runtime("ServerRuntime")
@@ -138,6 +174,9 @@ func _on_start_pressed() -> void:
 	_create_caden_presenter()
 	_create_local_expedition_presenter()
 	_create_guest_expedition_agent()
+	if enable_network_combat:
+		_create_local_combat_presenter()
+		_create_guest_combat_agent()
 	_setup_state = SetupState.IDLE
 	_set_running(true)
 	_set_status("Connecting both players. Choose Prepare Ready Party when identities appear.")
@@ -175,6 +214,22 @@ func _on_failure_pressed() -> void:
 	_send_stub_outcome("FAILURE")
 
 
+func _on_enter_combat_pressed() -> void:
+	if not enable_network_combat or _local_runtime == null:
+		return
+	var snapshot := _local_runtime.call("get_expedition_snapshot") as Dictionary
+	if snapshot.get("lifecycle_state", "") != "ACTIVE_EXPLORATION":
+		_set_status("Enter combat from active exploration.")
+		return
+	if _local_runtime.call(
+		"send_combat_start_encounter",
+		snapshot.expedition_id,
+		"development.encounter.venom_slime",
+		int(snapshot.revision)
+	):
+		_set_status("Encounter requested; both clients are crossing the combat ready barrier.")
+
+
 func _send_stub_outcome(outcome_code: String) -> void:
 	if _local_runtime == null:
 		return
@@ -204,6 +259,8 @@ func _on_reconnect_pressed() -> void:
 	)
 	if _guest_runtime != null:
 		_create_guest_expedition_agent()
+		if enable_network_combat:
+			_create_guest_combat_agent()
 		_guest_input_sequence = 0
 		_set_status("Guest reconnecting; active instance ID, room, and state should reconstruct.")
 
@@ -328,13 +385,37 @@ func _create_guest_expedition_agent() -> void:
 	_guest_expedition_agent.call("configure", _guest_runtime, false, true)
 
 
+func _create_local_combat_presenter() -> void:
+	_combat_presenter = _remove_node(_combat_presenter)
+	if _local_runtime == null:
+		return
+	_combat_presenter = CombatPresenterScene.instantiate()
+	add_child(_combat_presenter)
+	_combat_presenter.call("configure", _local_runtime)
+
+
+func _create_guest_combat_agent() -> void:
+	_guest_combat_agent = _remove_node(_guest_combat_agent)
+	if _guest_runtime == null:
+		return
+	_guest_combat_agent = CombatAgent.new()
+	_agent_root.add_child(_guest_combat_agent)
+	_guest_combat_agent.call("configure", _guest_runtime)
+
+
 func _start_server_on_available_port() -> int:
 	var starting_port := 29980
 	for offset in 32:
 		var candidate := starting_port + offset
-		if _server_runtime.call(
-			"start_expedition_caden_server", candidate, ACCESS_CODE, 4, 4, 5000
-		) == OK:
+		var method := (
+			"start_combat_expedition_server"
+			if enable_network_combat
+			else "start_expedition_caden_server"
+		)
+		var arguments: Array = [candidate, ACCESS_CODE, 4, 4, 5000]
+		if enable_network_combat:
+			arguments.append(10000)
+		if _server_runtime.callv(method, arguments) == OK:
 			return candidate
 	return 0
 
@@ -361,6 +442,8 @@ func _stop_all() -> void:
 	_remove_caden_presenter()
 	_remove_expedition_presenter()
 	_remove_guest_expedition_agent()
+	_combat_presenter = _remove_node(_combat_presenter)
+	_guest_combat_agent = _remove_node(_guest_combat_agent)
 	_stop_runtime(_guest_runtime)
 	_stop_runtime(_local_runtime)
 	_stop_runtime(_server_runtime)
@@ -415,6 +498,7 @@ func _set_running(is_running: bool) -> void:
 		_launch_button,
 		_retreat_button,
 		_failure_button,
+		_enter_combat_button,
 		_reconnect_button,
 	]:
 		button.disabled = not is_running

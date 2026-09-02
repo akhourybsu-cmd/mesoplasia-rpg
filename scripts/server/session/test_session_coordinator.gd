@@ -374,6 +374,10 @@ func _authorize_authenticated_envelope(
 			Protocol.EXPEDITION_STUB_OUTCOME,
 			Protocol.EXPEDITION_RETURN_ACK,
 			Protocol.EXPEDITION_REQUEST_SNAPSHOT,
+			Protocol.COMBAT_START_ENCOUNTER,
+			Protocol.COMBAT_READY,
+			Protocol.COMBAT_ACTION,
+			Protocol.COMBAT_REQUEST_SNAPSHOT,
 		]:
 			return _authorization_rejected(Protocol.REASON_MALFORMED, "Unsupported authenticated command type.")
 		if command.client_sequence <= connection.last_client_sequence:

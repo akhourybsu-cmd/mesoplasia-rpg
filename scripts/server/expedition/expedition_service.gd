@@ -1,7 +1,7 @@
 class_name ExpeditionService
 extends RefCounted
 
-const EXPEDITION_SNAPSHOT_SCHEMA_VERSION := 1
+const EXPEDITION_SNAPSHOT_SCHEMA_VERSION := 2
 const DEFAULT_MAX_ACTIVE_EXPEDITIONS := 1
 const DEFAULT_LOAD_TIMEOUT_MSEC := 5000
 const MOVEMENT_SPEED := 150.0
@@ -10,6 +10,7 @@ const PLAYER_HALF_SIZE := Vector2(12.0, 12.0)
 
 const STATE_LOADING := "LOADING"
 const STATE_ACTIVE_EXPLORATION := "ACTIVE_EXPLORATION"
+const STATE_ACTIVE_COMBAT := "ACTIVE_COMBAT"
 const STATE_RETURNING_TO_CADEN := "RETURNING_TO_CADEN"
 const STATE_CLOSED := "CLOSED"
 const STATE_FAILED := "FAILED"
@@ -86,6 +87,7 @@ func connect_character(identity: Dictionary, _now_msec: int) -> Dictionary:
 			"in_expedition": instance.lifecycle_state in [
 				STATE_LOADING,
 				STATE_ACTIVE_EXPLORATION,
+				STATE_ACTIVE_COMBAT,
 			],
 		}
 	)
@@ -161,6 +163,8 @@ func launch_expedition(
 		"avatars": avatars,
 		"load_deadline_msec": now_msec + _load_timeout_msec,
 		"outcome": OUTCOME_NONE,
+		"active_combat_id": "",
+		"encounters": _initial_encounter_states(definition),
 		"checkpoint_revision": 0,
 		"return_zone_id": definition.return_zone_id,
 		"return_entry_id": definition.return_entry_id,
@@ -365,6 +369,147 @@ func request_stub_outcome(
 	)
 
 
+func validate_encounter_start(
+	character_id: String,
+	expedition_id: String,
+	encounter_id: String,
+	expected_revision: int
+) -> Dictionary:
+	var instance := _active_instance(expedition_id)
+	var check := _require_instance_command(
+		instance, character_id, expected_revision, STATE_ACTIVE_EXPLORATION
+	)
+	if not check.accepted:
+		return check
+	if instance.leader_character_id != character_id:
+		return _rejected("NOT_LEADER", "Only the party leader may start an encounter.", instance)
+	var encounter := _definition_registry.call(
+		"get_encounter",
+		instance.expedition_definition_id,
+		instance.current_room_id,
+		encounter_id
+	) as Dictionary
+	if encounter.is_empty():
+		return _rejected("ENCOUNTER_NOT_FOUND", "The encounter is not in this room.", instance)
+	var encounter_state := (instance.encounters as Dictionary).get(encounter_id, {}) as Dictionary
+	if encounter_state.get("status", "") != "PENDING":
+		return _rejected("ENCOUNTER_ALREADY_RESOLVED", "The encounter is not pending.", instance)
+	if not _all_connected_members_in_rect(instance, encounter.activation_rect):
+		return _rejected(
+			"PARTY_NOT_COHESIVE", "All connected members must gather at the encounter.", instance
+		)
+	var member_ids: Array = (instance.avatars as Dictionary).keys()
+	member_ids.sort()
+	return _accepted(
+		{
+			"expedition_id": expedition_id,
+			"encounter_id": encounter_id,
+			"seed": int(instance.seed) ^ int(encounter_id.hash()),
+			"member_character_ids": member_ids,
+			"enemy_template_ids": (encounter.enemy_template_ids as Array).duplicate(),
+		}
+	)
+
+
+func commit_encounter_start(
+	character_id: String,
+	expedition_id: String,
+	encounter_id: String,
+	expected_revision: int,
+	combat_id: String,
+	now_msec: int
+) -> Dictionary:
+	var validation := validate_encounter_start(
+		character_id, expedition_id, encounter_id, expected_revision
+	)
+	if not validation.accepted:
+		return validation
+	if combat_id.is_empty():
+		return _rejected("INVALID_COMBAT", "The combat identity is missing.")
+	var instance := _active_instance(expedition_id)
+	var candidate := instance.duplicate(true)
+	candidate.lifecycle_state = STATE_ACTIVE_COMBAT
+	candidate.active_combat_id = combat_id
+	candidate.revision = int(instance.revision) + 1
+	var encounter_state := (candidate.encounters as Dictionary)[encounter_id] as Dictionary
+	encounter_state.status = "ACTIVE"
+	encounter_state.combat_id = combat_id
+	for avatar_value: Variant in (candidate.avatars as Dictionary).values():
+		var avatar := avatar_value as Dictionary
+		avatar.velocity = Vector2.ZERO
+		avatar.input_direction = Vector2.ZERO
+	if not _store_checkpoint(candidate, now_msec):
+		return _rejected("CHECKPOINT_FAILED", "Combat boundary checkpoint failed.", instance)
+	_instances_by_id[expedition_id] = candidate
+	_projection_revision += 1
+	return _accepted(
+		{
+			"expedition_id": expedition_id,
+			"revision": candidate.revision,
+			"combat_id": combat_id,
+			"lifecycle_state": STATE_ACTIVE_COMBAT,
+		}
+	)
+
+
+func resolve_encounter(
+	expedition_id: String,
+	combat_id: String,
+	victory: bool,
+	now_msec: int
+) -> Dictionary:
+	var instance := _active_instance(expedition_id)
+	if instance.is_empty() or instance.lifecycle_state != STATE_ACTIVE_COMBAT:
+		return _rejected("INVALID_STATE", "The expedition is not in combat.", instance)
+	if instance.active_combat_id != combat_id:
+		return _rejected("COMBAT_MISMATCH", "The combat does not own this expedition.", instance)
+	var encounter_id := ""
+	for candidate_id: Variant in instance.encounters:
+		var state := (instance.encounters as Dictionary)[candidate_id] as Dictionary
+		if state.get("combat_id", "") == combat_id and state.get("status", "") == "ACTIVE":
+			encounter_id = candidate_id as String
+			break
+	if encounter_id.is_empty():
+		return _rejected("ENCOUNTER_NOT_FOUND", "The active encounter is missing.", instance)
+	var candidate := instance.duplicate(true)
+	candidate.active_combat_id = ""
+	candidate.revision = int(instance.revision) + 1
+	var encounter_state := (candidate.encounters as Dictionary)[encounter_id] as Dictionary
+	encounter_state.status = "COMPLETED" if victory else "FAILED"
+	if victory:
+		candidate.lifecycle_state = STATE_ACTIVE_EXPLORATION
+	else:
+		candidate.lifecycle_state = STATE_RETURNING_TO_CADEN
+		candidate.outcome = OUTCOME_FAILURE
+		for avatar_value: Variant in (candidate.avatars as Dictionary).values():
+			(avatar_value as Dictionary).return_acknowledged = false
+	if not _store_checkpoint(candidate, now_msec):
+		return _rejected("CHECKPOINT_FAILED", "Combat outcome checkpoint failed.", instance)
+	if not victory:
+		var party_return := _party_service.call("begin_return", expedition_id) as Dictionary
+		if not party_return.accepted:
+			return _rejected("PARTY_RETURN_FAILED", "Combat defeat could not begin return.", instance)
+	_instances_by_id[expedition_id] = candidate
+	_projection_revision += 1
+	var result := {
+		"expedition_id": expedition_id,
+		"revision": candidate.revision,
+		"encounter_id": encounter_id,
+		"resumed_exploration": victory,
+		"return_required": not victory,
+	}
+	if not victory:
+		result.merge(
+			{
+				"member_character_ids": (candidate.avatars as Dictionary).keys(),
+				"return_zone_id": candidate.return_zone_id,
+				"return_entry_id": candidate.return_entry_id,
+			},
+			true
+		)
+	return _accepted(result)
+
+
 func acknowledge_caden_return(
 	character_id: String,
 	expedition_id: String,
@@ -449,6 +594,14 @@ func get_snapshot_for(character_id: String) -> Dictionary:
 				facing.y,
 			]
 		)
+	var encounter_rows: Array = []
+	var encounter_ids := (instance.encounters as Dictionary).keys()
+	encounter_ids.sort()
+	for encounter_id: Variant in encounter_ids:
+		var encounter := (instance.encounters as Dictionary)[encounter_id] as Dictionary
+		encounter_rows.append(
+			[encounter_id, encounter.get("status", "PENDING"), encounter.get("combat_id", "")]
+		)
 	return {
 		"expedition_snapshot_schema_version": EXPEDITION_SNAPSHOT_SCHEMA_VERSION,
 		"projection_revision": _projection_revision,
@@ -462,8 +615,10 @@ func get_snapshot_for(character_id: String) -> Dictionary:
 		"current_room_id": instance.current_room_id,
 		"load_deadline_msec": instance.load_deadline_msec,
 		"outcome": instance.outcome,
+		"active_combat_id": instance.active_combat_id,
 		"checkpoint_revision": instance.checkpoint_revision,
 		"visited_room_ids": (instance.visited_room_ids as Array).duplicate(),
+		"encounters": encounter_rows,
 		"avatars": avatar_rows,
 	}
 
@@ -482,6 +637,7 @@ func has_character_in_active_expedition(character_id: String) -> bool:
 	return not instance.is_empty() and instance.lifecycle_state in [
 		STATE_LOADING,
 		STATE_ACTIVE_EXPLORATION,
+		STATE_ACTIVE_COMBAT,
 	]
 
 
@@ -491,6 +647,7 @@ func get_active_expedition_count() -> int:
 		if (instance_value as Dictionary).lifecycle_state in [
 			STATE_LOADING,
 			STATE_ACTIVE_EXPLORATION,
+			STATE_ACTIVE_COMBAT,
 			STATE_RETURNING_TO_CADEN,
 		]:
 			count += 1
@@ -575,6 +732,8 @@ func _store_checkpoint(instance: Dictionary, now_msec: int) -> bool:
 		"current_room_id": instance.current_room_id,
 		"visited_room_ids": (instance.visited_room_ids as Array).duplicate(),
 		"outcome": instance.outcome,
+		"active_combat_id": instance.active_combat_id,
+		"encounters": (instance.encounters as Dictionary).duplicate(true),
 		"checkpoint_revision": checkpoint_revision,
 		"avatars": avatar_rows,
 		"recorded_msec": now_msec,
@@ -591,6 +750,15 @@ func _all_required_content_ready(instance: Dictionary) -> bool:
 		if not avatar.connected or not avatar.content_ready:
 			return false
 	return not (instance.avatars as Dictionary).is_empty()
+
+
+func _initial_encounter_states(definition: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	for room_value: Variant in (definition.rooms as Dictionary).values():
+		var room := room_value as Dictionary
+		for encounter_id: Variant in room.encounters:
+			result[encounter_id] = {"status": "PENDING", "combat_id": ""}
+	return result
 
 
 func _all_connected_returns_acknowledged(instance: Dictionary) -> bool:
@@ -703,8 +871,10 @@ func _empty_snapshot() -> Dictionary:
 		"current_room_id": "",
 		"load_deadline_msec": 0,
 		"outcome": OUTCOME_NONE,
+		"active_combat_id": "",
 		"checkpoint_revision": 0,
 		"visited_room_ids": [],
+		"encounters": [],
 		"avatars": [],
 	}
 

@@ -28,6 +28,47 @@ func _run_test() -> void:
 	if not layout_error.is_empty():
 		_fail(layout_error)
 		return
+	if initial.get("current_actor_id", "") != "development.combatant.viewer.vanguard":
+		_fail("Viewer fixture did not begin on Vanguard's deterministic turn.")
+		return
+	var opening_strike := _sandbox.call(
+		"use_ability_for_test", "development.ability.strike"
+	) as Dictionary
+	if not opening_strike.get("accepted", false):
+		_fail("Viewer could not submit Vanguard's opening Strike.")
+		return
+	if not await _wait_for(func() -> bool: return _player_turn_or_end()):
+		_fail("Viewer did not advance from Vanguard through its AI turn.")
+		return
+	var mend_turn := _sandbox.call("get_snapshot_for_test") as Dictionary
+	if mend_turn.get("current_actor_id", "") != "development.combatant.viewer.warden":
+		_fail("Viewer did not expose Mend on Warden's deterministic turn.")
+		return
+	var mend_button := _sandbox.get_node("%MendButton") as Button
+	if mend_button.disabled:
+		_fail("Mend remained disabled for Warden while an ally was injured.")
+		return
+	var injured_ally := _most_injured_living_hero(mend_turn)
+	if injured_ally.is_empty() or int(injured_ally.health) >= int(injured_ally.max_health):
+		_fail("Viewer fixture did not provide an injured ally for Mend verification.")
+		return
+	var injured_id := injured_ally.combatant_id as String
+	var health_before_mend := int(injured_ally.health)
+	var mend := _sandbox.call(
+		"use_ability_for_test", "development.ability.mend"
+	) as Dictionary
+	if not mend.get("accepted", false):
+		_fail("Viewer rejected a legal Mend action: %s" % mend.get("reason_code", ""))
+		return
+	if not await _wait_for(func() -> bool: return _player_turn_or_end()):
+		_fail("Viewer did not advance after Warden used Mend.")
+		return
+	var after_mend := _sandbox.call("get_snapshot_for_test") as Dictionary
+	var healed_ally := _snapshot_combatant(after_mend, injured_id)
+	var expected_health := mini(int(injured_ally.max_health), health_before_mend + 5)
+	if healed_ally.is_empty() or int(healed_ally.health) != expected_health:
+		_fail("Mend did not heal the living ally missing the most health.")
+		return
 	var safety := 0
 	while safety < 20:
 		var snapshot := _sandbox.call("get_snapshot_for_test") as Dictionary
@@ -66,7 +107,7 @@ func _run_test() -> void:
 		return
 
 	_cleanup()
-	print("PASS: Phase G optional viewer fits the 640x360 viewport, consumes snapshots, submits intents, advances deterministic AI, reflects outcome, restarts, and owns no network state.")
+	print("PASS: Phase G optional viewer fits the 640x360 viewport, heals the most-injured ally with Warden's Mend, consumes snapshots, submits intents, advances deterministic AI, reflects outcome, restarts, and owns no network state.")
 	quit(0)
 
 
@@ -103,6 +144,28 @@ func _menu_layout_error() -> String:
 				control.name, control_rect
 			]
 	return ""
+
+
+func _most_injured_living_hero(snapshot: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	var greatest_missing := -1
+	for combatant_value: Variant in snapshot.get("combatants", []):
+		var combatant := combatant_value as Dictionary
+		if combatant.get("team_id", "") != "heroes" or not combatant.get("alive", false):
+			continue
+		var missing := int(combatant.max_health) - int(combatant.health)
+		if missing > greatest_missing:
+			result = combatant
+			greatest_missing = missing
+	return result
+
+
+func _snapshot_combatant(snapshot: Dictionary, combatant_id: String) -> Dictionary:
+	for combatant_value: Variant in snapshot.get("combatants", []):
+		var combatant := combatant_value as Dictionary
+		if combatant.get("combatant_id", "") == combatant_id:
+			return combatant
+	return {}
 
 
 func _player_turn_or_end() -> bool:

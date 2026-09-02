@@ -281,28 +281,50 @@ func serialize_checkpoint(combat_id: String) -> Dictionary:
 		"checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
 		"instance": instance.duplicate(true),
 	}
-	checkpoint["checksum"] = JSON.stringify(checkpoint).sha256_text()
+	checkpoint["checksum"] = _checkpoint_checksum(checkpoint)
 	return checkpoint
 
 
-func restore_checkpoint(checkpoint: Dictionary) -> Dictionary:
+func restore_checkpoint(checkpoint: Dictionary, replace_existing: bool = false) -> Dictionary:
 	if int(checkpoint.get("checkpoint_schema_version", 0)) != CHECKPOINT_SCHEMA_VERSION:
 		return _rejected("CHECKPOINT_SCHEMA")
 	var expected_checksum := checkpoint.get("checksum", "") as String
 	var check_copy := checkpoint.duplicate(true)
 	check_copy.erase("checksum")
-	if expected_checksum.is_empty() or JSON.stringify(check_copy).sha256_text() != expected_checksum:
+	if expected_checksum.is_empty() or _checkpoint_checksum(check_copy) != expected_checksum:
 		return _rejected("CHECKPOINT_CHECKSUM")
 	var instance := checkpoint.get("instance", {}) as Dictionary
 	var validation := _validate_restored_instance(instance)
 	if not validation.accepted:
 		return validation
 	var combat_id := instance.combat_id as String
-	if _instances.has(combat_id):
+	if _instances.has(combat_id) and not replace_existing:
 		return _rejected("DUPLICATE_COMBAT")
 	_instances[combat_id] = instance.duplicate(true)
 	_combat_id_sequence = maxi(_combat_id_sequence, _combat_id_suffix(combat_id))
 	return _accepted(_instances[combat_id] as Dictionary, {"restored": true})
+
+
+func _checkpoint_checksum(value: Dictionary) -> String:
+	return JSON.stringify(_normalize_checkpoint_numbers(value), "", true, true).sha256_text()
+
+
+func _normalize_checkpoint_numbers(value: Variant) -> Variant:
+	if value is int:
+		return float(value)
+	if value is Array:
+		var array_result: Array = []
+		for entry: Variant in value:
+			array_result.append(_normalize_checkpoint_numbers(entry))
+		return array_result
+	if value is Dictionary:
+		var dictionary_result: Dictionary = {}
+		var keys := (value as Dictionary).keys()
+		keys.sort_custom(func(first: Variant, second: Variant) -> bool: return str(first) < str(second))
+		for key: Variant in keys:
+			dictionary_result[key] = _normalize_checkpoint_numbers((value as Dictionary)[key])
+		return dictionary_result
+	return value
 
 
 func get_instance_state(combat_id: String) -> Dictionary:

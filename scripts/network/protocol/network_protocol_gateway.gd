@@ -15,6 +15,8 @@ signal party_snapshot_received(snapshot: Dictionary)
 signal party_command_result_received(result: Dictionary)
 signal expedition_snapshot_received(snapshot: Dictionary)
 signal expedition_command_result_received(result: Dictionary)
+signal combat_snapshot_received(snapshot: Dictionary)
+signal combat_command_result_received(result: Dictionary)
 signal server_expedition_transfer_committed(member_character_ids: Array)
 signal server_expedition_return_required(return_data: Dictionary)
 
@@ -23,6 +25,7 @@ const AvatarStore := preload("res://scripts/client/network/network_avatar_store.
 const HubStateStore := preload("res://scripts/client/network/caden_hub_state_store.gd")
 const PartyStateStore := preload("res://scripts/client/network/party_state_store.gd")
 const ExpeditionStateStore := preload("res://scripts/client/network/expedition_state_store.gd")
+const CombatStateStore := preload("res://scripts/client/network/combat_state_store.gd")
 
 enum GatewayRole { NONE, SERVER, CLIENT }
 
@@ -33,9 +36,11 @@ var _avatar_store: RefCounted = AvatarStore.new()
 var _hub_state_store: RefCounted = HubStateStore.new()
 var _party_state_store: RefCounted = PartyStateStore.new()
 var _expedition_state_store: RefCounted = ExpeditionStateStore.new()
+var _combat_state_store: RefCounted = CombatStateStore.new()
 var _caden_hub_service: RefCounted
 var _party_service: RefCounted
 var _expedition_service: RefCounted
+var _combat_coordinator: RefCounted
 var _client_access_code := ""
 var _client_display_label := ""
 var _client_reconnect_token := ""
@@ -56,6 +61,7 @@ func _ready() -> void:
 	_hub_state_store.snapshot_applied.connect(_on_hub_snapshot_applied)
 	_party_state_store.snapshot_applied.connect(_on_party_snapshot_applied)
 	_expedition_state_store.snapshot_applied.connect(_on_expedition_snapshot_applied)
+	_combat_state_store.snapshot_applied.connect(_on_combat_snapshot_applied)
 
 
 func configure_server(session_coordinator: RefCounted, endpoint: Node) -> void:
@@ -96,6 +102,11 @@ func configure_party_service(party_service: RefCounted) -> void:
 func configure_expedition_service(expedition_service: RefCounted) -> void:
 	_expedition_service = expedition_service
 	status_changed.emit("Authoritative expedition protocol enabled.")
+
+
+func configure_combat_coordinator(combat_coordinator: RefCounted) -> void:
+	_combat_coordinator = combat_coordinator
+	status_changed.emit("Authoritative network combat protocol enabled.")
 
 
 func server_peer_connected(peer_id: int) -> void:
@@ -312,6 +323,53 @@ func request_expedition_snapshot() -> bool:
 	return _send_expedition_command(Protocol.EXPEDITION_REQUEST_SNAPSHOT, {})
 
 
+func send_combat_start_encounter(
+	expedition_id: String,
+	encounter_id: String,
+	expected_expedition_revision: int
+) -> bool:
+	return _send_combat_command(
+		Protocol.COMBAT_START_ENCOUNTER,
+		{
+			"expedition_id": expedition_id,
+			"encounter_id": encounter_id,
+			"expected_expedition_revision": expected_expedition_revision,
+		}
+	)
+
+
+func send_combat_ready(combat_id: String, expected_revision: int) -> bool:
+	return _send_combat_command(
+		Protocol.COMBAT_READY,
+		{"combat_id": combat_id, "expected_revision": expected_revision}
+	)
+
+
+func send_combat_action(
+	combat_id: String,
+	expected_revision: int,
+	action_nonce: String,
+	actor_id: String,
+	ability_id: String,
+	target_ids: Array
+) -> bool:
+	return _send_combat_command(
+		Protocol.COMBAT_ACTION,
+		{
+			"combat_id": combat_id,
+			"expected_revision": expected_revision,
+			"action_nonce": action_nonce,
+			"actor_id": actor_id,
+			"ability_id": ability_id,
+			"target_ids": target_ids.duplicate(),
+		}
+	)
+
+
+func request_combat_snapshot() -> bool:
+	return _send_combat_command(Protocol.COMBAT_REQUEST_SNAPSHOT, {})
+
+
 func send_raw_envelope_for_test(envelope: Variant) -> void:
 	if _role == GatewayRole.CLIENT:
 		submit_client_envelope.rpc_id(1, envelope)
@@ -338,6 +396,10 @@ func get_expedition_state_store() -> RefCounted:
 	return _expedition_state_store
 
 
+func get_combat_state_store() -> RefCounted:
+	return _combat_state_store
+
+
 func get_client_identity() -> Dictionary:
 	return _client_identity.duplicate(true)
 
@@ -361,6 +423,7 @@ func reset() -> void:
 	_caden_hub_service = null
 	_party_service = null
 	_expedition_service = null
+	_combat_coordinator = null
 	_client_access_code = ""
 	_client_display_label = ""
 	_client_reconnect_token = ""
@@ -376,6 +439,7 @@ func reset() -> void:
 	_hub_state_store.clear()
 	_party_state_store.clear()
 	_expedition_state_store.clear()
+	_combat_state_store.clear()
 
 
 @rpc("any_peer", "call_remote", "reliable", 0)
@@ -384,6 +448,18 @@ func submit_client_envelope(envelope: Variant) -> void:
 		return
 	var sender_peer_id := multiplayer.get_remote_sender_id()
 	if sender_peer_id <= 1:
+		return
+	if (
+		_combat_coordinator != null
+		and envelope is Dictionary
+		and (envelope as Dictionary).get("message_type", "") in [
+			Protocol.COMBAT_START_ENCOUNTER,
+			Protocol.COMBAT_READY,
+			Protocol.COMBAT_ACTION,
+			Protocol.COMBAT_REQUEST_SNAPSHOT,
+		]
+	):
+		_handle_combat_application_command(sender_peer_id, envelope)
 		return
 	if (
 		_caden_hub_service != null
@@ -564,6 +640,17 @@ func _handle_received_server_envelope(envelope: Variant) -> void:
 						expedition_result.reason_text,
 					]
 				)
+		Protocol.COMBAT_SNAPSHOT:
+			_combat_state_store.apply_snapshot(message.payload)
+		Protocol.COMBAT_COMMAND_RESULT:
+			var combat_result := (message.payload as Dictionary).duplicate(true)
+			combat_command_result_received.emit(combat_result)
+			status_changed.emit(
+				"Combat command %s: %s." % [
+					"accepted" if combat_result.accepted else "rejected",
+					combat_result.command_type,
+				]
+			)
 
 
 func _handle_server_hello(message: Dictionary) -> void:
@@ -675,6 +762,28 @@ func send_expedition_snapshot_to_peer(peer_id: int, reliable: bool = true) -> vo
 		"make_application_server_envelope", Protocol.EXPEDITION_SNAPSHOT, "", snapshot
 	) as Dictionary
 	_send_server_envelope(peer_id, envelope, reliable)
+
+
+func broadcast_combat_snapshots() -> void:
+	if _role != GatewayRole.SERVER or _combat_coordinator == null:
+		return
+	for peer_id: int in _session_coordinator.call("get_authenticated_peer_ids"):
+		send_combat_snapshot_to_peer(peer_id)
+
+
+func send_combat_snapshot_to_peer(peer_id: int) -> void:
+	if _role != GatewayRole.SERVER or _combat_coordinator == null:
+		return
+	var connection := _session_coordinator.call("get_connection_snapshot", peer_id) as Dictionary
+	if connection.get("state", "") != "authenticated":
+		return
+	var snapshot := _combat_coordinator.call(
+		"get_snapshot_for", connection.character_id
+	) as Dictionary
+	var envelope := _session_coordinator.call(
+		"make_application_server_envelope", Protocol.COMBAT_SNAPSHOT, "", snapshot
+	) as Dictionary
+	_send_server_envelope(peer_id, envelope, true)
 
 
 func _handle_hub_application_command(sender_peer_id: int, envelope: Variant) -> void:
@@ -897,8 +1006,8 @@ func _handle_expedition_application_command(sender_peer_id: int, envelope: Varia
 	if result.get("return_required", false):
 		server_expedition_return_required.emit(result.duplicate(true))
 	if result.get("accepted", false):
-		broadcast_expedition_snapshots(true)
 		broadcast_party_snapshots()
+		broadcast_expedition_snapshots(true)
 	else:
 		send_expedition_snapshot_to_peer(sender_peer_id)
 
@@ -925,6 +1034,91 @@ func _send_expedition_command_result(
 			"expedition_id": expedition_id,
 			"revision": result.get("revision", -1),
 			"lifecycle_state": lifecycle_state,
+		}
+	)
+
+
+func _handle_combat_application_command(sender_peer_id: int, envelope: Variant) -> void:
+	var authorization := _session_coordinator.call(
+		"authorize_application_command", sender_peer_id, envelope, Time.get_ticks_msec()
+	) as Dictionary
+	if not authorization.accepted:
+		_send_command_rejection(sender_peer_id, envelope, authorization)
+		if authorization.get("disconnect_peer", false):
+			_disconnect_after_delivery(sender_peer_id)
+		return
+	var connection := _session_coordinator.call(
+		"get_connection_snapshot", sender_peer_id
+	) as Dictionary
+	var command := envelope as Dictionary
+	var payload := command.payload as Dictionary
+	var result: Dictionary
+	var now_msec := Time.get_ticks_msec()
+	match command.message_type:
+		Protocol.COMBAT_START_ENCOUNTER:
+			result = _combat_coordinator.call(
+				"start_encounter",
+				connection.character_id,
+				payload.expedition_id,
+				payload.encounter_id,
+				payload.expected_expedition_revision,
+				now_msec
+			) as Dictionary
+		Protocol.COMBAT_READY:
+			result = _combat_coordinator.call(
+				"acknowledge_ready",
+				connection.character_id,
+				payload.combat_id,
+				payload.expected_revision,
+				now_msec
+			) as Dictionary
+		Protocol.COMBAT_ACTION:
+			result = _combat_coordinator.call(
+				"submit_action",
+				connection.character_id,
+				payload.combat_id,
+				payload.expected_revision,
+				payload.action_nonce,
+				payload.actor_id,
+				payload.ability_id,
+				payload.target_ids,
+				now_msec
+			) as Dictionary
+		Protocol.COMBAT_REQUEST_SNAPSHOT:
+			send_combat_snapshot_to_peer(sender_peer_id)
+			return
+		_:
+			result = {
+				"accepted": false,
+				"reason_code": Protocol.REASON_MALFORMED,
+				"reason_text": "Unsupported combat command.",
+				"combat_id": "",
+				"revision": -1,
+			}
+	_send_combat_command_result(sender_peer_id, command, result)
+	if result.get("accepted", false):
+		broadcast_combat_snapshots()
+		broadcast_expedition_snapshots(true)
+	else:
+		send_combat_snapshot_to_peer(sender_peer_id)
+
+
+func _send_combat_command_result(
+	peer_id: int,
+	command: Dictionary,
+	result: Dictionary
+) -> void:
+	_send_application_result(
+		peer_id,
+		Protocol.COMBAT_COMMAND_RESULT,
+		command.command_id,
+		{
+			"accepted": result.get("accepted", false),
+			"reason_code": result.get("reason_code", "COMBAT_COMMAND_REJECTED"),
+			"reason_text": result.get("reason_text", "Combat command rejected."),
+			"command_type": command.message_type,
+			"combat_id": result.get("combat_id", ""),
+			"revision": result.get("revision", -1),
 		}
 	)
 
@@ -1022,6 +1216,13 @@ func _send_expedition_command(message_type: String, payload: Dictionary) -> bool
 	return true
 
 
+func _send_combat_command(message_type: String, payload: Dictionary) -> bool:
+	if _role != GatewayRole.CLIENT or _client_session_id.is_empty():
+		return false
+	_send_client_message(message_type, payload, _client_session_id)
+	return true
+
+
 func _dispatch_server_result(result: Dictionary) -> void:
 	var connected_peer_ids := multiplayer.get_peers()
 	for delivery: Variant in result.get("deliveries", []):
@@ -1072,3 +1273,7 @@ func _on_party_snapshot_applied(snapshot: Dictionary) -> void:
 
 func _on_expedition_snapshot_applied(snapshot: Dictionary) -> void:
 	expedition_snapshot_received.emit(snapshot)
+
+
+func _on_combat_snapshot_applied(snapshot: Dictionary) -> void:
+	combat_snapshot_received.emit(snapshot)

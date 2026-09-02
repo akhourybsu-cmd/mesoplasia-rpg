@@ -15,6 +15,7 @@
       "spawn_positions": [[152, 180], [192, 180], [152, 220], [192, 220]],
       "checkpoint_id": "development.checkpoint.test_threshold",
       "goal_rect": [],
+      "encounters": [],
       "connections": [
         {
           "connection_id": "development.connection.threshold_to_depths",
@@ -32,6 +33,13 @@
       "spawn_positions": [[140, 180], [180, 180], [140, 220], [180, 220]],
       "checkpoint_id": "development.checkpoint.test_depths",
       "goal_rect": [500, 104, 76, 152],
+      "encounters": [
+        {
+          "encounter_id": "development.encounter.venom_slime",
+          "activation_rect": [500, 104, 76, 152],
+          "enemy_template_ids": ["development.combatant.venom_slime"]
+        }
+      ],
       "connections": [
         {
           "connection_id": "development.connection.depths_to_threshold",

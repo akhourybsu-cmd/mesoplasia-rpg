@@ -208,7 +208,20 @@ func _update_action_buttons(actor: Dictionary) -> void:
 	]:
 		var button := pair[0] as Button
 		var ability_id := pair[1] as String
-		button.disabled = not may_act or ability_id not in (actor.get("ability_ids", []) as Array)
+		var actor_has_ability := ability_id in (actor.get("ability_ids", []) as Array)
+		var has_useful_target := ability_id != "development.ability.mend" or _has_injured_ally(actor)
+		button.disabled = not may_act or not actor_has_ability or not has_useful_target
+		button.tooltip_text = _ability_tooltip(
+			ability_id, may_act, actor_has_ability, has_useful_target
+		)
+	_mend_button.text = (
+		"Mend"
+		if not may_act or (
+			"development.ability.mend" in (actor.get("ability_ids", []) as Array)
+			and _has_injured_ally(actor)
+		)
+		else "Mend (Warden)"
+	)
 
 
 func _choose_target(target_ids: Array[String], target_rule: String) -> String:
@@ -218,16 +231,54 @@ func _choose_target(target_ids: Array[String], target_rule: String) -> String:
 	var best := _combatant(best_id)
 	for target_id: String in target_ids:
 		var candidate := _combatant(target_id)
-		if (
-			int(candidate.health) < int(best.health)
-			or (
-				int(candidate.health) == int(best.health)
-				and target_id < best_id
+		var candidate_is_better := false
+		if target_rule == "ALLY":
+			var candidate_missing := int(candidate.max_health) - int(candidate.health)
+			var best_missing := int(best.max_health) - int(best.health)
+			candidate_is_better = (
+				candidate_missing > best_missing
+				or (candidate_missing == best_missing and target_id < best_id)
 			)
-		):
+		else:
+			candidate_is_better = (
+				int(candidate.health) < int(best.health)
+				or (int(candidate.health) == int(best.health) and target_id < best_id)
+			)
+		if candidate_is_better:
 			best_id = target_id
 			best = candidate
 	return best_id
+
+
+func _has_injured_ally(actor: Dictionary) -> bool:
+	for combatant_value: Variant in _snapshot.get("combatants", []):
+		var combatant := combatant_value as Dictionary
+		if (
+			combatant.get("team_id", "") == actor.get("team_id", "")
+			and combatant.get("alive", false)
+			and int(combatant.get("health", 0)) < int(combatant.get("max_health", 0))
+		):
+			return true
+	return false
+
+
+func _ability_tooltip(
+	ability_id: String,
+	may_act: bool,
+	actor_has_ability: bool,
+	has_useful_target: bool
+) -> String:
+	if not may_act:
+		return "Available when a locally controlled combatant is awaiting an action."
+	if not actor_has_ability:
+		if ability_id == "development.ability.mend":
+			return "Mend is available on Warden's turn."
+		return "The current combatant does not know this ability."
+	if not has_useful_target:
+		return "All living allies are at full health."
+	if ability_id == "development.ability.mend":
+		return "Restore 5 HP to the living ally missing the most health."
+	return "Submit this ability to the combat domain."
 
 
 func _combatant(combatant_id: String) -> Dictionary:

@@ -1414,6 +1414,7 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 - One-click development scene: PASS for automatic server/two-client authentication, two-avatar presentation, and visibly changing server-owned guest position.
 - Complete executable Godot regression suite: PASS, 33 of 33 scripts.
 - Headless production Main startup and `git diff --check`: PASS.
+
 - Snapshot payloads were reduced below the loopback ENet MTU warning threshold observed during the first integration pass.
 - Production `project.godot`, `scenes/Main.tscn`, and legacy `scenes/world/caden/Caden.tscn` remain unchanged by Phase D; no autoload, dependency, renderer change, or Phase E party work was introduced.
 
@@ -1664,3 +1665,98 @@ This document records implementation changes from August 25, 2026 onward. Add ne
 - Visual Godot runtime check: PASS at the configured gameplay viewport before and after Strike, with Restart, state, combatants, Strike/Mend/Guard, result feedback, events, and the development boundary all visible.
 - Complete executable Godot regression suite: PASS, 45 of 45 scripts.
 - Headless production Main startup and `git diff --check`: PASS.
+
+## 2026-09-01 - Phase G Mend viewer correction
+
+### Scope
+
+- Corrected the offline viewer's automatic ally selection for Mend to prioritize missing health instead of the lowest raw health value, preventing a full-health Warden from being chosen over an injured Vanguard.
+- Made Mend's development-fixture ownership visible as `Mend (Warden)` outside Warden's turn and added contextual tooltips for turn ownership and full-health unavailability.
+- Disabled Mend when no living ally is injured so the viewer no longer offers a legal but ineffective full-health heal.
+- Extended the viewer regression to exercise Vanguard's opening action, deterministic enemy damage, Warden's Mend, the exact healed target and amount, and the existing combat completion path.
+
+### Validation
+
+- Focused offline viewer regression: PASS, including Warden-only availability and healing the living ally missing the most health.
+- Visual Godot runtime check: PASS; Vanguard changed from 16/18 to 18/18 HP, Warden spent 2 Focus, `HEAL_APPLIED mend` appeared, and the full 640x360 menu remained visible.
+- Complete executable Godot regression suite: PASS, 45 of 45 scripts.
+
+## 2026-09-01 - Cooperative roadmap Phase H networked combat
+
+### Scope
+
+- Added one registry-validated authored depths encounter with persistent pending, active, completed, or failed state and a leader/cohesion/revision-gated transition from real-time exploration into combat.
+- Added a server-side network combat coordinator that composes the Phase G domain without moving authority into scenes. It allocates combat identity and fixtures, binds authenticated party controllers, drives ready synchronization, timeouts, disconnect fallback, enemy AI, settlement, and exactly-once expedition outcome handling.
+- Extended the private-development protocol to version 5 with strict reliable encounter-start, combat-ready, combat-action, snapshot-request, command-result, compact combat snapshot, and bounded event schemas. Session authorization now explicitly recognizes the four authenticated combat command families.
+- Added revision-filtered client combat projections and extended expedition projections with the active CombatId and compact encounter states.
+- Added a disposable dedicated network combat presenter that auto-acknowledges readiness, exposes local Strike/Mend/Guard intent, selects only legal fixture targets, renders authoritative combatants/events/results, and reconstructs from the current snapshot after reload.
+- Added an isolated `NetworkCombatSandbox.tscn` that reuses the Phase F two-client expedition flow, launches the authored encounter, gives the local client the visible combat presenter, gives the separate guest client an intent-only Warden agent, and preserves guest reconnect testing during combat.
+- Kept loot, rewards, inventory mutation, durable persistence, final targeting/animation/audio/accessibility design, alternate presentations, PvP, production Main migration, public hosting, relay, discovery, and matchmaking outside Phase H.
+
+### Files and systems changed
+
+- `data/expeditions/development_test_expedition.json`
+- `scripts/server/expedition/expedition_definition_registry.gd`
+- `scripts/server/expedition/expedition_service.gd`
+- `scripts/server/combat/network_combat_coordinator.gd`
+- `scripts/server/session/test_session_coordinator.gd`
+- `scripts/network/protocol/network_protocol_contract.gd`
+- `scripts/network/protocol/network_protocol_gateway.gd`
+- `scripts/network/runtime/network_runtime.gd`
+- `scripts/client/network/expedition_state_store.gd`
+- `scripts/client/network/combat_state_store.gd`
+- `scripts/client/combat/networked_combat_presenter.gd`
+- `scripts/development/network_combat_agent.gd`
+- `scripts/development/network_expedition_sandbox.gd`
+- `scenes/network/NetworkedCombatPresenter.tscn`
+- `scenes/network/NetworkCombatSandbox.tscn`
+- `scenes/network/NetworkExpeditionSandbox.tscn`
+- `tests/combat/network_combat_coordinator_test.gd`
+- `tests/network_combat_sandbox_test.gd`
+- `docs/architecture/PHASE_H_MANUAL_TEST.md`
+- `docs/PROJECT_STRUCTURE.md`
+- `docs/CHANGELOG.md`
+
+### Validation
+
+- Pure coordinator boundary: PASS for stale/nonleader encounter launch, controller-ready synchronization, forged controller rejection, replay-safe action nonces, disconnect/reconnect state, timeout fallback, normal AI progression, victory settlement, and exactly-once exploration resume.
+- Actual two-client ENet sandbox: PASS for authored encounter launch, both-client ready barrier, 640×360 menu bounds, dedicated presenter reload, guest reconnect reconstruction, reliable local/guest/AI turns, closed combat convergence, completed encounter persistence, and exactly-once settlement.
+- Complete executable Godot regression suite: PASS, 47 of 47 scripts.
+- Godot editor parse/import scan: PASS; no GDScript parse errors or broken scene/resource references.
+- Visual Godot check: PASS for the numbered Phase H setup flow and the dedicated combat title, state area, side-by-side combatant/event panels, full action row, result text, and authority boundary at the configured gameplay viewport.
+
+### Remaining limitations and manual gate
+
+- The workflow in `docs/architecture/PHASE_H_MANUAL_TEST.md` still requires manual acceptance for encounter readability, combat information clarity, action feel, timeout feedback, reconnect presentation, and the return to exploration.
+- The current server process and its expedition/combat checkpoints are memory-only. Durable restart recovery remains Phase I work.
+- The development guest always submits Strike, and the visible presenter automatically chooses legal targets. These are sandbox policies, not final party AI or target-selection design.
+- Defeat is authority-tested through the coordinator and safe-return boundary; the manual fixture is tuned primarily for the visible victory/resume path.
+- Production `project.godot`, `scenes/Main.tscn`, and legacy `scenes/world/caden/Caden.tscn` remain unchanged; no autoload, external dependency, addon, renderer change, inventory mutation, reward grant, or PvP path was introduced.
+- Disabling/removing the authored encounter launch leaves the existing Phase F expedition outcome-stub sandbox as the rollback path.
+- Headless validation continues to report the known sandbox-only blocked `user://` log writes and Windows certificate-store access notices.
+
+## 2026-09-01 - Phase H manual acceptance
+
+### Validation follow-up
+
+- User playtesting confirmed the authored encounter, dedicated network combat presentation, action flow, and expedition resume work as expected.
+- This closes the Phase H manual completion gate without changing the implementation, production Main/Caden, or Phase I persistence behavior.
+
+## 2026-09-01 - Phase I durable persistence foundation
+
+- Added deterministic schema-v1 file repositories for profiles, characters, world state, inventory, quest progress, parties, expeditions, combat checkpoints, and settlement outcomes.
+- Added canonical checksums, optimistic record revisions, path guards, atomic temp-file promotion, multi-record intent journals, startup recovery, corruption fallback, maintenance mode, validated backups, and deterministic backup rotation.
+- Added explicit schema migration planning with downgrade refusal, signed pre-migration snapshots, migration history, and preservation of unknown legacy fields under extensions.
+- Added a server persistence coordinator that atomically bootstraps related records and settles idempotent personal rewards without partial inventory/outcome writes.
+- Added durable expedition and combat checkpoint adapters. Network combat mutations now persist before successful acknowledgement and roll back in-memory state when the checkpoint write fails; persisted combat checkpoints can be restored into a fresh coordinator composition.
+- Advanced `SAVE_SCHEMA_VERSION` to `1` and the development build label to Phase I while leaving the Phase H protocol/content compatibility contracts unchanged.
+- Added `PersistenceSandbox.tscn` and a manual test guide covering atomic initialization, exact-once reward replay, process reconstruction, backup/restore, and injected write failure.
+- Validation: Godot 4.7 editor filesystem/script scan passed. The Phase I backend test, durable restart/migration test, and persistence sandbox test passed headlessly. Full regression results are recorded in the follow-up validation entry below.
+- Environment note: headless Godot could not access the Windows root certificate store or write its normal `user://logs` file in the sandbox; neither limitation affects the local file fixtures under `res://tests/`.
+
+### Follow-up validation
+
+- The complete headless repository suite passed: 50/50 tests.
+- A live 640x360 Godot check initially exposed vertical clipping in the new sandbox. The layout was compacted and rechecked with the title, all six actions, durable record view, wrapped authority status, and footer visible simultaneously.
+- Live controls confirmed atomic initialization, reward settlement, duplicate reward replay, process reconstruction, and failed-save rejection while the quantity remained exactly one and maintenance mode remained off.
+- Added an automated 640x360 bounds assertion for the title, final action, and footer to prevent the clipping regression.
